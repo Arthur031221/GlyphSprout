@@ -1,0 +1,61 @@
+{
+  "name": "glyphsprout",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local handwriting font workshop for Latin, Han and kana subsets.",
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "vitest run tests/*.test.ts && npm run test:server",
+    "test:e2e": "playwright test",
+    "lint": "biome check src tests scripts bin vite.config.ts playwright.config.ts",
+    "format": "biome check --write .",
+    "test:font-fixtures": "tsx scripts/export-fixtures.ts",
+    "test:fonts": ".venv/bin/python tests/validate_fonts.py && .venv/bin/python tests/validate_sample.py",
+    "prepare": "npm run build",
+    "start": "node bin/glyphsprout.mjs",
+    "test:server": "node --test tests/server.test.mjs",
+    "pretest:fonts": "npm run test:font-fixtures && npm run export:sample",
+    "export:sample": "tsx scripts/export-sample.ts",
+    "demo": "node scripts/record-demo.mjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/react": "2.1.10",
+    "fonteditor-core": "2.6.3",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@playwright/test": "1.64.0",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2",
+    "vite": "8.3.4",
+    "vitest": "5.0.4"
+  },
+  "bin": {
+    "glyphsprout": "bin/glyphsprout.mjs"
+  },
+  "files": [
+    "dist",
+    "bin",
+    "LICENSE",
+    "README.md",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Arthur031221/GlyphSprout.git"
+  },
+  "homepage": "https://Arthur031221.github.io/GlyphSprout/",
+  "author": "Arthur031221 <levi74108520963@gmail.com>"
+}

@@ -1,0 +1,46 @@
+import { MAX_GLYPHS } from "./types";
+
+export function isSupported(character: string): boolean {
+  const cp = character.codePointAt(0) ?? 0;
+  return (
+    ((cp >= 0x21 && cp <= 0x7e) ||
+      (cp >= 0xa1 && cp <= 0x24f && cp !== 0xad) ||
+      (cp >= 0x3000 && cp <= 0x303f) ||
+      (cp >= 0x3041 && cp <= 0x3096) ||
+      (cp >= 0x309b && cp <= 0x30ff) ||
+      (cp >= 0x3400 && cp <= 0x4dbf) ||
+      (cp >= 0x4e00 && cp <= 0x9fff) ||
+      (cp >= 0x2000 && cp <= 0x206f && !/\p{Cf}/u.test(character)) ||
+      (cp >= 0x20a0 && cp <= 0x20cf) ||
+      (cp >= 0xff01 && cp <= 0xff60) ||
+      (cp >= 0xffe0 && cp <= 0xffe6)) &&
+    !/\p{M}|\p{Cn}|\p{Cc}/u.test(character)
+  );
+}
+
+export function isCjk(character: string): boolean {
+  const cp = character.codePointAt(0) ?? 0;
+  return (cp >= 0x3000 && cp <= 0x9fff) || cp >= 0xff01;
+}
+
+export interface TextAnalysis {
+  text: string;
+  characters: string[];
+  unsupported: string[];
+  overflow: boolean;
+}
+
+export function analyzeText(input: string): TextAnalysis {
+  const text = input.normalize("NFC").replace(/\s/gu, " ");
+  const distinct = [...new Set([...text].filter((ch) => ch !== " "))];
+  return {
+    text,
+    characters: distinct.filter(isSupported),
+    unsupported: distinct.filter((ch) => !isSupported(ch)),
+    overflow: distinct.length > MAX_GLYPHS,
+  };
+}
+
+export function codepoint(character: string): string {
+  return `U+${(character.codePointAt(0) ?? 0).toString(16).toUpperCase().padStart(4, "0")}`;
+}

@@ -1,0 +1,55 @@
+{
+  "sample": "Paper Bloom",
+  "ttf_bytes": 3284,
+  "measured_from": "Bundled project and actual browser download",
+  "office": {
+    "application": "LibreOffice 24.2.7.2",
+    "sample": "Public domain NIST SD19 handwriting crops",
+    "family": "Paper Bloom",
+    "characters": "HELOJB",
+    "exported_text": "HELLO JOB",
+    "pdf_embedded_font": "PaperBloom",
+    "font_embedded": true,
+    "text_preserved": true,
+    "method": "Generated TTF used by Writer to export a PDF. Poppler pdffonts confirms embedding and pdftotext checks exact text."
+  },
+  "browser_export": {
+    "source": "Actual browser downloads from the production workshop",
+    "ttf_bytes": 3284,
+    "woff2_bytes": 1100,
+    "characters": 6,
+    "raster_sizes": [
+      20,
+      50,
+      100
+    ],
+    "formats_identical": true
+  },
+  "reference_fixtures": {
+    "characters": 6,
+    "formats": [
+      "TTF",
+      "WOFF2"
+    ],
+    "raster_sizes": [
+      100,
+      200,
+      1000
+    ],
+    "half_gray_exclusion": "At 100 pixels, values from 127 through 129 are excluded from source pixel classification."
+  },
+  "handwriting_source_check": {
+    "characters": 6,
+    "formats": [
+      "TTF",
+      "WOFF2"
+    ],
+    "raster_sizes": [
+      288,
+      720,
+      1440
+    ],
+    "source_cell_pixels": 144,
+    "half_gray_exclusions": false
+  }
+}

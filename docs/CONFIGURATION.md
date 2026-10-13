@@ -1,0 +1,31 @@
+# Configuration
+
+## Local server
+
+The packaged command serves the built app on `http://127.0.0.1:4173` by default. Set a different port with `--port` or an address with `--host`:
+
+    npx --yes git+https://github.com/Arthur031221/GlyphSprout.git --port 4190 --host 127.0.0.1
+
+Press Ctrl+C to close the server. The command serves local static files. It does not configure cloud hosting or synchronization.
+
+## Project and scan limits
+
+- Up to 512 distinct supported BMP characters per project.
+- A small set of Latin, Han, and kana characters. Unsupported characters are reported during setup.
+- 35 cells per A4 page, with up to 15 pages.
+- PNG or JPEG scan images up to 16 MiB each and 32 megapixels after decoding.
+- Projects up to 96 MiB.
+
+Use flat paper, dark ink, and even light. Keep all four registration marks visible. For every image, assign the printed page and confirm its visible page ID and alignment before conversion.
+
+## Glyph controls
+
+Each glyph has its own threshold, minimum speck area, crop, scale, horizontal and vertical offsets, side bearing where applicable, and advance width. Crop values run from 0 to 1. Size is a multiplier, while offsets and spacing use font units. The **0 automatic** advance width uses the workshop's default spacing calculation.
+
+## Appearance and language
+
+Choose light, dark, or system theme and one of nine interface languages: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, Spanish, French, German, or Brazilian Portuguese. These settings affect the interface, not the character coverage of the exported font.
+
+## Local storage and offline cache
+
+The browser stores project recovery data in IndexedDB. Browser storage may be cleared, so use downloadable JSON backups. Offline use is available only after the complete app cache reports ready. A first visit needs a network connection. Offline cache does not imply cloud storage or synchronization.
