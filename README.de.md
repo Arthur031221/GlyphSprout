@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.13.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.14.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -29,7 +29,7 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 3. Füge einen gleichmäßig beleuchteten Scan hinzu und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
 5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Konturglättung, Ausschnitt, Größe, Versatz und Abstand an.
-6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter.
+6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter. Sobald alle Glyphen fertig sind, speichert **Schrift herunterladen (TTF)** im Vorschaubereich die Schrift, ohne bis zur Werkstatt zu scrollen.
 
 Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
 

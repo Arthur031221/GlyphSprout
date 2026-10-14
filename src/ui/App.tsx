@@ -520,6 +520,28 @@ export function App() {
               <DownloadSimple />
               {t.downloadSpecimen}
             </button>
+            {project && (
+              <button
+                type="button"
+                className="primary specimen-download"
+                disabled={
+                  missing.length > 0 ||
+                  exportBusy ||
+                  drawingDirty ||
+                  editor.busy
+                }
+                aria-describedby={missing.length ? "hero-font-gate" : undefined}
+                onClick={() => void exportFile("ttf", false)}
+              >
+                <DownloadSimple />
+                {t.downloadFontQuick}
+              </button>
+            )}
+            {project && missing.length > 0 && (
+              <small id="hero-font-gate" className="hero-font-gate">
+                {t.missingGate}
+              </small>
+            )}
             <div className="preview-diagnostics" role="status">
               {editor.busy ? (
                 t.applyingEdits

@@ -242,6 +242,7 @@
   "infoInvalid": "設計者、著作權、授權文字與授權網址最多各 100、200、400 與 200 個字元，授權網址須以 http:// 或 https:// 開頭。",
   "bearingApplied": "已複製側邊距。變更的字母數：",
   "downloadSpecimen": "下載預覽圖片",
+  "downloadFontQuick": "下載字型（TTF）",
   "specimenEmpty": "預覽文字中還沒有任何字元具備字形。",
   "presetsLabel": "加入常用字元",
   "presetUppercase": "大寫字母",

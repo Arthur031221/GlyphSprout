@@ -242,6 +242,7 @@
   "infoInvalid": "Use no máximo 100, 200, 400 e 200 caracteres, e comece a URL da licença com http:// ou https://.",
   "bearingApplied": "Espaçamento lateral copiado. Letras alteradas:",
   "downloadSpecimen": "Baixar imagem de amostra",
+  "downloadFontQuick": "Baixar fonte (TTF)",
   "specimenEmpty": "Nenhum caractere do texto de amostra tem glifo ainda.",
   "presetsLabel": "Adicionar caracteres comuns",
   "presetUppercase": "Letras maiúsculas",

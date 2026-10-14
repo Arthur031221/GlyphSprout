@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.14.0
+
+The live preview panel at the top of the page now has a **Download font (TTF)** button. Before this, the font download sat in the Font file panel at the bottom of the Workshop, so someone who opened the sample or finished a project had to scroll past the glyph editor to find the one thing they came for. The button saves the same TTF as the Font file panel. While any glyph is still missing, or a drawing is unsaved, it stays disabled and says why. Partial subsets and WOFF2 files remain in the Font file panel.
+
+A browser test checks that the button is on the first screen, downloads a valid TrueType file and is disabled with an explanation once a glyph is cleared. The label is translated in all nine interface languages.
+
 ## 1.13.0
 
 Converting a scan now evens out the lighting in each cell before it traces the ink. Before this, one fixed ink threshold was applied to the photo as it came, so a soft shadow, a darker corner or a dim phone photo could turn paper into solid ink and ruin the glyph. The paper level is now estimated across each cell and divided out, so evenly lit pages convert as before and shaded ones trace the strokes you drew.

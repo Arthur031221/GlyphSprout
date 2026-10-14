@@ -242,6 +242,7 @@
   "infoInvalid": "デザイナー、著作権、ライセンス本文、ライセンス URL はそれぞれ 100、200、400、200 文字までです。ライセンス URL は http:// または https:// で始めてください。",
   "bearingApplied": "サイドベアリングをコピーしました。変更した文字数：",
   "downloadSpecimen": "プレビュー画像をダウンロード",
+  "downloadFontQuick": "フォントをダウンロード（TTF）",
   "specimenEmpty": "プレビュー文字にはまだ字形のある文字がありません。",
   "presetsLabel": "よく使う文字を追加",
   "presetUppercase": "大文字",

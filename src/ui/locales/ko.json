@@ -242,6 +242,7 @@
   "infoInvalid": "디자이너, 저작권, 라이선스 본문, 라이선스 URL은 각각 최대 100, 200, 400, 200자이며 라이선스 URL은 http:// 또는 https://로 시작해야 합니다.",
   "bearingApplied": "측면 여백을 복사했습니다. 변경된 문자 수:",
   "downloadSpecimen": "견본 이미지 다운로드",
+  "downloadFontQuick": "글꼴 다운로드(TTF)",
   "specimenEmpty": "견본 문구에 글리프가 있는 문자가 아직 없습니다.",
   "presetsLabel": "자주 쓰는 문자 추가",
   "presetUppercase": "대문자",

@@ -242,6 +242,7 @@
   "infoInvalid": "Höchstens 100, 200, 400 und 200 Zeichen verwenden; die Lizenz-URL muss mit http:// oder https:// beginnen.",
   "bearingApplied": "Seitenabstand kopiert. Geänderte Buchstaben:",
   "downloadSpecimen": "Beispieltext als Bild herunterladen",
+  "downloadFontQuick": "Schrift herunterladen (TTF)",
   "specimenEmpty": "Für kein Zeichen des Beispieltexts gibt es schon einen Glyphen.",
   "presetsLabel": "Häufige Zeichen hinzufügen",
   "presetUppercase": "Großbuchstaben",

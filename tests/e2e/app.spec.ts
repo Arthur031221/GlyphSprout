@@ -126,3 +126,29 @@ test("production app shell reopens offline after its cache is ready", async ({
   await page.reload();
   await expect(page.locator(".project-label strong")).toHaveText("Paper Bloom");
 });
+
+test("the live preview panel downloads the font and waits for missing glyphs", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await expect(projectStatus(page)).toHaveText("Saved");
+  const quick = page.getByRole("button", { name: "Download font (TTF)" });
+  await expect(quick).toBeVisible();
+  await expect(quick).toBeEnabled();
+  expect(await quick.boundingBox().then((box) => box?.y ?? 9999)).toBeLessThan(
+    700,
+  );
+  const download = page.waitForEvent("download");
+  await quick.click();
+  const file = await download;
+  expect(file.suggestedFilename()).toMatch(/\.ttf$/);
+  const path = await file.path();
+  const { readFileSync } = await import("node:fs");
+  expect(readFileSync(path).subarray(0, 4)).toEqual(Buffer.from([0, 1, 0, 0]));
+
+  await page.getByRole("button", { name: "Clear glyph" }).click();
+  await expect(quick).toBeDisabled();
+  await expect(page.locator("#hero-font-gate")).toContainText(
+    "Complete all glyphs",
+  );
+});

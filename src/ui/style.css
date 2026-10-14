@@ -305,6 +305,10 @@ main {
 .specimen-download {
   align-self: flex-start;
 }
+.hero-font-gate {
+  font-size: 10px;
+  color: var(--muted);
+}
 .preview-diagnostics {
   max-height: 40px;
   overflow: auto;

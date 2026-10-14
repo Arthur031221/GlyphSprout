@@ -242,6 +242,7 @@
   "infoInvalid": "Utilisez au plus 100, 200, 400 et 200 caractères, et commencez l'URL de la licence par http:// ou https://.",
   "bearingApplied": "Approche latérale copiée. Lettres modifiées :",
   "downloadSpecimen": "Télécharger l'image d'exemple",
+  "downloadFontQuick": "Télécharger la police (TTF)",
   "specimenEmpty": "Aucun caractère du texte d'exemple n'a encore de glyphe.",
   "presetsLabel": "Ajouter des caractères courants",
   "presetUppercase": "Lettres majuscules",

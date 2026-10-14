@@ -242,6 +242,7 @@
   "infoInvalid": "Use at most 100, 200, 400 and 200 characters, and start the license URL with http:// or https://.",
   "bearingApplied": "Side bearing copied. Letters changed:",
   "downloadSpecimen": "Download specimen image",
+  "downloadFontQuick": "Download font (TTF)",
   "specimenEmpty": "None of the specimen characters has a glyph yet.",
   "presetsLabel": "Add common characters",
   "presetUppercase": "Uppercase letters",

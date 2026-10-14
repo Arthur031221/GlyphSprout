@@ -242,6 +242,7 @@
   "infoInvalid": "设计者、版权、许可文本和许可网址最多分别为 100、200、400 和 200 个字符，许可网址须以 http:// 或 https:// 开头。",
   "bearingApplied": "已复制侧边距。更改的字母数：",
   "downloadSpecimen": "下载预览图片",
+  "downloadFontQuick": "下载字体（TTF）",
   "specimenEmpty": "预览文本中还没有任何字符具备字形。",
   "presetsLabel": "添加常用字符",
   "presetUppercase": "大写字母",
