@@ -13,7 +13,7 @@
 ![實際工作坊：擦除並修正掃描字形、查看樣張並下載 TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.9.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.10.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。指令顯示就緒訊息後，請開啟 `http://127.0.0.1:4173`。
@@ -24,7 +24,7 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.9.0
 
 ## 製作你的第一款字型
 
-1. 建立專案，並選擇需要的字元，例如 `Hello!`。也可以一鍵加入整組字元，例如大寫字母、數字、標點符號、平假名或片假名。
+1. 建立專案，並選擇需要的字元，例如 `Hello!`。也可以一鍵加入整組字元，例如大寫字母、數字、標點符號、帶重音字母、平假名或片假名。
 2. 以實際尺寸列印範本（A4 或 US Letter 紙張），每格寫一個字元。
 3. 加入光線均勻的掃描圖並確認頁面 ID。GlyphSprout 會尋找四個定位十字並把角落放上去，請檢查每個角，有偏差就調整。
 4. 點擊**轉換掃描**，等待轉換完成。

@@ -14,6 +14,8 @@ const PRESET_LABELS = {
   lowercase: "presetLowercase",
   digits: "presetDigits",
   punctuation: "presetPunctuation",
+  accentedLower: "presetAccentedLower",
+  accentedUpper: "presetAccentedUpper",
   hiragana: "presetHiragana",
   katakana: "presetKatakana",
 } as const;

@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.9.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.10.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -24,7 +24,7 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 
 ## Créez votre première police
 
-1. Créez un projet et choisissez les caractères nécessaires, par exemple `Hello!`. Vous pouvez ajouter des jeux entiers, comme les majuscules, les chiffres, la ponctuation, les hiragana ou les katakana, en un clic.
+1. Créez un projet et choisissez les caractères nécessaires, par exemple `Hello!`. Vous pouvez ajouter des jeux entiers, comme les majuscules, les chiffres, la ponctuation, les lettres accentuées, les hiragana ou les katakana, en un clic.
 2. Imprimez le modèle à taille réelle sur du papier A4 ou US Letter et écrivez un caractère dans chaque case.
 3. Ajoutez un scan éclairé uniformément et confirmez son identifiant de page. GlyphSprout cherche les quatre croix de repère et y place les coins. Vérifiez chaque coin et corrigez ceux qui sont décalés.
 4. Cliquez sur **Convertir les scans** et attendez la fin de la conversion.

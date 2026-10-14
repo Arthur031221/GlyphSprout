@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.0
+
+The Characters stage has two new quick-add buttons, **Accented lowercase** and **Accented uppercase**. They add the precomposed Latin letters that Spanish, French, German, Portuguese and many other languages need, such as e with an acute accent, n with a tilde, u with a diaeresis, c with a cedilla and the German sharp s, in one click. Before this you had to type or paste each accented letter yourself.
+
+Like the other sets, each button appends only the characters your text is missing and stays a draft until **Project ready**. Adding every set at once still fits the 512 glyph limit. Tests cover the new sets and the button flow, and the button labels are translated in all nine interface languages. Updated the demo recording.
+
 ## 1.9.0
 
 The Pages stage has a **Paper size** choice of A4 or US Letter. Before this, the template was A4 only, so printing it at actual size on Letter paper cut off the bottom registration crosses. The Letter template is the same layout scaled to 94 percent and centered, so every cell and cross stays on the sheet, and the print window, the downloaded SVG and the footer line all follow the choice.

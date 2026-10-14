@@ -17,7 +17,7 @@ Staged scans belong to the character template used when they were added. If Undo
 
 The corrected page preview updates as you adjust the four corners. Large scans are decoded once in a browser worker, so dragging does not repeatedly read the image on the main thread. Corner handles accept touches within 24 pixels of their centers and also support the arrow keys and numeric fields. An updating or error message appears below the preview.
 
-The Characters stage has quick-add buttons for uppercase letters, lowercase letters, digits, punctuation, hiragana and katakana. Each button appends only the characters your text is missing, so pressing it twice changes nothing, and it is disabled once the set is complete. The additions stay a draft until you choose **Project ready**. Adding every set at once stays within the 512 glyph limit.
+The Characters stage has quick-add buttons for uppercase letters, lowercase letters, digits, punctuation, accented lowercase letters, accented uppercase letters, hiragana and katakana. The accented sets hold the precomposed Latin letters used in Spanish, French, German, Portuguese and several other languages, such as e with an acute accent, n with a tilde, u with a diaeresis and the German sharp s. Each button appends only the characters your text is missing, so pressing it twice changes nothing, and it is disabled once the set is complete. The additions stay a draft until you choose **Project ready**. Adding every set at once stays within the 512 glyph limit.
 
 ## Edit and review glyphs
 

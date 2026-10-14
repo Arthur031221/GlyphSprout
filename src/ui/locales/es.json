@@ -239,6 +239,8 @@
   "presetPunctuation": "Puntuación",
   "presetHiragana": "Hiragana",
   "presetKatakana": "Katakana",
+  "presetAccentedLower": "Minúsculas con acento",
+  "presetAccentedUpper": "Mayúsculas con acento",
   "copyWebCss": "Copiar CSS de fuente web",
   "cssCopied": "CSS de fuente web copiado. Guárdalo junto a los archivos de fuente descargados.",
   "cssCopyFailed": "El navegador bloqueó la copia. Permite el acceso al portapapeles e inténtalo de nuevo.",

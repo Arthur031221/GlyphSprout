@@ -12,9 +12,17 @@ test("character presets add missing characters as a setup draft", async ({
   await expect(text).toHaveValue("Hi 0123456789");
   await expect(page.getByRole("button", { name: "Digits" })).toBeDisabled();
   await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 12");
+  await page.getByRole("button", { name: "Accented lowercase" }).click();
+  await expect(text).toHaveValue(/ ?àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿß$/);
+  await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 42");
+  await page.getByRole("button", { name: "Accented uppercase" }).click();
+  await expect(
+    page.getByRole("button", { name: "Accented uppercase" }),
+  ).toBeDisabled();
+  await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 70");
   await page.getByRole("button", { name: "Hiragana" }).click();
-  await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 95");
-  await expect(page.locator(".analysis")).toContainText("Print pages: 3");
+  await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 153");
+  await expect(page.locator(".analysis")).toContainText("Print pages: 5");
   await expect(page.locator(".analysis .bad")).toHaveCount(0);
   page.once("dialog", (dialog) => void dialog.accept());
   await page.getByRole("button", { name: "Project ready" }).click();
@@ -22,5 +30,5 @@ test("character presets add missing characters as a setup draft", async ({
   await expect(
     page.locator(".glyph-tile, .glyph-list button").first(),
   ).toBeVisible();
-  await expect(page.locator(".hero-foot")).toContainText("1 / 95 characters");
+  await expect(page.locator(".hero-foot")).toContainText("1 / 153 characters");
 });

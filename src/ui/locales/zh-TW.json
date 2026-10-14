@@ -239,6 +239,8 @@
   "presetPunctuation": "標點符號",
   "presetHiragana": "平假名",
   "presetKatakana": "片假名",
+  "presetAccentedLower": "帶重音小寫字母",
+  "presetAccentedUpper": "帶重音大寫字母",
   "copyWebCss": "複製網頁字型 CSS",
   "cssCopied": "已複製網頁字型 CSS。請把它放在下載的字型檔旁邊。",
   "cssCopyFailed": "瀏覽器擋下了複製。請允許剪貼簿權限後再試一次。",

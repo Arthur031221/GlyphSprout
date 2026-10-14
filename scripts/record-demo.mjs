@@ -35,6 +35,8 @@ try {
   const characters = page.getByRole("textbox", { name: "Text to include" });
   const committedText = await characters.inputValue();
   await page.getByRole("button", { name: "Digits", exact: true }).click();
+  await page.waitForTimeout(1000);
+  await page.getByRole("button", { name: "Accented lowercase" }).click();
   await page.waitForTimeout(1600);
   await characters.fill(committedText);
   await page.waitForTimeout(800);
@@ -205,7 +207,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded character presets, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded character presets including accented letters, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

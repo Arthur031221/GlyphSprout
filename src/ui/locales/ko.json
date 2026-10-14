@@ -239,6 +239,8 @@
   "presetPunctuation": "문장 부호",
   "presetHiragana": "히라가나",
   "presetKatakana": "가타카나",
+  "presetAccentedLower": "악센트 소문자",
+  "presetAccentedUpper": "악센트 대문자",
   "copyWebCss": "웹 폰트 CSS 복사",
   "cssCopied": "웹 폰트 CSS를 복사했습니다. 내려받은 글꼴 파일 옆에 두세요.",
   "cssCopyFailed": "브라우저가 복사를 막았습니다. 클립보드 권한을 허용한 뒤 다시 시도하세요.",

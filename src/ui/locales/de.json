@@ -239,6 +239,8 @@
   "presetPunctuation": "Satzzeichen",
   "presetHiragana": "Hiragana",
   "presetKatakana": "Katakana",
+  "presetAccentedLower": "Kleinbuchstaben mit Akzent",
+  "presetAccentedUpper": "Großbuchstaben mit Akzent",
   "copyWebCss": "Web-Font-CSS kopieren",
   "cssCopied": "Web-Font-CSS kopiert. Lege es neben die heruntergeladenen Schriftdateien.",
   "cssCopyFailed": "Der Browser hat das Kopieren blockiert. Erlaube den Zugriff auf die Zwischenablage und versuche es erneut.",

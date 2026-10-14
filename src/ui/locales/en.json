@@ -239,6 +239,8 @@
   "presetPunctuation": "Punctuation",
   "presetHiragana": "Hiragana",
   "presetKatakana": "Katakana",
+  "presetAccentedLower": "Accented lowercase",
+  "presetAccentedUpper": "Accented uppercase",
   "copyWebCss": "Copy web font CSS",
   "cssCopied": "Web font CSS copied. Save it next to the downloaded font files.",
   "cssCopyFailed": "The browser blocked copying. Allow clipboard access and try again.",

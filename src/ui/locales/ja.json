@@ -239,6 +239,8 @@
   "presetPunctuation": "句読点と記号",
   "presetHiragana": "ひらがな",
   "presetKatakana": "カタカナ",
+  "presetAccentedLower": "アクセント付き小文字",
+  "presetAccentedUpper": "アクセント付き大文字",
   "copyWebCss": "Web フォント用 CSS をコピー",
   "cssCopied": "Web フォント用 CSS をコピーしました。ダウンロードしたフォントファイルと同じ場所に置いてください。",
   "cssCopyFailed": "ブラウザーがコピーを許可しませんでした。クリップボードの権限を許可してもう一度お試しください。",

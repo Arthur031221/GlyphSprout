@@ -55,6 +55,8 @@ export const CHARACTER_SETS = {
   lowercase: range(0x61, 0x7a),
   digits: range(0x30, 0x39),
   punctuation: [..."!?.,:;'\"()-&@/%"],
+  accentedLower: [..."àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿß"],
+  accentedUpper: [..."ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝ"],
   hiragana: range(0x3041, 0x3093),
   katakana: range(0x30a1, 0x30f6),
 } as const;

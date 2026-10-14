@@ -281,6 +281,8 @@ describe("character set presets", () => {
       expect(set.every(isSupported)).toBe(true);
     }
     expect(CHARACTER_SETS.uppercase).toHaveLength(26);
+    expect(CHARACTER_SETS.accentedLower).toHaveLength(30);
+    expect(CHARACTER_SETS.accentedUpper).toHaveLength(28);
     expect(CHARACTER_SETS.hiragana).toHaveLength(83);
     expect(CHARACTER_SETS.katakana).toHaveLength(86);
   });
@@ -294,6 +296,16 @@ describe("character set presets", () => {
       `ABC ${CHARACTER_SETS.uppercase.slice(3).join("")}`,
     );
     expect(missingFromSet(text, "digits")).toEqual([]);
+  });
+
+  it("adds accented letters as precomposed characters", () => {
+    const text = addCharacterSet("caf\u00e9", "accentedLower");
+    expect(text.normalize("NFC")).toBe(text);
+    expect([...text].filter((ch) => ch === "\u00e9")).toHaveLength(1);
+    expect(analyzeText(text).unsupported).toEqual([]);
+    expect(missingFromSet("\u00c0\u00c9", "accentedUpper")).toHaveLength(26);
+    expect(new Set(CHARACTER_SETS.accentedLower).size).toBe(30);
+    expect(new Set(CHARACTER_SETS.accentedUpper).size).toBe(28);
   });
 
   it("stays inside the glyph limit when every preset is added", () => {

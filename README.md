@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.9.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.10.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -24,7 +24,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 
 ## Make your first font
 
-1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets such as uppercase letters, digits, punctuation, hiragana or katakana with one click.
+1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets such as uppercase letters, digits, punctuation, accented letters, hiragana or katakana with one click.
 2. Print its template at actual size on A4 or US Letter paper and write one character in each cell.
 3. Add an evenly lit scan and confirm the page ID. GlyphSprout looks for the four registration crosses and places the corners on them. Check each corner and fix any that are off.
 4. Click **Convert scans** and wait for it to finish.
