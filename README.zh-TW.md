@@ -13,7 +13,7 @@
 ![實際工作坊：擦除並修正掃描字形、查看樣張並下載 TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。指令顯示就緒訊息後，請開啟 `http://127.0.0.1:4173`。
@@ -51,7 +51,7 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
 
 ## 保存你的成果
 
-專案資料留在瀏覽器中。應用程式不會上傳專案，也不會使用遠端分析。關閉重要工作前，請下載 `.glyphsprout.json` 備份。IndexedDB 會保留最新與前一個儲存版本、檢查儲存影像的雜湊值，並在其他分頁儲存了較新版本時發出警告。
+專案資料留在瀏覽器中。應用程式不會上傳專案，也不會使用遠端分析。關閉重要工作前，請下載 `.glyphsprout.json` 備份。要開啟備份，請選擇 **開啟專案**，或把檔案拖放到頁面任意位置。IndexedDB 會保留最新與前一個儲存版本、檢查儲存影像的雜湊值，並在其他分頁儲存了較新版本時發出警告。
 
 頁尾顯示 **Ready for offline use** 後即可離線使用。完整應用程式、工作者與 WOFF2 編碼器都會快取。首次造訪需要網路連線。清除瀏覽器儲存空間可能同時移除復原資料與快取。
 

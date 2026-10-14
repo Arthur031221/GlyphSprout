@@ -462,7 +462,7 @@ export function Workshop({
                   <div>
                     {t.outline}
                     <small>
-                      {current.contours.length} {t.contours}
+                      {t.contours}: {current.contours.length}
                     </small>
                   </div>
                   {current.contours.length ? (

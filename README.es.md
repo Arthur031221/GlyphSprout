@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -51,7 +51,7 @@ Las exportaciones contienen contornos sencillos sin hinting. El suavizado del co
 
 ## Conserva tu trabajo
 
-Los datos del proyecto permanecen en el navegador. La aplicación no sube proyectos ni usa analítica remota. Descarga una copia de seguridad `.glyphsprout.json` antes de cerrar un trabajo importante. IndexedDB conserva la revisión guardada más reciente y la anterior, comprueba los hashes de las imágenes guardadas y avisa si otra pestaña ha guardado una revisión más nueva.
+Los datos del proyecto permanecen en el navegador. La aplicación no sube proyectos ni usa analítica remota. Descarga una copia de seguridad `.glyphsprout.json` antes de cerrar un trabajo importante. Para abrir una copia, elige **Abrir proyecto** o suelta el archivo en cualquier parte de la página. IndexedDB conserva la revisión guardada más reciente y la anterior, comprueba los hashes de las imágenes guardadas y avisa si otra pestaña ha guardado una revisión más nueva.
 
 Puedes trabajar sin conexión cuando el pie de página muestre **Ready for offline use**. Se guardan en caché la aplicación completa, el worker y el codificador WOFF2. La primera visita requiere conexión. Al borrar el almacenamiento del navegador pueden eliminarse tanto los datos de recuperación como la caché.
 

@@ -33,6 +33,7 @@
   "takePhoto": "Hacer una foto",
   "dropImages": "También puedes soltar imágenes JPEG o PNG en cualquier parte de esta sección.",
   "dropNotImages": "Solo se pueden añadir imágenes JPEG y PNG.",
+  "dropProject": "Suelta para abrir esta copia del proyecto",
   "scanHelp": "Elige imágenes de las páginas, confirma la asignación y el ID visible de cada página, y ajusta las cuatro esquinas.",
   "cornersFound": "Las cuatro esquinas se encontraron automáticamente. Antes de confirmar, comprueba que cada marcador esté sobre su cruz.",
   "chooseImages": "Elegir imágenes JPEG o PNG",

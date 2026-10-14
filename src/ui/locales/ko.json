@@ -33,6 +33,7 @@
   "takePhoto": "사진 찍기",
   "dropImages": "JPEG 또는 PNG 이미지를 이 영역에 끌어다 놓을 수도 있습니다.",
   "dropNotImages": "JPEG와 PNG 이미지만 추가할 수 있습니다.",
+  "dropProject": "놓으면 이 프로젝트 백업을 엽니다",
   "scanHelp": "페이지 이미지를 선택하고 페이지 할당과 보이는 페이지 ID를 확인한 다음 네 모서리를 조정하세요.",
   "cornersFound": "네 모서리를 자동으로 찾았습니다. 확인하기 전에 각 표시가 십자 위에 있는지 살펴보세요.",
   "chooseImages": "JPEG 또는 PNG 이미지 선택",

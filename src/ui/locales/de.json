@@ -33,6 +33,7 @@
   "takePhoto": "Foto aufnehmen",
   "dropImages": "Du kannst JPEG- oder PNG-Bilder auch an eine beliebige Stelle in diesem Abschnitt ziehen.",
   "dropNotImages": "Es können nur JPEG- und PNG-Bilder hinzugefügt werden.",
+  "dropProject": "Zum Öffnen dieser Projektsicherung loslassen",
   "scanHelp": "Wähle Seitenbilder aus, bestätige die Zuordnung und die sichtbare Seitennummer jeder Seite und passe dann die vier Ecken an.",
   "cornersFound": "Die vier Ecken wurden automatisch gefunden. Prüfe vor dem Bestätigen, dass jede Markierung auf ihrem Kreuz sitzt.",
   "chooseImages": "JPEG- oder PNG-Bilder auswählen",

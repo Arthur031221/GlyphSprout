@@ -33,6 +33,7 @@
   "takePhoto": "写真を撮る",
   "dropImages": "JPEG または PNG 画像をこのセクションにドロップすることもできます。",
   "dropNotImages": "追加できるのは JPEG と PNG 画像だけです。",
+  "dropProject": "ドロップしてこのプロジェクトのバックアップを開く",
   "scanHelp": "画像を選び、ページ割り当てと表示ページ番号を確認してから四隅を調整します。",
   "cornersFound": "四隅を自動で検出しました。確認する前に、各マーカーが十字の上にあるか見てください。",
   "chooseImages": "JPEG または PNG 画像を選択",

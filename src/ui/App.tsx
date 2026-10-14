@@ -120,6 +120,42 @@ export function App() {
     return () => window.removeEventListener("beforeunload", warn);
   }, [hasUnsavedWork]);
 
+  const [projectDropping, setProjectDropping] = useState(false);
+  const dropOpen = useRef<(file: File) => void>(() => {});
+  dropOpen.current = (file) => {
+    if (!locked) void open(file);
+  };
+  useEffect(() => {
+    const isJsonItem = (item: DataTransferItem) =>
+      item.kind === "file" && item.type === "application/json";
+    function over(event: DragEvent) {
+      if (!Array.from(event.dataTransfer?.items ?? []).some(isJsonItem)) return;
+      event.preventDefault();
+      event.stopPropagation();
+      setProjectDropping(true);
+    }
+    function leave(event: DragEvent) {
+      if (!event.relatedTarget) setProjectDropping(false);
+    }
+    function drop(event: DragEvent) {
+      setProjectDropping(false);
+      const files = Array.from(event.dataTransfer?.files ?? []);
+      const [file] = files;
+      if (files.length !== 1 || file.type !== "application/json") return;
+      event.preventDefault();
+      event.stopPropagation();
+      dropOpen.current(file);
+    }
+    window.addEventListener("dragover", over, true);
+    window.addEventListener("dragleave", leave, true);
+    window.addEventListener("drop", drop, true);
+    return () => {
+      window.removeEventListener("dragover", over, true);
+      window.removeEventListener("dragleave", leave, true);
+      window.removeEventListener("drop", drop, true);
+    };
+  }, []);
+
   function changeDrawing(next: DrawingDraft | null, applied = false) {
     if (!applied && drawingDirty && !window.confirm(t.discardDrawing))
       return false;
@@ -453,6 +489,11 @@ export function App() {
         </div>
       </header>
       <main>
+        {projectDropping && (
+          <div className="project-drop" role="status">
+            {t.dropProject}
+          </div>
+        )}
         <section className="intro">
           <div>
             <span className="eyebrow">{t.localWorkshop}</span>

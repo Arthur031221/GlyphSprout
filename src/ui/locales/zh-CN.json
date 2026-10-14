@@ -33,6 +33,7 @@
   "takePhoto": "拍照",
   "dropImages": "也可以把 JPEG 或 PNG 图像拖放到这个区域。",
   "dropNotImages": "只能添加 JPEG 和 PNG 图像。",
+  "dropProject": "松开以打开这个项目备份",
   "scanHelp": "选择页面图像，确认页面分配和可见页码，再调整四个角。",
   "cornersFound": "已自动找到四个角。确认前，请检查每个标记是否落在对应的十字上。",
   "chooseImages": "选择 JPEG 或 PNG 图像",

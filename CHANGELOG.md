@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.22.0
+
+A project backup can now be dropped anywhere on the page to open it. While a `.glyphsprout.json` file is over the window, a dashed outline and a short message say it will be opened, and dropping it goes through the same check and the same replace confirmation as **Open project**. A broken file is refused with the usual message and the current project stays as it was. Before this, the only way to open a backup was the file chooser. The outline panel's contour count now reads "contours: 1" instead of "1 contours".
+
+Browser tests cover a drop that is declined, a drop that is accepted, a broken file, the overlay message and its translation. The new message is translated in all nine interface languages, and the README paragraph on keeping your work mentions the drop in every language.
+
 ## 1.21.0
 
 When the text typed into the live preview contains characters the project doesn't have, the preview now lists them under the text box and offers **Add these characters**. Before this, those letters showed in red and you had to go to Characters, work out what was missing and type it in. One click adds them after the existing characters, so the glyphs you already made keep their order and place, then opens Pages so you can print cells for the new characters. The same confirmation as in Characters appears first, because changing the characters clears scan page assignments. The text in the preview box is left as you typed it, and the button stays disabled while the Characters stage has an unapplied draft.

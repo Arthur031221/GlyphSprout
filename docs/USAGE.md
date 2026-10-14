@@ -69,7 +69,7 @@ Changing the chosen characters or their order requires fresh printed sheets. Cha
 
 ## Save and recover
 
-Download a `.glyphsprout.json` project file for a portable backup. A backup waits for pending settings to finish and includes their latest values. Projects are also saved locally in IndexedDB with a current and previous revision. If the newest revision cannot be read, the workshop can fall back to the previous one. If another tab saves first, the workshop warns about the conflict so you can download your copy or reload.
+Download a `.glyphsprout.json` project file for a portable backup. To open one, choose **Open project** or drop the file anywhere on the page. A backup waits for pending settings to finish and includes their latest values. Projects are also saved locally in IndexedDB with a current and previous revision. If the newest revision cannot be read, the workshop can fall back to the previous one. If another tab saves first, the workshop warns about the conflict so you can download your copy or reload.
 
 On restore, the specimen uses the project's text. If both revisions are unreadable, automatic saving stops and the stored data stays intact. **Download stored data** saves a raw recovery archive, including original assets and revisions. This archive is for manual inspection or repair and cannot be opened as a project. Open a normal project backup to keep working, or use **Reset local storage** after keeping the archive. Resetting requires confirmation and removes this browser's saved revisions. Reset is disabled while the archive is being prepared. Wait for the browser to finish saving the file before resetting.
 

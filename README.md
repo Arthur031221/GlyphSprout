@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -51,7 +51,7 @@ Exports contain simple unhinted outlines. Outline smoothing rounds the pixel ste
 
 ## Keep your work
 
-Project data stays in your browser. The app has no project upload or remote analytics. Download a `.glyphsprout.json` backup before you close important work. IndexedDB keeps the latest and previous saved revisions, checks stored image hashes, and warns you if another tab has saved a newer revision.
+Project data stays in your browser. The app has no project upload or remote analytics. Download a `.glyphsprout.json` backup before you close important work. To open a backup, choose **Open project** or drop the file anywhere on the page. IndexedDB keeps the latest and previous saved revisions, checks stored image hashes, and warns you if another tab has saved a newer revision.
 
 Once the footer says **Ready for offline use**, the app works offline. The full app, worker and WOFF2 encoder are cached. Your first visit needs a connection. Clearing browser storage can remove both recovery data and the cache.
 

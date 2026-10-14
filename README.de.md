@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -51,7 +51,7 @@ Die Exporte enthalten einfache Konturen ohne Hinting. Die Konturglättung rundet
 
 ## Arbeit sichern
 
-Projektdaten bleiben im Browser. Die App lädt keine Projekte hoch und verwendet keine Remote-Analyse. Lade vor dem Schließen wichtiger Arbeit eine Sicherung als `.glyphsprout.json` herunter. IndexedDB speichert die aktuelle und die vorherige gespeicherte Version, prüft die Hashes gespeicherter Bilder und warnt, wenn ein anderer Tab eine neuere Version gespeichert hat.
+Projektdaten bleiben im Browser. Die App lädt keine Projekte hoch und verwendet keine Remote-Analyse. Lade vor dem Schließen wichtiger Arbeit eine Sicherung als `.glyphsprout.json` herunter. Zum Öffnen einer Sicherung wähle **Projekt öffnen** oder ziehe die Datei an eine beliebige Stelle der Seite. IndexedDB speichert die aktuelle und die vorherige gespeicherte Version, prüft die Hashes gespeicherter Bilder und warnt, wenn ein anderer Tab eine neuere Version gespeichert hat.
 
 Offline kannst du arbeiten, sobald die Fußzeile **Ready for offline use** anzeigt. Die vollständige App, der Worker und der WOFF2-Encoder werden zwischengespeichert. Beim ersten Besuch ist eine Internetverbindung nötig. Beim Löschen des Browserspeichers können Wiederherstellungsdaten und Cache verloren gehen.
 

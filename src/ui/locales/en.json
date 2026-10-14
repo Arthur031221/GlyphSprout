@@ -33,6 +33,7 @@
   "takePhoto": "Take a photo",
   "dropImages": "You can also drop JPEG or PNG images anywhere in this section.",
   "dropNotImages": "Only JPEG and PNG images can be added.",
+  "dropProject": "Drop to open this project backup",
   "scanHelp": "Choose page images, confirm each page assignment and visible page ID, then adjust the four corners.",
   "cornersFound": "The four corners were found automatically. Check that each marker sits on its cross before you confirm.",
   "chooseImages": "Choose JPEG or PNG images",

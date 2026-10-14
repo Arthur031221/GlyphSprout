@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.21.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -51,7 +51,7 @@ Les exports contiennent des contours simples sans hinting. Le lissage du contour
 
 ## Conservez votre travail
 
-Les données du projet restent dans votre navigateur. L'application n'envoie aucun projet et n'utilise aucune analyse à distance. Téléchargez une sauvegarde `.glyphsprout.json` avant de fermer un travail important. IndexedDB conserve la dernière version enregistrée et la précédente, vérifie les empreintes des images stockées et vous avertit si un autre onglet a enregistré une version plus récente.
+Les données du projet restent dans votre navigateur. L'application n'envoie aucun projet et n'utilise aucune analyse à distance. Téléchargez une sauvegarde `.glyphsprout.json` avant de fermer un travail important. Pour ouvrir une sauvegarde, choisissez **Ouvrir un projet** ou déposez le fichier n'importe où sur la page. IndexedDB conserve la dernière version enregistrée et la précédente, vérifie les empreintes des images stockées et vous avertit si un autre onglet a enregistré une version plus récente.
 
 Le mode hors ligne est disponible lorsque le pied de page affiche **Ready for offline use**. L'application complète, le worker et l'encodeur WOFF2 sont mis en cache. La première visite nécessite une connexion. Effacer le stockage du navigateur peut supprimer à la fois les données de récupération et le cache.
 

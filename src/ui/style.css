@@ -1565,3 +1565,17 @@ progress {
   font-weight: 700;
   letter-spacing: 0.08em;
 }
+.project-drop {
+  position: fixed;
+  inset: 12px;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--accent);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--accent-soft), transparent 8%);
+  color: var(--accent);
+  font-size: 1.25rem;
+  font-weight: 700;
+  pointer-events: none;
+}

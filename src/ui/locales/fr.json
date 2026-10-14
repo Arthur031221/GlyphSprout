@@ -33,6 +33,7 @@
   "takePhoto": "Prendre une photo",
   "dropImages": "Vous pouvez aussi déposer des images JPEG ou PNG n'importe où dans cette section.",
   "dropNotImages": "Seules les images JPEG et PNG peuvent être ajoutées.",
+  "dropProject": "Déposez pour ouvrir cette sauvegarde de projet",
   "scanHelp": "Choisissez les images des pages, confirmez l'affectation et l'ID visible de chaque page, puis ajustez les quatre coins.",
   "cornersFound": "Les quatre coins ont été trouvés automatiquement. Avant de confirmer, vérifiez que chaque repère est bien sur sa croix.",
   "chooseImages": "Choisir des images JPEG ou PNG",
