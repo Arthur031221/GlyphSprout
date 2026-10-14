@@ -81,6 +81,9 @@ async function stroke(
 }
 
 async function pixels(page: Page) {
+  await expect(
+    page.getByRole("button", { name: "Pen", exact: true }),
+  ).toBeEnabled();
   return page
     .locator(".draw-canvas canvas")
     .evaluate((canvas: HTMLCanvasElement) => {
