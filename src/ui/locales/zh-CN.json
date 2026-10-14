@@ -26,6 +26,8 @@
   "pages": "打印页面",
   "paperSize": "纸张大小",
   "printAll": "打印所有页面",
+  "downloadPdf": "下载全部页面 (PDF)",
+  "pdfFailed": "无法生成 PDF。请改为下载 SVG 模板。",
   "printPage": "打印此页",
   "templateHelp": "请按实际尺寸打印。保留四个十字标记，使用平整纸张、深色墨水和均匀光线。",
   "stageInstructions": "在每个方框中写一个字，并保留四个定位十字。",

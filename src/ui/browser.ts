@@ -1,5 +1,6 @@
 import { validateCorners } from "../core/geometry";
 import { DETECT_MAX_SIDE, detectCorners } from "../core/markers";
+import { pdfFromJpegs } from "../core/pdf";
 import {
   MAX_IMAGE_BYTES,
   MAX_PROJECT_BYTES,
@@ -199,4 +200,40 @@ export function printSheets(
     image.src = svgUrl(svg);
     popup.document.body.append(image);
   }
+}
+
+const PDF_DPI = 300;
+
+/** Draws each template sheet at print resolution and bundles them into one PDF. */
+export async function templatePdf(
+  sheets: string[],
+  paper: Paper,
+): Promise<Uint8Array<ArrayBuffer>> {
+  const { width, height } = PAPERS[paper];
+  const pixelWidth = Math.round((width / 25.4) * PDF_DPI);
+  const pixelHeight = Math.round((height / 25.4) * PDF_DPI);
+  const pages = [];
+  for (const svg of sheets) {
+    const image = new Image();
+    image.src = svgUrl(svg);
+    await image.decode();
+    const canvas = document.createElement("canvas");
+    canvas.width = pixelWidth;
+    canvas.height = pixelHeight;
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("invalidPdf");
+    context.fillStyle = "#fff";
+    context.fillRect(0, 0, pixelWidth, pixelHeight);
+    context.drawImage(image, 0, 0, pixelWidth, pixelHeight);
+    const blob = await new Promise<Blob | null>((done) =>
+      canvas.toBlob(done, "image/jpeg", 0.92),
+    );
+    if (!blob) throw new Error("invalidPdf");
+    pages.push({
+      jpeg: new Uint8Array(await blob.arrayBuffer()),
+      width: pixelWidth,
+      height: pixelHeight,
+    });
+  }
+  return pdfFromJpegs(pages, { width, height });
 }

@@ -26,6 +26,8 @@
   "pages": "Seiten drucken",
   "paperSize": "Papierformat",
   "printAll": "Alle Seiten drucken",
+  "downloadPdf": "Alle Seiten herunterladen (PDF)",
+  "pdfFailed": "Das PDF konnte nicht erstellt werden. Lade stattdessen die SVG-Vorlagen herunter.",
   "printPage": "Diese Seite drucken",
   "templateHelp": "In Originalgröße drucken. Alle vier Kreuze müssen sichtbar bleiben. Verwende glattes Papier, dunkle Tinte und gleichmäßiges Licht.",
   "stageInstructions": "Schreibe ein Zeichen in jedes Quadrat. Lass die vier Passkreuze sichtbar.",

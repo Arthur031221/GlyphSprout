@@ -26,6 +26,8 @@
   "pages": "Imprimir páginas",
   "paperSize": "Tamaño del papel",
   "printAll": "Imprimir todas las páginas",
+  "downloadPdf": "Descargar todas las páginas (PDF)",
+  "pdfFailed": "No se pudo crear el PDF. Descarga las plantillas SVG en su lugar.",
   "printPage": "Imprimir esta página",
   "templateHelp": "Imprime a tamaño real. Mantén visibles las cuatro cruces y usa papel plano, tinta oscura e iluminación uniforme.",
   "stageInstructions": "Escribe un carácter dentro de cada cuadro. Mantén visibles las cuatro cruces de registro.",

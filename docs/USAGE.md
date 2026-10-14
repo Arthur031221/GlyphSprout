@@ -3,7 +3,7 @@
 ## Make a small font of your own
 
 1. Open the local workshop and choose the characters your project needs.
-2. Print the generated template at actual size. Choose A4 or US Letter with **Paper size** on the Pages stage. The choice is remembered in this browser, and browsers set to a United States, Canadian, Mexican, Philippine, Chilean or Colombian region start on US Letter. Write one character in each cell.
+2. Print the generated template at actual size. Choose A4 or US Letter with **Paper size** on the Pages stage. The choice is remembered in this browser, and browsers set to a United States, Canadian, Mexican, Philippine, Chilean or Colombian region start on US Letter. Write one character in each cell. **Download all pages (PDF)** saves every sheet in one PDF at the chosen paper size, so you can print from a PDF viewer or a phone without the print window.
 3. Add a flat, evenly lit PNG or JPEG scan. Choose the files, drop them onto the scan section, or on a touch screen tap **Take a photo** to open the camera. Confirm its printed page ID and the four page corners.
 4. Click **Convert scans** and wait for conversion to finish. Cells with no ink are listed in the notice when it finishes, so a letter you skipped or a wrong page assignment shows up at once.
 5. Review each traced glyph. Adjust its threshold, speck filter, stroke weight, outline smoothing, crop, size, offsets, and spacing, or draw and erase directly on the source.

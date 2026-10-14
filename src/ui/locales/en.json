@@ -26,6 +26,8 @@
   "pages": "Print pages",
   "paperSize": "Paper size",
   "printAll": "Print all pages",
+  "downloadPdf": "Download all pages (PDF)",
+  "pdfFailed": "The PDF could not be made. Download the SVG templates instead.",
   "printPage": "Print this page",
   "templateHelp": "Print at actual size. Keep all four crosses visible and use flat paper with dark ink and even light.",
   "stageInstructions": "Write one character inside each square. Keep the four registration crosses visible.",

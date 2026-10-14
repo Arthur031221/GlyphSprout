@@ -25,7 +25,7 @@ import {
   templateSvg,
 } from "../core/template";
 import type { Point, Project } from "../core/types";
-import { download, printSheets, svgUrl } from "./browser";
+import { download, printSheets, svgUrl, templatePdf } from "./browser";
 import { type Dictionary, errorKey, preference, remember } from "./i18n";
 import { RectifiedPreview } from "./RectifiedPreview";
 import type { Notice } from "./useGlyphEditor";
@@ -246,6 +246,14 @@ export function Pages({
       notify({ key: errorKey(error, "popupBlocked"), tone: "error" });
     }
   }
+  async function downloadPdf() {
+    try {
+      const bytes = await templatePdf(sheets, paper);
+      download(bytes, `${project.name}-template.pdf`, "application/pdf");
+    } catch {
+      notify({ key: "pdfFailed", tone: "error" });
+    }
+  }
   const cornerNames = [t.topLeft, t.topRight, t.bottomRight, t.bottomLeft];
   return (
     <section className="panel page-stage">
@@ -274,6 +282,10 @@ export function Pages({
           <button type="button" onClick={() => print(sheets)}>
             <Printer />
             {t.printAll}
+          </button>
+          <button type="button" onClick={downloadPdf}>
+            <DownloadSimple />
+            {t.downloadPdf}
           </button>
         </div>
       </div>

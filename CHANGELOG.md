@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.24.0
+
+The Pages stage has a new **Download all pages (PDF)** button. It saves every template sheet in one PDF at the chosen paper size, A4 or US Letter. Before this you could print from a browser window, which phones often block, or save each sheet as an SVG that few programs print at the right size. The PDF holds each sheet as a 300 dpi picture, and no extra dependency was added.
+
+A unit test checks the PDF structure, page size and cross reference table. Browser tests download the file for A4 and US Letter and check the page count, size and button translation. The two new labels are translated in all nine interface languages, and the README step for printing and the usage guide describe the button.
+
 ## 1.23.1
 
 The live preview of an empty project no longer cuts its message off. On a phone, the "Load a sample or start with the characters you want to write" text was drawn with the line height of a full size specimen, so it was spread over tall lines and the last words were clipped. The message now uses its own small size and normal line height at every screen width, and the Preview zoom slider only changes real specimen text.

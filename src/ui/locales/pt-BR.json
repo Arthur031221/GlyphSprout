@@ -26,6 +26,8 @@
   "pages": "Imprimir páginas",
   "paperSize": "Tamanho do papel",
   "printAll": "Imprimir todas as páginas",
+  "downloadPdf": "Baixar todas as páginas (PDF)",
+  "pdfFailed": "Não foi possível criar o PDF. Baixe os modelos SVG.",
   "printPage": "Imprimir esta página",
   "templateHelp": "Imprima no tamanho real. Mantenha as quatro cruzes visíveis e use papel plano, tinta escura e iluminação uniforme.",
   "stageInstructions": "Escreva um caractere dentro de cada quadrado. Mantenha visíveis as quatro cruzes de alinhamento.",

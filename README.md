@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.23.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -25,7 +25,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 ## Make your first font
 
 1. Start a project and choose the characters you need, such as `Hello!`. One click adds a whole set: uppercase letters, digits, punctuation, accented letters, Greek, Cyrillic, hiragana, katakana or Hangul.
-2. Print the template at actual size on A4 or US Letter paper and write one character in each cell.
+2. Print the template at actual size on A4 or US Letter paper and write one character in each cell. Print from the browser, or choose **Download all pages (PDF)** for one file you can print from any PDF viewer or send to a print shop.
 3. Add an evenly lit scan. Choose it, drop it onto the scan section, or tap **Take a photo** on a phone, then confirm the page ID. GlyphSprout finds the four registration crosses and snaps the corners to them. Check each corner and fix any that are off.
 4. Click **Convert scans** and wait for it to finish. Cells with no ink are listed at the end, so a skipped letter or a wrong page choice shows up right away.
 5. Review each glyph. You can adjust the source, threshold, stroke weight, outline smoothing, crop, size, offsets and spacing. Every number setting has a slider beside it. Type a value and press Enter, or move the slider, and the outline updates when you let go. Ctrl+Z or Cmd+Z undoes a change, and adding Shift redoes it. Dashed guides in the outline view mark the left edge and the advance width, so you can watch a glyph's spacing as you adjust it.

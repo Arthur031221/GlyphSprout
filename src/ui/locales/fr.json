@@ -26,6 +26,8 @@
   "pages": "Imprimer les pages",
   "paperSize": "Format du papier",
   "printAll": "Imprimer toutes les pages",
+  "downloadPdf": "Télécharger toutes les pages (PDF)",
+  "pdfFailed": "Impossible de créer le PDF. Téléchargez plutôt les modèles SVG.",
   "printPage": "Imprimer cette page",
   "templateHelp": "Imprimez à la taille réelle. Gardez les quatre croix visibles et utilisez du papier plat, de l'encre foncée et une lumière uniforme.",
   "stageInstructions": "Écrivez un caractère dans chaque carré. Gardez visibles les quatre croix de repérage.",

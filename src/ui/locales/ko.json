@@ -26,6 +26,8 @@
   "pages": "페이지 인쇄",
   "paperSize": "용지 크기",
   "printAll": "모든 페이지 인쇄",
+  "downloadPdf": "모든 페이지 다운로드 (PDF)",
+  "pdfFailed": "PDF를 만들 수 없습니다. 대신 SVG 템플릿을 다운로드하세요.",
   "printPage": "이 페이지 인쇄",
   "templateHelp": "실제 크기로 인쇄하세요. 네 개의 십자 표시를 모두 보이게 하고 평평한 종이, 진한 잉크, 고른 조명을 사용하세요.",
   "stageInstructions": "각 사각형 안에 문자 하나를 쓰고 네 개의 정렬 십자 표시를 보이게 하세요.",
