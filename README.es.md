@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.22.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.23.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -27,7 +27,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`. Puedes añadir conjuntos completos, como mayúsculas, dígitos, puntuación, letras con acento, griego, cirílico, hiragana, katakana o letras hangul, con un clic.
 2. Imprime la plantilla a tamaño real en papel A4 o US Letter y escribe un carácter en cada celda.
 3. Añade un escaneo con luz uniforme eligiendo el archivo, soltándolo en la sección de escaneo o tocando **Hacer una foto** en el móvil, y confirma el ID de página. GlyphSprout busca las cuatro cruces de registro y coloca las esquinas sobre ellas. Revisa cada esquina y corrige las que estén desviadas.
-4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
+4. Haz clic en **Convertir escaneos** y espera a que termine la conversión. Al terminar se listan las celdas sin tinta, así que una letra omitida o una página equivocada se nota enseguida.
 5. Revisa cada glifo. Ajusta la imagen original, el umbral, el grosor del trazo, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado. Cada ajuste numérico tiene un control deslizante. Escribe un valor y pulsa Intro, o mueve el control, y el contorno se actualiza al soltarlo. Pulsa Ctrl+Z o Cmd+Z para deshacer un cambio y añade Shift para rehacerlo. Las guías discontinuas de la vista de contorno marcan el borde izquierdo y el ancho de avance, así ves el espaciado de cada glifo mientras lo ajustas.
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2. Cuando todos los glifos están listos, **Descargar fuente (TTF)** en el panel de vista previa guarda la fuente sin bajar hasta el taller. Los caracteres del texto que la fuente aún no tiene aparecen en rojo, y **Añadir estos caracteres** los suma al proyecto para que imprimas sus casillas. Cambiar los caracteres borra las asignaciones de página de los escaneos, así que vuelve a asignarlas.
 

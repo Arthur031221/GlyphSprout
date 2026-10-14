@@ -221,6 +221,7 @@
   "drawingViewport": "Área de desenho",
   "precisionHelp": "Amplie para editar detalhes. Use Mover, as barras de rolagem ou foque a tela e pressione as setas. Os tamanhos são medidos em pixels da imagem de origem.",
   "scanRepair": "Conversão concluída. Estas células precisam de contornos mais simples. Ajuste o filtro de pontos, o recorte ou a imagem original:",
+  "scanBlank": "Digitalizações convertidas. Estas células não tinham tinta, então ainda não têm glifo. Confira se você escreveu nelas e escolheu a página certa:",
   "reviewedCount": "revisados",
   "nextReview": "Próximo a revisar",
   "allReviewed": "Todos os glifos revisados",

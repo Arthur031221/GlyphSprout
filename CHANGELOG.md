@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.23.0
+
+When scan conversion finishes, cells that held no ink are now named in the notice. Before this, the notice said only that the scans were converted, and a letter you forgot to write, a faint pen or a wrong page assignment left empty glyphs that you found one by one in the glyph list. The notice now reads "Scans converted. These cells had no ink, so they have no glyph yet." followed by the characters, cut to 24 with a count of the rest. Cells that need a simpler outline still report first, as before.
+
+A unit test covers the character list and a browser test converts a sheet with one written cell out of three. The new message is translated in all nine interface languages, and the README step for converting scans mentions it in every language.
+
 ## 1.22.0
 
 A project backup can now be dropped anywhere on the page to open it. While a `.glyphsprout.json` file is over the window, a dashed outline and a short message say it will be opened, and dropping it goes through the same check and the same replace confirmation as **Open project**. A broken file is refused with the usual message and the current project stays as it was. Before this, the only way to open a backup was the file chooser. The outline panel's contour count now reads "contours: 1" instead of "1 contours".

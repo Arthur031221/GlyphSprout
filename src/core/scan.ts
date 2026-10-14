@@ -41,3 +41,12 @@ export function traceScannedCell(
   }
   return { ...result, needsRepair: false };
 }
+
+const LISTED_CELLS = 24;
+
+/** Characters for a notice, cut to a short list with a count of the rest. */
+export function listCells(characters: string[]): string {
+  const shown = characters.slice(0, LISTED_CELLS).join(" ");
+  const more = characters.length - LISTED_CELLS;
+  return more > 0 ? `${shown} +${more}` : shown;
+}

@@ -221,6 +221,7 @@
   "drawingViewport": "Zone de dessin",
   "precisionHelp": "Agrandissez pour modifier les détails. Utilisez Déplacer, les barres de défilement ou les flèches lorsque le canevas a le focus. La taille est mesurée en pixels de l'image source.",
   "scanRepair": "Conversion terminée. Ces cases nécessitent des contours plus simples. Ajustez le filtre des petits points, le recadrage ou l'image source :",
+  "scanBlank": "Scans convertis. Ces cases n'avaient pas d'encre, elles n'ont donc pas encore de glyphe. Vérifiez que vous y avez écrit et que vous avez choisi la bonne page :",
   "reviewedCount": "vérifiés",
   "nextReview": "Prochain à vérifier",
   "allReviewed": "Tous les glyphes sont vérifiés",

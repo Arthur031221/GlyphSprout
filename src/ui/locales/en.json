@@ -221,6 +221,7 @@
   "drawingViewport": "Drawing viewport",
   "precisionHelp": "Zoom for detail. Choose Pan, use the scrollbars or focus the canvas and press arrow keys to move. Brush sizes use source pixels.",
   "scanRepair": "Conversion finished. These cells need simpler outlines. Adjust the speck filter, crop or source:",
+  "scanBlank": "Scans converted. These cells had no ink, so they have no glyph yet. Check that you wrote in them and picked the right page:",
   "reviewedCount": "reviewed",
   "nextReview": "Next to review",
   "allReviewed": "All glyphs reviewed",

@@ -221,6 +221,7 @@
   "drawingViewport": "Área de dibujo",
   "precisionHelp": "Amplía para editar detalles. Usa Mover, las barras de desplazamiento o enfoca el lienzo y pulsa las flechas. El tamaño del pincel se mide en píxeles de origen.",
   "scanRepair": "Conversión terminada. Estas celdas necesitan contornos más simples. Ajusta el filtro de motas, el recorte o la imagen original:",
+  "scanBlank": "Escaneos convertidos. Estas celdas no tenían tinta, así que aún no tienen glifo. Comprueba que escribiste en ellas y que elegiste la página correcta:",
   "reviewedCount": "revisados",
   "nextReview": "Siguiente por revisar",
   "allReviewed": "Todos los glifos revisados",

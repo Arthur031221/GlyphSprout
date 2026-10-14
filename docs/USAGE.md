@@ -5,7 +5,7 @@
 1. Open the local workshop and choose the characters your project needs.
 2. Print the generated template at actual size. Choose A4 or US Letter with **Paper size** on the Pages stage. The choice is remembered in this browser, and browsers set to a United States, Canadian, Mexican, Philippine, Chilean or Colombian region start on US Letter. Write one character in each cell.
 3. Add a flat, evenly lit PNG or JPEG scan. Choose the files, drop them onto the scan section, or on a touch screen tap **Take a photo** to open the camera. Confirm its printed page ID and the four page corners.
-4. Click **Convert scans** and wait for conversion to finish.
+4. Click **Convert scans** and wait for conversion to finish. Cells with no ink are listed in the notice when it finishes, so a letter you skipped or a wrong page assignment shows up at once.
 5. Review each traced glyph. Adjust its threshold, speck filter, stroke weight, outline smoothing, crop, size, offsets, and spacing, or draw and erase directly on the source.
 6. Type a specimen in the live preview and download a TTF or WOFF2 font. Once every glyph is ready, **Download font (TTF)** in the preview panel at the top saves the TTF without scrolling to the Workshop. For a subset or a WOFF2 file, use the Font file panel in the Workshop. Characters in your text that the font doesn't have yet show in red, and **Add these characters** below the text box adds them to the project and opens Pages so you can print cells for them. Changing the characters clears the scan page assignments.
 

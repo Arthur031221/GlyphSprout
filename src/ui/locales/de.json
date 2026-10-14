@@ -221,6 +221,7 @@
   "drawingViewport": "Zeichenbereich",
   "precisionHelp": "Zum Bearbeiten von Details vergrößern. Mit Verschieben, den Scrollleisten oder den Pfeiltasten im fokussierten Zeichenbereich bewegen. Größen werden in Quellpixeln gemessen.",
   "scanRepair": "Konvertierung abgeschlossen. Diese Zellen brauchen einfachere Konturen. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an:",
+  "scanBlank": "Scans umgewandelt. Diese Zellen hatten keine Tinte und haben deshalb noch keinen Glyphen. Prüfe, ob du hineingeschrieben und die richtige Seite gewählt hast:",
   "reviewedCount": "geprüft",
   "nextReview": "Nächste Prüfung",
   "allReviewed": "Alle Zeichen geprüft",

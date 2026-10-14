@@ -1,5 +1,6 @@
 import { type MutableRefObject, useEffect, useRef, useState } from "react";
 import { validateCorners } from "../core/geometry";
+import { listCells } from "../core/scan";
 import { pageCount, TEMPLATE } from "../core/template";
 import type { Glyph, Point, Project, ScanPage } from "../core/types";
 import { createScanWorker } from "../worker/client";
@@ -228,6 +229,7 @@ export function useScans(
         try {
           const glyphs = { ...snapshot.glyphs };
           const repairs: string[] = [];
+          const blanks: string[] = [];
           const pages = snapshot.pages.filter(
             (page) =>
               !drafts.some((draft) => draft.pageIndex === page.pageIndex),
@@ -235,6 +237,7 @@ export function useScans(
           for (const result of message.results) {
             for (const { needsRepair, ...glyph } of result.pageGlyphs) {
               if (needsRepair) repairs.push(glyph.character);
+              else if (!glyph.contours.length) blanks.push(glyph.character);
               glyphs[glyph.character] = {
                 ...glyph,
                 reviewed: false,
@@ -273,7 +276,9 @@ export function useScans(
           setDrafts([]);
           setIndex(0);
           if (repairs.length)
-            notify({ key: "scanRepair", detail: repairs.join(" ") });
+            notify({ key: "scanRepair", detail: listCells(repairs) });
+          else if (blanks.length)
+            notify({ key: "scanBlank", detail: listCells(blanks) });
           else notify({ key: "scanComplete" });
         } catch (error) {
           notify({ key: errorKey(error, "scanFailed"), tone: "error" });

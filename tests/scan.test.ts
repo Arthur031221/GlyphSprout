@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { traceScannedCell } from "../src/core/scan";
+import { listCells, traceScannedCell } from "../src/core/scan";
 import { trace } from "../src/core/trace";
 import { defaultSettings } from "../src/core/types";
 
@@ -49,4 +49,13 @@ it("does not hide invalid raster failures as repairable glyphs", () => {
   expect(() => traceScannedCell("A", new Uint8Array(5), 384, 384)).toThrow(
     "invalidRaster",
   );
+});
+
+it("lists a few cells in full and counts the rest", () => {
+  expect(listCells(["A", "B"])).toBe("A B");
+  expect(listCells([])).toBe("");
+  const many = Array.from({ length: 30 }, (_, i) =>
+    String.fromCharCode(65 + i),
+  );
+  expect(listCells(many)).toBe(`${many.slice(0, 24).join(" ")} +6`);
 });
