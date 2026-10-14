@@ -11,7 +11,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.4.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -36,6 +36,8 @@ Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst
 Vergrößere das Bild, um Details zu korrigieren. Stift und Radierer werden in Quellpixeln bemessen, daher bleibt die Strichbreite beim Zoomen gleich. Bewege das Bild mit Verschieben, den Scrollleisten oder Pfeiltasten. Beim Stoppen der Umwandlung bleiben Scans, Eckpunkte und Seitenbestätigungen für einen neuen Versuch erhalten. Mit **Vorgemerkte Scans verwerfen** entfernst du sie.
 
 Als geprüft markieren wartet, bis die Anpassungen an Tinte und Zuschnitt abgeschlossen sind. Hat eine Zelle zu viele Punkte oder Konturen für den Export, bleibt ihr Quellbild erhalten und das betroffene Zeichen wird angezeigt. Die anderen Zellen werden umgewandelt. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an und prüfe die korrigierte Glyphe.
+
+Der Prüffortschritt steht neben der Zeichenliste. **Nächste Prüfung** springt zum nächsten ungeprüften Zeichen, und die Pfeiltasten wechseln zwischen den Zeichen. Im Bereich für Schriftabstände legst du den Wortabstand für die ganze Schrift fest und kannst den lateinischen Seitenabstand eines Zeichens auf alle lateinischen Buchstaben übertragen. **Beispieltext als Bild herunterladen** speichert den Vorschautext als PNG.
 
 Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen den Bereichen als Entwürfe erhalten. Mit **Project ready** übernimmst du die Änderungen. Sicherungen und Schriftdateien verwenden bis dahin die übernommenen Werte. Nicht übernommene Änderungen gehen beim Neuladen verloren.
 

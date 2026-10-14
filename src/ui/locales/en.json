@@ -218,5 +218,7 @@
   "wordSpaceHelp": "Width of the space character in font units, from 100 to 1000.",
   "matchBearing": "Use this side bearing for all Latin letters",
   "spaceInvalid": "Word space must be a whole number from 100 to 1000.",
-  "bearingApplied": "Side bearing copied. Letters changed:"
+  "bearingApplied": "Side bearing copied. Letters changed:",
+  "downloadSpecimen": "Download specimen image",
+  "specimenEmpty": "None of the specimen characters has a glyph yet."
 }

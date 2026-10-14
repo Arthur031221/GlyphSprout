@@ -218,5 +218,7 @@
   "wordSpaceHelp": "Breite des Leerzeichens in Schrifteinheiten, von 100 bis 1000.",
   "matchBearing": "Diesen Seitenabstand für alle lateinischen Buchstaben verwenden",
   "spaceInvalid": "Der Wortabstand muss eine ganze Zahl von 100 bis 1000 sein.",
-  "bearingApplied": "Seitenabstand kopiert. Geänderte Buchstaben:"
+  "bearingApplied": "Seitenabstand kopiert. Geänderte Buchstaben:",
+  "downloadSpecimen": "Beispieltext als Bild herunterladen",
+  "specimenEmpty": "Für kein Zeichen des Beispieltexts gibt es schon einen Glyphen."
 }

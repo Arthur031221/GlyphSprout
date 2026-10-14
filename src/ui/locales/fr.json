@@ -218,5 +218,7 @@
   "wordSpaceHelp": "Largeur du caractère espace en unités de police, de 100 à 1000.",
   "matchBearing": "Appliquer cette approche latérale à toutes les lettres latines",
   "spaceInvalid": "L'espace entre les mots doit être un entier de 100 à 1000.",
-  "bearingApplied": "Approche latérale copiée. Lettres modifiées :"
+  "bearingApplied": "Approche latérale copiée. Lettres modifiées :",
+  "downloadSpecimen": "Télécharger l'image d'exemple",
+  "specimenEmpty": "Aucun caractère du texte d'exemple n'a encore de glyphe."
 }

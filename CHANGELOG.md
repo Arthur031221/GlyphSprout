@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.4.0
+
+The glyph list shows review progress, and **Next to review** jumps to the next unchecked glyph. Arrow keys move between glyph tiles.
+
+A Font spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin glyph in a single undoable step. The word space is saved in project backups and written to the exported space glyph. Projects without it keep the previous width of 350.
+
+**Download specimen image** saves the preview text as a PNG. New strings are translated in all nine interface languages. Updated the demo recording.
+
 ## 1.3.1
 
 Marking a glyph reviewed waits for pending ink and crop adjustments and preserves undo history. Failed or canceled adjustments leave the review state unchanged.

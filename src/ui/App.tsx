@@ -30,6 +30,7 @@ import {
 } from "./i18n";
 import { Pages } from "./Pages";
 import { Setup } from "./Setup";
+import { renderSpecimen } from "./specimen";
 import { useFontPreview } from "./useFontPreview";
 import { type Notice, useGlyphEditor } from "./useGlyphEditor";
 import { useProject } from "./useProject";
@@ -312,6 +313,26 @@ export function App() {
     }
   }
 
+  async function exportSpecimen() {
+    if (!project || !preview.family) return;
+    const text = Array.from(specimen.normalize("NFC"))
+      .filter((ch) => /\s/u.test(ch) || project.glyphs[ch]?.contours.length)
+      .join("");
+    if (!text.trim()) {
+      setNotice({ key: "specimenEmpty", tone: "error" });
+      return;
+    }
+    try {
+      download(
+        await renderSpecimen(preview.family, text, project.name),
+        fontFilename(`${project.name}-specimen`, "png"),
+        "image/png",
+      );
+    } catch (error) {
+      setNotice({ key: errorKey(error, "invalidFont"), tone: "error" });
+    }
+  }
+
   if (local.loading) return <main className="loading">{t.loading}</main>;
   const occurrences = new Map<string, number>();
   const specimenLetters = Array.from(specimen.normalize("NFC")).map(
@@ -463,6 +484,15 @@ export function App() {
                 onChange={(e) => setSpecimen(e.target.value)}
               />
             </label>
+            <button
+              type="button"
+              className="specimen-download"
+              disabled={!preview.family || preview.busy || editor.busy}
+              onClick={() => void exportSpecimen()}
+            >
+              <DownloadSimple />
+              {t.downloadSpecimen}
+            </button>
             <div className="preview-diagnostics" role="status">
               {editor.busy ? (
                 t.applyingEdits

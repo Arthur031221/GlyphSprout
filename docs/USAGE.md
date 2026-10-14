@@ -23,11 +23,17 @@ The source editor opens the current native pixel image for the selected glyph. U
 
 Zoom from 100 to 800 percent to correct details. Pen and eraser sizes are separate and measured in source pixels. Their widths stay stable when zoom changes. The canvas keeps the native image dimensions and aspect ratio. Choose **Pan** and drag to move a magnified image, use the scrollbars, or focus the drawing viewport and press arrow keys. **Fit image** returns to 100 percent. Zooming and panning do not change source pixels or drawing history.
 
+The glyph list shows how many ready glyphs you have reviewed. **Next to review** selects the next glyph that has an outline and no review mark, wrapping to the start of the list. With focus on a glyph tile, the arrow keys move to the neighbouring tile and select it. Left and right move one tile, up and down move one row.
+
+The Font spacing panel holds two settings for the whole font. **Word space** is the width of the space character in font units, from 100 to 1000, and defaults to 350. It is saved with the project and follows Undo and Redo. **Use this side bearing for all Latin letters** copies the selected glyph's Latin side bearing to every other Latin glyph as one undoable step. It leaves Han and kana glyphs and review marks alone.
+
 **Draw a glyph** starts with a blank image. Using a drawing replaces the glyph and resets its settings. Drawing undo and project undo are separate. Use **Mark reviewed** after checking the source and generated outline.
 
 An unfinished drawing stays in Workshop while you move between Workshop, Pages, and Characters. Its pixels and drawing undo history remain available when you return. The **Saved** badge refers to the committed project. Unapplied drawing edits are not included in project backups or font downloads, and font export stays disabled until you apply or cancel them. Leaving a dirty drawing for another glyph, a new drawing, review, clear, or project Undo/Redo asks whether to discard it. Choosing **Cancel drawing** or **Cancel source edit** discards it directly. Applying a source edit commits it without a discard prompt. Drawing undo keeps the latest 20 steps. Restoring the original pixels clears the draft warning.
 
 The workshop warns before closing or reloading whenever drawing edits or scan alignment are staged. A staged scan is also excluded from project backups and font downloads until conversion. Remove an individual staged scan from its queue row. The other scans keep their registration and confirmation, and you can upload a replacement after removing one. Once conversion succeeds, the saved project includes the converted page and links scanned glyphs to that page. Converting a page that contains the edited glyph asks before discarding its drawing draft. Converting another page keeps the drawing available to apply afterward. The drawing remains available if conversion fails or is canceled, and is discarded only when its replacement is committed.
+
+**Download specimen image** renders the preview text as a 1600 pixel wide PNG named after the font. Characters without a glyph are left out so the image only shows your handwriting, and long text is wrapped at spaces. Up to 24 lines are drawn.
 
 Specimen text is normalized to Unicode NFC for preview, so decomposed accents display as their composed character when that character is supported by the project.
 

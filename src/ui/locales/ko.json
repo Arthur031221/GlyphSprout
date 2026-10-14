@@ -218,5 +218,7 @@
   "wordSpaceHelp": "공백 문자의 너비이며 글꼴 단위로 100에서 1000까지 지정합니다.",
   "matchBearing": "이 측면 여백을 모든 라틴 문자에 적용",
   "spaceInvalid": "단어 간격은 100에서 1000 사이의 정수여야 합니다.",
-  "bearingApplied": "측면 여백을 복사했습니다. 변경된 문자 수:"
+  "bearingApplied": "측면 여백을 복사했습니다. 변경된 문자 수:",
+  "downloadSpecimen": "견본 이미지 다운로드",
+  "specimenEmpty": "견본 문구에 글리프가 있는 문자가 아직 없습니다."
 }

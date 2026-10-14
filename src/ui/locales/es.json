@@ -218,5 +218,7 @@
   "wordSpaceHelp": "Ancho del carácter de espacio en unidades de fuente, de 100 a 1000.",
   "matchBearing": "Usar este espaciado lateral en todas las letras latinas",
   "spaceInvalid": "El espacio entre palabras debe ser un número entero de 100 a 1000.",
-  "bearingApplied": "Espaciado lateral copiado. Letras modificadas:"
+  "bearingApplied": "Espaciado lateral copiado. Letras modificadas:",
+  "downloadSpecimen": "Descargar imagen de muestra",
+  "specimenEmpty": "Ningún carácter del texto de muestra tiene glifo todavía."
 }

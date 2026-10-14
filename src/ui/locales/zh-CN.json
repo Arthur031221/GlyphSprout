@@ -218,5 +218,7 @@
   "wordSpaceHelp": "空格字符的宽度，以字体单位计，范围 100 到 1000。",
   "matchBearing": "将此侧边距应用到所有拉丁字母",
   "spaceInvalid": "词间空格必须是 100 到 1000 之间的整数。",
-  "bearingApplied": "已复制侧边距。更改的字母数："
+  "bearingApplied": "已复制侧边距。更改的字母数：",
+  "downloadSpecimen": "下载预览图片",
+  "specimenEmpty": "预览文本中还没有任何字符具备字形。"
 }

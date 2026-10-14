@@ -302,6 +302,9 @@ main {
   resize: vertical;
   min-height: 60px;
 }
+.specimen-download {
+  align-self: flex-start;
+}
 .preview-diagnostics {
   max-height: 40px;
   overflow: auto;

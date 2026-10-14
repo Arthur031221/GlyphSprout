@@ -116,7 +116,14 @@ try {
   await expect(
     page.getByRole("button", { name: "Mark reviewed" }),
   ).toHaveAttribute("aria-pressed", "true");
-  await page.waitForTimeout(2600);
+  await page.waitForTimeout(1600);
+  const wordSpace = page.getByLabel("Word space", { exact: true });
+  await wordSpace.fill("520");
+  await wordSpace.press("Enter");
+  await expect(
+    page.getByRole("status").filter({ hasText: "Saved" }),
+  ).toBeVisible();
+  await page.waitForTimeout(1800);
   await page.getByRole("button", { name: "Pages" }).click();
   await page
     .locator('input[type="file"][accept="image/png,image/jpeg"]')

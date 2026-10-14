@@ -11,7 +11,7 @@
 [開啟線上工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 授權條款](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.4.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。指令顯示就緒訊息後，請開啟 `http://127.0.0.1:4173`。
@@ -36,6 +36,8 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 放大可修正細節。筆刷與橡皮擦大小以來源像素為單位，縮放不會改變筆畫寬度。可使用平移工具、捲軸或方向鍵移動影像。停止掃描轉換會保留掃描影像、角點位置與頁面確認，方便重試。選擇 **捨棄待處理掃描** 才會移除它們。
 
 標記已審閱會等待墨跡與裁切調整完成。如果掃描字格的節點或輪廓過多而無法匯出，轉換會保留來源影像並列出受影響的字元，其他字格仍可正常轉換。請調整雜點過濾、裁切或來源影像，再審閱修復後的字形。
+
+審閱進度會顯示在字形清單旁。按下 **下一個待檢視** 會跳到下一個尚未檢查的字形，方向鍵也能在字形之間移動。字型間距面板可設定整個字型的字間空白，也能把一個字形的拉丁字側邊距套用到所有拉丁字母。**下載預覽圖片** 會把預覽文字存成 PNG。
 
 在 Characters 輸入的字型名稱與字元文字會以草稿保留，切換頁面後仍可繼續編輯。選擇 **Project ready** 後才會套用。在此之前，備份與字型下載仍使用已套用的值。未套用的設定變更會在重新載入頁面後消失。
 
