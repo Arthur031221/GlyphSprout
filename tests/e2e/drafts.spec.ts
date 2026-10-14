@@ -316,6 +316,7 @@ test("staged scan beforeunload warning is removed when the last scan is removed"
   await upload.setInputFiles(paper);
   await page.getByRole("button", { name: /Page 1: paper.png/ }).waitFor();
   await page.getByRole("button", { name: "Remove scan: paper.png" }).click();
+  await expect(upload).toBeFocused();
   await page.reload();
   expect(dialogs).toEqual(["beforeunload"]);
 });
@@ -389,6 +390,51 @@ for (const removal of ["first", "middle", "last"] as const) {
     await expect(page.locator(".draft-notice")).toContainText(
       "Scan alignment is not saved",
     );
+  });
+}
+
+for (const removed of [0, 1, 2]) {
+  test(`removing selected scan ${removed + 1} restores selection, registration and keyboard focus`, async ({
+    page,
+  }) => {
+    await ready(page);
+    await useThreePageCharacterSet(page);
+    const image = await readFile(paper);
+    const names = ["one.png", "two.png", "three.png"];
+    await page
+      .locator('input[accept="image/png,image/jpeg"]')
+      .setInputFiles(
+        names.map((name) => ({ name, mimeType: "image/png", buffer: image })),
+      );
+    const replacement = names[removed === 2 ? 1 : removed + 1];
+    const next = page.getByRole("button", {
+      name: new RegExp(`^Page \\d+: ${replacement}$`),
+    });
+    await next.click();
+    const corner = page
+      .locator(".corner-input")
+      .first()
+      .locator("input")
+      .first();
+    await corner.fill("47");
+    await corner.press("Tab");
+    await page.getByLabel(confirmation).check();
+    await page
+      .getByRole("button", {
+        name: new RegExp(`^Page \\d+: ${names[removed]}$`),
+      })
+      .click();
+    await page
+      .getByRole("button", {
+        name: `Remove scan: ${names[removed]}`,
+        exact: true,
+      })
+      .click();
+    await expect(next).toBeFocused();
+    await expect(next).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".draft-item")).toHaveCount(2);
+    await expect(corner).toHaveValue("47");
+    await expect(page.getByLabel(confirmation)).toBeChecked();
   });
 }
 

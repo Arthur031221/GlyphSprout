@@ -15,7 +15,7 @@ async function backup(page: Page): Promise<Project> {
   return JSON.parse(await readFile(file, "utf8"));
 }
 
-async function prepare(page: Page) {
+async function prepare(page: Page, draw = true) {
   await page.goto("/");
   await expect(page.locator(".project-label [role=status]")).toHaveText(
     "Saved",
@@ -46,24 +46,30 @@ async function prepare(page: Page) {
   });
   await expect(page.locator(".editor h2")).toHaveText("H");
   await page.getByRole("button", { name: "Edit source", exact: true }).click();
+  await expect(
+    page.getByRole("button", { name: "Apply source edits", exact: true }),
+  ).toBeEnabled();
   const canvas = page.locator(".draw-canvas canvas");
   await canvas.scrollIntoViewIfNeeded();
   const bounds = await canvas.boundingBox();
   if (!bounds) throw new Error("missing drawing canvas");
-  await page.mouse.move(
-    bounds.x + bounds.width * 0.2,
-    bounds.y + bounds.height * 0.2,
-  );
-  await page.mouse.down();
-  await page.mouse.move(
-    bounds.x + bounds.width * 0.7,
-    bounds.y + bounds.height * 0.7,
-  );
-  await page.mouse.up();
+  if (draw) {
+    await page.mouse.move(
+      bounds.x + bounds.width * 0.2,
+      bounds.y + bounds.height * 0.2,
+    );
+    await page.mouse.down();
+    await page.mouse.move(
+      bounds.x + bounds.width * 0.7,
+      bounds.y + bounds.height * 0.7,
+    );
+    await page.mouse.up();
+  }
   const edited = await canvas.evaluate((element: HTMLCanvasElement) =>
     element.toDataURL(),
   );
-  await expect(page.locator(".draft-notice")).toContainText("Drawing edits");
+  if (draw)
+    await expect(page.locator(".draft-notice")).toContainText("Drawing edits");
   await page.getByRole("button", { name: "Pages" }).click();
   await page
     .locator('input[accept="image/png,image/jpeg"]')
@@ -151,4 +157,145 @@ test("accepting discard lets an affected scan conversion replace the glyph", asy
   await page.getByRole("button", { name: "Workshop" }).click();
   await expect(page.locator(".draw-canvas canvas")).toHaveCount(0);
   await expect(page.locator(".draft-notice")).toHaveCount(0);
+});
+
+for (const outcome of ["failed", "canceled", "invalid"] as const) {
+  test(`an accepted but ${outcome} conversion preserves an applicable source draft`, async ({
+    page,
+  }) => {
+    await page.addInitScript((mode) => {
+      const NativeWorker = window.Worker;
+      window.Worker = class extends NativeWorker {
+        postMessage(
+          message: unknown,
+          options?: StructuredSerializeOptions | Transferable[],
+        ) {
+          const send = () => {
+            if (Array.isArray(options)) super.postMessage(message, options);
+            else super.postMessage(message, options);
+          };
+          if (message && typeof message === "object" && "pages" in message) {
+            if (mode === "failed") {
+              setTimeout(
+                () =>
+                  this.dispatchEvent(
+                    new ErrorEvent("error", { message: "scan failure" }),
+                  ),
+                50,
+              );
+            } else if (
+              mode === "invalid" &&
+              "jobId" in message &&
+              "projectId" in message
+            ) {
+              setTimeout(
+                () =>
+                  this.dispatchEvent(
+                    new MessageEvent("message", {
+                      data: {
+                        type: "done",
+                        jobId: message.jobId,
+                        projectId: message.projectId,
+                        results: [
+                          {
+                            pageGlyphs: [{ character: "H", source: "invalid" }],
+                          },
+                        ],
+                      },
+                    }),
+                  ),
+                50,
+              );
+            } else setTimeout(send, 1200);
+          } else send();
+        }
+      };
+    }, outcome);
+    const { original, edited } = await prepare(page);
+    await page.getByLabel(confirmation).check();
+    page.on("dialog", (dialog) => dialog.accept());
+    await page
+      .getByRole("button", { name: "Convert scans", exact: true })
+      .click();
+    if (outcome === "canceled") {
+      await page
+        .locator(".scan-job")
+        .getByRole("button", { name: "Cancel", exact: true })
+        .click();
+      await expect(
+        page
+          .getByRole("status")
+          .filter({ hasText: "Scan conversion was canceled" }),
+      ).toBeVisible();
+    } else await expect(page.getByRole("alert")).toBeVisible();
+    expect((await backup(page)).glyphs.H.source).toBe(original);
+    await page.getByRole("button", { name: "Workshop" }).click();
+    const canvas = page.locator(".draw-canvas canvas");
+    await expect(canvas).toBeVisible();
+    expect(
+      await canvas.evaluate((element: HTMLCanvasElement) =>
+        element.toDataURL(),
+      ),
+    ).toBe(edited);
+    await expect(
+      page
+        .locator(".draw-tools")
+        .getByRole("button", { name: "Undo", exact: true }),
+    ).toBeEnabled();
+    await page
+      .getByRole("button", { name: "Apply source edits", exact: true })
+      .click();
+    expect((await backup(page)).glyphs.H.source).toBe(edited);
+  });
+}
+
+test("an untouched source cannot receive strokes during scan conversion", async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const NativeWorker = window.Worker;
+    window.Worker = class extends NativeWorker {
+      postMessage(
+        message: unknown,
+        options?: StructuredSerializeOptions | Transferable[],
+      ) {
+        const send = () => {
+          if (Array.isArray(options)) super.postMessage(message, options);
+          else super.postMessage(message, options);
+        };
+        if (message && typeof message === "object" && "pages" in message)
+          window.addEventListener("release-scan", send, { once: true });
+        else send();
+      }
+    };
+  });
+  const { edited } = await prepare(page, false);
+  await page.getByLabel(confirmation).check();
+  page.on("dialog", (dialog) => dialog.accept());
+  await page
+    .getByRole("button", { name: "Convert scans", exact: true })
+    .click();
+  await page.getByRole("button", { name: "Workshop" }).click();
+  await expect(
+    page.getByRole("button", { name: "Pen", exact: true }),
+  ).toBeDisabled();
+  const canvas = page.locator(".draw-canvas canvas");
+  await canvas.scrollIntoViewIfNeeded();
+  const box = await canvas.boundingBox();
+  if (!box) throw new Error("missing drawing canvas");
+  await page.mouse.move(box.x + box.width * 0.2, box.y + box.height * 0.2);
+  await page.mouse.down();
+  await page.mouse.move(box.x + box.width * 0.8, box.y + box.height * 0.8);
+  await page.mouse.up();
+  expect(
+    await canvas.evaluate((element: HTMLCanvasElement) => element.toDataURL()),
+  ).toBe(edited);
+  await expect(
+    page
+      .locator(".draw-tools")
+      .getByRole("button", { name: "Undo", exact: true }),
+  ).toBeDisabled();
+  await page.evaluate(() => window.dispatchEvent(new Event("release-scan")));
+  await expect(canvas).toHaveCount(0);
+  expect((await backup(page)).glyphs.H.origin).toBe("scan");
 });

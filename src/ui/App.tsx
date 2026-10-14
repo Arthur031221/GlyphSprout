@@ -67,7 +67,11 @@ export function App() {
   const scans = useScans(
     projectRef,
     (next) => {
+      const replacesDrawing =
+        drawing &&
+        projectRef.current?.glyphs[selected] !== next.glyphs[selected];
       commit(next);
+      if (replacesDrawing) changeDrawing(null, true);
       editor.cancel();
     },
     setNotice,
@@ -82,7 +86,9 @@ export function App() {
             .slice(page.pageIndex * 35, (page.pageIndex + 1) * 35)
             .includes(selected),
         );
-      return !affectsDrawing || changeDrawing(null);
+      return (
+        !affectsDrawing || !drawingDirty || window.confirm(t.discardDrawing)
+      );
     },
   );
   const locked =

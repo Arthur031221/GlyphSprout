@@ -6,7 +6,7 @@ Make a small font for your project's words and names. Print a template, write ea
 
 **Six handwritten letters. A 3.3 kB font.**
 
-The bundled Paper Bloom sample exports a 3,284 byte TTF checked with Fontconfig and LibreOffice. Just six letters. [Method and reproducible export](docs/VALIDATION.md).
+The bundled Paper Bloom sample exports a 3,284 byte TTF checked with Fontconfig and LibreOffice. Six letters in all. [Method and reproducible export](docs/VALIDATION.md).
 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
@@ -14,7 +14,7 @@ The bundled Paper Bloom sample exports a 3,284 byte TTF checked with Fontconfig 
 npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
 ```
 
-You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
+You'll need Node.js 22.12 or newer and Git. Once the command prints its ready message, open `http://127.0.0.1:4173`.
 
 | Start with | Make |
 | --- | --- |
@@ -31,13 +31,13 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 5. Review each glyph. Adjust the source, threshold, crop, size, offsets and spacing.
 6. Type your text in the live specimen and download TTF or WOFF2.
 
-Edit source keeps the current native pixels so you can erase, draw and undo local strokes. The glyph's settings and page assignment stay intact. Review any sources you change. Draw a glyph starts blank and replaces the glyph, resetting its settings. Empty drawings are rejected. Leave the source unchanged and project history stays untouched.
+Edit source keeps the current native pixels so you can erase, draw and undo local strokes. The glyph's settings and page assignment stay intact. Review any changed sources. Draw a glyph starts blank and replaces the glyph, resetting its settings. Empty drawings are rejected. If you leave the source unchanged, project history stays untouched.
 
 ## A small subset with clear limits
 
 Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a project can use up to 15 pages. Latin glyphs use proportional spacing by default. Han and kana use a fixed cell advance. The interface has nine languages, light and dark themes, and a narrow-screen layout.
 
-Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
+Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. You assign and confirm pages manually. GlyphSprout doesn't read handwriting or detect cells automatically.
 
 Exports contain simple unhinted outlines. They don't include kerning, curve simplification, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
 
@@ -49,7 +49,7 @@ You can use the app offline once the footer says **Ready for offline use**. The 
 
 ## Install the font you made
 
-Use TTF to install the font on your desktop. These instructions don't guarantee font support in every application. Restart applications as needed.
+Use TTF to install the font on your desktop. These host instructions don't guarantee font support in every application. Restart applications as needed.
 
 <details>
 <summary>macOS</summary>
@@ -109,6 +109,6 @@ The exported sample was opened in LibreOffice and saved as a PDF with its font e
 - [Validation](docs/VALIDATION.md)
 - [Contributing](CONTRIBUTING.md)
 
-GlyphSprout uses the [MIT License](LICENSE). [Third party notices](THIRD_PARTY_NOTICES.md) lists included dependencies and sample provenance.
+GlyphSprout is available under the [MIT License](LICENSE). [Third party notices](THIRD_PARTY_NOTICES.md) lists included dependencies and sample provenance.
 
 Assisted by Claude/Codex.

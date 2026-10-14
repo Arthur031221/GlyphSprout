@@ -89,6 +89,7 @@ export function Drawing({
   }
   function draw(event: PointerEvent<HTMLCanvasElement>, start = false) {
     const element = event.currentTarget;
+    if (element.closest("fieldset:disabled")) return;
     const ctx = element.getContext("2d");
     if (!ready || !ctx) return;
     if (start ? pointer.current !== null : pointer.current !== event.pointerId)
