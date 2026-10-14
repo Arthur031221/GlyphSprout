@@ -608,6 +608,15 @@ main {
   padding: 12px;
   background: var(--paper-muted);
 }
+.draft-item {
+  display: flex;
+  gap: 4px;
+  min-width: 0;
+}
+.draft-item button:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
 .scan-controls > label {
   margin: 9px 0;
 }

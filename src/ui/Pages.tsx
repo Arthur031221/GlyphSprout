@@ -1,4 +1,9 @@
-import { DownloadSimple, Printer, UploadSimple } from "@phosphor-icons/react";
+import {
+  DownloadSimple,
+  Printer,
+  Trash,
+  UploadSimple,
+} from "@phosphor-icons/react";
 import { type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   homography,
@@ -294,15 +299,24 @@ export function Pages({
           <>
             <div className="draft-queue">
               {scans.drafts.map((page, i) => (
-                <button
-                  type="button"
-                  key={page.id}
-                  className={i === scans.index ? "selected" : ""}
-                  disabled={scans.busy}
-                  onClick={() => scans.setIndex(i)}
-                >
-                  {t.page} {i + 1}: {page.filename}
-                </button>
+                <div key={page.id} className="draft-item">
+                  <button
+                    type="button"
+                    className={i === scans.index ? "selected" : ""}
+                    disabled={scans.busy || scans.reading}
+                    onClick={() => scans.setIndex(i)}
+                  >
+                    {t.page} {i + 1}: {page.filename}
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={`${t.removeScan}: ${page.filename}`}
+                    disabled={scans.busy || scans.reading}
+                    onClick={() => scans.remove(page.id)}
+                  >
+                    <Trash />
+                  </button>
+                </div>
               ))}
             </div>
             {draft && (

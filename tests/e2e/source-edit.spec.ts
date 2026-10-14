@@ -196,7 +196,7 @@ test("cancel and empty source edits leave the scanned glyph unchanged", async ({
   expect((await backup(page)).glyphs.H).toEqual(before.glyphs.H);
 });
 
-test("an edit opened on an older glyph cannot replace newer work", async ({
+test("reviewing a glyph asks before discarding source edits", async ({
   page,
 }) => {
   await ready(page);
@@ -206,17 +206,29 @@ test("an edit opened on an older glyph cannot replace newer work", async ({
     page.getByRole("button", { name: "Apply source edits" }),
   ).toBeEnabled();
   await stroke(page, 0.4, 0.82, 0.72, 0.82);
+  const editedPixels = await canvasPixels(page);
+  let discard = false;
+  const decisions: string[] = [];
+  page.on("dialog", async (dialog) => {
+    decisions.push(dialog.message());
+    if (discard) await dialog.accept();
+    else await dialog.dismiss();
+  });
   await page
     .getByRole("button", { name: "Mark reviewed", exact: true })
     .click();
-  const newer = await backup(page);
+  expect(decisions).toHaveLength(1);
+  expect(decisions[0]).toContain("Discard the unfinished drawing");
+  expect((await backup(page)).glyphs.H).toEqual(before.glyphs.H);
+  expect(await canvasPixels(page)).toEqual(editedPixels);
+  discard = true;
   await page
-    .getByRole("button", { name: "Apply source edits", exact: true })
+    .getByRole("button", { name: "Mark reviewed", exact: true })
     .click();
-  await expect(page.getByRole("alert")).toContainText(
-    "This glyph changed while the source editor was open.",
-  );
-  expect((await backup(page)).glyphs.H).toEqual(newer.glyphs.H);
+  expect(decisions).toHaveLength(2);
+  await expect(page.locator(".draw-canvas canvas")).toHaveCount(0);
+  const newer = await backup(page);
+  expect(newer.glyphs.H.source).toBe(before.glyphs.H.source);
   expect(newer.glyphs.H).not.toEqual(before.glyphs.H);
 });
 

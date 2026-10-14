@@ -15,12 +15,14 @@ export function Drawing({
   source,
   onUse,
   onCancel,
+  onDirtyChange,
 }: {
   t: Dictionary;
   character: string;
   source?: string;
   onUse: (source: string, pixels: ImageData, changed: boolean) => void;
   onCancel: () => void;
+  onDirtyChange: (dirty: boolean) => void;
 }) {
   const area = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -36,6 +38,8 @@ export function Drawing({
   useEffect(() => {
     area.current?.focus();
   }, []);
+
+  useEffect(() => () => onDirtyChange(false), [onDirtyChange]);
 
   useEffect(() => {
     let active = true;
@@ -58,7 +62,7 @@ export function Drawing({
         blank.data[i + 2] = 255;
         blank.data[i + 3] = 255;
       }
-      originalPixels.current = null;
+      originalPixels.current = blank;
       setPixels(blank);
     }
     return () => {
@@ -73,6 +77,16 @@ export function Drawing({
   }, [pixels]);
 
   const ready = pixels !== null && !error;
+  function reportChange() {
+    const element = canvas.current;
+    const ctx = element?.getContext("2d");
+    const original = originalPixels.current;
+    if (!element || !ctx || !original) return;
+    const current = ctx.getImageData(0, 0, element.width, element.height);
+    onDirtyChange(
+      original.data.some((value, index) => value !== current.data[index]),
+    );
+  }
   function draw(event: PointerEvent<HTMLCanvasElement>, start = false) {
     const element = event.currentTarget;
     const ctx = element.getContext("2d");
@@ -112,6 +126,7 @@ export function Drawing({
       ctx.fill();
     }
     point.current = next;
+    onDirtyChange(true);
     setStrokes(history.current.length);
   }
   function finish(event: PointerEvent<HTMLCanvasElement>) {
@@ -120,6 +135,7 @@ export function Drawing({
     point.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId))
       event.currentTarget.releasePointerCapture(event.pointerId);
+    reportChange();
   }
   function clear() {
     const element = canvas.current;
@@ -132,6 +148,7 @@ export function Drawing({
     ctx.fillStyle = "white";
     ctx.fillRect(0, 0, element.width, element.height);
     setStrokes(history.current.length);
+    reportChange();
   }
   return (
     <section
@@ -171,6 +188,7 @@ export function Drawing({
             const ctx = canvas.current?.getContext("2d");
             if (previous && ctx) ctx.putImageData(previous, 0, 0);
             setStrokes(history.current.length);
+            reportChange();
           }}
         >
           <ArrowCounterClockwise />

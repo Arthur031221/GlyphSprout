@@ -20,6 +20,9 @@ import { type Dictionary, errorKey } from "./i18n";
 import type { useGlyphEditor } from "./useGlyphEditor";
 
 type Editor = ReturnType<typeof useGlyphEditor>;
+export type DrawingDraft =
+  | { kind: "blank" }
+  | { kind: "edit"; original: Glyph };
 
 function Outline({ glyph, t }: { glyph: Glyph; t: Dictionary }) {
   try {
@@ -163,6 +166,10 @@ export function Workshop({
   onClear,
   onExport,
   exportBusy,
+  drawing,
+  drawingVersion,
+  onDrawingChange,
+  onDrawingDirtyChange,
 }: {
   project: Project;
   t: Dictionary;
@@ -172,20 +179,17 @@ export function Workshop({
   onClear: (character: string) => void;
   onExport: (format: "ttf" | "woff2", partial: boolean) => void;
   exportBusy: boolean;
+  drawing: DrawingDraft | null;
+  drawingVersion: number;
+  onDrawingChange: (draft: DrawingDraft | null, applied?: boolean) => boolean;
+  onDrawingDirtyChange: (dirty: boolean) => void;
 }) {
-  const [drawing, setDrawing] = useState<
-    { kind: "blank" } | { kind: "edit"; original: Glyph } | null
-  >(null);
   const editorLaunch = useRef<HTMLButtonElement>(null);
   const drawingOpener = useRef<HTMLButtonElement | null>(null);
   const restoreFocus = useRef(false);
   const [partial, setPartial] = useState(false);
   const current = project.glyphs[selected];
   const missing = missingCharacters(project);
-  // biome-ignore lint/correctness/useExhaustiveDependencies: Changing the selected character closes its drawing canvas.
-  useEffect(() => {
-    setDrawing(null);
-  }, [selected]);
   useEffect(() => {
     if (drawing || !restoreFocus.current) return;
     restoreFocus.current = false;
@@ -194,9 +198,9 @@ export function Workshop({
       : editorLaunch.current;
     opener?.focus();
   }, [drawing]);
-  function closeDrawing() {
+  function closeDrawing(applied = false) {
+    if (!onDrawingChange(null, applied)) return;
     restoreFocus.current = true;
-    setDrawing(null);
   }
   return (
     <section className="workshop-layout">
@@ -223,7 +227,6 @@ export function Workshop({
                 aria-label={`${ch} ${glyph?.reviewed ? t.reviewedLabel : ready ? t.needsReview : t.missing}`}
                 aria-pressed={ch === selected}
                 onClick={() => {
-                  setDrawing(null);
                   onSelect(ch);
                 }}
               >
@@ -246,7 +249,7 @@ export function Workshop({
           type="button"
           onClick={(event) => {
             drawingOpener.current = event.currentTarget;
-            setDrawing({ kind: "blank" });
+            onDrawingChange({ kind: "blank" });
           }}
         >
           <Pen />
@@ -266,12 +269,13 @@ export function Workshop({
                   <button
                     type="button"
                     aria-pressed={current.reviewed}
-                    onClick={() =>
+                    onClick={() => {
+                      if (!onDrawingChange(null)) return;
                       editor.mutate(selected, (glyph) => ({
                         ...glyph,
                         reviewed: !glyph.reviewed,
-                      }))
-                    }
+                      }));
+                    }}
                   >
                     <CheckCircle />
                     {t.reviewed}
@@ -286,13 +290,14 @@ export function Workshop({
           </div>
           {drawing ? (
             <Drawing
-              key={`${selected}-${drawing.kind}`}
+              key={`${selected}-${drawingVersion}`}
               character={selected}
               source={
                 drawing.kind === "edit" ? drawing.original.source : undefined
               }
               t={t}
-              onCancel={closeDrawing}
+              onCancel={() => closeDrawing(true)}
+              onDirtyChange={onDrawingDirtyChange}
               onUse={(source, pixels, changed) => {
                 if (
                   editor.drawing(
@@ -303,7 +308,7 @@ export function Workshop({
                     changed,
                   )
                 )
-                  closeDrawing();
+                  closeDrawing(true);
               }}
             />
           ) : current ? (
@@ -374,7 +379,7 @@ export function Workshop({
                 type="button"
                 onClick={(event) => {
                   drawingOpener.current = event.currentTarget;
-                  setDrawing({ kind: "edit", original: current });
+                  onDrawingChange({ kind: "edit", original: current });
                 }}
               >
                 <Pen />
@@ -389,7 +394,7 @@ export function Workshop({
                 type="button"
                 onClick={(event) => {
                   drawingOpener.current = event.currentTarget;
-                  setDrawing({ kind: "blank" });
+                  onDrawingChange({ kind: "blank" });
                 }}
               >
                 <Pen />
