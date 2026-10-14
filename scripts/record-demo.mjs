@@ -217,6 +217,41 @@ try {
   await page.getByRole("button", { name: "Download TTF", exact: true }).click();
   await (await event).saveAs(resolve(outputDir, "Weekend-source-edited.ttf"));
   await page.waitForTimeout(2200);
+  const tiles = page.locator(".glyph-tile");
+  await tiles.first().scrollIntoViewIfNeeded();
+  for (const index of [1, 0]) {
+    await tiles.nth(index).click();
+    await page
+      .getByRole("button", { name: "Clear glyph", exact: true })
+      .click();
+    await page.waitForTimeout(500);
+  }
+  await expect(
+    page.getByRole("button", { name: /Missing glyph$/ }),
+  ).toHaveCount(2);
+  await page.locator(".draw-launch").click();
+  for (const turn of [0, 1]) {
+    const surface = page.locator(".draw-canvas canvas");
+    await surface.scrollIntoViewIfNeeded();
+    const pad = await surface.boundingBox();
+    if (!pad) throw new Error("Drawing canvas is not visible.");
+    await page.mouse.move(pad.x + pad.width * 0.3, pad.y + pad.height * 0.75);
+    await page.mouse.down();
+    await page.mouse.move(
+      pad.x + pad.width * (0.5 + turn * 0.2),
+      pad.y + pad.height * 0.25,
+      { steps: 24 },
+    );
+    await page.mouse.up();
+    await page.waitForTimeout(600);
+    await page
+      .getByRole("button", {
+        name: turn ? "Use drawing" : "Use and draw next",
+        exact: true,
+      })
+      .click();
+    await page.waitForTimeout(1400);
+  }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
   await page.waitForTimeout(1200);
   const zoom = page.getByLabel("Preview zoom", { exact: true });
@@ -241,7 +276,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded shared tracing values, kerning, character presets including accented letters and Cyrillic, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded shared tracing values, kerning, character presets including accented letters and Cyrillic, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom, a TTF download and drawing glyphs in a row.",
   );
 } finally {
   await browser?.close();

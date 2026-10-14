@@ -73,6 +73,7 @@
   "eraser": "消しゴム",
   "clearDrawing": "描画を消去",
   "useDrawing": "描画を使う",
+  "useDrawingNext": "使って次を描く",
   "undo": "元に戻す",
   "redo": "やり直す",
   "previewText": "プレビュー文字を入力",

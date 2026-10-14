@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.25.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.26.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -31,7 +31,7 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 5. Vérifiez chaque glyphe. Réglez la source, le seuil, l'épaisseur du trait, le lissage du contour, le recadrage, la taille, les décalages et l'espacement. Chaque réglage numérique a un curseur. Saisissez une valeur et appuyez sur Entrée, ou déplacez le curseur, et le contour se met à jour dès que vous le relâchez. Appuyez sur Ctrl+Z ou Cmd+Z pour annuler un changement, et ajoutez Maj pour le rétablir. Les guides en pointillés de la vue du contour marquent le bord gauche et la chasse, ce qui permet de voir l'espacement de chaque glyphe pendant le réglage.
 6. Saisissez votre texte dans l'aperçu et téléchargez le TTF ou le WOFF2. Quand tous les glyphes sont prêts, **Télécharger la police (TTF)** dans le panneau d'aperçu l'enregistre sans descendre jusqu'à l'atelier. Les caractères du texte que la police n'a pas encore apparaissent en rouge, et **Ajouter ces caractères** les ajoute au projet pour que vous imprimiez leurs cases. Modifier les caractères efface les affectations de page des scans, il faut donc les refaire.
 
-Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.
+Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Pendant que vous dessinez, **Utiliser et dessiner le suivant** garde le dessin et ouvre un canevas vide pour le caractère suivant qui n'a pas encore de glyphe, ce qui permet de créer une police sans imprimante. Une modification de source sans changement ne modifie pas l'historique du projet.
 
 Agrandissez l'image pour corriger les détails. La taille du stylo et de la gomme se mesure en pixels source, donc le zoom ne change pas la largeur du trait. Déplacez l'image avec l'outil Déplacer, les barres de défilement ou les flèches. Arrêter la conversion conserve les scans, les coins et les confirmations pour réessayer. Choisissez **Supprimer les scans en attente** pour les retirer.
 

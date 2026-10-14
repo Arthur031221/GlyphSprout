@@ -13,6 +13,7 @@ export function Drawing({
   t,
   character,
   source,
+  canAdvance,
   onUse,
   onCancel,
   onDirtyChange,
@@ -20,7 +21,13 @@ export function Drawing({
   t: Dictionary;
   character: string;
   source?: string;
-  onUse: (source: string, pixels: ImageData, changed: boolean) => void;
+  canAdvance?: boolean;
+  onUse: (
+    source: string,
+    pixels: ImageData,
+    changed: boolean,
+    advance: boolean,
+  ) => void;
   onCancel: () => void;
   onDirtyChange: (dirty: boolean) => void;
 }) {
@@ -233,6 +240,20 @@ export function Drawing({
     setStrokes(history.current.length);
     reportChange();
   }
+  function use(advance: boolean) {
+    const element = canvas.current;
+    const ctx = element?.getContext("2d");
+    if (!ready || !element || !ctx) return;
+    const result = ctx.getImageData(0, 0, element.width, element.height);
+    const original = originalPixels.current;
+    const changed =
+      !original ||
+      original.width !== result.width ||
+      original.height !== result.height ||
+      original.data.some((value, index) => value !== result.data[index]);
+    onUse(element.toDataURL("image/png"), result, changed, advance);
+  }
+
   return (
     <section
       ref={area}
@@ -405,29 +426,19 @@ export function Drawing({
           className="primary"
           type="button"
           disabled={!ready || gestureActive}
-          onClick={() => {
-            const element = canvas.current;
-            const ctx = element?.getContext("2d");
-            if (!ready || !element || !ctx) return;
-            const result = ctx.getImageData(
-              0,
-              0,
-              element.width,
-              element.height,
-            );
-            const original = originalPixels.current;
-            const changed =
-              !original ||
-              original.width !== result.width ||
-              original.height !== result.height ||
-              original.data.some(
-                (value, index) => value !== result.data[index],
-              );
-            onUse(element.toDataURL("image/png"), result, changed);
-          }}
+          onClick={() => use(false)}
         >
           {source ? t.applySourceEdits : t.useDrawing}
         </button>
+        {canAdvance && (
+          <button
+            type="button"
+            disabled={!ready || gestureActive}
+            onClick={() => use(true)}
+          >
+            {t.useDrawingNext}
+          </button>
+        )}
         <button type="button" onClick={onCancel}>
           {source ? t.cancelSourceEdit : t.cancelDrawing}
         </button>

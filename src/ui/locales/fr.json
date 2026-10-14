@@ -73,6 +73,7 @@
   "eraser": "Gomme",
   "clearDrawing": "Effacer le dessin",
   "useDrawing": "Utiliser le dessin",
+  "useDrawingNext": "Utiliser et dessiner le suivant",
   "undo": "Annuler",
   "redo": "Rétablir",
   "previewText": "Saisissez un texte d'exemple",

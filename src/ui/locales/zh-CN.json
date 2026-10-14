@@ -73,6 +73,7 @@
   "eraser": "橡皮擦",
   "clearDrawing": "清除画布",
   "useDrawing": "使用绘图",
+  "useDrawingNext": "使用并绘制下一个",
   "undo": "撤销",
   "redo": "重做",
   "previewText": "输入预览文本",

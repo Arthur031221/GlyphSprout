@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.25.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.26.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -31,7 +31,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 5. Revisa cada glifo. Ajusta la imagen original, el umbral, el grosor del trazo, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado. Cada ajuste numérico tiene un control deslizante. Escribe un valor y pulsa Intro, o mueve el control, y el contorno se actualiza al soltarlo. Pulsa Ctrl+Z o Cmd+Z para deshacer un cambio y añade Shift para rehacerlo. Las guías discontinuas de la vista de contorno marcan el borde izquierdo y el ancho de avance, así ves el espaciado de cada glifo mientras lo ajustas.
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2. Cuando todos los glifos están listos, **Descargar fuente (TTF)** en el panel de vista previa guarda la fuente sin bajar hasta el taller. Los caracteres del texto que la fuente aún no tiene aparecen en rojo, y **Añadir estos caracteres** los suma al proyecto para que imprimas sus casillas. Cambiar los caracteres borra las asignaciones de página de los escaneos, así que vuelve a asignarlas.
 
-Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.
+Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Mientras dibujas, **Usar y dibujar el siguiente** guarda el dibujo y abre un lienzo vacío para el siguiente carácter que aún no tiene glifo, así puedes crear una fuente sin impresora. Una edición del origen sin cambios no modifica el historial del proyecto.
 
 Amplía la imagen para corregir detalles. El tamaño del lápiz y del borrador se mide en píxeles de origen, así que el ancho del trazo se mantiene al cambiar el zoom. Usa Mover, las barras de desplazamiento o las flechas. Detener la conversión conserva los escaneos, las esquinas y las confirmaciones para reintentarlo. Usa **Descartar escaneos pendientes** para eliminarlos.
 

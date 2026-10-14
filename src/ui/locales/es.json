@@ -73,6 +73,7 @@
   "eraser": "Borrador",
   "clearDrawing": "Borrar dibujo",
   "useDrawing": "Usar dibujo",
+  "useDrawingNext": "Usar y dibujar el siguiente",
   "undo": "Deshacer",
   "redo": "Rehacer",
   "previewText": "Escribe un texto de muestra",

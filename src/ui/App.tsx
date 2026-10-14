@@ -166,6 +166,13 @@ export function App() {
     return true;
   }
 
+  function drawNext(character: string) {
+    setDrawingDirty(false);
+    setSelected(character);
+    setDrawing({ kind: "blank" });
+    setDrawingVersion((value) => value + 1);
+  }
+
   function undoProject() {
     if (!changeDrawing(null)) return;
     editor.cancel();
@@ -844,6 +851,7 @@ export function App() {
                 drawing={drawing}
                 drawingVersion={drawingVersion}
                 onDrawingChange={changeDrawing}
+                onDrawNext={drawNext}
                 onDrawingDirtyChange={setDrawingDirty}
               />
             </div>

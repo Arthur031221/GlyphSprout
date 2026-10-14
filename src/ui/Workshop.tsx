@@ -245,6 +245,7 @@ export function Workshop({
   drawing,
   drawingVersion,
   onDrawingChange,
+  onDrawNext,
   onDrawingDirtyChange,
 }: {
   project: Project;
@@ -259,6 +260,7 @@ export function Workshop({
   drawing: DrawingDraft | null;
   drawingVersion: number;
   onDrawingChange: (draft: DrawingDraft | null, applied?: boolean) => boolean;
+  onDrawNext: (character: string) => void;
   onDrawingDirtyChange: (dirty: boolean) => void;
 }) {
   const editorLaunch = useRef<HTMLButtonElement>(null);
@@ -272,6 +274,11 @@ export function Workshop({
     return !!glyph?.contours.length && !glyph.reviewed;
   });
   const readyCount = project.characters.length - missing.length;
+  const selectedIndex = project.characters.indexOf(selected);
+  const nextBlank = [
+    ...project.characters.slice(selectedIndex + 1),
+    ...project.characters.slice(0, Math.max(selectedIndex, 0)),
+  ].find((ch) => !project.glyphs[ch]);
   const nextReview =
     pendingReview.find(
       (ch) =>
@@ -410,10 +417,11 @@ export function Workshop({
               source={
                 drawing.kind === "edit" ? drawing.original.source : undefined
               }
+              canAdvance={drawing.kind === "blank" && !!nextBlank}
               t={t}
               onCancel={() => closeDrawing(true)}
               onDirtyChange={onDrawingDirtyChange}
-              onUse={(source, pixels, changed) => {
+              onUse={(source, pixels, changed, advance) => {
                 if (
                   editor.drawing(
                     selected,
@@ -422,8 +430,10 @@ export function Workshop({
                     drawing.kind === "edit" ? drawing.original : undefined,
                     changed,
                   )
-                )
-                  closeDrawing(true);
+                ) {
+                  if (advance && nextBlank) onDrawNext(nextBlank);
+                  else closeDrawing(true);
+                }
               }}
             />
           ) : current ? (

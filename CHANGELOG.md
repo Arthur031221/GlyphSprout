@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.26.0
+
+The drawing editor has a new button, **Use and draw next**. It keeps the drawing and opens a blank canvas for the next character in the project that has no glyph yet, wrapping around to the start of the list. Before this, drawing a font in the browser meant selecting each glyph, pressing Draw a glyph and pressing Use drawing, once per character. The button is hidden when no character is missing a glyph and while you edit an existing source.
+
+Each drawing is its own history step, so one Undo takes back one glyph. Browser tests draw three characters in a row, check that characters that already have a glyph are skipped and that the last one has no such button, and check the Traditional Chinese label. The new label is translated in all nine interface languages, and the README and user guide describe it.
+
 ## 1.25.0
 
 The Font spacing panel has a new checkbox, **Type lowercase letters with my uppercase glyphs**. A capitals only handwriting font could not type lowercase text at all: every lowercase letter showed in red in the live preview and was missing from the exported font, so you had to print and write a second alphabet. With the box ticked, each lowercase letter that isn't in your character list is exported with the glyph of its uppercase letter. Latin, Greek and Cyrillic letters are covered. A lowercase letter you add yourself keeps its own glyph, and the live preview, the specimen image and the TTF and WOFF2 downloads all follow the setting. Kerning pairs set for two uppercase letters also apply to their lowercase forms.
