@@ -367,6 +367,11 @@ export function Pages({
                       {t.pageId}
                       <input readOnly value={draft.templateId.slice(0, 8)} />
                       <small>{t.scanHelp}</small>
+                      {draft.autoCorners && (
+                        <small className="corners-found">
+                          {t.cornersFound}
+                        </small>
+                      )}
                     </label>
                     {draft.corners.map((p, i) => (
                       <div className="corner-input" key={cornerNames[i]}>

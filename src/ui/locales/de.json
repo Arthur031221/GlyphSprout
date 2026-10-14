@@ -30,6 +30,7 @@
   "stageInstructions": "Schreibe ein Zeichen in jedes Quadrat. Lass die vier Passkreuze sichtbar.",
   "scan": "Scans hinzufügen",
   "scanHelp": "Wähle Seitenbilder aus, bestätige die Zuordnung und die sichtbare Seitennummer jeder Seite und passe dann die vier Ecken an.",
+  "cornersFound": "Die vier Ecken wurden automatisch gefunden. Prüfe vor dem Bestätigen, dass jede Markierung auf ihrem Kreuz sitzt.",
   "chooseImages": "JPEG- oder PNG-Bilder auswählen",
   "assignPage": "Zugewiesene Vorlagenseite",
   "pageId": "Sichtbare Seitennummer",

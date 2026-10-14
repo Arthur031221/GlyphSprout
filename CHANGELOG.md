@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0
+
+Adding a scan now finds the four registration crosses and places the page corners on them, so most pages need a check instead of four drags. The search tolerates pages that don't fill the image, small shifts and slight rotation. When a cross can't be found, the corners start where a page-filling scan would show them, as before, and the note is not shown. You still confirm every page.
+
+Images with a long side over 4096 pixels are scaled down when they are added, which lets large phone photos load on browsers with a canvas size limit. The specimen text is no longer announced by screen readers on every keystroke. The README now shows the demo before the install command. The new note is translated in all nine interface languages.
+
 ## 1.6.0
 
 New traces no longer export as raw pixel staircases. **Outline smoothing** turns the one pixel steps along curves and diagonals into straight segments and drops the points that no longer matter, so large sizes look clean and glyphs carry fewer points. Each glyph has its own level from 0 to 3, new scans start at 2, and 0 keeps the exact pixel outline. If smoothing would make two outlines cross, the glyph keeps its pixel outline.

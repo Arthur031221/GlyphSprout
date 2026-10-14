@@ -30,6 +30,7 @@
   "stageInstructions": "Write one character inside each square. Keep the four registration crosses visible.",
   "scan": "Add scans",
   "scanHelp": "Choose page images, confirm each page assignment and visible page ID, then adjust the four corners.",
+  "cornersFound": "The four corners were found automatically. Check that each marker sits on its cross before you confirm.",
   "chooseImages": "Choose JPEG or PNG images",
   "assignPage": "Assigned template page",
   "pageId": "Visible page ID",

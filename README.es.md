@@ -10,8 +10,10 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
+![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
+
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.7.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -20,13 +22,11 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 | --- | --- |
 | Tu escritura en una plantilla impresa | Una fuente pequeña con píxeles originales, contornos y espaciado editables |
 
-![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
-
 ## Crea tu primera fuente
 
 1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`. Puedes añadir conjuntos completos, como mayúsculas, dígitos, puntuación, hiragana o katakana, con un clic.
 2. Imprime la plantilla A4 a tamaño real y escribe un carácter en cada celda.
-3. Añade un escaneo con luz uniforme, confirma el ID de página y alinea las cuatro esquinas.
+3. Añade un escaneo con luz uniforme y confirma el ID de página. GlyphSprout busca las cuatro cruces de registro y coloca las esquinas sobre ellas. Revisa cada esquina y corrige las que estén desviadas.
 4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
 5. Revisa cada glifo. Ajusta la imagen original, el umbral, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado.
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2.

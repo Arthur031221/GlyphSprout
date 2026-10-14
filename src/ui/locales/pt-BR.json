@@ -30,6 +30,7 @@
   "stageInstructions": "Escreva um caractere dentro de cada quadrado. Mantenha visíveis as quatro cruzes de alinhamento.",
   "scan": "Adicionar digitalizações",
   "scanHelp": "Escolha imagens das páginas, confirme a atribuição e o ID visível de cada página e ajuste os quatro cantos.",
+  "cornersFound": "Os quatro cantos foram encontrados automaticamente. Antes de confirmar, confira se cada marcador está sobre a sua cruz.",
   "chooseImages": "Escolher imagens JPEG ou PNG",
   "assignPage": "Página de modelo atribuída",
   "pageId": "ID de página visível",

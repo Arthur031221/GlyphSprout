@@ -30,6 +30,7 @@
   "stageInstructions": "Écrivez un caractère dans chaque carré. Gardez visibles les quatre croix de repérage.",
   "scan": "Ajouter des scans",
   "scanHelp": "Choisissez les images des pages, confirmez l'affectation et l'ID visible de chaque page, puis ajustez les quatre coins.",
+  "cornersFound": "Les quatre coins ont été trouvés automatiquement. Avant de confirmer, vérifiez que chaque repère est bien sur sa croix.",
   "chooseImages": "Choisir des images JPEG ou PNG",
   "assignPage": "Page de modèle attribuée",
   "pageId": "ID de page visible",

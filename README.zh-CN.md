@@ -10,8 +10,10 @@
 
 [打开在线工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 许可证](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
+![实际工作坊：擦除并修正扫描字形、查看样张并下载 TTF](assets/demo.gif)
+
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.7.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。命令显示就绪信息后，打开 `http://127.0.0.1:4173`。
@@ -20,13 +22,11 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 | --- | --- |
 | 写在打印纸上的个人手写字 | 字源像素、轮廓和间距均可编辑的小型字体 |
 
-![实际工作坊：擦除并修正扫描字形、查看样张并下载 TTF](assets/demo.gif)
-
 ## 制作你的第一款字体
 
 1. 新建项目，并选择需要的字符，例如 `Hello!`。也可以一键添加整组字符，例如大写字母、数字、标点符号、平假名或片假名。
 2. 按实际尺寸打印 A4 模板，每格写一个字符。
-3. 添加光线均匀的扫描图，确认页面 ID 并对齐四个角。
+3. 添加光线均匀的扫描图并确认页面 ID。GlyphSprout 会查找四个定位十字并把角点放上去，请检查每个角，有偏差就调整。
 4. 点击**转换扫描**，等待转换完成。
 5. 检查每个字形。调整源图、阈值、轮廓平滑、裁切、大小、偏移和间距。
 6. 在实时样张中输入文本，然后下载 TTF 或 WOFF2。

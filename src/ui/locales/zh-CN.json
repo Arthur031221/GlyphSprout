@@ -30,6 +30,7 @@
   "stageInstructions": "在每个方框中写一个字，并保留四个定位十字。",
   "scan": "添加扫描",
   "scanHelp": "选择页面图像，确认页面分配和可见页码，再调整四个角。",
+  "cornersFound": "已自动找到四个角。确认前，请检查每个标记是否落在对应的十字上。",
   "chooseImages": "选择 JPEG 或 PNG 图像",
   "assignPage": "指定模板页",
   "pageId": "可见页码",

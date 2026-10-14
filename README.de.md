@@ -10,8 +10,10 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
+![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
+
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.7.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -20,13 +22,11 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 | --- | --- |
 | Deine Handschrift auf einer gedruckten Vorlage | Eine kleine Schrift mit bearbeitbaren Quellpixeln, Konturen und Abständen |
 
-![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
-
 ## Deine erste Schrift erstellen
 
 1. Erstelle ein Projekt und wähle die benötigten Zeichen, zum Beispiel `Hello!`. Ganze Sätze wie Großbuchstaben, Ziffern, Satzzeichen, Hiragana oder Katakana lassen sich mit einem Klick hinzufügen.
 2. Drucke die A4-Vorlage in Originalgröße und schreibe ein Zeichen in jedes Feld.
-3. Füge einen gleichmäßig beleuchteten Scan hinzu, bestätige die Seiten-ID und richte die vier Ecken aus.
+3. Füge einen gleichmäßig beleuchteten Scan hinzu und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
 5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Konturglättung, Ausschnitt, Größe, Versatz und Abstand an.
 6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter.

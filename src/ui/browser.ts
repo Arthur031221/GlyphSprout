@@ -1,3 +1,5 @@
+import { validateCorners } from "../core/geometry";
+import { DETECT_MAX_SIDE, detectCorners } from "../core/markers";
 import {
   MAX_IMAGE_BYTES,
   MAX_PROJECT_BYTES,
@@ -80,6 +82,36 @@ export async function validateImages(project: Project) {
   }
 }
 
+const MAX_PAGE_SIDE = 4096;
+
+/** Looks for the printed crosses on a small grayscale copy; null when unsure. */
+function findCorners(bitmap: ImageBitmap, width: number, height: number) {
+  try {
+    const factor = Math.min(1, DETECT_MAX_SIDE / Math.max(width, height));
+    const w = Math.max(1, Math.round(width * factor));
+    const h = Math.max(1, Math.round(height * factor));
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const context = canvas.getContext("2d", { willReadFrequently: true });
+    if (!context) return null;
+    context.fillStyle = "white";
+    context.fillRect(0, 0, w, h);
+    context.drawImage(bitmap, 0, 0, w, h);
+    const { data } = context.getImageData(0, 0, w, h);
+    const gray = new Uint8Array(w * h);
+    for (let i = 0; i < gray.length; i++)
+      gray[i] =
+        (data[i * 4] * 77 + data[i * 4 + 1] * 151 + data[i * 4 + 2] * 28) >> 8;
+    const found = detectCorners(gray, w, h);
+    if (!found) return null;
+    validateCorners(found, w, h);
+    return found.map((p) => ({ x: (p.x / w) * width, y: (p.y / h) * height }));
+  } catch {
+    return null;
+  }
+}
+
 export async function imageData(file: File) {
   if (!["image/png", "image/jpeg"].includes(file.type))
     throw new Error("wrongType");
@@ -92,6 +124,18 @@ export async function imageData(file: File) {
   }
   try {
     if (bitmap.width * bitmap.height > 32_000_000) throw new Error("tooLarge");
+    const longSide = Math.max(bitmap.width, bitmap.height);
+    if (longSide > MAX_PAGE_SIDE) {
+      // Phone photos can exceed what some mobile browsers allow in one canvas.
+      const ratio = MAX_PAGE_SIDE / longSide;
+      const resized = await createImageBitmap(file, {
+        resizeWidth: Math.round(bitmap.width * ratio),
+        resizeHeight: Math.round(bitmap.height * ratio),
+        resizeQuality: "high",
+      });
+      bitmap.close();
+      bitmap = resized;
+    }
     const canvas = document.createElement("canvas");
     canvas.width = bitmap.width;
     canvas.height = bitmap.height;
@@ -102,7 +146,12 @@ export async function imageData(file: File) {
     context.drawImage(bitmap, 0, 0);
     const image = canvas.toDataURL(file.type, 0.94);
     if (image.length * 0.75 > MAX_IMAGE_BYTES) throw new Error("tooLarge");
-    return { image, width: canvas.width, height: canvas.height };
+    return {
+      image,
+      width: canvas.width,
+      height: canvas.height,
+      detected: findCorners(bitmap, canvas.width, canvas.height),
+    };
   } finally {
     bitmap.close();
   }

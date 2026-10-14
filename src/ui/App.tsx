@@ -456,7 +456,6 @@ export function App() {
                 fontFamily: preview.family ? `"${preview.family}"` : "inherit",
                 ...(specimenSize ? { fontSize: `${specimenSize}px` } : {}),
               }}
-              aria-live="polite"
             >
               {preview.family ? (
                 specimenLetters.map(({ character: ch, key }) => {

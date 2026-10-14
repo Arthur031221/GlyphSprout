@@ -11,6 +11,7 @@ export interface DraftPage extends ScanPage {
   templateId: string;
   filename: string;
   confirmed: boolean;
+  autoCorners: boolean;
 }
 interface ScanResult {
   pageId: string;
@@ -100,7 +101,7 @@ export function useScans(
     const corners = page.corners.map((p, i) =>
       i === cornerIndex ? point : p,
     ) as DraftPage["corners"];
-    change({ corners });
+    change({ corners, autoCorners: false });
   }
 
   async function add(files: File[]) {
@@ -120,29 +121,25 @@ export function useScans(
       const next: DraftPage[] = [];
       const used = new Set(drafts.map((p) => p.pageIndex));
       for (const file of files) {
-        const decoded = await imageData(file);
+        const { detected, ...decoded } = await imageData(file);
         let pageIndex = 0;
         while (used.has(pageIndex)) pageIndex++;
         used.add(pageIndex);
+        // Without detected crosses, guess where a page-filling scan would show them.
         next.push({
           id: crypto.randomUUID(),
           templateId: snapshot.id,
           pageIndex,
           filename: file.name,
           confirmed: false,
+          autoCorners: Boolean(detected),
           ...decoded,
-          corners: TEMPLATE.markers.map((p) => ({
-            x: p.x,
-            y: p.y,
-          })) as DraftPage["corners"],
+          corners: (detected ??
+            TEMPLATE.markers.map((p) => ({
+              x: (p.x / TEMPLATE.width) * decoded.width,
+              y: (p.y / TEMPLATE.height) * decoded.height,
+            }))) as DraftPage["corners"],
         });
-        // Default crosses are proportional to the whole image, then adjusted by the user.
-        const page = next.at(-1);
-        if (page)
-          page.corners = TEMPLATE.markers.map((p) => ({
-            x: (p.x / TEMPLATE.width) * page.width,
-            y: (p.y / TEMPLATE.height) * page.height,
-          })) as DraftPage["corners"];
       }
       if (readVersion.current !== version || projectRef.current !== snapshot)
         return;
@@ -263,8 +260,13 @@ export function useScans(
             pages: [
               ...pages,
               ...drafts.map(
-                ({ filename: _, confirmed: __, templateId: ___, ...page }) =>
-                  page,
+                ({
+                  filename: _,
+                  confirmed: __,
+                  templateId: ___,
+                  autoCorners: ____,
+                  ...page
+                }) => page,
               ),
             ],
           });
