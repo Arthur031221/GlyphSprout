@@ -92,3 +92,30 @@ test("template cards and their actions fit narrow screens in every locale", asyn
     }
   }
 });
+
+for (const viewport of [
+  { width: 375, height: 740 },
+  { width: 1280, height: 800 },
+]) {
+  test(`the empty project preview message is not clipped at ${viewport.width} px`, async ({
+    page,
+  }) => {
+    await page.setViewportSize(viewport);
+    await page.goto("/");
+    page.once("dialog", (dialog) => void dialog.accept());
+    await page.getByRole("button", { name: "New project" }).click();
+    const message = page.locator(".hero-copy .specimen-placeholder");
+    await expect(message).toBeVisible();
+    const copy = page.locator(".hero-copy");
+    const fits = await copy.evaluate(
+      (el) => el.scrollHeight <= el.clientHeight,
+    );
+    expect(fits).toBe(true);
+    const lines = await message.evaluate(
+      (el) =>
+        el.getBoundingClientRect().height /
+        Number.parseFloat(getComputedStyle(el).lineHeight),
+    );
+    expect(lines).toBeLessThan(4);
+  });
+}

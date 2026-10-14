@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.23.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.23.1
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.

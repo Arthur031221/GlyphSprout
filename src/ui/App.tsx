@@ -536,10 +536,12 @@ export function App() {
               />
             </div>
             <p
-              className="hero-copy"
+              className={preview.family ? "hero-copy" : "hero-copy empty"}
               style={{
                 fontFamily: preview.family ? `"${preview.family}"` : "inherit",
-                ...(specimenSize ? { fontSize: `${specimenSize}px` } : {}),
+                ...(specimenSize && preview.family
+                  ? { fontSize: `${specimenSize}px` }
+                  : {}),
               }}
             >
               {preview.family ? (

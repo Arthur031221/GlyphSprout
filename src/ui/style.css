@@ -1351,9 +1351,12 @@ fieldset {
   width: auto;
   min-width: 0;
 }
+.hero-copy.empty {
+  font-size: 22px;
+  line-height: 1.5;
+}
 .specimen-placeholder {
   font-family: inherit;
-  font-size: 22px;
   font-weight: 500;
   color: var(--muted);
 }

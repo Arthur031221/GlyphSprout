@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.23.1
+
+The live preview of an empty project no longer cuts its message off. On a phone, the "Load a sample or start with the characters you want to write" text was drawn with the line height of a full size specimen, so it was spread over tall lines and the last words were clipped. The message now uses its own small size and normal line height at every screen width, and the Preview zoom slider only changes real specimen text.
+
+A browser test starts a new project at phone and desktop widths and checks that the message fits its box in a few lines. It fails on the previous release at phone width.
+
 ## 1.23.0
 
 When scan conversion finishes, cells that held no ink are now named in the notice. Before this, the notice said only that the scans were converted, and a letter you forgot to write, a faint pen or a wrong page assignment left empty glyphs that you found one by one in the glyph list. The notice now reads "Scans converted. These cells had no ink, so they have no glyph yet." followed by the characters, cut to 24 with a count of the rest. Cells that need a simpler outline still report first, as before.
