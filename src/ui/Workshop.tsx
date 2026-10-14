@@ -5,7 +5,13 @@ import {
   Pen,
   Trash,
 } from "@phosphor-icons/react";
-import { type KeyboardEvent, useEffect, useRef, useState } from "react";
+import {
+  type KeyboardEvent,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { fontGlyph, missingCharacters } from "../core/font";
 import { isCjk } from "../core/text";
 import {
@@ -90,10 +96,12 @@ function Settings({
   glyph,
   editor,
   t,
+  children,
 }: {
   glyph: Glyph;
   editor: Editor;
   t: Dictionary;
+  children?: ReactNode;
 }) {
   const [draft, setDraft] = useState(glyph.settings);
   const latest = useRef(glyph.settings);
@@ -197,6 +205,8 @@ function Settings({
             </label>
           ))}
         </div>
+      </div>
+      <div className="editor-actions settings-actions">
         <button
           type="button"
           onClick={() => {
@@ -216,6 +226,7 @@ function Settings({
         >
           {t.matchTracing}
         </button>
+        {children}
       </div>
     </>
   );
@@ -306,7 +317,7 @@ export function Workshop({
         <div className="section-heading">
           <div>
             <span className="eyebrow">{t.characterSet}</span>
-            <h2>{t.charactersLabel}</h2>
+            <h2>{t.glyphList}</h2>
           </div>
           <span className="count-pill">
             {readyCount} / {project.characters.length}
@@ -480,18 +491,19 @@ export function Workshop({
                 glyph={current}
                 editor={editor}
                 t={t}
-              />
-              <button
-                ref={editorLaunch}
-                type="button"
-                onClick={(event) => {
-                  drawingOpener.current = event.currentTarget;
-                  onDrawingChange({ kind: "edit", original: current });
-                }}
               >
-                <Pen />
-                {t.editSource}
-              </button>
+                <button
+                  ref={editorLaunch}
+                  type="button"
+                  onClick={(event) => {
+                    drawingOpener.current = event.currentTarget;
+                    onDrawingChange({ kind: "edit", original: current });
+                  }}
+                >
+                  <Pen />
+                  {t.editSource}
+                </button>
+              </Settings>
             </>
           ) : (
             <div className="empty-editor">

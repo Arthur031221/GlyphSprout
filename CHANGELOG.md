@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.24.1
+
+The Workshop's glyph list now has its own heading, **Glyphs**. It reused the word for a character count, so the Traditional and Simplified Chinese interfaces showed a bare counting word where a title belongs. The new heading is translated in all nine interface languages.
+
+The glyph settings buttons (Reset settings, the match-all button and Edit source) now sit together in one wrapping row under the sliders. Before this, Reset settings took a single grid cell, the match-all button stretched across the panel and Edit source sat alone below them.
+
+Browser tests check the heading in English and Traditional Chinese, that the three buttons share one row at desktop width and that they stay inside the panel on a phone. Both fail on the previous release.
+
 ## 1.24.0
 
 The Pages stage has a new **Download all pages (PDF)** button. It saves every template sheet in one PDF at the chosen paper size, A4 or US Letter. Before this you could print from a browser window, which phones often block, or save each sheet as an SVG that few programs print at the right size. The PDF holds each sheet as a 300 dpi picture, and no extra dependency was added.

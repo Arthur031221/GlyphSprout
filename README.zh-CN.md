@@ -13,7 +13,7 @@
 ![实际工作坊：擦除并修正扫描字形、查看样张并下载 TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.1
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。命令显示就绪信息后，打开 `http://127.0.0.1:4173`。

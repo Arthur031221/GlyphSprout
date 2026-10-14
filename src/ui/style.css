@@ -950,8 +950,8 @@ fieldset {
 .settings-grid input {
   padding: 7px;
 }
-.settings-grid .match-tracing {
-  grid-column: 1 / -1;
+.settings-actions {
+  margin-top: 14px;
 }
 .crop-settings {
   grid-column: 1 / -1;

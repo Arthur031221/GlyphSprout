@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.1
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
