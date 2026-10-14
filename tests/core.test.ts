@@ -28,6 +28,22 @@ it("changes the printed sheet identity when the character order changes", () => 
   );
 });
 
+it.each(["é 日", "e\u0301日", "é日é日  "])(
+  "retains printed sheets when text %s has the same ordered characters",
+  (input) => {
+    const project = newProject("My handwriting", "é日");
+    const before = templateSvg(project.characters, project.name, project.id, 0);
+    const updated = updateText(project, input);
+    expect(updated.id).toBe(project.id);
+    expect(updated.pages).toBe(project.pages);
+    expect(updated.glyphs).toBe(project.glyphs);
+    expect(updated.text).toBe(analyzeText(input).text);
+    expect(templateSvg(updated.characters, updated.name, updated.id, 0)).toBe(
+      before,
+    );
+  },
+);
+
 it("accepts exact 5 percent crops without accepting smaller crops", () => {
   for (const [left, right] of [
     [0.2, 0.25],

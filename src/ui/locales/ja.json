@@ -184,5 +184,11 @@
   "resetStorageConfirm": "このブラウザーに保存した版と画像を削除しますか？残したい場合は、先に保存データをダウンロードしてください。",
   "secureContextRequired": "HTTPS または localhost などのループバックアドレスで GlyphSprout を開いてください。通常の HTTP ネットワークアドレスではフォントの生成やプロジェクトの保存ができません。",
   "openLiveWorkshop": "オンラインの作業場を開く",
-  "applyingEdits": "字形の変更を適用しています..."
+  "applyingEdits": "字形の変更を適用しています...",
+  "editSource": "元画像を編集",
+  "sourceEditHelp": "元画像を修正します。既存の線は元のピクセルサイズのまま保持されます。",
+  "sourceLoading": "元画像を読み込み中...",
+  "sourceChanged": "編集画面を開いている間にこの字形が変更されました。編集を適用する前に開き直してください。",
+  "applySourceEdits": "元画像の編集を適用",
+  "cancelSourceEdit": "元画像の編集をキャンセル"
 }

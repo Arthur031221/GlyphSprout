@@ -184,5 +184,11 @@
   "resetStorageConfirm": "Remove this browser's saved revisions and images? Download the stored data first if you want to keep it.",
   "secureContextRequired": "Open GlyphSprout with HTTPS or a loopback address such as localhost. Plain HTTP network addresses cannot generate fonts or save projects.",
   "openLiveWorkshop": "Open live workshop",
-  "applyingEdits": "Applying glyph changes..."
+  "applyingEdits": "Applying glyph changes...",
+  "editSource": "Edit source",
+  "sourceEditHelp": "Touch up the source image. Existing ink stays at its original pixel size.",
+  "sourceLoading": "Loading source image...",
+  "sourceChanged": "This glyph changed while the source editor was open. Reopen it before applying edits.",
+  "applySourceEdits": "Apply source edits",
+  "cancelSourceEdit": "Cancel source edit"
 }

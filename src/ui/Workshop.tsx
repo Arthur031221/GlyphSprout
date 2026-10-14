@@ -173,14 +173,31 @@ export function Workshop({
   onExport: (format: "ttf" | "woff2", partial: boolean) => void;
   exportBusy: boolean;
 }) {
-  const [drawing, setDrawing] = useState(false);
+  const [drawing, setDrawing] = useState<
+    { kind: "blank" } | { kind: "edit"; original: Glyph } | null
+  >(null);
+  const editorLaunch = useRef<HTMLButtonElement>(null);
+  const drawingOpener = useRef<HTMLButtonElement | null>(null);
+  const restoreFocus = useRef(false);
   const [partial, setPartial] = useState(false);
   const current = project.glyphs[selected];
   const missing = missingCharacters(project);
   // biome-ignore lint/correctness/useExhaustiveDependencies: Changing the selected character closes its drawing canvas.
   useEffect(() => {
-    setDrawing(false);
+    setDrawing(null);
   }, [selected]);
+  useEffect(() => {
+    if (drawing || !restoreFocus.current) return;
+    restoreFocus.current = false;
+    const opener = drawingOpener.current?.isConnected
+      ? drawingOpener.current
+      : editorLaunch.current;
+    opener?.focus();
+  }, [drawing]);
+  function closeDrawing() {
+    restoreFocus.current = true;
+    setDrawing(null);
+  }
   return (
     <section className="workshop-layout">
       <aside className="glyph-browser panel">
@@ -205,7 +222,10 @@ export function Workshop({
                 className={`glyph-tile ${ch === selected ? "active" : ""} ${ready ? "done" : "missing"}`}
                 aria-label={`${ch} ${glyph?.reviewed ? t.reviewedLabel : ready ? t.needsReview : t.missing}`}
                 aria-pressed={ch === selected}
-                onClick={() => onSelect(ch)}
+                onClick={() => {
+                  setDrawing(null);
+                  onSelect(ch);
+                }}
               >
                 <span>{ch}</span>
                 <small>
@@ -224,7 +244,10 @@ export function Workshop({
         <button
           className="draw-launch"
           type="button"
-          onClick={() => setDrawing(true)}
+          onClick={(event) => {
+            drawingOpener.current = event.currentTarget;
+            setDrawing({ kind: "blank" });
+          }}
         >
           <Pen />
           {t.draw}
@@ -263,12 +286,24 @@ export function Workshop({
           </div>
           {drawing ? (
             <Drawing
-              key={selected}
+              key={`${selected}-${drawing.kind}`}
               character={selected}
+              source={
+                drawing.kind === "edit" ? drawing.original.source : undefined
+              }
               t={t}
-              onCancel={() => setDrawing(false)}
-              onUse={(source, pixels) => {
-                if (editor.drawing(selected, source, pixels)) setDrawing(false);
+              onCancel={closeDrawing}
+              onUse={(source, pixels, changed) => {
+                if (
+                  editor.drawing(
+                    selected,
+                    source,
+                    pixels,
+                    drawing.kind === "edit" ? drawing.original : undefined,
+                    changed,
+                  )
+                )
+                  closeDrawing();
               }}
             />
           ) : current ? (
@@ -334,11 +369,29 @@ export function Workshop({
                 editor={editor}
                 t={t}
               />
+              <button
+                ref={editorLaunch}
+                type="button"
+                onClick={(event) => {
+                  drawingOpener.current = event.currentTarget;
+                  setDrawing({ kind: "edit", original: current });
+                }}
+              >
+                <Pen />
+                {t.editSource}
+              </button>
             </>
           ) : (
             <div className="empty-editor">
               <p>{t.missing}</p>
-              <button type="button" onClick={() => setDrawing(true)}>
+              <button
+                ref={editorLaunch}
+                type="button"
+                onClick={(event) => {
+                  drawingOpener.current = event.currentTarget;
+                  setDrawing({ kind: "blank" });
+                }}
+              >
                 <Pen />
                 {t.draw}
               </button>

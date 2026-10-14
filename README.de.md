@@ -2,7 +2,7 @@
 
 # GlyphSprout
 
-Erstelle aus handschriftlichen Vorlagen bearbeitbare Schriftteilmengen für lateinische Zeichen, Han-Zeichen und Kana.
+Erstelle eine kleine Schrift für die Wörter und Namen deines Projekts. Drucke eine Vorlage, schreibe die gewünschten Zeichen hinein, prüfe die gescannten Konturen und exportiere eine Schrift zum Tippen.
 
 **Sechs handgeschriebene Buchstaben. Eine Schrift mit 3.3 kB.**
 
@@ -11,40 +11,35 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.284 Byte große TTF-Datei,
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.1.0
 ```
 
-Erfordert Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Befehl die Bereitschaftsmeldung ausgibt.
+Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
 
-| Vorher | Nachher |
+| Ausgangspunkt | Ergebnis |
 | --- | --- |
-| Sechs Ausschnitte handgeschriebener Buchstaben | Eine verwendbare Schrift mit bearbeitbaren Konturen und Abständen |
+| Deine Handschrift auf einer gedruckten Vorlage | Eine kleine Schrift mit bearbeitbaren Quellpixeln, Konturen und Abständen |
 
-![Echte Werkstatt: Handschriftvorschau, Glyphenskalierung anpassen und TTF herunterladen](assets/demo.gif)
-
-Ich habe das für die Zeichen entwickelt, die ein kleines Projekt tatsächlich verwendet.
+![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ## Deine erste Schrift erstellen
 
-Beim ersten Besuch wird Paper Bloom mit sechs echten handgeschriebenen Buchstaben geladen. Du kannst sofort einen Buchstaben bearbeiten oder die Schrift herunterladen. So erstellst du eine eigene Schrift:
-
-```text
-1. Erstelle ein neues Projekt namens Weekend und wähle den Text Hello! aus.
+1. Erstelle ein Projekt und wähle die benötigten Zeichen, zum Beispiel `Hello!`.
 2. Drucke die A4-Vorlage in Originalgröße und schreibe ein Zeichen in jedes Feld.
-3. Füge einen flach aufgenommenen PNG- oder JPEG-Scan hinzu und gib die gedruckte Seitennummer an.
-4. Passe die vier Ecken an, bestätige die Ausrichtung, wandle um und prüfe die Glyphen.
-5. Gib Hello! im Schriftmuster ein und lade TTF oder WOFF2 herunter.
-```
+3. Füge einen gleichmäßig beleuchteten Scan hinzu, bestätige die Seiten-ID und richte die vier Ecken aus.
+4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
+5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Ausschnitt, Größe, Versatz und Abstand an.
+6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter.
 
-Die Werkstatt bietet eine Quell- und Konturansicht, Einstellungen für Schwellenwert und Fleckenfilter sowie Zuschnitt, Skalierungsfaktor, Versatz und Abstand. Versatz und Abstand werden in Schrifteinheiten angegeben. Du kannst Glyphen auch zeichnen oder radieren. Das Live-Muster verwendet die tatsächlich erzeugte Schrift. Zeichnung und Projekt lassen sich getrennt rückgängig machen.
+Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
 
 ## Eine kleine Teilmenge mit klaren Grenzen
 
-Wähle bis zu 512 unterstützte BMP-Zeichen. Ein A4-Blatt enthält 35 Felder, höchstens 15 Blätter sind möglich. Lateinische Glyphen verwenden standardmäßig proportionale Abstände. Han-Zeichen und Kana haben einen festen Zellenfortschritt. Die Oberfläche bietet neun Sprachen, helle und dunkle Themes sowie ein Layout für schmale Bildschirme.
+Wähle bis zu 512 unterstützte BMP-Zeichen. Jede A4-Vorlage hat 35 Felder und ein Projekt kann bis zu 15 Seiten umfassen. Lateinische Glyphen verwenden standardmäßig proportionale Abstände. Han-Zeichen und Kana haben einen festen Zellenfortschritt. Die Oberfläche bietet neun Sprachen, helle und dunkle Themes sowie ein Layout für schmale Bildschirme.
 
-Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßige Beleuchtung und alle vier sichtbaren Passermarken. Seitenzuordnung und Bestätigung erfolgen manuell. Das Tool liest keine Handschrift und erkennt keine Felder automatisch.
+Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßiges Licht und alle vier sichtbaren Passermarken. Seitenzuordnung und Bestätigung erfolgen manuell. GlyphSprout liest keine Handschrift und erkennt keine Felder automatisch.
 
-Die Exporte enthalten einfache Konturen ohne Hinting. Es gibt kein Kerning, keine Kurvenglättung, keine Formung verbundener Schrift und keine vollständige Sprachabdeckung. Das Han- und Kana-Beispiel verwendet eigens erstellte synthetische Striche und ist entsprechend gekennzeichnet.
+Die Exporte enthalten einfache Konturen ohne Hinting. Es gibt kein Kerning, keine Kurvenvereinfachung, keine Formung verbundener Schrift und keine vollständige Sprachabdeckung. Das Han- und Kana-Beispiel verwendet eigens erstellte synthetische Striche und ist entsprechend gekennzeichnet.
 
 ## Arbeit sichern
 

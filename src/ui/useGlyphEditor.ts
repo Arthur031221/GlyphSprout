@@ -158,12 +158,36 @@ export function useGlyphEditor(
     return applied;
   }
 
-  function drawing(character: string, source: string, pixels: ImageData) {
-    cancel(character);
+  function drawing(
+    character: string,
+    source: string,
+    pixels: ImageData,
+    original?: Glyph,
+    changed = true,
+  ) {
     const current = projectRef.current;
     if (!current?.characters.includes(character)) return;
+    if (
+      original &&
+      (current.glyphs[character] !== original ||
+        releasePending.current.has(character))
+    ) {
+      notice({ key: "sourceChanged", tone: "error" });
+      return false;
+    }
+    if (original && !changed) return true;
+    cancel(character);
     try {
-      const glyph = blankGlyph(character, source);
+      const glyph = original
+        ? {
+            ...original,
+            source,
+            settings: {
+              ...original.settings,
+              crop: { ...original.settings.crop },
+            },
+          }
+        : blankGlyph(character, source);
       glyph.contours = trace(
         grayscale(pixels.data),
         pixels.width,
@@ -171,6 +195,7 @@ export function useGlyphEditor(
         glyph.settings,
       ).contours;
       glyph.origin = "draw";
+      glyph.reviewed = false;
       if (!glyph.contours.length) throw new Error("emptyGlyph");
       fontGlyph(glyph);
       commit({ ...current, glyphs: { ...current.glyphs, [character]: glyph } });

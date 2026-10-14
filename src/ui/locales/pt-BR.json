@@ -184,5 +184,11 @@
   "resetStorageConfirm": "Remover as versões e imagens salvas neste navegador? Baixe os dados primeiro se quiser mantê-los.",
   "secureContextRequired": "Abra o GlyphSprout por HTTPS ou por um endereço local como localhost. Endereços de rede com HTTP não permitem gerar fontes nem salvar projetos.",
   "openLiveWorkshop": "Abrir oficina online",
-  "applyingEdits": "Aplicando alterações ao glifo..."
+  "applyingEdits": "Aplicando alterações ao glifo...",
+  "editSource": "Editar origem",
+  "sourceEditHelp": "Ajuste a imagem de origem. Os traços existentes mantêm o tamanho original em pixels.",
+  "sourceLoading": "Carregando imagem de origem...",
+  "sourceChanged": "Este glifo mudou enquanto o editor de origem estava aberto. Abra-o novamente antes de aplicar as alterações.",
+  "applySourceEdits": "Aplicar alterações na origem",
+  "cancelSourceEdit": "Cancelar edição da origem"
 }

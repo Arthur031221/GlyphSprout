@@ -184,5 +184,11 @@
   "resetStorageConfirm": "이 브라우저에 저장된 버전과 이미지를 삭제할까요? 보관하려면 먼저 저장된 데이터를 다운로드하세요.",
   "secureContextRequired": "HTTPS 또는 localhost 같은 루프백 주소로 GlyphSprout를 열어 주세요. 일반 HTTP 네트워크 주소에서는 글꼴을 생성하거나 프로젝트를 저장할 수 없습니다.",
   "openLiveWorkshop": "온라인 작업실 열기",
-  "applyingEdits": "글리프 변경 사항을 적용하는 중..."
+  "applyingEdits": "글리프 변경 사항을 적용하는 중...",
+  "editSource": "원본 편집",
+  "sourceEditHelp": "원본 이미지를 다듬습니다. 기존 획은 원래 픽셀 크기로 유지됩니다.",
+  "sourceLoading": "원본 이미지를 불러오는 중...",
+  "sourceChanged": "원본 편집기가 열린 동안 이 글리프가 변경되었습니다. 편집을 적용하기 전에 다시 여세요.",
+  "applySourceEdits": "원본 편집 적용",
+  "cancelSourceEdit": "원본 편집 취소"
 }

@@ -29,6 +29,8 @@ export function newProject(name: string, input: string): Project {
 
 export function updateText(project: Project, input: string): Project {
   const next = newProject(project.name, input);
+  if (JSON.stringify(next.characters) === JSON.stringify(project.characters))
+    return { ...project, text: next.text, updatedAt: next.updatedAt };
   return {
     ...project,
     id: next.id,

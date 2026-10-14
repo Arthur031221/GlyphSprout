@@ -178,7 +178,7 @@ test("first visit restores the real paper sample with its stated provenance", as
   );
 });
 
-test("renaming retains scan registration and glyph page links", async ({
+test("renaming and equivalent character text retain scan registration and glyph page links", async ({
   page,
 }) => {
   await ready(page);
@@ -198,6 +198,19 @@ test("renaming retains scan registration and glyph page links", async ({
   expect(after.name).toBe("Renamed Handwriting");
   expect(after.pages).toEqual(before.pages);
   expect(after.glyphs.H.pageId).toBe(before.pages[0].id);
+  const dialogs: string[] = [];
+  page.on("dialog", async (dialog) => {
+    dialogs.push(dialog.message());
+    await dialog.accept();
+  });
+  await page.getByRole("button", { name: "Characters" }).click();
+  await page.getByLabel("Text to include").fill(" HELLO  JOB HELLO ");
+  await page.getByRole("button", { name: "Project ready" }).click();
+  const equivalent = await backupProject(page);
+  expect(dialogs).toEqual([]);
+  expect(equivalent.id).toBe(before.id);
+  expect(equivalent.pages).toEqual(before.pages);
+  expect(equivalent.glyphs).toEqual(before.glyphs);
 });
 
 test("saving after fallback retains the previous valid revision", async ({

@@ -2,7 +2,7 @@
 
 # GlyphSprout
 
-Convierte plantillas manuscritas en subconjuntos editables de fuentes para caracteres latinos, han y kana.
+Crea una fuente pequeña para las palabras y los nombres que usa tu proyecto. Imprime una plantilla, escribe cada carácter, revisa los contornos escaneados y exporta una fuente que puedas usar al escribir.
 
 **Seis letras manuscritas. Una fuente de 3.3 kB.**
 
@@ -11,40 +11,35 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.284 bytes, comprobado con
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.1.0
 ```
 
-Necesitas Node.js 22.12 o posterior y Git. Abre `http://127.0.0.1:4173` cuando el comando muestre el mensaje de que está listo.
+Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
 
-| Antes | Después |
+| Punto de partida | Resultado |
 | --- | --- |
-| Seis recortes de letras manuscritas | Una fuente lista para usar al escribir, con contornos y espaciado editables |
+| Tu escritura en una plantilla impresa | Una fuente pequeña con píxeles originales, contornos y espaciado editables |
 
-![Taller real: vista previa manuscrita, ajuste de escala del glifo y descarga TTF](assets/demo.gif)
-
-Lo hice para los caracteres que un proyecto pequeño usa de verdad.
+![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ## Crea tu primera fuente
 
-La primera visita carga Paper Bloom con seis letras manuscritas reales. Puedes editar una letra o descargar la fuente de inmediato. Para crear la tuya:
-
-```text
-1. Crea un proyecto llamado Weekend y elige el texto Hello!.
+1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`.
 2. Imprime la plantilla A4 a tamaño real y escribe un carácter en cada celda.
-3. Añade un escaneo plano en PNG o JPEG y asigna el número de página impreso.
-4. Ajusta las cuatro esquinas, confirma la alineación, convierte y revisa los glifos.
-5. Escribe Hello! en la muestra y descarga TTF o WOFF2.
-```
+3. Añade un escaneo con luz uniforme, confirma el ID de página y alinea las cuatro esquinas.
+4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
+5. Revisa cada glifo. Ajusta la imagen original, el umbral, el recorte, el tamaño, los desplazamientos y el espaciado.
+6. Escribe tu texto en la vista previa y descarga TTF o WOFF2.
 
-El taller incluye vistas del original y del contorno, controles de umbral y filtrado de motas, recorte y ajuste del multiplicador de escala, los desplazamientos y el espaciado. Los desplazamientos y el espaciado se expresan en unidades tipográficas. También puedes dibujar o borrar un glifo. La muestra en directo usa la fuente generada. Deshacer un dibujo y deshacer cambios del proyecto son acciones independientes.
+Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.
 
 ## Un subconjunto pequeño, con límites claros
 
-Elige hasta 512 caracteres BMP compatibles, con 35 celdas por hoja A4 y un máximo de 15 hojas. De forma predeterminada, los glifos latinos usan espaciado proporcional. Han y kana usan un avance de celda fijo. La interfaz ofrece nueve idiomas, temas claro y oscuro y un diseño para pantallas estrechas.
+Elige hasta 512 caracteres BMP compatibles. Cada plantilla A4 tiene 35 celdas y cada proyecto admite hasta 15 páginas. Los glifos latinos usan espaciado proporcional de forma predeterminada. Han y kana usan un avance fijo de celda. La interfaz ofrece nueve idiomas, temas claros y oscuros, y una disposición para pantallas estrechas.
 
-Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, iluminación uniforme y las cuatro marcas de registro visibles. La asignación y confirmación de página son manuales. La herramienta no lee texto manuscrito ni identifica celdas automáticamente.
+Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, luz uniforme y las cuatro marcas de registro visibles. La asignación y confirmación de páginas son manuales. GlyphSprout no lee la escritura ni detecta las celdas automáticamente.
 
-Las exportaciones contienen contornos simples sin hinting. No incluyen kerning, suavizado de curvas, composición de escritura conectada ni cobertura completa de idiomas. El ejemplo de han y kana usa trazos sintéticos originales y está etiquetado como tal.
+Las exportaciones contienen contornos sencillos sin hinting. No incluyen kerning, simplificación de curvas, composición de escritura conectada ni cobertura completa de idiomas. La muestra de han y kana usa trazos sintéticos originales y está identificada como tal.
 
 ## Conserva tu trabajo
 

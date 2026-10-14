@@ -101,8 +101,8 @@ export function App() {
   useEffect(() => {
     if (local.loading || started.current) return;
     started.current = true;
-    if (!projectRef.current && !local.recoveryFailed)
-      void sample("paper", false);
+    if (projectRef.current) setSpecimen(projectRef.current.text);
+    else if (!local.recoveryFailed) void sample("paper", false);
   }, [local.loading]);
 
   function replace(next: Project) {
@@ -153,11 +153,18 @@ export function App() {
     }
   }
 
-  function backup() {
+  async function backup() {
+    if (!project) return;
+    setExportBusy(true);
     try {
-      if (project) downloadProject(project);
+      if (!(await editor.flush())) return;
+      const current = projectRef.current;
+      if (!current || current.id !== project.id) return;
+      downloadProject(current);
     } catch (error) {
       setNotice({ key: errorKey(error), tone: "error" });
+    } finally {
+      setExportBusy(false);
     }
   }
 
@@ -199,21 +206,20 @@ export function App() {
 
   function setup(name: string, text: string) {
     try {
-      if (
-        project &&
-        text !== project.text &&
-        !window.confirm(t.charactersChanged)
-      )
-        return;
       const next = project
         ? {
             ...(text === project.text ? project : updateText(project, text)),
             name: name.trim(),
           }
         : newProject(name, text);
+      const charactersChanged = project && next.id !== project.id;
+      if (charactersChanged && !window.confirm(t.charactersChanged)) return;
       commit(next);
-      if (project && text !== project.text) editor.cancel();
-      scans.cancel();
+      if (charactersChanged) {
+        editor.cancel();
+        scans.cancel();
+      }
+      if (next.text !== project?.text) setSpecimen(next.text);
       setStage("Pages");
       setNotice({ key: "projectReady" });
     } catch (error) {
@@ -527,7 +533,11 @@ export function App() {
               <FileArrowUp />
               {t.import}
             </button>
-            <button type="button" disabled={!project} onClick={backup}>
+            <button
+              type="button"
+              disabled={!project || exportBusy}
+              onClick={() => void backup()}
+            >
               <DownloadSimple />
               {t.export}
             </button>

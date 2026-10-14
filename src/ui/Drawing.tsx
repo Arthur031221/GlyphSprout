@@ -6,51 +6,97 @@ import {
 } from "@phosphor-icons/react";
 import { type PointerEvent, useEffect, useRef, useState } from "react";
 import { BASELINE } from "../core/types";
+import { decodeCell } from "./browser";
 import type { Dictionary } from "./i18n";
 
 export function Drawing({
   t,
   character,
+  source,
   onUse,
   onCancel,
 }: {
   t: Dictionary;
   character: string;
-  onUse: (source: string, pixels: ImageData) => void;
+  source?: string;
+  onUse: (source: string, pixels: ImageData, changed: boolean) => void;
   onCancel: () => void;
 }) {
+  const area = useRef<HTMLElement>(null);
   const canvas = useRef<HTMLCanvasElement>(null);
+  const pointer = useRef<number | null>(null);
   const point = useRef<{ x: number; y: number } | null>(null);
   const history = useRef<ImageData[]>([]);
+  const originalPixels = useRef<ImageData | null>(null);
   const [eraser, setEraser] = useState(false);
   const [strokes, setStrokes] = useState(0);
+  const [pixels, setPixels] = useState<ImageData | null>(null);
+  const [error, setError] = useState(false);
+
   useEffect(() => {
-    const ctx = canvas.current?.getContext("2d");
-    if (ctx) {
-      ctx.fillStyle = "white";
-      ctx.fillRect(0, 0, 384, 384);
-    }
+    area.current?.focus();
   }, []);
+
+  useEffect(() => {
+    let active = true;
+    if (source) {
+      void decodeCell(source).then(
+        (imageData) => {
+          if (!active) return;
+          originalPixels.current = imageData;
+          setPixels(imageData);
+        },
+        () => {
+          if (active) setError(true);
+        },
+      );
+    } else {
+      const blank = new ImageData(384, 384);
+      for (let i = 0; i < blank.data.length; i += 4) {
+        blank.data[i] = 255;
+        blank.data[i + 1] = 255;
+        blank.data[i + 2] = 255;
+        blank.data[i + 3] = 255;
+      }
+      originalPixels.current = null;
+      setPixels(blank);
+    }
+    return () => {
+      active = false;
+    };
+  }, [source]);
+
+  useEffect(() => {
+    if (!pixels || !canvas.current) return;
+    const ctx = canvas.current.getContext("2d");
+    if (ctx) ctx.putImageData(pixels, 0, 0);
+  }, [pixels]);
+
+  const ready = pixels !== null && !error;
   function draw(event: PointerEvent<HTMLCanvasElement>, start = false) {
     const element = event.currentTarget;
     const ctx = element.getContext("2d");
-    if (!ctx || (!start && !point.current)) return;
+    if (!ready || !ctx) return;
+    if (start ? pointer.current !== null : pointer.current !== event.pointerId)
+      return;
     const bounds = element.getBoundingClientRect();
     const next = {
-      x: ((event.clientX - bounds.left) * 384) / bounds.width,
-      y: ((event.clientY - bounds.top) * 384) / bounds.height,
+      x: ((event.clientX - bounds.left) * element.width) / bounds.width,
+      y: ((event.clientY - bounds.top) * element.height) / bounds.height,
     };
     if (start) {
+      pointer.current = event.pointerId;
       history.current = [
         ...history.current.slice(-19),
-        ctx.getImageData(0, 0, 384, 384),
+        ctx.getImageData(0, 0, element.width, element.height),
       ];
       element.setPointerCapture(event.pointerId);
     }
     const previous = point.current ?? next;
     const pressure =
       event.pointerType === "pen" ? Math.max(0.15, event.pressure) : 0.55;
-    const width = eraser ? 28 : 3 + pressure * 10;
+    const pixelScale = element.width / bounds.width;
+    const width = (eraser ? 28 : 3 + pressure * 10) * pixelScale;
     ctx.strokeStyle = eraser ? "white" : "black";
     ctx.fillStyle = ctx.strokeStyle;
     ctx.lineWidth = width;
@@ -69,27 +115,39 @@ export function Drawing({
     setStrokes(history.current.length);
   }
   function finish(event: PointerEvent<HTMLCanvasElement>) {
+    if (pointer.current !== event.pointerId) return;
+    pointer.current = null;
     point.current = null;
     if (event.currentTarget.hasPointerCapture(event.pointerId))
       event.currentTarget.releasePointerCapture(event.pointerId);
   }
   function clear() {
-    const ctx = canvas.current?.getContext("2d");
-    if (!ctx) return;
+    const element = canvas.current;
+    const ctx = element?.getContext("2d");
+    if (!ready || !element || !ctx) return;
     history.current = [
       ...history.current.slice(-19),
-      ctx.getImageData(0, 0, 384, 384),
+      ctx.getImageData(0, 0, element.width, element.height),
     ];
     ctx.fillStyle = "white";
-    ctx.fillRect(0, 0, 384, 384);
+    ctx.fillRect(0, 0, element.width, element.height);
     setStrokes(history.current.length);
   }
   return (
-    <div className="drawing-area">
-      <p>{t.drawHelp}</p>
+    <section
+      ref={area}
+      className="drawing-area"
+      aria-label={`${source ? t.editSource : t.draw} ${character}`}
+      tabIndex={-1}
+    >
+      <p>{source ? t.sourceEditHelp : t.drawHelp}</p>
+      {!ready && (
+        <p role="status">{error ? t.decodeFailed : t.sourceLoading}</p>
+      )}
       <div className="draw-tools">
         <button
           type="button"
+          disabled={!ready}
           aria-pressed={!eraser}
           onClick={() => setEraser(false)}
         >
@@ -98,6 +156,7 @@ export function Drawing({
         </button>
         <button
           type="button"
+          disabled={!ready}
           aria-pressed={eraser}
           onClick={() => setEraser(true)}
         >
@@ -106,7 +165,7 @@ export function Drawing({
         </button>
         <button
           type="button"
-          disabled={!strokes}
+          disabled={!ready || !strokes}
           onClick={() => {
             const previous = history.current.pop();
             const ctx = canvas.current?.getContext("2d");
@@ -117,7 +176,7 @@ export function Drawing({
           <ArrowCounterClockwise />
           {t.undo}
         </button>
-        <button type="button" onClick={clear}>
+        <button type="button" disabled={!ready} onClick={clear}>
           <Trash />
           {t.clearDrawing}
         </button>
@@ -125,16 +184,18 @@ export function Drawing({
       <div className="draw-canvas">
         <canvas
           ref={canvas}
-          width={384}
-          height={384}
-          aria-label={`${t.draw} ${character}`}
+          width={pixels?.width ?? 384}
+          height={pixels?.height ?? 384}
+          aria-label={`${source ? t.editSource : t.draw} ${character}`}
           onPointerDown={(e) => {
+            if (!ready) return;
             e.preventDefault();
             draw(e, true);
           }}
           onPointerMove={draw}
           onPointerUp={finish}
           onPointerCancel={finish}
+          onLostPointerCapture={finish}
         />
         <div className="draw-baseline" style={{ top: `${BASELINE * 100}%` }} />
       </div>
@@ -142,22 +203,34 @@ export function Drawing({
         <button
           className="primary"
           type="button"
+          disabled={!ready}
           onClick={() => {
             const element = canvas.current;
             const ctx = element?.getContext("2d");
-            if (element && ctx)
-              onUse(
-                element.toDataURL("image/png"),
-                ctx.getImageData(0, 0, 384, 384),
+            if (!ready || !element || !ctx) return;
+            const result = ctx.getImageData(
+              0,
+              0,
+              element.width,
+              element.height,
+            );
+            const original = originalPixels.current;
+            const changed =
+              !original ||
+              original.width !== result.width ||
+              original.height !== result.height ||
+              original.data.some(
+                (value, index) => value !== result.data[index],
               );
+            onUse(element.toDataURL("image/png"), result, changed);
           }}
         >
-          {t.useDrawing}
+          {source ? t.applySourceEdits : t.useDrawing}
         </button>
         <button type="button" onClick={onCancel}>
-          {t.cancelDrawing}
+          {source ? t.cancelSourceEdit : t.cancelDrawing}
         </button>
       </div>
-    </div>
+    </section>
   );
 }

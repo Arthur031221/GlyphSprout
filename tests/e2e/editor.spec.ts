@@ -102,17 +102,20 @@ for (const order of [
         if (!release) throw new Error("missing glyph decode");
         release();
       }, index);
-      await expect
-        .poll(
-          async () =>
-            (await backup(page)).glyphs[characters[index]].settings.threshold,
-        )
-        .toBe(index === 0 ? 150 : 155);
+      await page
+        .locator(".glyph-tile")
+        .nth(1 - index)
+        .click();
+      await page.locator(".glyph-tile").nth(index).click();
+      await expect(
+        page.getByLabel("Ink threshold", { exact: true }),
+      ).toHaveValue(index === 0 ? "150" : "155");
       if (position === 0) {
         const waiting = characters[order[1]];
-        expect((await backup(page)).glyphs[waiting]).toEqual(
-          before.glyphs[waiting],
-        );
+        await page.locator(".glyph-tile").nth(order[1]).click();
+        await expect(
+          page.getByLabel("Ink threshold", { exact: true }),
+        ).toHaveValue(String(before.glyphs[waiting].settings.threshold));
       }
     }
     const after = await backup(page);
@@ -141,6 +144,10 @@ for (const action of ["drawing", "clearing", "empty drawing"] as const) {
         .getByRole("button", { name: "Draw a glyph", exact: true })
         .click();
       if (action === "drawing") {
+        await expect(
+          page.getByRole("button", { name: "Use drawing", exact: true }),
+        ).toBeEnabled();
+        await page.locator("canvas").scrollIntoViewIfNeeded();
         const box = await page.locator("canvas").boundingBox();
         if (!box) throw new Error("missing drawing canvas");
         await page.mouse.move(box.x + 70, box.y + 220);
@@ -213,6 +220,77 @@ test("changing review state discards a canceled crop from the settings form", as
   expect(after.glyphs.H.settings.crop.right).toBe(1);
   expect(after.glyphs.H.settings.scale).toBe(1.2);
   expect(after.glyphs.H.reviewed).toBe(false);
+});
+
+test("project backup waits for the crop started by its own click", async ({
+  page,
+}) => {
+  await ready(page);
+  await holdDecode(page);
+  await page.getByLabel("Crop edges Right", { exact: true }).fill("0.8");
+  const event = page.waitForEvent("download");
+  await page
+    .getByRole("button", { name: "Download project", exact: true })
+    .click();
+  try {
+    await expect(
+      page.getByRole("button", { name: "New project", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", { name: "Download project", exact: true }),
+    ).toBeDisabled();
+  } finally {
+    await releaseDecode(page);
+  }
+  const path = await (await event).path();
+  if (!path) throw new Error("missing project download");
+  const downloaded: Project = JSON.parse(await readFile(path, "utf8"));
+  expect(downloaded.glyphs.H.settings.crop.right).toBe(0.8);
+  expect(downloaded.glyphs.H.reviewed).toBe(false);
+  await expect(
+    page.getByRole("button", { name: "New project", exact: true }),
+  ).toBeEnabled();
+});
+
+test("restoring a multilingual project previews its included text", async ({
+  page,
+}) => {
+  await ready(page);
+  page.on("dialog", (dialog) => dialog.accept());
+  await page
+    .getByRole("button", { name: "Try Han and kana strokes", exact: true })
+    .click();
+  await expect(page.locator(".project-label strong")).toHaveText(
+    "Sprout Script",
+  );
+  await expect(page.locator(".project-label [role=status]")).toHaveText(
+    "Saved",
+  );
+  const before = await page.locator(".hero-tools textarea").inputValue();
+  await page.reload();
+  await expect(
+    page.getByText("Font preview ready", { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator(".hero-tools textarea")).toHaveValue(before);
+  await expect(page.locator(".missing-preview")).toHaveCount(0);
+});
+
+test("applying a new character list updates the specimen and retains matching glyphs", async ({
+  page,
+}) => {
+  await ready(page);
+  const before = await backup(page);
+  page.on("dialog", (dialog) => dialog.accept());
+  await page.getByRole("button", { name: "Characters" }).click();
+  await page.getByLabel("Text to include").fill("BE HELLO");
+  await page
+    .getByRole("button", { name: "Project ready", exact: true })
+    .click();
+  await expect(page.locator(".hero-tools textarea")).toHaveValue("BE HELLO");
+  const after = await backup(page);
+  expect(after.characters).toEqual(["B", "E", "H", "L", "O"]);
+  for (const character of after.characters)
+    expect(after.glyphs[character]).toEqual(before.glyphs[character]);
 });
 
 for (const fails of [false, true]) {

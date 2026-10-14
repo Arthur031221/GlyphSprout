@@ -184,5 +184,11 @@
   "resetStorageConfirm": "要移除此浏览器已保存的版本与图片吗？如需保留，请先下载已保存数据。",
   "secureContextRequired": "请通过 HTTPS 或 localhost 等本机地址打开 GlyphSprout。普通 HTTP 局域网地址无法生成字体或保存项目。",
   "openLiveWorkshop": "打开在线工作坊",
-  "applyingEdits": "正在应用字形更改..."
+  "applyingEdits": "正在应用字形更改...",
+  "editSource": "编辑源图",
+  "sourceEditHelp": "修整源图。已有笔画会保持原始像素尺寸。",
+  "sourceLoading": "正在加载源图...",
+  "sourceChanged": "源图编辑器打开期间此字形已更改。请重新打开后再应用修改。",
+  "applySourceEdits": "应用源图修改",
+  "cancelSourceEdit": "取消源图编辑"
 }

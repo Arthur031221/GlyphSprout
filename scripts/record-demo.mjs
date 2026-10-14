@@ -1,10 +1,12 @@
 import { execFileSync } from "node:child_process";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
-import { chromium } from "@playwright/test";
+import { chromium, expect } from "@playwright/test";
 import { workshopServer } from "../bin/server.mjs";
 
-await mkdir("artifacts/demo", { recursive: true });
+const recordingDir = resolve("artifacts/demo");
+const outputDir = recordingDir;
+await mkdir(recordingDir, { recursive: true });
 await mkdir("assets", { recursive: true });
 const server = await workshopServer(resolve("dist"));
 await new Promise((done) => server.listen(0, "127.0.0.1", done));
@@ -14,7 +16,7 @@ try {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 810 },
     deviceScaleFactor: 1,
-    recordVideo: { dir: "artifacts/demo", size: { width: 1440, height: 810 } },
+    recordVideo: { dir: recordingDir, size: { width: 1440, height: 810 } },
   });
   const started = Date.now();
   const page = await context.newPage();
@@ -22,51 +24,57 @@ try {
   await page.goto(`http://127.0.0.1:${server.address().port}`);
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   const trim = (Date.now() - started) / 1000 + 0.3;
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(1600);
   await page.locator(".glyph-tile").nth(5).click();
-  await page.waitForTimeout(500);
-  await page.getByRole("button", { name: "Draw a glyph", exact: true }).click();
-  await page.waitForTimeout(700);
-  await page.getByRole("button", { name: "Use drawing", exact: true }).click();
-  await page
-    .getByRole("alert")
-    .filter({ hasText: "This glyph has no ink." })
-    .waitFor();
-  await page.waitForTimeout(1300);
+  await page.waitForTimeout(800);
+  await page.getByRole("button", { name: "Edit source", exact: true }).click();
+  await page.waitForTimeout(1200);
   const canvas = page.locator(".draw-canvas canvas");
+  await expect(
+    page.getByRole("button", { name: "Apply source edits", exact: true }),
+  ).toBeEnabled();
+  await canvas.scrollIntoViewIfNeeded();
   const bounds = await canvas.boundingBox();
-  if (!bounds) throw new Error("Drawing canvas is not visible.");
+  if (!bounds) throw new Error("Source editing canvas is not visible.");
+  await page.getByRole("button", { name: "Eraser", exact: true }).click();
   await page.mouse.move(
-    bounds.x + bounds.width * 0.3,
-    bounds.y + bounds.height * 0.68,
+    bounds.x + bounds.width * 0.32,
+    bounds.y + bounds.height * 0.5,
   );
   await page.mouse.down();
   await page.mouse.move(
-    bounds.x + bounds.width * 0.48,
-    bounds.y + bounds.height * 0.28,
-    { steps: 12 },
-  );
-  await page.mouse.move(
-    bounds.x + bounds.width * 0.68,
-    bounds.y + bounds.height * 0.68,
+    bounds.x + bounds.width * 0.67,
+    bounds.y + bounds.height * 0.5,
     { steps: 12 },
   );
   await page.mouse.up();
-  await page.waitForTimeout(500);
-  await page.getByRole("button", { name: "Use drawing", exact: true }).click();
-  await page.getByText("Font preview ready", { exact: true }).waitFor();
+  await page.waitForTimeout(1000);
+  await page.getByRole("button", { name: "Pen", exact: true }).click();
+  await page.mouse.move(
+    bounds.x + bounds.width * 0.45,
+    bounds.y + bounds.height * 0.38,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    bounds.x + bounds.width * 0.52,
+    bounds.y + bounds.height * 0.62,
+    { steps: 12 },
+  );
+  await page.mouse.up();
   await page.waitForTimeout(1400);
-  const scale = page.getByLabel("Size", { exact: true });
-  await scale.fill("1.12");
-  await scale.press("Tab");
+  await page
+    .getByRole("button", { name: "Apply source edits", exact: true })
+    .click();
   await page.getByText("Font preview ready", { exact: true }).waitFor();
-  await page.waitForTimeout(2200);
+  await page.waitForTimeout(2600);
   const event = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download TTF", exact: true }).click();
-  await (await event).saveAs("artifacts/demo/PaperBloom-edited.ttf");
-  await page.waitForTimeout(1800);
+  await (await event).saveAs(
+    resolve(outputDir, "PaperBloom-source-edited.ttf"),
+  );
+  await page.waitForTimeout(2200);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
-  await page.waitForTimeout(4500);
+  await page.waitForTimeout(3500);
   const video = page.video();
   await context.close();
   execFileSync("ffmpeg", [
@@ -77,13 +85,15 @@ try {
     "-i",
     await video.path(),
     "-filter_complex",
-    "[0:v]fps=12,scale=1200:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer:bayer_scale=5",
+    "[0:v]fps=9,scale=1100:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=96[p];[b][p]paletteuse=dither=bayer:bayer_scale=4",
     "-loop",
     "0",
     "-y",
     "assets/demo.gif",
   ]);
-  console.log("Recorded the real workshop, a size edit and TTF download.");
+  console.log(
+    "Recorded source erasing and pen editing, the live preview, and a real TTF download.",
+  );
 } finally {
   await browser?.close();
   server.closeAllConnections();
