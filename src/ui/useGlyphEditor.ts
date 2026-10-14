@@ -129,6 +129,7 @@ export function useGlyphEditor(
         values.threshold !== glyph.settings.threshold ||
         values.minArea !== glyph.settings.minArea ||
         values.smoothing !== glyph.settings.smoothing ||
+        values.weight !== glyph.settings.weight ||
         JSON.stringify(values.crop) !== JSON.stringify(glyph.settings.crop);
       let result: ReturnType<typeof trace> | undefined;
       if (inkChanged) {
@@ -285,13 +286,14 @@ export function useGlyphEditor(
     const snapshot = projectRef.current;
     const source = snapshot?.glyphs[character]?.settings;
     if (!snapshot || !source) return;
-    const { threshold, minArea, smoothing } = source;
+    const { threshold, minArea, smoothing, weight } = source;
     const targets = Object.values(snapshot.glyphs).filter(
       (glyph) =>
         glyph.character !== character &&
         (glyph.settings.threshold !== threshold ||
           glyph.settings.minArea !== minArea ||
-          glyph.settings.smoothing !== smoothing),
+          glyph.settings.smoothing !== smoothing ||
+          glyph.settings.weight !== weight),
     );
     if (!targets.length) return;
     const glyphs = { ...snapshot.glyphs };
@@ -300,7 +302,13 @@ export function useGlyphEditor(
     setBusy(true);
     try {
       for (const glyph of targets) {
-        const values = { ...glyph.settings, threshold, minArea, smoothing };
+        const values = {
+          ...glyph.settings,
+          threshold,
+          minArea,
+          smoothing,
+          weight,
+        };
         try {
           const pixels = await decodeCell(glyph.source);
           const result = trace(

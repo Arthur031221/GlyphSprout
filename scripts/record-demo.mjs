@@ -126,9 +126,13 @@ try {
   await smoothing.fill("2");
   await smoothing.press("Tab");
   await page.getByText("Font preview ready", { exact: true }).waitFor();
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  await weight.fill("1");
+  await weight.press("Tab");
+  await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.waitForTimeout(1400);
   const matchTracing = page.getByRole("button", {
-    name: "Use this threshold, speck filter and smoothing for all glyphs",
+    name: "Use this threshold, speck filter, weight and smoothing for all glyphs",
   });
   await matchTracing.scrollIntoViewIfNeeded();
   await page.waitForTimeout(900);

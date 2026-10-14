@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.14.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -28,7 +28,7 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 2. Imprimez le modèle à taille réelle sur du papier A4 ou US Letter et écrivez un caractère dans chaque case.
 3. Ajoutez un scan éclairé uniformément et confirmez son identifiant de page. GlyphSprout cherche les quatre croix de repère et y place les coins. Vérifiez chaque coin et corrigez ceux qui sont décalés.
 4. Cliquez sur **Convertir les scans** et attendez la fin de la conversion.
-5. Vérifiez chaque glyphe. Réglez la source, le seuil, le lissage du contour, le recadrage, la taille, les décalages et l'espacement.
+5. Vérifiez chaque glyphe. Réglez la source, le seuil, l'épaisseur du trait, le lissage du contour, le recadrage, la taille, les décalages et l'espacement. Appuyez sur Ctrl+Z ou Cmd+Z pour annuler un changement, et ajoutez Maj pour le rétablir.
 6. Saisissez votre texte dans l'aperçu et téléchargez le TTF ou le WOFF2. Quand tous les glyphes sont prêts, **Télécharger la police (TTF)** dans le panneau d'aperçu l'enregistre sans descendre jusqu'à l'atelier.
 
 Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.

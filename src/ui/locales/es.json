@@ -53,6 +53,7 @@
   "threshold": "Umbral de tinta",
   "minArea": "Área mínima de motas",
   "smoothing": "Suavizado del contorno (0 a 3)",
+  "weight": "Grosor del trazo (-3 más fino a 3 más grueso)",
   "removed": "motas eliminadas",
   "scale": "Tamaño",
   "offsetX": "Desplazamiento horizontal",
@@ -257,7 +258,7 @@
   "cssCopied": "CSS de fuente web copiado. Guárdalo junto a los archivos de fuente descargados.",
   "cssCopyFailed": "El navegador bloqueó la copia. Permite el acceso al portapapeles e inténtalo de nuevo.",
   "previewZoom": "Zoom de la vista previa",
-  "matchTracing": "Usar este umbral, filtro de motas y suavizado en todos los glifos",
+  "matchTracing": "Usar este umbral, filtro de motas, grosor y suavizado en todos los glifos",
   "tracingApplied": "Trazado copiado. Glifos cambiados:",
   "tracingSkipped": "Algunos glifos no se pudieron trazar con estos valores y se dejaron como estaban:"
 }

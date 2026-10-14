@@ -6,6 +6,7 @@ export interface TraceOptions {
   threshold: number;
   minArea: number;
   smoothing?: number;
+  weight?: number;
   crop?: Crop;
 }
 
@@ -77,6 +78,43 @@ function removeSpecks(
     } else components++;
   }
   return { components, removedPixels };
+}
+
+/**
+ * Grows (positive steps) or shrinks (negative steps) the ink by whole source
+ * pixels. Steps alternate between a plus and a square neighbourhood so the
+ * change is close to a round pen rather than a diamond.
+ */
+export function changeWeight(
+  mask: Uint8Array,
+  width: number,
+  height: number,
+  steps: number,
+): Uint8Array {
+  const grow = steps > 0;
+  let current = mask;
+  for (let step = 0; step < Math.abs(steps); step++) {
+    const square = step % 2 === 1;
+    const next = new Uint8Array(current.length);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let hit = grow ? 0 : 1;
+        for (let dy = -1; dy <= 1; dy++) {
+          for (let dx = -1; dx <= 1; dx++) {
+            if (!square && dx !== 0 && dy !== 0) continue;
+            const nx = x + dx;
+            const ny = y + dy;
+            const inside = nx >= 0 && nx < width && ny >= 0 && ny < height;
+            const value = inside ? current[ny * width + nx] : 0;
+            if (grow ? value : !value) hit = grow ? 1 : 0;
+          }
+        }
+        next[y * width + x] = hit;
+      }
+    }
+    current = next;
+  }
+  return current;
 }
 
 interface Edge {
@@ -187,15 +225,21 @@ export function trace(
   }
   const crop = options.crop ?? { left: 0, top: 0, right: 1, bottom: 1 };
   const mask = new Uint8Array(gray.length);
+  for (let i = 0; i < gray.length; i++)
+    mask[i] = gray[i] < options.threshold ? 1 : 0;
+  if (options.weight)
+    mask.set(changeWeight(mask, width, height, options.weight));
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
       if (
-        x / width >= crop.left &&
-        x / width < crop.right &&
-        y / height >= crop.top &&
-        y / height < crop.bottom
+        !(
+          x / width >= crop.left &&
+          x / width < crop.right &&
+          y / height >= crop.top &&
+          y / height < crop.bottom
+        )
       ) {
-        mask[y * width + x] = gray[y * width + x] < options.threshold ? 1 : 0;
+        mask[y * width + x] = 0;
       }
     }
   }

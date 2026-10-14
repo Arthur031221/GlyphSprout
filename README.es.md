@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.14.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -28,7 +28,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 2. Imprime la plantilla a tamaño real en papel A4 o US Letter y escribe un carácter en cada celda.
 3. Añade un escaneo con luz uniforme y confirma el ID de página. GlyphSprout busca las cuatro cruces de registro y coloca las esquinas sobre ellas. Revisa cada esquina y corrige las que estén desviadas.
 4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
-5. Revisa cada glifo. Ajusta la imagen original, el umbral, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado.
+5. Revisa cada glifo. Ajusta la imagen original, el umbral, el grosor del trazo, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado. Pulsa Ctrl+Z o Cmd+Z para deshacer un cambio y añade Shift para rehacerlo.
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2. Cuando todos los glifos están listos, **Descargar fuente (TTF)** en el panel de vista previa guarda la fuente sin bajar hasta el taller.
 
 Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.

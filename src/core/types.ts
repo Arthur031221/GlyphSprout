@@ -15,6 +15,7 @@ export interface GlyphSettings {
   threshold: number;
   minArea: number;
   smoothing: number;
+  weight: number;
   scale: number;
   offsetX: number;
   offsetY: number;
@@ -95,6 +96,7 @@ export const DEFAULT_SETTINGS: GlyphSettings = {
   threshold: 165,
   minArea: 1,
   smoothing: 2,
+  weight: 0,
   scale: 1,
   offsetX: 0,
   offsetY: 0,

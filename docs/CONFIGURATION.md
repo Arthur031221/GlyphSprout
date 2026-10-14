@@ -22,7 +22,7 @@ Use flat paper, dark ink, and even light. Keep all four registration marks visib
 
 ## Glyph controls
 
-Each glyph has its own threshold, minimum speck area, outline smoothing from 0 to 3, crop, scale, horizontal and vertical offsets, side bearing where applicable, and advance width. Crop values run from 0 to 1. Size is a multiplier, while offsets and spacing use font units. The **0 automatic** advance width uses the workshop's default spacing calculation.
+Each glyph has its own threshold, minimum speck area, stroke weight from -3 to 3 pixels, outline smoothing from 0 to 3, crop, scale, horizontal and vertical offsets, side bearing where applicable, and advance width. Crop values run from 0 to 1. Size is a multiplier, while offsets and spacing use font units. The **0 automatic** advance width uses the workshop's default spacing calculation.
 
 ## Appearance and language
 

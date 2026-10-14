@@ -128,6 +128,47 @@ export function App() {
     return true;
   }
 
+  function undoProject() {
+    if (!changeDrawing(null)) return;
+    editor.cancel();
+    local.undo();
+  }
+
+  function redoProject() {
+    if (!changeDrawing(null)) return;
+    editor.cancel();
+    local.redo();
+  }
+
+  const shortcut = useRef<(event: KeyboardEvent) => void>(() => {});
+  shortcut.current = (event) => {
+    if (
+      event.defaultPrevented ||
+      event.altKey ||
+      !(event.ctrlKey || event.metaKey)
+    )
+      return;
+    const key = event.key.toLowerCase();
+    const redo = key === "y" || (key === "z" && event.shiftKey);
+    if (key !== "z" && !redo) return;
+    const target = event.target;
+    if (
+      target instanceof HTMLElement &&
+      (target.isContentEditable || target.closest("input, textarea, select"))
+    )
+      return;
+    if (drawing || locked || !project) return;
+    if (redo ? !local.canRedo : !local.canUndo) return;
+    event.preventDefault();
+    if (redo) redoProject();
+    else undoProject();
+  };
+  useEffect(() => {
+    const listener = (event: KeyboardEvent) => shortcut.current(event);
+    window.addEventListener("keydown", listener);
+    return () => window.removeEventListener("keydown", listener);
+  }, []);
+
   useEffect(() => {
     document.documentElement.lang = locale;
     remember("glyphsprout.locale", locale);
@@ -638,11 +679,8 @@ export function App() {
             <button
               type="button"
               disabled={!local.canUndo || locked}
-              onClick={() => {
-                if (!changeDrawing(null)) return;
-                editor.cancel();
-                local.undo();
-              }}
+              onClick={undoProject}
+              aria-keyshortcuts="Control+Z Meta+Z"
               aria-label={t.undo}
             >
               <ArrowCounterClockwise />
@@ -651,11 +689,8 @@ export function App() {
             <button
               type="button"
               disabled={!local.canRedo || locked}
-              onClick={() => {
-                if (!changeDrawing(null)) return;
-                editor.cancel();
-                local.redo();
-              }}
+              onClick={redoProject}
+              aria-keyshortcuts="Control+Shift+Z Control+Y Meta+Shift+Z"
               aria-label={t.redo}
             >
               <ArrowClockwise />

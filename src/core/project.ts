@@ -196,6 +196,8 @@ export function validateSettings(value: unknown): GlyphSettings {
     minArea: number(s.minArea, 1, 64),
     // Projects saved before smoothing existed keep their pixel outlines.
     smoothing: s.smoothing === undefined ? 0 : integer(s.smoothing, 0, 3),
+    // Projects saved before stroke weight existed keep their traced width.
+    weight: s.weight === undefined ? 0 : integer(s.weight, -3, 3),
     scale: number(s.scale, 0.25, 2),
     offsetX: number(s.offsetX, -500, 500),
     offsetY: number(s.offsetY, -500, 500),

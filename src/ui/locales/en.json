@@ -53,6 +53,7 @@
   "threshold": "Ink threshold",
   "minArea": "Minimum speck area",
   "smoothing": "Outline smoothing (0 to 3)",
+  "weight": "Stroke weight (-3 thinner to 3 bolder)",
   "removed": "specks removed",
   "scale": "Size",
   "offsetX": "Horizontal offset",
@@ -257,7 +258,7 @@
   "cssCopied": "Web font CSS copied. Save it next to the downloaded font files.",
   "cssCopyFailed": "The browser blocked copying. Allow clipboard access and try again.",
   "previewZoom": "Preview zoom",
-  "matchTracing": "Use this threshold, speck filter and smoothing for all glyphs",
+  "matchTracing": "Use this threshold, speck filter, weight and smoothing for all glyphs",
   "tracingApplied": "Tracing copied. Glyphs changed:",
   "tracingSkipped": "Some glyphs could not be traced with these values and were left as they were:"
 }

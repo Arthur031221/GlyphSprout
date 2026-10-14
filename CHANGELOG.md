@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.15.0
+
+Each glyph has a new **Stroke weight** setting from -3 to 3. It grows or shrinks the ink by whole source pixels before the outline is traced, so a font made with a thin pen can be made bolder and a heavy marker font can be lightened without redrawing. 0 keeps the traced width, and saved projects without the setting open at 0. The button that copies tracing values to every glyph now copies the weight too.
+
+Ctrl+Z (Cmd+Z on a Mac) undoes the last project change and Ctrl+Shift+Z or Ctrl+Y redoes it. The shortcut stays out of the way while you type in a field or draw, so the browser's own undo still works there.
+
+Unit tests cover growing, shrinking, the crop edge and old project files. Browser tests cover the setting, its range check, copying it to all glyphs and the shortcuts. The new label and button text are translated in all nine interface languages.
+
 ## 1.14.0
 
 The live preview panel at the top of the page now has a **Download font (TTF)** button. Before this, the font download sat in the Font file panel at the bottom of the Workshop, so someone who opened the sample or finished a project had to scroll past the glyph editor to find the one thing they came for. The button saves the same TTF as the Font file panel. While any glyph is still missing, or a drawing is unsaved, it stays disabled and says why. Partial subsets and WOFF2 files remain in the Font file panel.

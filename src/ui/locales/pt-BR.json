@@ -53,6 +53,7 @@
   "threshold": "Limiar da tinta",
   "minArea": "Área mínima de manchas",
   "smoothing": "Suavização do contorno (0 a 3)",
+  "weight": "Espessura do traço (-3 mais fino a 3 mais grosso)",
   "removed": "manchas removidas",
   "scale": "Tamanho",
   "offsetX": "Deslocamento horizontal",
@@ -257,7 +258,7 @@
   "cssCopied": "CSS de fonte web copiado. Salve-o ao lado dos arquivos de fonte baixados.",
   "cssCopyFailed": "O navegador bloqueou a cópia. Permita o acesso à área de transferência e tente de novo.",
   "previewZoom": "Zoom da pré-visualização",
-  "matchTracing": "Usar este limiar, filtro de manchas e suavização em todos os glifos",
+  "matchTracing": "Usar este limiar, filtro de manchas, espessura e suavização em todos os glifos",
   "tracingApplied": "Traçado copiado. Glifos alterados:",
   "tracingSkipped": "Alguns glifos não puderam ser traçados com esses valores e foram mantidos como estavam:"
 }

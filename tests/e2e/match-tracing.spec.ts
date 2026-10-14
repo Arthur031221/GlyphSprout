@@ -39,12 +39,18 @@ test("one glyph's tracing values apply to every glyph and undo together", async 
   await expect
     .poll(async () => (await backup(page)).glyphs.H.settings.smoothing)
     .toBe(0);
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  await weight.fill("1");
+  await weight.press("Tab");
+  await expect
+    .poll(async () => (await backup(page)).glyphs.H.settings.weight)
+    .toBe(1);
   const traced = await backup(page);
   expect(traced.glyphs.E.settings.threshold).toBe(original[1]);
 
   await page
     .getByRole("button", {
-      name: "Use this threshold, speck filter and smoothing for all glyphs",
+      name: "Use this threshold, speck filter, weight and smoothing for all glyphs",
     })
     .click();
   await expect(page.getByText("Glyphs changed: 5")).toBeVisible();
@@ -53,6 +59,7 @@ test("one glyph's tracing values apply to every glyph and undo together", async 
   for (const glyph of Object.values(matched.glyphs)) {
     expect(glyph.settings.threshold).toBe(120);
     expect(glyph.settings.smoothing).toBe(0);
+    expect(glyph.settings.weight).toBe(1);
     expect(glyph.contours.length).toBeGreaterThan(0);
     expect(glyph.reviewed).toBe(false);
   }

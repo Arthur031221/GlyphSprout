@@ -53,6 +53,7 @@
   "threshold": "Tintenschwelle",
   "minArea": "Mindestfläche für Störungen",
   "smoothing": "Konturglättung (0 bis 3)",
+  "weight": "Strichstärke (-3 dünner bis 3 kräftiger)",
   "removed": "Störungen entfernt",
   "scale": "Größe",
   "offsetX": "Horizontaler Versatz",
@@ -257,7 +258,7 @@
   "cssCopied": "Web-Font-CSS kopiert. Lege es neben die heruntergeladenen Schriftdateien.",
   "cssCopyFailed": "Der Browser hat das Kopieren blockiert. Erlaube den Zugriff auf die Zwischenablage und versuche es erneut.",
   "previewZoom": "Vorschau-Zoom",
-  "matchTracing": "Diesen Schwellenwert, Fleckenfilter und diese Glättung für alle Glyphen verwenden",
+  "matchTracing": "Diesen Schwellenwert, Fleckenfilter, diese Strichstärke und Glättung für alle Glyphen verwenden",
   "tracingApplied": "Nachzeichnung kopiert. Geänderte Glyphen:",
   "tracingSkipped": "Einige Glyphen ließen sich mit diesen Werten nicht nachzeichnen und blieben unverändert:"
 }

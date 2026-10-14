@@ -53,6 +53,7 @@
   "threshold": "Seuil d'encre",
   "minArea": "Surface minimale des taches",
   "smoothing": "Lissage du contour (0 à 3)",
+  "weight": "Épaisseur du trait (-3 plus fin à 3 plus épais)",
   "removed": "taches supprimées",
   "scale": "Taille",
   "offsetX": "Décalage horizontal",
@@ -257,7 +258,7 @@
   "cssCopied": "CSS de police web copié. Placez-le à côté des fichiers de police téléchargés.",
   "cssCopyFailed": "Le navigateur a bloqué la copie. Autorisez l'accès au presse-papiers puis réessayez.",
   "previewZoom": "Zoom de l'aperçu",
-  "matchTracing": "Appliquer ce seuil, ce filtre de taches et ce lissage à tous les glyphes",
+  "matchTracing": "Appliquer ce seuil, ce filtre de taches, cette épaisseur et ce lissage à tous les glyphes",
   "tracingApplied": "Tracé copié. Glyphes modifiés :",
   "tracingSkipped": "Certains glyphes n'ont pas pu être tracés avec ces valeurs et sont restés inchangés :"
 }
