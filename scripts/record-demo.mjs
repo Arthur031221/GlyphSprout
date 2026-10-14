@@ -14,6 +14,7 @@ let browser;
 try {
   browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
+    permissions: ["clipboard-read", "clipboard-write"],
     viewport: { width: 1440, height: 810 },
     deviceScaleFactor: 1,
     recordVideo: { dir: recordingDir, size: { width: 1440, height: 810 } },
@@ -31,6 +32,12 @@ try {
   ).toBeVisible();
   await page.getByRole("textbox", { name: "Font name" }).fill("Weekend");
   await page.waitForTimeout(1200);
+  const characters = page.getByRole("textbox", { name: "Text to include" });
+  const committedText = await characters.inputValue();
+  await page.getByRole("button", { name: "Digits", exact: true }).click();
+  await page.waitForTimeout(1600);
+  await characters.fill(committedText);
+  await page.waitForTimeout(800);
   await page.getByRole("button", { name: "Workshop" }).click();
   await page.getByRole("button", { name: "Characters" }).click();
   await page.getByRole("button", { name: "Project ready" }).click();
@@ -152,12 +159,19 @@ try {
   await page.getByRole("button", { name: "Remove scan: paper.png" }).click();
   await page.getByRole("button", { name: "Workshop" }).click();
   await page.waitForTimeout(1800);
+  await page.getByRole("button", { name: "Copy web font CSS" }).click();
+  await page.waitForTimeout(1800);
   const event = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download TTF", exact: true }).click();
   await (await event).saveAs(resolve(outputDir, "Weekend-source-edited.ttf"));
   await page.waitForTimeout(2200);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
-  await page.waitForTimeout(3500);
+  await page.waitForTimeout(1200);
+  const zoom = page.getByLabel("Preview zoom", { exact: true });
+  await zoom.fill("128");
+  await page.waitForTimeout(1500);
+  await zoom.fill("72");
+  await page.waitForTimeout(2200);
   const video = page.video();
   await context.close();
   execFileSync("ffmpeg", [
@@ -175,7 +189,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded font setup, source editing, scan alignment with corrected preview, and a TTF download.",
+    "Recorded character presets, source editing, scan alignment, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

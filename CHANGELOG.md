@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.5.0
+
+The Characters stage can add whole character sets in one click: uppercase letters, lowercase letters, digits, punctuation, hiragana and katakana. Only the missing characters are appended, and the result stays a draft until **Project ready**.
+
+**Copy web font CSS** copies an `@font-face` rule for the WOFF2 and TTF files you download. **Preview zoom** resizes the live specimen.
+
+The page now has a description, an icon, social preview tags and a web app manifest. New strings are translated in all nine interface languages. Updated the demo recording.
+
 ## 1.4.0
 
 The glyph list shows review progress, and **Next to review** jumps to the next unchecked glyph. Arrow keys move between glyph tiles.

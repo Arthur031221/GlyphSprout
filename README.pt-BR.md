@@ -11,7 +11,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fo
 [Abrir a oficina online](https://Arthur031221.github.io/GlyphSprout/) | [Guia do usuário](docs/USAGE.md) | [![Licença MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.4.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -24,7 +24,7 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 
 ## Crie sua primeira fonte
 
-1. Crie um projeto e escolha os caracteres necessários, como `Hello!`.
+1. Crie um projeto e escolha os caracteres necessários, como `Hello!`. Você pode adicionar conjuntos inteiros, como maiúsculas, dígitos, pontuação, hiragana ou katakana, com um clique.
 2. Imprima o modelo A4 no tamanho real e escreva um caractere em cada célula.
 3. Adicione uma digitalização com iluminação uniforme, confirme o ID da página e alinhe os quatro cantos.
 4. Clique em **Converter digitalizações** e aguarde a conversão terminar.
@@ -37,7 +37,7 @@ Amplie para corrigir detalhes. Os tamanhos da caneta e da borracha usam pixels d
 
 Marcar como revisado espera o fim dos ajustes de tinta e recorte. Se uma célula tiver pontos ou contornos demais para exportar, a conversão mantém a imagem e indica o caractere afetado. As outras células são convertidas. Ajuste o filtro de manchas, o recorte ou a imagem e revise o glifo corrigido.
 
-O andamento da revisão aparece ao lado da lista de glifos. **Próximo a revisar** vai para o próximo glifo ainda não conferido, e as setas do teclado se movem entre os glifos. O painel de espaçamento define o espaço entre palavras de toda a fonte e pode copiar o espaçamento lateral latino de um glifo para todas as letras latinas. **Baixar imagem de amostra** salva o texto de pré-visualização como PNG.
+O andamento da revisão aparece ao lado da lista de glifos. **Próximo a revisar** vai para o próximo glifo ainda não conferido, e as setas do teclado se movem entre os glifos. O painel de espaçamento define o espaço entre palavras de toda a fonte e pode copiar o espaçamento lateral latino de um glifo para todas as letras latinas. **Baixar imagem de amostra** salva o texto de pré-visualização como PNG. **Copiar CSS de fonte web** coloca uma regra `@font-face` na área de transferência para usar os arquivos baixados em um site, e **Zoom da pré-visualização** muda o tamanho da amostra ao vivo.
 
 O nome da fonte e o texto de caracteres em Characters continuam como rascunhos ao mudar de etapa. Selecione **Project ready** para aplicá-los. Até lá, backups e fontes baixadas mantêm os valores aplicados. Alterações não aplicadas são perdidas ao recarregar a página.
 

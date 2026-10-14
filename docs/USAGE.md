@@ -17,6 +17,8 @@ Staged scans belong to the character template used when they were added. If Undo
 
 The corrected page preview updates as you adjust the four corners. Large scans are decoded once in a browser worker, so dragging does not repeatedly read the image on the main thread. Corner handles accept touches within 24 pixels of their centers and also support the arrow keys and numeric fields. An updating or error message appears below the preview.
 
+The Characters stage has quick-add buttons for uppercase letters, lowercase letters, digits, punctuation, hiragana and katakana. Each button appends only the characters your text is missing, so pressing it twice changes nothing, and it is disabled once the set is complete. The additions stay a draft until you choose **Project ready**. Adding every set at once stays within the 512 glyph limit.
+
 ## Edit and review glyphs
 
 The source editor opens the current native pixel image for the selected glyph. Use the pen and eraser to make local changes, and use drawing undo to step back through strokes. Applying a source edit keeps the glyph's threshold, crop, size, offsets, spacing, and page ID. An empty source is rejected. A changed source becomes unreviewed so you can check its outline. Applying an unchanged source leaves project history untouched. If the glyph has changed or its settings are still being processed, the source editor rejects the edit and preserves that work. Cancel the source edit and reopen it once the pending settings finish.
@@ -56,6 +58,12 @@ On restore, the specimen uses the project's text. If both revisions are unreadab
 The workshop warns before closing or reloading while a project save or glyph edit is pending, and when local saving has failed. Browser warnings are controlled by the browser and cannot protect work from a crash or forced close. Download a project backup if you need to keep changes before leaving.
 
 Browser storage is not a backup service and can be cleared. Keep project JSON outside the browser. Project data stays in this browser. The app does not upload it or use remote analytics.
+
+## Use the font on a website
+
+Download the WOFF2 and TTF files, then choose **Copy web font CSS** in the Font file panel. It copies an `@font-face` rule that points to both files by the names GlyphSprout gives them, followed by a `body` rule that uses the font. Save the CSS next to the downloaded files, or edit the `url()` paths to match where you host them. If the browser blocks clipboard access, allow it for this page and try again.
+
+**Preview zoom** next to the specimen text changes the size of the live preview from 24 to 160 pixels. It does not change the exported font or the specimen image.
 
 ## Install an exported font
 

@@ -11,7 +11,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.4.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -24,7 +24,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 
 ## Make your first font
 
-1. Start a project and choose the characters you need, such as `Hello!`.
+1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets such as uppercase letters, digits, punctuation, hiragana or katakana with one click.
 2. Print its A4 template at actual size and write one character in each cell.
 3. Add an evenly lit scan, confirm the page ID and align its four corners.
 4. Click **Convert scans** and wait for conversion to finish.
@@ -37,7 +37,7 @@ Zoom in to fix small details. Pen and eraser sizes use source pixels, so zooming
 
 Mark reviewed waits for pending ink and crop adjustments. If a scan cell has too many points or contours to export, conversion keeps its source and names the character. Other cells still convert. Adjust the speck filter, crop or source, then review the repaired glyph.
 
-Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. **Download specimen image** saves your preview text as a PNG.
+Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard for using the downloaded files on a website, and **Preview zoom** resizes the live specimen.
 
 Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads use the applied values. Reloading loses unapplied setup changes.
 

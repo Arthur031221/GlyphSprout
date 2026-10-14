@@ -11,7 +11,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.4.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -24,7 +24,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 
 ## Crea tu primera fuente
 
-1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`.
+1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`. Puedes añadir conjuntos completos, como mayúsculas, dígitos, puntuación, hiragana o katakana, con un clic.
 2. Imprime la plantilla A4 a tamaño real y escribe un carácter en cada celda.
 3. Añade un escaneo con luz uniforme, confirma el ID de página y alinea las cuatro esquinas.
 4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
@@ -37,7 +37,7 @@ Amplía la imagen para corregir detalles. El tamaño del lápiz y del borrador s
 
 Marcar como revisado espera a que terminen los ajustes de tinta y recorte. Si una celda tiene demasiados puntos o contornos para exportarla, la conversión conserva su imagen y muestra el carácter afectado. Las demás celdas se convierten. Ajusta el filtro de manchas, el recorte o la imagen y revisa el glifo corregido.
 
-El avance de la revisión aparece junto a la lista de glifos. **Siguiente por revisar** salta al próximo glifo sin comprobar y las teclas de flecha se mueven entre glifos. El panel de espaciado fija el espacio entre palabras de toda la fuente y puede copiar el espaciado lateral latino de un glifo a todas las letras latinas. **Descargar imagen de muestra** guarda el texto de vista previa como PNG.
+El avance de la revisión aparece junto a la lista de glifos. **Siguiente por revisar** salta al próximo glifo sin comprobar y las teclas de flecha se mueven entre glifos. El panel de espaciado fija el espacio entre palabras de toda la fuente y puede copiar el espaciado lateral latino de un glifo a todas las letras latinas. **Descargar imagen de muestra** guarda el texto de vista previa como PNG. **Copiar CSS de fuente web** pone una regla `@font-face` en el portapapeles para usar los archivos descargados en un sitio web, y **Zoom de la vista previa** cambia el tamaño de la muestra en vivo.
 
 El nombre de la fuente y el texto de caracteres en «Characters» se conservan como borradores al cambiar de sección. Pulsa **Project ready** para aplicarlos. Las copias de seguridad y las fuentes descargadas conservan los valores aplicados hasta entonces. Los cambios sin aplicar se pierden al recargar la página.
 
