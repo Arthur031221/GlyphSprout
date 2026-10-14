@@ -14,12 +14,18 @@ from PIL import Image
 
 root = Path("artifacts/paper-bloom")
 project = json.loads(Path("public/samples/paper-sample.glyphsprout.json").read_text())
-assert (root / "PaperBloom.ttf").stat().st_size == 3360
+assert (root / "PaperBloom.ttf").stat().st_size == 3448
 rendered = []
 for extension in ("ttf", "woff2"):
     font = TTFont(root / f"PaperBloom.{extension}", checkChecksums=2)
     assert font["head"].unitsPerEm == 1000
-    assert set(font.getBestCmap()) == {32, *map(ord, "HELOJB")}
+    assert set(font.getBestCmap()) == {
+        32,
+        0xA0,
+        *range(0x2002, 0x200B),
+        0x202F,
+        *map(ord, "HELOJB"),
+    }
     assert font["name"].getDebugName(1) == "Paper Bloom"
     font.flavor = None
     output = io.BytesIO()
@@ -66,5 +72,5 @@ for extension in ("ttf", "woff2"):
     font.close()
 assert rendered[0] == rendered[1]
 print(
-    "Paper Bloom passed: 6 handwriting crops, 2 formats, 3 raster sizes, 3360 byte TTF"
+    "Paper Bloom passed: 6 handwriting crops, 2 formats, 3 raster sizes, 3448 byte TTF"
 )

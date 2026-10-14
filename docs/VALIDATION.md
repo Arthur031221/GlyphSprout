@@ -2,7 +2,7 @@
 
 ## What the headline measures
 
-The bundled Paper Bloom project has six letters: H, E, L, O, J and B. Its TTF is 3,360 bytes, or 3.4 kB using decimal units. This is one small sample, not a prediction for a 512 character font. Regenerate both formats from the committed project:
+The bundled Paper Bloom project has six letters: H, E, L, O, J and B. Its TTF is 3,448 bytes, or 3.4 kB using decimal units. This is one small sample, not a prediction for a 512 character font. Regenerate both formats from the committed project:
 
 ```sh
 npm ci

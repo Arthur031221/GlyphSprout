@@ -6,7 +6,7 @@
 
 **六個手寫字母。一款 3.4 kB 字型。**
 
-隨附的 Paper Bloom 範例會輸出 3,360 位元組的 TTF，並以 Fontconfig 和 FreeType 檢查。這項測量只涵蓋六個字母。[測量方法與可重現的匯出流程](docs/VALIDATION.md)。
+隨附的 Paper Bloom 範例會輸出 3,448 位元組的 TTF，並以 Fontconfig 和 FreeType 檢查。這項測量只涵蓋六個字母。[測量方法與可重現的匯出流程](docs/VALIDATION.md)。
 
 [開啟線上工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 授權條款](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 

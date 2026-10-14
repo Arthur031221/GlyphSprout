@@ -6,7 +6,7 @@
 
 **手書きの 6 文字。3.4 kB のフォント。**
 
-同梱の Paper Bloom サンプルは 3,360 バイトの TTF を出力し、Fontconfig と FreeType で確認しています。この測定対象は 6 文字です。[測定方法と再現可能な書き出し手順](docs/VALIDATION.md)。
+同梱の Paper Bloom サンプルは 3,448 バイトの TTF を出力し、Fontconfig と FreeType で確認しています。この測定対象は 6 文字です。[測定方法と再現可能な書き出し手順](docs/VALIDATION.md)。
 
 [オンライン作業場を開く](https://Arthur031221.github.io/GlyphSprout/) | [ユーザーガイド](docs/USAGE.md) | [![MIT ライセンス](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 

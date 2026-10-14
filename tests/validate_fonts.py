@@ -19,7 +19,9 @@ for extension in ("ttf", "woff2"):
     path = root / f"fixtures.{extension}"
     font = TTFont(path, checkChecksums=2)
     assert font["head"].unitsPerEm == 1000
-    assert set(font.getBestCmap()) == {32, *(ord(ch) for ch in characters)}
+    spaces = {0xA0, *range(0x2002, 0x200B), 0x202F}
+    assert set(font.getBestCmap()) == {32, *spaces, *(ord(ch) for ch in characters)}
+    assert {font.getBestCmap()[cp] for cp in spaces} == {font.getBestCmap()[32]}
     assert font["maxp"].numGlyphs == len(characters) + 2
     assert font["glyf"][font.getBestCmap()[32]].numberOfContours == 0
     assert font["hmtx"][font.getBestCmap()[32]][0] == 350

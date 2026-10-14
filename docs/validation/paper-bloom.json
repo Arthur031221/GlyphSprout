@@ -1,6 +1,6 @@
 {
   "sample": "Paper Bloom",
-  "ttf_bytes": 3360,
+  "ttf_bytes": 3448,
   "measured_from": "Bundled project and actual browser download",
   "office": {
     "application": "LibreOffice 24.2.7.2",
@@ -17,8 +17,8 @@
   },
   "browser_export": {
     "source": "Actual browser downloads from the production workshop",
-    "ttf_bytes": 3360,
-    "woff2_bytes": 1132,
+    "ttf_bytes": 3448,
+    "woff2_bytes": 1216,
     "characters": 6,
     "raster_sizes": [
       20,

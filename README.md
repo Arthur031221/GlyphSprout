@@ -6,7 +6,7 @@ Make a small font for your project's words and names. Print a template, write ea
 
 **Six handwritten letters. A 3.4 kB font.**
 
-The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig and FreeType. It has six letters. [Method and reproducible export](docs/VALIDATION.md).
+The bundled Paper Bloom sample exports a 3,448 byte TTF checked with Fontconfig and FreeType. It has six letters. [Method and reproducible export](docs/VALIDATION.md).
 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 

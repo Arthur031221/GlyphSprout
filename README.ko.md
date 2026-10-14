@@ -6,7 +6,7 @@
 
 **손글씨 여섯 글자. 3.4 kB 글꼴.**
 
-포함된 Paper Bloom 샘플은 3,360바이트 TTF를 내보내며 Fontconfig와 FreeType로 확인했습니다. 이 측정은 여섯 글자에 해당합니다. [측정 방법과 재현 가능한 내보내기](docs/VALIDATION.md).
+포함된 Paper Bloom 샘플은 3,448바이트 TTF를 내보내며 Fontconfig와 FreeType로 확인했습니다. 이 측정은 여섯 글자에 해당합니다. [측정 방법과 재현 가능한 내보내기](docs/VALIDATION.md).
 
 [온라인 작업실 열기](https://Arthur031221.github.io/GlyphSprout/) | [사용자 안내서](docs/USAGE.md) | [![MIT 라이선스](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 

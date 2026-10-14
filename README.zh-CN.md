@@ -6,7 +6,7 @@
 
 **六个手写字母。一款 3.4 kB 字体。**
 
-随附的 Paper Bloom 示例会导出 3,360 字节的 TTF，并经过 Fontconfig 和 FreeType 检查。这项测量仅涵盖六个字母。[测量方法和可复现的导出流程](docs/VALIDATION.md)。
+随附的 Paper Bloom 示例会导出 3,448 字节的 TTF，并经过 Fontconfig 和 FreeType 检查。这项测量仅涵盖六个字母。[测量方法和可复现的导出流程](docs/VALIDATION.md)。
 
 [打开在线工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 许可证](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
