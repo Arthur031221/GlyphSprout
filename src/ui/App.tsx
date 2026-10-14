@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   exportFont,
   fontFilename,
-  lowercaseFallbacks,
+  glyphFallbacks,
   missingCharacters,
   webFontCss,
 } from "../core/font";
@@ -445,7 +445,7 @@ export function App() {
     },
   );
 
-  const fallbacks = project ? lowercaseFallbacks(project) : new Map();
+  const fallbacks = project ? glyphFallbacks(project) : new Map();
   const addable = project
     ? charactersToAdd(specimen, [...project.characters, ...fallbacks.keys()])
     : [];

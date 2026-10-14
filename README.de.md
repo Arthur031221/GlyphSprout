@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.26.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.27.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -29,7 +29,7 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 3. Füge einen gleichmäßig beleuchteten Scan hinzu, indem du die Datei auswählst, auf den Scan-Bereich ziehst oder auf dem Handy **Foto aufnehmen** tippst, und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist. Zellen ohne Tinte werden am Ende aufgelistet, sodass ein vergessener Buchstabe oder eine falsche Seite sofort auffällt.
 5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Strichstärke, Konturglättung, Ausschnitt, Größe, Versatz und Abstand an. Zu jeder Zahl gehört ein Schieberegler. Gib einen Wert ein und drücke Enter oder bewege den Regler, und die Kontur aktualisiert sich, sobald du loslässt. Mit Strg+Z oder Cmd+Z machst du eine Änderung rückgängig, mit zusätzlicher Umschalttaste stellst du sie wieder her. Gestrichelte Hilfslinien in der Konturansicht markieren den linken Rand und die Dickte, sodass du den Abstand jeder Glyphe beim Anpassen siehst.
-6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter. Sobald alle Glyphen fertig sind, speichert **Schrift herunterladen (TTF)** im Vorschaubereich die Schrift, ohne bis zur Werkstatt zu scrollen. Zeichen im Text, die die Schrift noch nicht hat, erscheinen rot, und **Diese Zeichen hinzufügen** nimmt sie ins Projekt auf, damit du ihre Felder drucken kannst. Beim Ändern der Zeichen werden die Seitenzuordnungen der Scans gelöscht, ordne sie also neu zu.
+6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter. Sobald alle Glyphen fertig sind, speichert **Schrift herunterladen (TTF)** im Vorschaubereich die Schrift, ohne bis zur Werkstatt zu scrollen. Zeichen im Text, die die Schrift noch nicht hat, erscheinen rot, und **Diese Zeichen hinzufügen** nimmt sie ins Projekt auf, damit du ihre Felder drucken kannst. Beim Ändern der Zeichen werden die Seitenzuordnungen der Scans gelöscht, ordne sie also neu zu. Gebogene Anführungszeichen und Apostrophe, wie Telefone und Textprogramme sie tippen, verwenden die Glyphen deiner geraden `'` und `"`, du musst sie also nicht zweimal schreiben.
 
 Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Beim Zeichnen übernimmt **Verwenden und nächstes zeichnen** die Zeichnung und öffnet eine leere Fläche für das nächste Zeichen ohne Glyph, sodass sich eine Schrift auch ohne Drucker erstellen lässt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
 

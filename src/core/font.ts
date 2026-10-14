@@ -36,6 +36,36 @@ export function lowercaseFallbacks(project: Project): Map<string, string> {
   return fallbacks;
 }
 
+const QUOTE_SOURCES: Record<string, string> = {
+  "\u2018": "'",
+  "\u2019": "'",
+  "\u201a": "'",
+  "\u201b": "'",
+  "\u201c": '"',
+  "\u201d": '"',
+  "\u201e": '"',
+};
+
+/**
+ * Curly quotes that borrow the glyph of the straight quote, keyed by the curly
+ * quote. Phones and word processors type curly quotes and apostrophes, so a
+ * font with only the straight marks would show them as missing. A curly quote
+ * the project has itself keeps its own glyph.
+ */
+export function quoteFallbacks(project: Project): Map<string, string> {
+  const fallbacks = new Map<string, string>();
+  const have = new Set(project.characters);
+  for (const [curly, straight] of Object.entries(QUOTE_SOURCES))
+    if (project.glyphs[straight]?.contours.length && !have.has(curly))
+      fallbacks.set(curly, straight);
+  return fallbacks;
+}
+
+/** Every character the font types with another character's glyph, keyed by the borrowing character. */
+export function glyphFallbacks(project: Project): Map<string, string> {
+  return new Map([...lowercaseFallbacks(project), ...quoteFallbacks(project)]);
+}
+
 export function fontGlyph(glyph: Glyph): TTF.Glyph {
   if (!glyph.contours.length) throw new Error("emptyGlyph");
   const settings = glyph.settings;
@@ -211,17 +241,17 @@ function identitySuffix(projectId: string, name: string): string {
 export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
   const missing = missingCharacters(project);
   if (missing.length && !allowPartial) throw new Error("missingGlyphs");
-  const lowers = new Map<string, number[]>();
-  for (const [lower, upper] of lowercaseFallbacks(project))
-    lowers.set(upper, [
-      ...(lowers.get(upper) ?? []),
-      lower.codePointAt(0) ?? 0,
+  const borrowed = new Map<string, number[]>();
+  for (const [borrower, source] of glyphFallbacks(project))
+    borrowed.set(source, [
+      ...(borrowed.get(source) ?? []),
+      borrower.codePointAt(0) ?? 0,
     ]);
   const glyphs = project.characters
     .filter((ch) => project.glyphs[ch]?.contours.length)
     .map((ch) => {
       const glyph = fontGlyph(project.glyphs[ch]);
-      const extra = lowers.get(ch);
+      const extra = borrowed.get(ch);
       if (extra) glyph.unicode = [...(glyph.unicode ?? []), ...extra];
       return glyph;
     });

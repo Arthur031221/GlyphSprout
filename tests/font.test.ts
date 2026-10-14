@@ -4,6 +4,7 @@ import {
   buildTtf,
   fontGlyph,
   lowercaseFallbacks,
+  quoteFallbacks,
   webFontCss,
 } from "../src/core/font";
 import {
@@ -367,5 +368,55 @@ describe("uppercase glyphs for lowercase letters", () => {
     expect(() => parseProject(JSON.stringify(broken))).toThrow(
       "invalidProject",
     );
+  });
+});
+
+describe("straight quotes for curly quotes", () => {
+  function quoteProject(text: string): Project {
+    const project = newProject("Quotes", text);
+    for (const ch of project.characters) {
+      const glyph = blankGlyph(ch, "data:image/png;base64,iVBORw0KGgo=");
+      glyph.contours = [
+        [
+          { x: 0.2, y: 0.2 },
+          { x: 0.5, y: 0.2 },
+          { x: 0.5, y: 0.7 },
+        ],
+      ];
+      project.glyphs[ch] = glyph;
+    }
+    return project;
+  }
+  const cmap = (project: Project) =>
+    createFont(buildTtf(project), { type: "ttf" }).get().cmap;
+
+  it("types curly apostrophes and quotes with the straight glyphs", () => {
+    const table = cmap(quoteProject("A'\""));
+    for (const curly of [0x2018, 0x2019, 0x201a, 0x201b])
+      expect(table[curly]).toBe(table[0x27]);
+    for (const curly of [0x201c, 0x201d, 0x201e])
+      expect(table[curly]).toBe(table[0x22]);
+    expect(table[0x27]).not.toBe(table[0x22]);
+  });
+
+  it("does nothing without a straight quote and keeps a curly quote the project has", () => {
+    expect(quoteFallbacks(quoteProject("AB")).size).toBe(0);
+    const project = quoteProject("'\u2019");
+    project.glyphs["\u2019"].contours = [
+      [
+        { x: 0.1, y: 0.1 },
+        { x: 0.4, y: 0.1 },
+        { x: 0.4, y: 0.3 },
+      ],
+    ];
+    const table = cmap(project);
+    expect(table[0x2019]).not.toBe(table[0x27]);
+    expect(table[0x2018]).toBe(table[0x27]);
+  });
+
+  it("skips a straight quote whose glyph is empty", () => {
+    const project = quoteProject("A'");
+    project.glyphs["'"].contours = [];
+    expect(quoteFallbacks(project).size).toBe(0);
   });
 });

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.27.0
+
+Curly quotes and apostrophes now type with the glyphs of the straight ones. Phones and word processors turn a typed `'` or `"` into a curly mark, and a font that only had the straight marks showed every curly one in red in the live preview and left it out of the TTF and WOFF2 files. The font now maps the curly single quotes and the low and reversed single quote to your apostrophe glyph, and the curly double quotes and the low double quote to your double quote glyph. A curly mark you add to the project keeps its own glyph, and nothing changes when the straight glyph is missing. Kerning pairs set for a straight quote also apply to the curly ones. Nothing is saved in the project, so existing backups gain the behavior without a format change, and the **Add these characters** offer no longer lists curly marks that are already covered.
+
+Unit tests read the exported cmap for all seven code points, the kept own glyph and the empty glyph case. A browser test opens a project with an apostrophe glyph and checks that curly marks stop showing in red while a double quote still does.
+
 ## 1.26.0
 
 The drawing editor has a new button, **Use and draw next**. It keeps the drawing and opens a blank canvas for the next character in the project that has no glyph yet, wrapping around to the start of the list. Before this, drawing a font in the browser meant selecting each glyph, pressing Draw a glyph and pressing Use drawing, once per character. The button is hidden when no character is missing a glyph and while you edit an existing source.
