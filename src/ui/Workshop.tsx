@@ -169,6 +169,15 @@ function Settings({
         >
           {t.reset}
         </button>
+        <button
+          className="match-tracing"
+          type="button"
+          onClick={() => {
+            void editor.matchTracing(glyph.character);
+          }}
+        >
+          {t.matchTracing}
+        </button>
       </div>
     </>
   );

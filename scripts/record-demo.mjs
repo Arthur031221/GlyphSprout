@@ -127,6 +127,17 @@ try {
   await smoothing.press("Tab");
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.waitForTimeout(1400);
+  const matchTracing = page.getByRole("button", {
+    name: "Use this threshold, speck filter and smoothing for all glyphs",
+  });
+  await matchTracing.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(900);
+  await matchTracing.click();
+  await expect(page.getByText("Glyphs changed: 5")).toBeVisible();
+  await page.waitForTimeout(1800);
+  await page
+    .getByRole("button", { name: "Mark reviewed" })
+    .scrollIntoViewIfNeeded();
   await page.getByRole("button", { name: "Mark reviewed" }).click();
   await expect(
     page.getByRole("button", { name: "Mark reviewed" }),
@@ -215,7 +226,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded kerning, character presets including accented letters, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded shared tracing values, kerning, character presets including accented letters, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

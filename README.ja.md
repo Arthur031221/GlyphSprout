@@ -13,7 +13,7 @@
 ![実際の作業画面：スキャンした字形を消して描き直し、プレビューして TTF をダウンロード](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.11.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
 ```
 
 Node.js 22.12 以降と Git が必要です。起動完了のメッセージが表示されたら `http://127.0.0.1:4173` を開きます。

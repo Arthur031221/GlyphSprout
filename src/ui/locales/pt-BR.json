@@ -255,5 +255,8 @@
   "copyWebCss": "Copiar CSS de fonte web",
   "cssCopied": "CSS de fonte web copiado. Salve-o ao lado dos arquivos de fonte baixados.",
   "cssCopyFailed": "O navegador bloqueou a cópia. Permita o acesso à área de transferência e tente de novo.",
-  "previewZoom": "Zoom da pré-visualização"
+  "previewZoom": "Zoom da pré-visualização",
+  "matchTracing": "Usar este limiar, filtro de manchas e suavização em todos os glifos",
+  "tracingApplied": "Traçado copiado. Glifos alterados:",
+  "tracingSkipped": "Alguns glifos não puderam ser traçados com esses valores e foram mantidos como estavam:"
 }

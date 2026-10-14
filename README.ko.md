@@ -13,7 +13,7 @@
 ![실제 작업실: 스캔한 글리프를 지우고 수정한 뒤 미리보기와 TTF 다운로드](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.11.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
 ```
 
 Node.js 22.12 이상과 Git이 필요합니다. 준비 완료 메시지가 나오면 `http://127.0.0.1:4173`을 여세요.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0
+
+The Workshop has a new button, **Use this threshold, speck filter and smoothing for all glyphs**. Tune the ink threshold, minimum speck area and outline smoothing on one glyph, press it, and every other glyph is traced again from its source pixels with the same values. Before this, a page scanned under dim light meant editing the same setting glyph by glyph.
+
+It is one undoable step. Crop, size, offsets and spacing stay as they were, and changed glyphs become unreviewed. A glyph that can't be traced with the new values keeps its old outline and is named in a message. A browser test covers the copy and Undo, and the label is translated in all nine interface languages.
+
 ## 1.11.0
 
 A new **Kerning** panel in the Workshop adjusts the space between two letters that sit next to each other, such as A and V. Choose the pair, enter a number from -300 to 300 thousandths of the text size, and the live specimen shows it at once. A negative number brings the letters closer and a positive number pushes them apart. Before this, every letter pair used the same spacing, which looks loose around shapes like A, V, T and L.

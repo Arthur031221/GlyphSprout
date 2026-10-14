@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.11.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -24,9 +24,9 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 
 ## Make your first font
 
-1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets such as uppercase letters, digits, punctuation, accented letters, hiragana or katakana with one click.
-2. Print its template at actual size on A4 or US Letter paper and write one character in each cell.
-3. Add an evenly lit scan and confirm the page ID. GlyphSprout looks for the four registration crosses and places the corners on them. Check each corner and fix any that are off.
+1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets like uppercase letters, digits, punctuation, accented letters, hiragana or katakana with one click.
+2. Print the template at actual size on A4 or US Letter paper and write one character in each cell.
+3. Add an evenly lit scan and confirm the page ID. GlyphSprout looks for the four registration crosses and snaps the corners to them. Check each corner and fix any that are off.
 4. Click **Convert scans** and wait for it to finish.
 5. Review each glyph. Adjust the source, threshold, outline smoothing, crop, size, offsets and spacing.
 6. Type your text in the live specimen and download TTF or WOFF2.
@@ -37,7 +37,7 @@ Zoom in to fix small details. Pen and eraser sizes use source pixels, so zooming
 
 Mark reviewed waits for pending ink and crop adjustments. If a scan cell has too many points or contours to export, conversion keeps its source and names the character. Other cells still convert. Adjust the speck filter, crop or source, then review the repaired glyph.
 
-Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
+Once one glyph looks right, **Use this threshold, speck filter and smoothing for all glyphs** traces every other glyph again with the same values. Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
 
 Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads use the applied values. Reloading loses unapplied setup changes.
 

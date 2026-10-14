@@ -255,5 +255,8 @@
   "copyWebCss": "复制网页字体 CSS",
   "cssCopied": "已复制网页字体 CSS。请把它放在下载的字体文件旁边。",
   "cssCopyFailed": "浏览器阻止了复制。请允许剪贴板权限后再试一次。",
-  "previewZoom": "预览缩放"
+  "previewZoom": "预览缩放",
+  "matchTracing": "将此阈值、杂点过滤和平滑设置应用到所有字形",
+  "tracingApplied": "已复制描摹设置。变更的字形数：",
+  "tracingSkipped": "部分字形无法用这些数值描摹，已保持原样："
 }

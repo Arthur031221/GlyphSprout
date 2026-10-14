@@ -255,5 +255,8 @@
   "copyWebCss": "Web-Font-CSS kopieren",
   "cssCopied": "Web-Font-CSS kopiert. Lege es neben die heruntergeladenen Schriftdateien.",
   "cssCopyFailed": "Der Browser hat das Kopieren blockiert. Erlaube den Zugriff auf die Zwischenablage und versuche es erneut.",
-  "previewZoom": "Vorschau-Zoom"
+  "previewZoom": "Vorschau-Zoom",
+  "matchTracing": "Diesen Schwellenwert, Fleckenfilter und diese Glättung für alle Glyphen verwenden",
+  "tracingApplied": "Nachzeichnung kopiert. Geänderte Glyphen:",
+  "tracingSkipped": "Einige Glyphen ließen sich mit diesen Werten nicht nachzeichnen und blieben unverändert:"
 }

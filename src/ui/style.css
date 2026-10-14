@@ -864,6 +864,9 @@ fieldset {
 .settings-grid input {
   padding: 7px;
 }
+.settings-grid .match-tracing {
+  grid-column: 1 / -1;
+}
 .crop-settings {
   grid-column: 1 / -1;
   display: grid;

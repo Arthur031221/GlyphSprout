@@ -255,5 +255,8 @@
   "copyWebCss": "Copiar CSS de fuente web",
   "cssCopied": "CSS de fuente web copiado. Guárdalo junto a los archivos de fuente descargados.",
   "cssCopyFailed": "El navegador bloqueó la copia. Permite el acceso al portapapeles e inténtalo de nuevo.",
-  "previewZoom": "Zoom de la vista previa"
+  "previewZoom": "Zoom de la vista previa",
+  "matchTracing": "Usar este umbral, filtro de motas y suavizado en todos los glifos",
+  "tracingApplied": "Trazado copiado. Glifos cambiados:",
+  "tracingSkipped": "Algunos glifos no se pudieron trazar con estos valores y se dejaron como estaban:"
 }

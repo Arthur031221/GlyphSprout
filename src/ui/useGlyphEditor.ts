@@ -280,6 +280,76 @@ export function useGlyphEditor(
     }
   }
 
+  async function matchTracing(character: string) {
+    if (!(await flush())) return;
+    const snapshot = projectRef.current;
+    const source = snapshot?.glyphs[character]?.settings;
+    if (!snapshot || !source) return;
+    const { threshold, minArea, smoothing } = source;
+    const targets = Object.values(snapshot.glyphs).filter(
+      (glyph) =>
+        glyph.character !== character &&
+        (glyph.settings.threshold !== threshold ||
+          glyph.settings.minArea !== minArea ||
+          glyph.settings.smoothing !== smoothing),
+    );
+    if (!targets.length) return;
+    const glyphs = { ...snapshot.glyphs };
+    const changed: string[] = [];
+    const skipped: string[] = [];
+    setBusy(true);
+    try {
+      for (const glyph of targets) {
+        const values = { ...glyph.settings, threshold, minArea, smoothing };
+        try {
+          const pixels = await decodeCell(glyph.source);
+          const result = trace(
+            grayscale(pixels.data),
+            pixels.width,
+            pixels.height,
+            values,
+          );
+          const next = {
+            ...glyph,
+            contours: result.contours,
+            settings: values,
+            reviewed: false,
+          };
+          if (next.contours.length) fontGlyph(next);
+          glyphs[glyph.character] = next;
+          changed.push(glyph.character);
+        } catch {
+          skipped.push(glyph.character);
+        }
+      }
+    } finally {
+      setBusy(pending.current.size > 0);
+    }
+    const current = projectRef.current;
+    if (
+      current?.id !== snapshot.id ||
+      targets.some((glyph) => current.glyphs[glyph.character] !== glyph)
+    ) {
+      notice({ key: "sourceChanged", tone: "error" });
+      return;
+    }
+    if (changed.length) {
+      for (const ch of changed) cancel(ch);
+      commit({ ...current, glyphs });
+      notice({
+        key: "tracingApplied",
+        detail: String(changed.length),
+        tone: "info",
+      });
+    }
+    if (skipped.length)
+      notice({
+        key: "tracingSkipped",
+        detail: skipped.join(" "),
+        tone: "error",
+      });
+  }
+
   function drawing(
     character: string,
     source: string,
@@ -335,6 +405,7 @@ export function useGlyphEditor(
     kern,
     fontInfo,
     matchSideBearing,
+    matchTracing,
     drawing,
     flush,
     busy,

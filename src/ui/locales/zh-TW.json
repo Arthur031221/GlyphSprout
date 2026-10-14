@@ -255,5 +255,8 @@
   "copyWebCss": "複製網頁字型 CSS",
   "cssCopied": "已複製網頁字型 CSS。請把它放在下載的字型檔旁邊。",
   "cssCopyFailed": "瀏覽器擋下了複製。請允許剪貼簿權限後再試一次。",
-  "previewZoom": "預覽縮放"
+  "previewZoom": "預覽縮放",
+  "matchTracing": "將此閾值、雜點過濾與平滑設定套用到所有字形",
+  "tracingApplied": "已複製描繪設定。變更的字形數：",
+  "tracingSkipped": "部分字形無法以這些數值描繪，已維持原狀："
 }
