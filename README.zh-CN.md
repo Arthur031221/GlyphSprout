@@ -11,7 +11,7 @@
 [打开在线工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 许可证](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.2
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。命令显示就绪信息后，打开 `http://127.0.0.1:4173`。

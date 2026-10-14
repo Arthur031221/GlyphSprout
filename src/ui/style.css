@@ -582,6 +582,7 @@ main {
   height: 100%;
   pointer-events: none;
   touch-action: none;
+  overflow: visible;
 }
 .scan-preview polygon {
   fill: rgba(40, 108, 86, 0.08);
@@ -590,18 +591,24 @@ main {
 }
 .corner-handle {
   pointer-events: all;
+  fill: transparent;
+  stroke: none;
+  cursor: grab;
+  touch-action: none;
+}
+.corner-marker {
+  pointer-events: none;
   fill: var(--accent);
   stroke: var(--paper);
   stroke-width: 6;
-  cursor: grab;
-  touch-action: none;
 }
 .corner-handle:active {
   cursor: grabbing;
 }
 .corner-handle:focus-visible {
   stroke: var(--ink);
-  stroke-width: 10;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
 }
 .scan-controls {
   border: 1px solid var(--line);
@@ -779,8 +786,8 @@ fieldset {
 }
 .outline-wrap line {
   stroke: #9db0bd;
-  stroke-width: 0.003;
-  stroke-dasharray: 0.018 0.012;
+  stroke-width: 1;
+  stroke-dasharray: 6 4;
 }
 .outline-wrap path {
   fill: #203247;
@@ -1206,6 +1213,17 @@ fieldset {
   aspect-ratio: 1000 / 1414;
   background: white;
   border: 1px solid var(--line);
+}
+
+.preview-state {
+  min-height: 1.5em;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.rectified-preview canvas[hidden] {
+  display: none;
 }
 .scan-job {
   position: sticky;

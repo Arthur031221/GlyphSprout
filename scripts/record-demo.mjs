@@ -32,12 +32,7 @@ try {
   await page.getByRole("textbox", { name: "Font name" }).fill("Weekend");
   await page.waitForTimeout(1200);
   await page.getByRole("button", { name: "Workshop" }).click();
-  await page.waitForTimeout(1200);
   await page.getByRole("button", { name: "Characters" }).click();
-  await expect(page.getByRole("textbox", { name: "Font name" })).toHaveValue(
-    "Weekend",
-  );
-  await page.waitForTimeout(1200);
   await page.getByRole("button", { name: "Project ready" }).click();
   await page.getByRole("button", { name: "Workshop" }).click();
   await page.locator(".glyph-tile").nth(5).click();
@@ -80,27 +75,40 @@ try {
   await expect(page.locator(".draft-notice")).toContainText(
     "Drawing edits are not saved",
   );
-  await page.getByRole("button", { name: "Pages" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Print pages" }),
-  ).toBeVisible();
-  await page.waitForTimeout(1400);
-  await page.getByRole("button", { name: "Characters" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Set up your font" }),
-  ).toBeVisible();
-  await page.waitForTimeout(1200);
-  await page.getByRole("button", { name: "Workshop" }).click();
-  await expect(page.locator(".draft-notice")).toContainText(
-    "Drawing edits are not saved",
-  );
-  await page.waitForTimeout(1400);
   await page
     .getByRole("button", { name: "Apply source edits", exact: true })
     .click();
   await expect(page.locator(".draft-notice")).toHaveCount(0);
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.waitForTimeout(2600);
+  await page.getByRole("button", { name: "Pages" }).click();
+  await page
+    .locator('input[type="file"][accept="image/png,image/jpeg"]')
+    .setInputFiles("tests/e2e/fixtures/paper.png");
+  const corrected = page.locator(".rectified-preview");
+  await expect(corrected).toHaveAttribute("aria-busy", "false");
+  await page.locator(".scan-preview").scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1200);
+  const corner = page.locator(".corner-handle").first();
+  const target = await corner.boundingBox();
+  if (!target) throw new Error("Missing corner handle");
+  await page.mouse.move(
+    target.x + target.width / 2,
+    target.y + target.height / 2,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    target.x + target.width / 2 + 14,
+    target.y + target.height / 2 + 10,
+    { steps: 18 },
+  );
+  await page.mouse.up();
+  await expect(corrected).toHaveAttribute("aria-busy", "false");
+  await corrected.scrollIntoViewIfNeeded();
+  await page.waitForTimeout(1800);
+  await page.getByRole("button", { name: "Remove scan: paper.png" }).click();
+  await page.getByRole("button", { name: "Workshop" }).click();
+  await page.waitForTimeout(1800);
   const event = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download TTF", exact: true }).click();
   await (await event).saveAs(resolve(outputDir, "Weekend-source-edited.ttf"));
@@ -124,7 +132,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded setup draft preservation through Workshop and Characters, font name application, source editing, and a TTF download.",
+    "Recorded font setup, source editing, scan alignment with corrected preview, and a TTF download.",
   );
 } finally {
   await browser?.close();

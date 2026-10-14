@@ -3,3 +3,9 @@ export function createScanWorker(): Worker {
     type: "module",
   });
 }
+
+export function createPreviewWorker(): Worker {
+  return new Worker(new URL("./preview.worker.ts", import.meta.url), {
+    type: "module",
+  });
+}

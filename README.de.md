@@ -11,7 +11,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.284 Byte große TTF-Datei,
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.2
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.

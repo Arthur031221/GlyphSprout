@@ -197,5 +197,6 @@
   "removeScan": "Quitar escaneo",
   "setupDraftStatus": "Cambios de configuración sin aplicar",
   "setupUnsaved": "Los cambios del nombre de la fuente y de los caracteres no se guardan ni se incluyen en las descargas. Selecciona Proyecto listo en Caracteres para aplicarlos.",
-  "scanTemplateChanged": "Estos escaneos pertenecen a otra plantilla de caracteres. Restáurala con Deshacer o Rehacer, o elimina los escaneos y sube hojas de la plantilla actual."
+  "scanTemplateChanged": "Estos escaneos pertenecen a otra plantilla de caracteres. Restáurala con Deshacer o Rehacer, o elimina los escaneos y sube hojas de la plantilla actual.",
+  "previewUpdating": "Actualizando la vista previa corregida..."
 }

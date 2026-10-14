@@ -809,6 +809,12 @@ test("fresh offline cache can scan before the scan worker has ever been created 
   await page.getByRole("button", { name: "Pages" }).click();
   page.on("dialog", (dialog) => dialog.accept());
   await stageImage(page, synthetic);
+  await expect(page.locator(".rectified-preview")).toHaveAttribute(
+    "aria-busy",
+    "false",
+  );
+  await expect(page.locator(".rectified-preview canvas")).toBeVisible();
+  await expect(page.locator(".rectified-preview .bad")).toHaveCount(0);
   await page.getByRole("button", { name: "Convert scans" }).click();
   await expect(
     page.getByRole("status").filter({ hasText: "Scans converted" }),

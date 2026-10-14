@@ -11,7 +11,7 @@ The bundled Paper Bloom sample exports a 3,284 byte TTF checked with Fontconfig 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.2
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
 ```
 
 You'll need Node.js 22.12 or newer and Git. Once the command prints its ready message, open `http://127.0.0.1:4173`.

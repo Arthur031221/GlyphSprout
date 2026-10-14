@@ -4,6 +4,61 @@ const paper = "tests/e2e/fixtures/paper.png";
 const confirmation =
   "I confirmed the visible page ID, page assignment and interior alignment";
 
+test("mobile corner targets accept touches away from the visible marker", async ({
+  page,
+  context,
+  browserName,
+}) => {
+  test.skip(browserName !== "chromium", "CDP touch input is Chromium-specific");
+  const session = await context.newCDPSession(page);
+  await session.send("Emulation.setTouchEmulationEnabled", { enabled: true });
+  for (const width of [320, 390]) {
+    await page.setViewportSize({ width, height: 844 });
+    if (width === 320) await stagePaper(page);
+    for (let index = 0; index < 4; index++) {
+      const handle = page.locator(".corner-handle").nth(index);
+      await handle.scrollIntoViewIfNeeded();
+      await expect
+        .poll(async () => (await handle.boundingBox())?.width ?? 0)
+        .toBeGreaterThanOrEqual(47.5);
+      const box = await handle.boundingBox();
+      if (!box) throw new Error("Missing mobile corner target");
+      const before = await coordinates(page, index);
+      const scale = await handle.evaluate((element) => {
+        const matrix = (element as SVGCircleElement).getScreenCTM();
+        if (!matrix) throw new Error("Missing registration scale");
+        return { x: matrix.a, y: matrix.d };
+      });
+      const direction = index === 1 || index === 2 ? -1 : 1;
+      const start = {
+        x: box.x + box.width / 2 + 18 * direction,
+        y: box.y + box.height / 2,
+      };
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchStart",
+        touchPoints: [{ ...start, id: 1 }],
+      });
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ x: start.x + 8 * direction, y: start.y + 6, id: 1 }],
+      });
+      await session.send("Input.dispatchTouchEvent", {
+        type: "touchEnd",
+        touchPoints: [],
+      });
+      const after = await coordinates(page, index);
+      expect(
+        Math.abs(
+          Number(after[0]) - Number(before[0]) - (8 * direction) / scale.x,
+        ),
+      ).toBeLessThan(2);
+      expect(
+        Math.abs(Number(after[1]) - Number(before[1]) - 6 / scale.y),
+      ).toBeLessThan(2);
+    }
+  }
+});
+
 async function stagePaper(page: Page) {
   await page.goto("/");
   await page.getByRole("button", { name: "Pages" }).click();

@@ -197,5 +197,6 @@
   "removeScan": "移除扫描件",
   "setupDraftStatus": "设置更改尚未应用",
   "setupUnsaved": "字体名称与字符更改尚未保存，也不会包含在下载文件中。请到字符页面选择项目已就绪以应用。",
-  "scanTemplateChanged": "这些扫描属于另一份字符模板。请使用撤销或重做恢复原模板，或移除扫描并上传当前模板的纸张。"
+  "scanTemplateChanged": "这些扫描属于另一份字符模板。请使用撤销或重做恢复原模板，或移除扫描并上传当前模板的纸张。",
+  "previewUpdating": "正在更新校正预览..."
 }
