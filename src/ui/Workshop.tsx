@@ -5,13 +5,16 @@ import {
   Pen,
   Trash,
 } from "@phosphor-icons/react";
-import { useEffect, useRef, useState } from "react";
+import { type KeyboardEvent, useEffect, useRef, useState } from "react";
 import { fontGlyph, missingCharacters } from "../core/font";
 import { isCjk } from "../core/text";
 import {
+  DEFAULT_SPACE_WIDTH,
   defaultSettings,
   type Glyph,
   type GlyphSettings,
+  MAX_SPACE_WIDTH,
+  MIN_SPACE_WIDTH,
   type Project,
 } from "../core/types";
 import { download } from "./browser";
@@ -196,6 +199,38 @@ export function Workshop({
   const [partial, setPartial] = useState(false);
   const current = project.glyphs[selected];
   const missing = missingCharacters(project);
+  const pendingReview = project.characters.filter((ch) => {
+    const glyph = project.glyphs[ch];
+    return !!glyph?.contours.length && !glyph.reviewed;
+  });
+  const readyCount = project.characters.length - missing.length;
+  const nextReview =
+    pendingReview.find(
+      (ch) =>
+        project.characters.indexOf(ch) > project.characters.indexOf(selected),
+    ) ?? pendingReview.find((ch) => ch !== selected);
+  function moveSelection(event: KeyboardEvent<HTMLDivElement>) {
+    if (event.altKey || event.ctrlKey || event.metaKey) return;
+    const columns = getComputedStyle(
+      event.currentTarget,
+    ).gridTemplateColumns.split(" ").length;
+    const step = {
+      ArrowRight: 1,
+      ArrowLeft: -1,
+      ArrowDown: columns,
+      ArrowUp: -columns,
+    }[event.key];
+    if (!step) return;
+    const tiles = [
+      ...event.currentTarget.querySelectorAll<HTMLButtonElement>(".glyph-tile"),
+    ];
+    const index = tiles.indexOf(document.activeElement as HTMLButtonElement);
+    const target = tiles[index + step];
+    if (index < 0 || !target) return;
+    event.preventDefault();
+    target.focus();
+    target.click();
+  }
   useEffect(() => {
     if (drawing || !restoreFocus.current) return;
     restoreFocus.current = false;
@@ -217,11 +252,30 @@ export function Workshop({
             <h2>{t.charactersLabel}</h2>
           </div>
           <span className="count-pill">
-            {project.characters.length - missing.length} /{" "}
-            {project.characters.length}
+            {readyCount} / {project.characters.length}
           </span>
         </div>
-        <div className="glyph-grid">
+        {readyCount > 0 && (
+          <div className="review-progress">
+            <p>
+              {readyCount - pendingReview.length} / {readyCount}{" "}
+              {t.reviewedCount}
+            </p>
+            {pendingReview.length ? (
+              <button
+                type="button"
+                disabled={!nextReview}
+                onClick={() => nextReview && onSelect(nextReview)}
+              >
+                {t.nextReview}
+              </button>
+            ) : (
+              <p className="review-done">{t.allReviewed}</p>
+            )}
+          </div>
+        )}
+        {/* biome-ignore lint/a11y/noStaticElementInteractions: Arrow keys move between the glyph buttons it contains. */}
+        <div className="glyph-grid" onKeyDown={moveSelection}>
           {project.characters.map((ch) => {
             const glyph = project.glyphs[ch];
             const ready = !!glyph?.contours.length;
@@ -408,6 +462,44 @@ export function Workshop({
               </button>
             </div>
           )}
+        </section>
+        <section className="spacing-panel panel">
+          <div>
+            <span className="eyebrow">{t.spacingTitle}</span>
+            <label>
+              {t.wordSpace}
+              <input
+                key={project.spaceWidth ?? DEFAULT_SPACE_WIDTH}
+                type="number"
+                min={MIN_SPACE_WIDTH}
+                max={MAX_SPACE_WIDTH}
+                step={10}
+                defaultValue={project.spaceWidth ?? DEFAULT_SPACE_WIDTH}
+                onBlur={(event) => {
+                  const input = event.currentTarget;
+                  void editor.wordSpace(Number(input.value)).then((applied) => {
+                    if (!applied && input.isConnected)
+                      input.value = String(
+                        project.spaceWidth ?? DEFAULT_SPACE_WIDTH,
+                      );
+                  });
+                }}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") event.currentTarget.blur();
+                }}
+              />
+            </label>
+            <small>{t.wordSpaceHelp}</small>
+          </div>
+          <button
+            type="button"
+            disabled={!current || isCjk(selected)}
+            onClick={() => {
+              void editor.matchSideBearing(selected);
+            }}
+          >
+            {t.matchBearing}
+          </button>
         </section>
         <section className="export-panel panel">
           <div>

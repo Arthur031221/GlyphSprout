@@ -209,5 +209,14 @@
   "fitCanvas": "Bild einpassen",
   "drawingViewport": "Zeichenbereich",
   "precisionHelp": "Zum Bearbeiten von Details vergrößern. Mit Verschieben, den Scrollleisten oder den Pfeiltasten im fokussierten Zeichenbereich bewegen. Größen werden in Quellpixeln gemessen.",
-  "scanRepair": "Konvertierung abgeschlossen. Diese Zellen brauchen einfachere Konturen. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an:"
+  "scanRepair": "Konvertierung abgeschlossen. Diese Zellen brauchen einfachere Konturen. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an:",
+  "reviewedCount": "geprüft",
+  "nextReview": "Nächste Prüfung",
+  "allReviewed": "Alle Zeichen geprüft",
+  "spacingTitle": "Schriftabstände",
+  "wordSpace": "Wortabstand",
+  "wordSpaceHelp": "Breite des Leerzeichens in Schrifteinheiten, von 100 bis 1000.",
+  "matchBearing": "Diesen Seitenabstand für alle lateinischen Buchstaben verwenden",
+  "spaceInvalid": "Der Wortabstand muss eine ganze Zahl von 100 bis 1000 sein.",
+  "bearingApplied": "Seitenabstand kopiert. Geänderte Buchstaben:"
 }

@@ -209,5 +209,14 @@
   "fitCanvas": "Fit image",
   "drawingViewport": "Drawing viewport",
   "precisionHelp": "Zoom for detail. Choose Pan, use the scrollbars or focus the canvas and press arrow keys to move. Brush sizes use source pixels.",
-  "scanRepair": "Conversion finished. These cells need simpler outlines. Adjust the speck filter, crop or source:"
+  "scanRepair": "Conversion finished. These cells need simpler outlines. Adjust the speck filter, crop or source:",
+  "reviewedCount": "reviewed",
+  "nextReview": "Next to review",
+  "allReviewed": "All glyphs reviewed",
+  "spacingTitle": "Font spacing",
+  "wordSpace": "Word space",
+  "wordSpaceHelp": "Width of the space character in font units, from 100 to 1000.",
+  "matchBearing": "Use this side bearing for all Latin letters",
+  "spaceInvalid": "Word space must be a whole number from 100 to 1000.",
+  "bearingApplied": "Side bearing copied. Letters changed:"
 }

@@ -209,5 +209,14 @@
   "fitCanvas": "Ajuster l'image",
   "drawingViewport": "Zone de dessin",
   "precisionHelp": "Agrandissez pour modifier les détails. Utilisez Déplacer, les barres de défilement ou les flèches lorsque le canevas a le focus. La taille est mesurée en pixels de l'image source.",
-  "scanRepair": "Conversion terminée. Ces cases nécessitent des contours plus simples. Ajustez le filtre des petits points, le recadrage ou l'image source :"
+  "scanRepair": "Conversion terminée. Ces cases nécessitent des contours plus simples. Ajustez le filtre des petits points, le recadrage ou l'image source :",
+  "reviewedCount": "vérifiés",
+  "nextReview": "Prochain à vérifier",
+  "allReviewed": "Tous les glyphes sont vérifiés",
+  "spacingTitle": "Espacement de la police",
+  "wordSpace": "Espace entre les mots",
+  "wordSpaceHelp": "Largeur du caractère espace en unités de police, de 100 à 1000.",
+  "matchBearing": "Appliquer cette approche latérale à toutes les lettres latines",
+  "spaceInvalid": "L'espace entre les mots doit être un entier de 100 à 1000.",
+  "bearingApplied": "Approche latérale copiée. Lettres modifiées :"
 }

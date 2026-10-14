@@ -209,5 +209,14 @@
   "fitCanvas": "Ajustar imagem",
   "drawingViewport": "Área de desenho",
   "precisionHelp": "Amplie para editar detalhes. Use Mover, as barras de rolagem ou foque a tela e pressione as setas. Os tamanhos são medidos em pixels da imagem de origem.",
-  "scanRepair": "Conversão concluída. Estas células precisam de contornos mais simples. Ajuste o filtro de pontos, o recorte ou a imagem original:"
+  "scanRepair": "Conversão concluída. Estas células precisam de contornos mais simples. Ajuste o filtro de pontos, o recorte ou a imagem original:",
+  "reviewedCount": "revisados",
+  "nextReview": "Próximo a revisar",
+  "allReviewed": "Todos os glifos revisados",
+  "spacingTitle": "Espaçamento da fonte",
+  "wordSpace": "Espaço entre palavras",
+  "wordSpaceHelp": "Largura do caractere de espaço em unidades da fonte, de 100 a 1000.",
+  "matchBearing": "Usar este espaçamento lateral em todas as letras latinas",
+  "spaceInvalid": "O espaço entre palavras deve ser um número inteiro de 100 a 1000.",
+  "bearingApplied": "Espaçamento lateral copiado. Letras alteradas:"
 }

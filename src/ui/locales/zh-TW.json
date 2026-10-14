@@ -209,5 +209,14 @@
   "fitCanvas": "符合影像",
   "drawingViewport": "繪圖視窗",
   "precisionHelp": "放大後可精細編輯。選擇平移、使用捲軸，或聚焦畫布並按方向鍵移動。筆刷大小以來源像素為單位。",
-  "scanRepair": "轉換完成。這些字格需要較簡單的輪廓，請調整雜點過濾、裁切或來源影像："
+  "scanRepair": "轉換完成。這些字格需要較簡單的輪廓，請調整雜點過濾、裁切或來源影像：",
+  "reviewedCount": "已檢視",
+  "nextReview": "下一個待檢視",
+  "allReviewed": "全部字形已檢視",
+  "spacingTitle": "字型間距",
+  "wordSpace": "字間空白",
+  "wordSpaceHelp": "空白字元的寬度，以字型單位計，範圍 100 到 1000。",
+  "matchBearing": "將此側邊距套用到所有拉丁字母",
+  "spaceInvalid": "字間空白必須是 100 到 1000 之間的整數。",
+  "bearingApplied": "已複製側邊距。變更的字母數："
 }

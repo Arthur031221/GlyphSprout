@@ -49,6 +49,7 @@ export interface Project {
   characters: string[];
   glyphs: Record<string, Glyph>;
   pages: ScanPage[];
+  spaceWidth?: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -56,6 +57,9 @@ export interface Project {
 export const MAX_GLYPHS = 512;
 export const MAX_CONTOURS_PER_GLYPH = 4096;
 export const MAX_POINTS_PER_GLYPH = 32760;
+export const DEFAULT_SPACE_WIDTH = 350;
+export const MIN_SPACE_WIDTH = 100;
+export const MAX_SPACE_WIDTH = 1000;
 export const BASELINE = 0.78;
 export const UNITS_PER_EM = 1000;
 export const DEFAULT_SETTINGS: GlyphSettings = {

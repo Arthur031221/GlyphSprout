@@ -1,8 +1,14 @@
 import { useRef, useState } from "react";
 import { fontGlyph } from "../core/font";
-import { blankGlyph, validateSettings } from "../core/project";
+import { blankGlyph, spaceWidth, validateSettings } from "../core/project";
+import { isCjk } from "../core/text";
 import { grayscale, trace } from "../core/trace";
-import type { Glyph, GlyphSettings, Project } from "../core/types";
+import {
+  DEFAULT_SPACE_WIDTH,
+  type Glyph,
+  type GlyphSettings,
+  type Project,
+} from "../core/types";
 import { decodeCell } from "./browser";
 import { errorKey, type MessageKey } from "./i18n";
 
@@ -175,6 +181,52 @@ export function useGlyphEditor(
     return applied;
   }
 
+  async function wordSpace(value: number) {
+    if (!(await flush())) return false;
+    const current = projectRef.current;
+    if (!current) return false;
+    try {
+      const width = spaceWidth(value);
+      if (width !== (current.spaceWidth ?? DEFAULT_SPACE_WIDTH))
+        commit({ ...current, spaceWidth: width });
+      return true;
+    } catch {
+      notice({ key: "spaceInvalid", tone: "error" });
+      return false;
+    }
+  }
+
+  async function matchSideBearing(character: string) {
+    if (!(await flush())) return;
+    const current = projectRef.current;
+    const sideBearing = current?.glyphs[character]?.settings.sideBearing;
+    if (!current || sideBearing === undefined) return;
+    const glyphs = { ...current.glyphs };
+    const changed: string[] = [];
+    try {
+      for (const [ch, glyph] of Object.entries(glyphs)) {
+        if (isCjk(ch) || glyph.settings.sideBearing === sideBearing) continue;
+        const next = {
+          ...glyph,
+          settings: { ...glyph.settings, sideBearing },
+        };
+        if (next.contours.length) fontGlyph(next);
+        glyphs[ch] = next;
+        changed.push(ch);
+      }
+      if (!changed.length) return;
+      for (const ch of changed) cancel(ch);
+      commit({ ...current, glyphs });
+      notice({
+        key: "bearingApplied",
+        detail: String(changed.length),
+        tone: "info",
+      });
+    } catch (error) {
+      notice({ key: errorKey(error, "settingsInvalid"), tone: "error" });
+    }
+  }
+
   function drawing(
     character: string,
     source: string,
@@ -223,5 +275,15 @@ export function useGlyphEditor(
     }
   }
 
-  return { mutate, settings, drawing, flush, busy, cancel, cancellation };
+  return {
+    mutate,
+    settings,
+    wordSpace,
+    matchSideBearing,
+    drawing,
+    flush,
+    busy,
+    cancel,
+    cancellation,
+  };
 }

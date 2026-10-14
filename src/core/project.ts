@@ -7,6 +7,8 @@ import {
   MAX_CONTOURS_PER_GLYPH,
   MAX_GLYPHS,
   MAX_POINTS_PER_GLYPH,
+  MAX_SPACE_WIDTH,
+  MIN_SPACE_WIDTH,
 } from "./types";
 
 export const MAX_PROJECT_BYTES = 96 * 1024 * 1024;
@@ -95,6 +97,12 @@ function date(value: unknown): string {
   const s = string(value, 40);
   if (!Number.isFinite(Date.parse(s))) throw new Error("invalidProject");
   return s;
+}
+
+export function spaceWidth(value: unknown): number {
+  const width = number(value, MIN_SPACE_WIDTH, MAX_SPACE_WIDTH);
+  if (!Number.isInteger(width)) throw new Error("invalidProject");
+  return width;
 }
 
 export function validateSettings(value: unknown): GlyphSettings {
@@ -235,6 +243,9 @@ export function validateProject(value: unknown): Project {
     characters: analysis.characters,
     glyphs,
     pages,
+    ...(p.spaceWidth === undefined
+      ? {}
+      : { spaceWidth: spaceWidth(p.spaceWidth) }),
     createdAt: date(p.createdAt),
     updatedAt: date(p.updatedAt),
   };

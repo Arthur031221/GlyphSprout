@@ -3,7 +3,7 @@ import { createFont, woff2 } from "fonteditor-core";
 import { isCjk } from "./text";
 import { signedArea } from "./trace";
 import type { Glyph, Project } from "./types";
-import { BASELINE, UNITS_PER_EM } from "./types";
+import { BASELINE, DEFAULT_SPACE_WIDTH, UNITS_PER_EM } from "./types";
 
 export function missingCharacters(project: Project): string[] {
   return project.characters.filter(
@@ -120,7 +120,7 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     xMax: 0,
     yMin: 0,
     yMax: 0,
-    advanceWidth: 350,
+    advanceWidth: project.spaceWidth ?? DEFAULT_SPACE_WIDTH,
     leftSideBearing: 0,
     name: "space",
     unicode: [32],

@@ -209,5 +209,14 @@
   "fitCanvas": "适合图像",
   "drawingViewport": "绘图窗口",
   "precisionHelp": "放大后可精细编辑。选择平移、使用滚动条，或聚焦画布并按方向键移动。画笔大小以原图像素为单位。",
-  "scanRepair": "转换完成。这些字格需要较简单的轮廓，请调整杂点过滤、裁切或来源图像："
+  "scanRepair": "转换完成。这些字格需要较简单的轮廓，请调整杂点过滤、裁切或来源图像：",
+  "reviewedCount": "已检查",
+  "nextReview": "下一个待检查",
+  "allReviewed": "全部字形已检查",
+  "spacingTitle": "字体间距",
+  "wordSpace": "词间空格",
+  "wordSpaceHelp": "空格字符的宽度，以字体单位计，范围 100 到 1000。",
+  "matchBearing": "将此侧边距应用到所有拉丁字母",
+  "spaceInvalid": "词间空格必须是 100 到 1000 之间的整数。",
+  "bearingApplied": "已复制侧边距。更改的字母数："
 }

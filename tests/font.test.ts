@@ -1,7 +1,12 @@
 import { createFont } from "fonteditor-core";
 import { expect, it } from "vitest";
 import { buildTtf, fontGlyph } from "../src/core/font";
-import { blankGlyph, newProject } from "../src/core/project";
+import {
+  blankGlyph,
+  newProject,
+  parseProject,
+  serializeProject,
+} from "../src/core/project";
 import type { Project } from "../src/core/types";
 
 it("checks the actual rounding phase before losing a contour edge", () => {
@@ -73,4 +78,35 @@ it("keeps font identity stable across revisions of one named project", () => {
     },
   };
   expect(names(revision)).toEqual(names(project));
+});
+
+function spaceAdvance(project: Project): number {
+  const font = createFont(buildTtf(project), { type: "ttf" }).get();
+  const space = font.glyf.find((glyph) => glyph.unicode?.includes(32));
+  if (!space) throw new Error("missing space glyph");
+  return space.advanceWidth ?? 0;
+}
+
+it("uses the project word space for the space glyph", () => {
+  const project = namedProject("Spacing");
+  expect(spaceAdvance(project)).toBe(350);
+  project.spaceWidth = 520;
+  expect(spaceAdvance(project)).toBe(520);
+});
+
+it("keeps the word space through a project round trip and rejects bad values", () => {
+  const project = namedProject("Spacing");
+  project.glyphs.A.source = "data:image/png;base64,iVBORw0KGgo=";
+  project.spaceWidth = 480;
+  expect(parseProject(serializeProject(project)).spaceWidth).toBe(480);
+  project.spaceWidth = undefined;
+  expect(parseProject(serializeProject(project)).spaceWidth).toBeUndefined();
+  project.spaceWidth = 480;
+  for (const bad of [99, 1001, 350.5, "350", null]) {
+    const broken = JSON.parse(serializeProject(project));
+    broken.spaceWidth = bad;
+    expect(() => parseProject(JSON.stringify(broken))).toThrow(
+      "invalidProject",
+    );
+  }
 });
