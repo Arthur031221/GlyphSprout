@@ -5,12 +5,7 @@ import {
   UploadSimple,
 } from "@phosphor-icons/react";
 import { type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
-import {
-  homography,
-  projectPoint,
-  sampleCell,
-  validateCorners,
-} from "../core/geometry";
+import { homography, projectPoint, validateCorners } from "../core/geometry";
 import {
   cellRect,
   pageCharacters,
@@ -21,71 +16,11 @@ import {
 import type { Point, Project } from "../core/types";
 import { download, printSheets, svgUrl } from "./browser";
 import { type Dictionary, errorKey } from "./i18n";
+import { RectifiedPreview } from "./RectifiedPreview";
 import type { Notice } from "./useGlyphEditor";
 import type { DraftPage, useScans } from "./useScans";
 
 type Scans = ReturnType<typeof useScans>;
-
-function RectifiedPreview({ page, t }: { page: DraftPage; t: Dictionary }) {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const [error, setError] = useState(false);
-  useEffect(() => {
-    let canceled = false;
-    setError(false);
-    const image = new Image();
-    image.src = page.image;
-    void image
-      .decode()
-      .then(() => {
-        if (canceled || !canvas.current) return;
-        validateCorners(page.corners, page.width, page.height);
-        const source = document.createElement("canvas");
-        source.width = image.naturalWidth;
-        source.height = image.naturalHeight;
-        const ctx = source.getContext("2d", { willReadFrequently: true });
-        const dest = canvas.current.getContext("2d");
-        if (!ctx || !dest) return;
-        ctx.drawImage(image, 0, 0);
-        const rgba = ctx.getImageData(0, 0, source.width, source.height).data;
-        const map = homography(TEMPLATE.markers, page.corners);
-        const pixels = sampleCell(
-          rgba,
-          source.width,
-          source.height,
-          map,
-          { x: 0, y: 0, width: TEMPLATE.width, height: TEMPLATE.height },
-          384,
-        );
-        dest.putImageData(
-          new ImageData(new Uint8ClampedArray(pixels), 384, 384),
-          0,
-          0,
-        );
-      })
-      .catch(() => {
-        if (!canceled) setError(true);
-      });
-    return () => {
-      canceled = true;
-    };
-  }, [page.image, page.corners, page.width, page.height]);
-  return (
-    <figure className="rectified-preview">
-      <figcaption>{t.correctedPreview}</figcaption>
-      {error ? (
-        <p className="bad">{t.invalidCorners}</p>
-      ) : (
-        <canvas
-          ref={canvas}
-          width={384}
-          height={384}
-          role="img"
-          aria-label={t.correctedPreview}
-        />
-      )}
-    </figure>
-  );
-}
 
 function Registration({
   page,
@@ -98,8 +33,32 @@ function Registration({
   scans: Scans;
   t: Dictionary;
 }) {
-  const active = useRef<{ pointerId: number; corner: number } | null>(null);
+  const active = useRef<{
+    pointerId: number;
+    corner: number;
+    offset: Point;
+  } | null>(null);
   const svg = useRef<SVGSVGElement>(null);
+  const [displayScale, setDisplayScale] = useState(0);
+  useEffect(() => {
+    const element = svg.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) =>
+      setDisplayScale(
+        Math.min(
+          entry.contentRect.width / page.width,
+          entry.contentRect.height / page.height,
+        ),
+      ),
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [page.width, page.height]);
+  const markerRadius = Math.max(page.width / 55, 10);
+  const hitRadius = Math.max(
+    markerRadius,
+    displayScale > 0 ? 24 / displayScale : 0,
+  );
   const disabled = scans.busy || scans.reading || !scans.compatible;
   const names = [t.topLeft, t.topRight, t.bottomRight, t.bottomLeft];
   const polygons = useMemo(() => {
@@ -132,8 +91,8 @@ function Registration({
     point.y = event.clientY;
     const local = point.matrixTransform(matrix.inverse());
     scans.corner(active.current.corner, {
-      x: Math.max(0, Math.min(page.width, local.x)),
-      y: Math.max(0, Math.min(page.height, local.y)),
+      x: Math.max(0, Math.min(page.width, local.x - active.current.offset.x)),
+      y: Math.max(0, Math.min(page.height, local.y - active.current.offset.y)),
     });
   }
   function finish(event: PointerEvent<SVGSVGElement>) {
@@ -155,45 +114,65 @@ function Registration({
           <polygon key={points} points={points} fill="none" />
         ))}
         {page.corners.map((p, i) => (
-          <circle
-            key={names[i]}
-            cx={p.x}
-            cy={p.y}
-            r={Math.max(page.width / 55, 10)}
-            className="corner-handle"
-            role="slider"
-            tabIndex={disabled ? -1 : 0}
-            aria-disabled={disabled}
-            aria-label={names[i]}
-            aria-valuemin={0}
-            aria-valuemax={page.width}
-            aria-valuenow={Math.round(p.x)}
-            aria-valuetext={`${Math.round(p.x)}, ${Math.round(p.y)}`}
-            onPointerDown={(e) => {
-              if (disabled || active.current !== null || e.button !== 0) return;
-              e.preventDefault();
-              active.current = { pointerId: e.pointerId, corner: i };
-              e.currentTarget.setPointerCapture(e.pointerId);
-            }}
-            onKeyDown={(e) => {
-              if (disabled) return;
-              const delta = e.shiftKey ? 10 : 1;
-              const directions: Record<string, Point> = {
-                ArrowLeft: { x: -delta, y: 0 },
-                ArrowRight: { x: delta, y: 0 },
-                ArrowUp: { x: 0, y: -delta },
-                ArrowDown: { x: 0, y: delta },
-              };
-              const d = directions[e.key];
-              if (d) {
+          <g key={names[i]}>
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={hitRadius}
+              className="corner-handle"
+              role="slider"
+              tabIndex={disabled ? -1 : 0}
+              aria-disabled={disabled}
+              aria-label={names[i]}
+              aria-valuemin={0}
+              aria-valuemax={page.width}
+              aria-valuenow={Math.round(p.x)}
+              aria-valuetext={`${Math.round(p.x)}, ${Math.round(p.y)}`}
+              onPointerDown={(e) => {
+                if (disabled || active.current !== null || e.button !== 0)
+                  return;
+                const element = svg.current;
+                const matrix = element?.getScreenCTM();
+                if (!element || !matrix) return;
+                const point = element.createSVGPoint();
+                point.x = e.clientX;
+                point.y = e.clientY;
+                const local = point.matrixTransform(matrix.inverse());
                 e.preventDefault();
-                scans.corner(i, {
-                  x: Math.max(0, Math.min(page.width, p.x + d.x)),
-                  y: Math.max(0, Math.min(page.height, p.y + d.y)),
-                });
-              }
-            }}
-          />
+                active.current = {
+                  pointerId: e.pointerId,
+                  corner: i,
+                  offset: { x: local.x - p.x, y: local.y - p.y },
+                };
+                e.currentTarget.setPointerCapture(e.pointerId);
+              }}
+              onKeyDown={(e) => {
+                if (disabled) return;
+                const delta = e.shiftKey ? 10 : 1;
+                const directions: Record<string, Point> = {
+                  ArrowLeft: { x: -delta, y: 0 },
+                  ArrowRight: { x: delta, y: 0 },
+                  ArrowUp: { x: 0, y: -delta },
+                  ArrowDown: { x: 0, y: delta },
+                };
+                const d = directions[e.key];
+                if (d) {
+                  e.preventDefault();
+                  scans.corner(i, {
+                    x: Math.max(0, Math.min(page.width, p.x + d.x)),
+                    y: Math.max(0, Math.min(page.height, p.y + d.y)),
+                  });
+                }
+              }}
+            />
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={markerRadius}
+              className="corner-marker"
+              focusable="false"
+            />
+          </g>
         ))}
       </svg>
     </div>

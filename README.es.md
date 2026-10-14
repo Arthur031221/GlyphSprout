@@ -11,7 +11,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.284 bytes, comprobado con
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.2
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.

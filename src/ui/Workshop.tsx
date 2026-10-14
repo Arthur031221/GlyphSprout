@@ -45,7 +45,13 @@ function Outline({ glyph, t }: { glyph: Glyph; t: Dictionary }) {
         role="img"
         aria-label={`${t.outline} ${glyph.character}`}
       >
-        <line x1={left} y1={900} x2={left + width} y2={900} />
+        <line
+          x1={left}
+          y1={900}
+          x2={left + width}
+          y2={900}
+          vectorEffect="non-scaling-stroke"
+        />
         <path d={path} />
       </svg>
     );

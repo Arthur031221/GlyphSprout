@@ -197,5 +197,6 @@
   "removeScan": "移除掃描",
   "setupDraftStatus": "設定變更尚未套用",
   "setupUnsaved": "字型名稱與字元變更尚未儲存，也不會包含在下載檔案中。請到「字元」選擇「專案已就緒」以套用。",
-  "scanTemplateChanged": "這些掃描屬於另一份字元範本。請使用復原或重做恢復原範本，或移除掃描並上傳目前範本的紙張。"
+  "scanTemplateChanged": "這些掃描屬於另一份字元範本。請使用復原或重做恢復原範本，或移除掃描並上傳目前範本的紙張。",
+  "previewUpdating": "正在更新校正預覽..."
 }

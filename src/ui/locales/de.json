@@ -197,5 +197,6 @@
   "removeScan": "Scan entfernen",
   "setupDraftStatus": "Einrichtungsänderungen nicht angewendet",
   "setupUnsaved": "Änderungen am Schriftnamen und an den Zeichen sind nicht gespeichert und nicht in Downloads enthalten. Wähle Projekt bereit unter Zeichen, um sie anzuwenden.",
-  "scanTemplateChanged": "Diese Scans gehören zu einer anderen Zeichenvorlage. Stelle sie mit Rückgängig oder Wiederholen wieder her, oder entferne die Scans und lade Blätter der aktuellen Vorlage hoch."
+  "scanTemplateChanged": "Diese Scans gehören zu einer anderen Zeichenvorlage. Stelle sie mit Rückgängig oder Wiederholen wieder her, oder entferne die Scans und lade Blätter der aktuellen Vorlage hoch.",
+  "previewUpdating": "Korrigierte Vorschau wird aktualisiert..."
 }

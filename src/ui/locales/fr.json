@@ -197,5 +197,6 @@
   "removeScan": "Supprimer le scan",
   "setupDraftStatus": "Modifications de configuration non appliquées",
   "setupUnsaved": "Les modifications du nom de la police et des caractères ne sont ni enregistrées ni incluses dans les téléchargements. Choisissez Projet prêt dans Caractères pour les appliquer.",
-  "scanTemplateChanged": "Ces scans appartiennent à un autre modèle de caractères. Rétablissez ce modèle avec Annuler ou Rétablir, ou supprimez les scans et importez les feuilles du modèle actuel."
+  "scanTemplateChanged": "Ces scans appartiennent à un autre modèle de caractères. Rétablissez ce modèle avec Annuler ou Rétablir, ou supprimez les scans et importez les feuilles du modèle actuel.",
+  "previewUpdating": "Mise à jour de l'aperçu corrigé..."
 }

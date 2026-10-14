@@ -197,5 +197,6 @@
   "removeScan": "Remover escaneamento",
   "setupDraftStatus": "Alterações de configuração não aplicadas",
   "setupUnsaved": "As alterações do nome da fonte e dos caracteres não são salvas nem incluídas nos downloads. Selecione Projeto pronto em Caracteres para aplicá-las.",
-  "scanTemplateChanged": "Estas digitalizações pertencem a outro modelo de caracteres. Restaure-o com Desfazer ou Refazer, ou remova as digitalizações e envie folhas do modelo atual."
+  "scanTemplateChanged": "Estas digitalizações pertencem a outro modelo de caracteres. Restaure-o com Desfazer ou Refazer, ou remova as digitalizações e envie folhas do modelo atual.",
+  "previewUpdating": "Atualizando a prévia corrigida..."
 }

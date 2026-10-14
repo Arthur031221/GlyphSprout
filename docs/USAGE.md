@@ -5,14 +5,17 @@
 1. Open the local workshop and choose the characters your project needs.
 2. Print the generated A4 template at actual size. Write one character in each cell.
 3. Add a flat, evenly lit PNG or JPEG scan. Confirm its printed page ID and the four page corners.
-4. Review each traced glyph. Adjust its threshold, speck filter, crop, size, offsets, and spacing, or draw and erase directly on the source.
-5. Type a specimen in the live preview and download a TTF or WOFF2 font.
+4. Click **Convert scans** and wait for conversion to finish.
+5. Review each traced glyph. Adjust its threshold, speck filter, crop, size, offsets, and spacing, or draw and erase directly on the source.
+6. Type a specimen in the live preview and download a TTF or WOFF2 font.
 
 Each A4 sheet has 35 cells. A project supports at most 512 supported BMP characters and 15 template pages. Drag a page corner with one finger or the left mouse button. A second finger leaves that drag and the other corners unchanged. You can also use the corner coordinates or arrow keys for fine adjustments. Confirming the visible page ID, page assignment, and interior alignment enables **Convert scans**. Click it to start conversion in a browser worker.
 
 The font name and character text in Characters are drafts until you choose **Project ready**. They remain in the form while you move between Characters, Pages, and Workshop. A status and notice identify unapplied setup changes, and the workshop warns before the page is closed or reloaded. Backups and font downloads use the applied project values until setup is submitted. Fields you have not edited follow Undo and Redo. Any text you are still editing stays in place. A successful submission normalizes the raw input. Replacing a project resets the drafts, including when you load the same sample again. Unapplied setup changes are not saved or recovered after a page reload.
 
 Staged scans belong to the character template used when they were added. If Undo or Redo changes that template, conversion and alignment controls are disabled. The scans, confirmation and corner positions remain intact. Restore their template with Undo or Redo to continue, or remove the staged scans and upload sheets for the current template. Renaming a font keeps its template compatible.
+
+The corrected page preview updates as you adjust the four corners. Large scans are decoded once in a browser worker, so dragging does not repeatedly read the image on the main thread. Corner handles accept touches within 24 pixels of their centers and also support the arrow keys and numeric fields. An updating or error message appears below the preview.
 
 ## Edit and review glyphs
 
