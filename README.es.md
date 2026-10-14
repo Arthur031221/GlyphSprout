@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.16.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.17.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -37,7 +37,7 @@ Amplía la imagen para corregir detalles. El tamaño del lápiz y del borrador s
 
 Marcar como revisado espera a que terminen los ajustes de tinta y recorte. Si una celda tiene demasiados puntos o contornos para exportarla, la conversión conserva su imagen y muestra el carácter afectado. Las demás celdas se convierten. Ajusta el filtro de manchas, el recorte o la imagen y revisa el glifo corregido.
 
-El avance de la revisión aparece junto a la lista de glifos. **Siguiente por revisar** salta al próximo glifo sin comprobar y las teclas de flecha se mueven entre glifos. El panel de espaciado fija el espacio entre palabras de toda la fuente y puede copiar el espaciado lateral latino de un glifo a todas las letras latinas. **Descargar imagen de muestra** guarda el texto de vista previa como PNG. **Copiar CSS de fuente web** pone una regla `@font-face` en el portapapeles para usar los archivos descargados en un sitio web, y **Zoom de la vista previa** cambia el tamaño de la muestra en vivo. El panel **Información de la fuente** guarda el diseñador, el aviso de copyright y la licencia en la fuente exportada, y puede rellenar la SIL Open Font License con un clic.
+El avance de la revisión aparece junto a la lista de glifos. Cada casilla de la lista dibuja el contorno trazado, así que un glifo diminuto o mal colocado se nota de un vistazo. **Siguiente por revisar** salta al próximo glifo sin comprobar y las teclas de flecha se mueven entre glifos. El panel de espaciado fija el espacio entre palabras de toda la fuente y puede copiar el espaciado lateral latino de un glifo a todas las letras latinas. **Descargar imagen de muestra** guarda el texto de vista previa como PNG. **Copiar CSS de fuente web** pone una regla `@font-face` en el portapapeles para usar los archivos descargados en un sitio web, y **Zoom de la vista previa** cambia el tamaño de la muestra en vivo. El panel **Información de la fuente** guarda el diseñador, el aviso de copyright y la licencia en la fuente exportada, y puede rellenar la SIL Open Font License con un clic.
 
 El nombre de la fuente y el texto de caracteres en «Characters» se conservan como borradores al cambiar de sección. Pulsa **Project ready** para aplicarlos. Las copias de seguridad y las fuentes descargadas conservan los valores aplicados hasta entonces. Los cambios sin aplicar se pierden al recargar la página.
 

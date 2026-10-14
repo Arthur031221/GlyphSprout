@@ -1,6 +1,5 @@
 import {
   CheckCircle,
-  Circle,
   Copy,
   DownloadSimple,
   Pen,
@@ -26,6 +25,7 @@ import {
 } from "../core/types";
 import { download } from "./browser";
 import { Drawing } from "./Drawing";
+import { GlyphTile } from "./GlyphTile";
 import { type Dictionary, errorKey } from "./i18n";
 import type { useGlyphEditor } from "./useGlyphEditor";
 
@@ -300,27 +300,14 @@ export function Workshop({
             const glyph = project.glyphs[ch];
             const ready = !!glyph?.contours.length;
             return (
-              <button
-                type="button"
+              <GlyphTile
                 key={ch}
-                className={`glyph-tile ${ch === selected ? "active" : ""} ${ready ? "done" : "missing"}`}
-                aria-label={`${ch} ${glyph?.reviewed ? t.reviewedLabel : ready ? t.needsReview : t.missing}`}
-                aria-pressed={ch === selected}
-                onClick={() => {
-                  onSelect(ch);
-                }}
-              >
-                <span>{ch}</span>
-                <small>
-                  {glyph?.reviewed ? (
-                    <CheckCircle size={14} weight="fill" />
-                  ) : ready ? (
-                    <Circle size={12} />
-                  ) : (
-                    ""
-                  )}
-                </small>
-              </button>
+                character={ch}
+                glyph={glyph}
+                active={ch === selected}
+                label={`${ch} ${glyph?.reviewed ? t.reviewedLabel : ready ? t.needsReview : t.missing}`}
+                onSelect={onSelect}
+              />
             );
           })}
         </div>

@@ -94,6 +94,40 @@ export function fontGlyph(glyph: Glyph): TTF.Glyph {
   };
 }
 
+// Path and viewBox for a small preview of the exported outline; null when the
+// glyph is empty or its outline can't be built.
+export function glyphThumbnail(
+  glyph: Glyph | undefined,
+): { path: string; box: string } | null {
+  if (!glyph?.contours.length) return null;
+  try {
+    const shape = fontGlyph(glyph);
+    const path = shape.contours
+      .map(
+        (contour) =>
+          `${contour
+            .map((p, i) => `${i ? "L" : "M"}${p.x} ${900 - p.y}`)
+            .join(" ")}Z`,
+      )
+      .join(" ");
+    // Fit the ink, not the whole em box, so small glyphs stay readable. The
+    // minimum side keeps a period or a hyphen from filling the tile.
+    const inkWidth = shape.xMax - shape.xMin;
+    const inkHeight = shape.yMax - shape.yMin;
+    const pad = Math.max(inkWidth, inkHeight, 200) * 0.08;
+    const width = Math.max(inkWidth, 200) + pad * 2;
+    const height = Math.max(inkHeight, 200) + pad * 2;
+    const left = shape.xMin - (width - inkWidth) / 2;
+    const top = 900 - shape.yMax - (height - inkHeight) / 2;
+    return {
+      path,
+      box: [left, top, width, height].map((n) => +n.toFixed(1)).join(" "),
+    };
+  } catch {
+    return null;
+  }
+}
+
 // Format 0 `kern` table with one horizontal subtable. Browsers, FreeType and
 // word processors apply it without any layout tables, so a font that has no
 // GPOS still kerns. Glyph indices follow the order set in buildTtf.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.17.0
+
+The glyph list in the Workshop now shows each glyph's own traced outline instead of the typed character. Before this, every tile looked the same in the system font, so you had to open each glyph to find one that was tiny, cut off or in the wrong place. The outline is scaled to fit the tile and the character stays in the tile's corner. Glyphs that are missing, or whose outline can't be built, still show the typed character. The tiles keep their accessible names, so screen readers and the arrow keys work as before.
+
+Unit tests cover the outline path and the empty and invalid cases, and browser tests check the tiles for the sample and after clearing a glyph. No new interface text was needed.
+
 ## 1.16.0
 
 The Characters stage now accepts Greek, Cyrillic and Korean Hangul. Before this, those letters were rejected as unsupported, so the Korean interface could not be used to make a Korean font and Greek or Russian text could not be set up at all. The quick-add row has three new buttons: **Greek** (49 letters), **Cyrillic** (the 66 letters of the Russian alphabet, including the letter io) and **Hangul letters** (the 51 basic jamo). Whole Hangul syllables can be typed or pasted directly. Adding every set at once still fits the 512 glyph limit.

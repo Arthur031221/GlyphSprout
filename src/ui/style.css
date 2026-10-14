@@ -747,6 +747,19 @@ fieldset {
   color: var(--muted);
   height: 12px;
 }
+.glyph-tile .glyph-thumb {
+  width: 100%;
+  height: 34px;
+  padding: 0 4px;
+  fill: var(--ink);
+}
+.glyph-tile .glyph-tile-char {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  font-size: 10px;
+  color: var(--muted);
+}
 .glyph-tile.active {
   outline: 2px solid var(--accent);
   outline-offset: -2px;
