@@ -26,7 +26,7 @@ Each glyph has its own threshold, minimum speck area, stroke weight from -3 to 3
 
 ## Appearance and language
 
-Choose light, dark, or system theme and one of nine interface languages: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, Spanish, French, German, or Brazilian Portuguese. These settings affect the interface, not the character coverage of the exported font.
+The first visit opens in the first of your browser's languages that GlyphSprout has, and in English when none matches. Chinese follows the script or region: Traditional for Hant, Taiwan, Hong Kong and Macau, Simplified otherwise, and any Portuguese opens the Brazilian Portuguese interface. Once you pick a language it stays chosen. Choose light, dark, or system theme and one of nine interface languages: English, Traditional Chinese, Simplified Chinese, Japanese, Korean, Spanish, French, German, or Brazilian Portuguese. These settings affect the interface, not the character coverage of the exported font.
 
 ## Local storage and offline cache
 

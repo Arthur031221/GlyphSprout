@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.29.0
+
+The interface now opens in your browser's language on the first visit. GlyphSprout has had nine interface languages for a long time, but everyone started in English and had to find the language menu. A browser set to Japanese, Korean, Spanish, French, German or Portuguese now opens in that language. Chinese is split by script or region, with Traditional for Hant, Taiwan, Hong Kong and Macau and Simplified otherwise. A browser language the app doesn't have still opens in English, and a language you choose in the menu always wins on later visits.
+
+Unit tests cover the language mapping and the order of the browser's list. Browser tests open the app with a Hong Kong Chinese browser, switch to English and reload, and open it with Italian.
+
 ## 1.28.0
 
 Dashes, the ellipsis and non-breaking spaces now type with the glyphs you already wrote. Text from a phone, a web page or a word processor is full of en and em dashes, the minus sign, the single ellipsis character and spaces that don't break lines. A font that only had a hyphen, periods and a word space showed the dashes and the ellipsis in red in the live preview and dropped all of them from the TTF and WOFF2 files, so the reader's system substituted another font in the middle of a sentence. The hyphen glyph now covers the hyphen variants, the figure dash, the en and em dashes, the horizontal bar and the minus sign. The ellipsis is built from three copies of your period outline and keeps the period's own spacing. Non-breaking, narrow non-breaking and the fixed width spaces from en space to hair space use the word space of the font. A dash or ellipsis you add to the project keeps its own glyph, and nothing changes when the hyphen or period glyph is missing. Nothing is saved in the project, so existing backups gain the behavior without a format change. The extra space code points grow the Paper Bloom sample TTF from 3,360 to 3,448 bytes, and the validation notes and checks use the new size.

@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,448 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.28.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.29.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.

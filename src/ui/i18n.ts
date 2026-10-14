@@ -34,6 +34,24 @@ export const languages: [Locale, string][] = [
   ["pt-BR", "Português (Brasil)"],
 ];
 
+export function detectLocale(preferred: readonly string[]): Locale {
+  for (const tag of preferred) {
+    const parts = tag.toLowerCase().split("-");
+    const [language, ...rest] = parts;
+    if (language === "zh") {
+      const traditional =
+        rest.includes("hant") ||
+        (!rest.includes("hans") &&
+          ["tw", "hk", "mo"].some((region) => rest.includes(region)));
+      return traditional ? "zh-TW" : "zh-CN";
+    }
+    const match = languages.find(([code]) => code.toLowerCase() === language);
+    if (match) return match[0];
+    if (language === "pt") return "pt-BR";
+  }
+  return "en";
+}
+
 export function errorKey(
   error: unknown,
   fallback: MessageKey = "invalidProject",

@@ -28,6 +28,7 @@ import {
   validateImages,
 } from "./browser";
 import {
+  detectLocale,
   dictionaries,
   errorKey,
   type Locale,
@@ -50,8 +51,10 @@ export function App() {
   const local = useProject();
   const { project, projectRef, commit } = local;
   const [locale, setLocale] = useState<Locale>(() => {
-    const value = preference("glyphsprout.locale", "en");
-    return value in dictionaries ? (value as Locale) : "en";
+    const value = preference("glyphsprout.locale", "");
+    return value in dictionaries
+      ? (value as Locale)
+      : detectLocale(navigator.languages ?? [navigator.language]);
   });
   const [theme, setTheme] = useState(() =>
     preference("glyphsprout.theme", "system"),
