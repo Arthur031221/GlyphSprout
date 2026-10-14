@@ -231,5 +231,5 @@
   "copyWebCss": "Copier le CSS de police web",
   "cssCopied": "CSS de police web copié. Placez-le à côté des fichiers de police téléchargés.",
   "cssCopyFailed": "Le navigateur a bloqué la copie. Autorisez l'accès au presse-papiers puis réessayez.",
-  "previewSize": "Taille de l'aperçu"
+  "previewZoom": "Zoom de l'aperçu"
 }

@@ -501,8 +501,8 @@ export function App() {
                 onChange={(e) => setSpecimen(e.target.value)}
               />
             </label>
-            <label className="size-control">
-              {t.previewSize}
+            <label className="zoom-control">
+              {t.previewZoom}
               <input
                 type="range"
                 min={24}

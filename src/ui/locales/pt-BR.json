@@ -231,5 +231,5 @@
   "copyWebCss": "Copiar CSS de fonte web",
   "cssCopied": "CSS de fonte web copiado. Salve-o ao lado dos arquivos de fonte baixados.",
   "cssCopyFailed": "O navegador bloqueou a cópia. Permita o acesso à área de transferência e tente de novo.",
-  "previewSize": "Tamanho da pré-visualização"
+  "previewZoom": "Zoom da pré-visualização"
 }

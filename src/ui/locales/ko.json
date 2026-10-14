@@ -231,5 +231,5 @@
   "copyWebCss": "웹 폰트 CSS 복사",
   "cssCopied": "웹 폰트 CSS를 복사했습니다. 내려받은 글꼴 파일 옆에 두세요.",
   "cssCopyFailed": "브라우저가 복사를 막았습니다. 클립보드 권한을 허용한 뒤 다시 시도하세요.",
-  "previewSize": "미리보기 크기"
+  "previewZoom": "미리보기 확대"
 }

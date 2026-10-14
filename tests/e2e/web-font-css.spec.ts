@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 
-test("web font CSS is copied and the preview size slider resizes the specimen", async ({
+test("web font CSS is copied and the preview zoom slider resizes the specimen", async ({
   page,
 }) => {
   await page.addInitScript(() => {
@@ -30,7 +30,7 @@ test("web font CSS is copied and the preview size slider resizes the specimen", 
 
   const copy = page.locator(".hero-copy");
   const before = await copy.evaluate((el) => getComputedStyle(el).fontSize);
-  await page.getByLabel("Preview size").fill("40");
+  await page.getByLabel("Preview zoom").fill("40");
   await expect(copy).toHaveCSS("font-size", "40px");
   expect(before).not.toBe("40px");
 });

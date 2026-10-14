@@ -1,0 +1,13 @@
+{
+  "name": "GlyphSprout Workshop",
+  "short_name": "GlyphSprout",
+  "description": "Turn handwriting pages into a font subset, entirely in your browser.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f2f5f6",
+  "theme_color": "#286c56",
+  "icons": [
+    { "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
