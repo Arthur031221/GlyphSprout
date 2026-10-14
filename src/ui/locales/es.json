@@ -208,5 +208,6 @@
   "zoomOut": "Alejar",
   "fitCanvas": "Ajustar imagen",
   "drawingViewport": "Área de dibujo",
-  "precisionHelp": "Amplía para editar detalles. Usa Mover, las barras de desplazamiento o enfoca el lienzo y pulsa las flechas. El tamaño del pincel se mide en píxeles de origen."
+  "precisionHelp": "Amplía para editar detalles. Usa Mover, las barras de desplazamiento o enfoca el lienzo y pulsa las flechas. El tamaño del pincel se mide en píxeles de origen.",
+  "scanRepair": "Conversión terminada. Estas celdas necesitan contornos más simples. Ajusta el filtro de motas, el recorte o la imagen original:"
 }

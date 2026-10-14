@@ -1,7 +1,8 @@
 import { base64 } from "../core/bytes";
 import { homography, sampleCell } from "../core/geometry";
+import { traceScannedCell } from "../core/scan";
 import { cellRect, TEMPLATE } from "../core/template";
-import { grayscale, trace } from "../core/trace";
+import { grayscale } from "../core/trace";
 import { defaultSettings } from "../core/types";
 
 self.onmessage = async (event: MessageEvent) => {
@@ -46,7 +47,12 @@ self.onmessage = async (event: MessageEvent) => {
           0,
         );
         const settings = defaultSettings();
-        const result = trace(grayscale(pixels), size, size, settings);
+        const result = traceScannedCell(
+          character,
+          grayscale(pixels),
+          size,
+          size,
+        );
         const png = await cell.convertToBlob({ type: "image/png" });
         const source = `data:image/png;base64,${base64(new Uint8Array(await png.arrayBuffer()))}`;
         pageGlyphs.push({
@@ -55,6 +61,7 @@ self.onmessage = async (event: MessageEvent) => {
           source,
           settings,
           removedPixels: result.removedPixels,
+          needsRepair: result.needsRepair,
           pageId: page.id,
         });
         self.postMessage({

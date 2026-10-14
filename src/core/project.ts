@@ -2,11 +2,15 @@ import { validateCorners } from "./geometry";
 import { analyzeText } from "./text";
 import { signedArea } from "./trace";
 import type { Glyph, GlyphSettings, Point, Project, ScanPage } from "./types";
-import { defaultSettings, MAX_GLYPHS } from "./types";
+import {
+  defaultSettings,
+  MAX_CONTOURS_PER_GLYPH,
+  MAX_GLYPHS,
+  MAX_POINTS_PER_GLYPH,
+} from "./types";
 
 export const MAX_PROJECT_BYTES = 96 * 1024 * 1024;
 export const MAX_IMAGE_BYTES = 16 * 1024 * 1024;
-const MAX_POINTS_PER_GLYPH = 32760;
 
 export function newProject(name: string, input: string): Project {
   const analysis = analyzeText(input);
@@ -148,7 +152,10 @@ export function validateProject(value: unknown): Project {
       typeof g.reviewed !== "boolean"
     )
       throw new Error("invalidProject");
-    if (!Array.isArray(g.contours) || g.contours.length > 4096)
+    if (
+      !Array.isArray(g.contours) ||
+      g.contours.length > MAX_CONTOURS_PER_GLYPH
+    )
       throw new Error("invalidProject");
     let count = 0;
     const contours = g.contours.map((contour) => {

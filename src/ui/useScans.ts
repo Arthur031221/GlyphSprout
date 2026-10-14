@@ -14,7 +14,9 @@ export interface DraftPage extends ScanPage {
 }
 interface ScanResult {
   pageId: string;
-  pageGlyphs: Omit<Glyph, "reviewed" | "origin">[];
+  pageGlyphs: (Omit<Glyph, "reviewed" | "origin"> & {
+    needsRepair?: boolean;
+  })[];
 }
 type Response = { jobId: string; projectId: string } & (
   | { type: "progress"; done: number; total: number }
@@ -228,17 +230,20 @@ export function useScans(
         }
         try {
           const glyphs = { ...snapshot.glyphs };
+          const repairs: string[] = [];
           const pages = snapshot.pages.filter(
             (page) =>
               !drafts.some((draft) => draft.pageIndex === page.pageIndex),
           );
           for (const result of message.results) {
-            for (const glyph of result.pageGlyphs)
+            for (const { needsRepair, ...glyph } of result.pageGlyphs) {
+              if (needsRepair) repairs.push(glyph.character);
               glyphs[glyph.character] = {
                 ...glyph,
                 reviewed: false,
                 origin: "scan",
               };
+            }
           }
           // Replacing a page also retires old associations, including empty glyph cells.
           const retired = new Set(
@@ -265,7 +270,9 @@ export function useScans(
           });
           setDrafts([]);
           setIndex(0);
-          notify({ key: "scanComplete" });
+          if (repairs.length)
+            notify({ key: "scanRepair", detail: repairs.join(" ") });
+          else notify({ key: "scanComplete" });
         } catch (error) {
           notify({ key: errorKey(error, "scanFailed"), tone: "error" });
         }

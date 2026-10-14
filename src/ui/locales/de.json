@@ -208,5 +208,6 @@
   "zoomOut": "Verkleinern",
   "fitCanvas": "Bild einpassen",
   "drawingViewport": "Zeichenbereich",
-  "precisionHelp": "Zum Bearbeiten von Details vergrößern. Mit Verschieben, den Scrollleisten oder den Pfeiltasten im fokussierten Zeichenbereich bewegen. Größen werden in Quellpixeln gemessen."
+  "precisionHelp": "Zum Bearbeiten von Details vergrößern. Mit Verschieben, den Scrollleisten oder den Pfeiltasten im fokussierten Zeichenbereich bewegen. Größen werden in Quellpixeln gemessen.",
+  "scanRepair": "Konvertierung abgeschlossen. Diese Zellen brauchen einfachere Konturen. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an:"
 }
