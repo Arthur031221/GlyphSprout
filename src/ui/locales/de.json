@@ -136,7 +136,7 @@
   "blankCharacters": "Gib mindestens ein unterstütztes Zeichen ein.",
   "projectFileTooLarge": "Die Projektdatei muss kleiner als 96 MiB sein.",
   "duplicatePage": "Weise jedes Bild einer anderen Seite zu. Ersetze Seiten in einem separaten Umwandlungslauf.",
-  "scanCanceled": "Scanumwandlung abgebrochen. Die aktuellen Glyphen wurden nicht geändert.",
+  "scanCanceled": "Die Umwandlung wurde abgebrochen. Scans und Ausrichtung bleiben für einen neuen Versuch erhalten.",
   "scanComplete": "Scans umgewandelt. Prüfe jeden Glyphe vor dem Export.",
   "settingsInvalid": "Halte die Einstellungen in den angezeigten Bereichen und erhalte mindestens 5 % des Zuschnitts.",
   "fontPreparing": "Schriftvorschau wird erstellt...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "Einrichtungsänderungen nicht angewendet",
   "setupUnsaved": "Änderungen am Schriftnamen und an den Zeichen sind nicht gespeichert und nicht in Downloads enthalten. Wähle Projekt bereit unter Zeichen, um sie anzuwenden.",
   "scanTemplateChanged": "Diese Scans gehören zu einer anderen Zeichenvorlage. Stelle sie mit Rückgängig oder Wiederholen wieder her, oder entferne die Scans und lade Blätter der aktuellen Vorlage hoch.",
-  "previewUpdating": "Korrigierte Vorschau wird aktualisiert..."
+  "previewUpdating": "Korrigierte Vorschau wird aktualisiert...",
+  "stopConversion": "Umwandlung stoppen",
+  "discardScans": "Vorgemerkte Scans verwerfen",
+  "panCanvas": "Verschieben",
+  "penSize": "Stiftgröße, Quellpixel",
+  "eraserSize": "Radierergröße, Quellpixel",
+  "zoomIn": "Vergrößern",
+  "zoomOut": "Verkleinern",
+  "fitCanvas": "Bild einpassen",
+  "drawingViewport": "Zeichenbereich",
+  "precisionHelp": "Zum Bearbeiten von Details vergrößern. Mit Verschieben, den Scrollleisten oder den Pfeiltasten im fokussierten Zeichenbereich bewegen. Größen werden in Quellpixeln gemessen."
 }

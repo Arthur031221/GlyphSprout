@@ -356,7 +356,7 @@ test("canceling a pending real worker leaves the saved glyphs intact", async ({
   await page.getByRole("button", { name: "Convert scans" }).click();
   await page
     .locator(".scan-job")
-    .getByRole("button", { name: "Cancel", exact: true })
+    .getByRole("button", { name: "Stop conversion", exact: true })
     .click();
   await expect(
     page
@@ -551,7 +551,7 @@ test("35+ character two-page batches reject duplicate assignments and invalidate
   await expect(page.getByRole("alert")).toContainText(
     "Move the corners into a valid",
   );
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByRole("button", { name: "Discard staged scans" }).click();
   await expect(
     page.getByRole("button", { name: /Page 1: first.png/ }),
   ).toHaveCount(0);

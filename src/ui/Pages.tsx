@@ -445,9 +445,11 @@ export function Pages({
               >
                 {t.processScans}
               </button>
-              <button type="button" onClick={scans.cancel}>
-                {t.cancel}
-              </button>
+              {!scans.busy && (
+                <button type="button" onClick={scans.discard}>
+                  {t.discardScans}
+                </button>
+              )}
             </div>
           </>
         )}

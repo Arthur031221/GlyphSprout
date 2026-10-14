@@ -44,6 +44,37 @@ try {
     page.getByRole("button", { name: "Apply source edits", exact: true }),
   ).toBeEnabled();
   await canvas.scrollIntoViewIfNeeded();
+  await page.getByRole("button", { name: "Zoom in", exact: true }).click();
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Pan", exact: true }).click();
+  const view = await page.locator(".drawing-viewport").boundingBox();
+  if (!view) throw new Error("Source viewport is not visible.");
+  await page.mouse.move(view.x + view.width / 2, view.y + view.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(
+    view.x + view.width / 2 - 30,
+    view.y + view.height / 2 - 18,
+    { steps: 12 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Eraser", exact: true }).click();
+  await page.waitForTimeout(800);
+  await page
+    .getByLabel("Eraser size, source pixels", { exact: true })
+    .fill("12");
+  const zoomed = await canvas.boundingBox();
+  if (!zoomed) throw new Error("Magnified canvas is not visible.");
+  await page.mouse.move(view.x + view.width / 2, view.y + view.height / 2);
+  await page.mouse.down();
+  await page.mouse.move(
+    view.x + view.width / 2 + 22,
+    view.y + view.height / 2,
+    { steps: 10 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(1000);
+  await page.getByRole("button", { name: "Fit image", exact: true }).click();
   const bounds = await canvas.boundingBox();
   if (!bounds) throw new Error("Source editing canvas is not visible.");
   await page.getByRole("button", { name: "Eraser", exact: true }).click();

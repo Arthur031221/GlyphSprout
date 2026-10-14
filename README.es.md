@@ -11,7 +11,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.284 bytes, comprobado con
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -32,6 +32,8 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2.
 
 Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.
+
+Amplía la imagen para corregir detalles. El tamaño del lápiz y del borrador se mide en píxeles de origen, así que el ancho del trazo se mantiene al cambiar el zoom. Usa Mover, las barras de desplazamiento o las flechas. Detener la conversión conserva los escaneos, las esquinas y las confirmaciones para reintentarlo. Usa **Descartar escaneos pendientes** para eliminarlos.
 
 El nombre de la fuente y el texto de caracteres en «Characters» se conservan como borradores al cambiar de sección. Pulsa **Project ready** para aplicarlos. Las copias de seguridad y las fuentes descargadas conservan los valores aplicados hasta entonces. Los cambios sin aplicar se pierden al recargar la página.
 

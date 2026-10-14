@@ -11,7 +11,7 @@
 [開啟線上工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 授權條款](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。指令顯示就緒訊息後，請開啟 `http://127.0.0.1:4173`。
@@ -32,6 +32,8 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
 6. 在即時樣張輸入文字，然後下載 TTF 或 WOFF2。
 
 編輯字源會載入目前的像素，可用筆刷與橡皮擦局部修改，也可復原筆畫。此功能會保留字形設定與頁面指派。修改後的字源需要重新檢查。繪製字形從空白影像開始，會取代字形並重設設定。空白繪圖會遭到拒絕。沒有變動的字源編輯不會改變專案記錄。
+
+放大可修正細節。筆刷與橡皮擦大小以來源像素為單位，縮放不會改變筆畫寬度。可使用平移工具、捲軸或方向鍵移動影像。停止掃描轉換會保留掃描影像、角點位置與頁面確認，方便重試。選擇 **捨棄待處理掃描** 才會移除它們。
 
 在 Characters 輸入的字型名稱與字元文字會以草稿保留，切換頁面後仍可繼續編輯。選擇 **Project ready** 後才會套用。在此之前，備份與字型下載仍使用已套用的值。未套用的設定變更會在重新載入頁面後消失。
 

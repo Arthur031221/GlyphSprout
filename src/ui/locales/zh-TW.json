@@ -136,7 +136,7 @@
   "blankCharacters": "請輸入至少一個支援的字元。",
   "projectFileTooLarge": "專案檔案必須小於 96 MiB。",
   "duplicatePage": "請將每張影像指派至不同頁面，替換頁面請另開一批次轉換。",
-  "scanCanceled": "掃描轉換已取消，現有字形未變更。",
+  "scanCanceled": "掃描轉換已取消，掃描影像與對齊設定已保留，可再次轉換。",
   "scanComplete": "掃描已轉換，匯出前請檢查每個字形。",
   "settingsInvalid": "設定請維持在顯示範圍內，裁切範圍至少保留 5%。",
   "fontPreparing": "正在建立字體預覽...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "設定變更尚未套用",
   "setupUnsaved": "字型名稱與字元變更尚未儲存，也不會包含在下載檔案中。請到「字元」選擇「專案已就緒」以套用。",
   "scanTemplateChanged": "這些掃描屬於另一份字元範本。請使用復原或重做恢復原範本，或移除掃描並上傳目前範本的紙張。",
-  "previewUpdating": "正在更新校正預覽..."
+  "previewUpdating": "正在更新校正預覽...",
+  "stopConversion": "停止轉換",
+  "discardScans": "捨棄待處理掃描",
+  "panCanvas": "平移",
+  "penSize": "筆刷大小，來源像素",
+  "eraserSize": "橡皮擦大小，來源像素",
+  "zoomIn": "放大",
+  "zoomOut": "縮小",
+  "fitCanvas": "符合影像",
+  "drawingViewport": "繪圖視窗",
+  "precisionHelp": "放大後可精細編輯。選擇平移、使用捲軸，或聚焦畫布並按方向鍵移動。筆刷大小以來源像素為單位。"
 }

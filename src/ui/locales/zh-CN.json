@@ -136,7 +136,7 @@
   "blankCharacters": "请输入至少一个受支持的字符。",
   "projectFileTooLarge": "项目文件必须小于 96 MiB。",
   "duplicatePage": "请将每张图片分配到不同页面，替换页面请另开一批次转换。",
-  "scanCanceled": "扫描转换已取消，当前字形未更改。",
+  "scanCanceled": "扫描转换已取消，扫描图像与对齐设置已保留，可以重新转换。",
   "scanComplete": "扫描已转换，导出前请检查每个字形。",
   "settingsInvalid": "设置请保持在显示范围内，裁剪范围至少保留 5%。",
   "fontPreparing": "正在构建字体预览...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "设置更改尚未应用",
   "setupUnsaved": "字体名称与字符更改尚未保存，也不会包含在下载文件中。请到字符页面选择项目已就绪以应用。",
   "scanTemplateChanged": "这些扫描属于另一份字符模板。请使用撤销或重做恢复原模板，或移除扫描并上传当前模板的纸张。",
-  "previewUpdating": "正在更新校正预览..."
+  "previewUpdating": "正在更新校正预览...",
+  "stopConversion": "停止转换",
+  "discardScans": "丢弃待处理扫描",
+  "panCanvas": "平移",
+  "penSize": "画笔大小，原图像素",
+  "eraserSize": "橡皮擦大小，原图像素",
+  "zoomIn": "放大",
+  "zoomOut": "缩小",
+  "fitCanvas": "适合图像",
+  "drawingViewport": "绘图窗口",
+  "precisionHelp": "放大后可精细编辑。选择平移、使用滚动条，或聚焦画布并按方向键移动。画笔大小以原图像素为单位。"
 }

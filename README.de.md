@@ -11,7 +11,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.284 Byte große TTF-Datei,
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.3
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -32,6 +32,8 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter.
 
 Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
+
+Vergrößere das Bild, um Details zu korrigieren. Stift und Radierer werden in Quellpixeln bemessen, daher bleibt die Strichbreite beim Zoomen gleich. Bewege das Bild mit Verschieben, den Scrollleisten oder Pfeiltasten. Beim Stoppen der Umwandlung bleiben Scans, Eckpunkte und Seitenbestätigungen für einen neuen Versuch erhalten. Mit **Vorgemerkte Scans verwerfen** entfernst du sie.
 
 Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen den Bereichen als Entwürfe erhalten. Mit **Project ready** übernimmst du die Änderungen. Sicherungen und Schriftdateien verwenden bis dahin die übernommenen Werte. Nicht übernommene Änderungen gehen beim Neuladen verloren.
 
