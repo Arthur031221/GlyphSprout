@@ -824,6 +824,30 @@ fieldset {
   background: transparent;
   color: var(--accent);
 }
+.variant-box {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 8px;
+}
+.variant-box h3 {
+  margin: 0;
+  font-size: 0.95rem;
+}
+.variant-box p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.variant-box button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
 .editor-column {
   min-width: 0;
 }

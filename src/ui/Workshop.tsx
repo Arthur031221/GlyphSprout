@@ -3,6 +3,7 @@ import {
   Copy,
   DownloadSimple,
   Pen,
+  Plus,
   Trash,
 } from "@phosphor-icons/react";
 import {
@@ -21,6 +22,7 @@ import {
   type FontInfo,
   type Glyph,
   type GlyphSettings,
+  MAX_GLYPHS,
   MAX_KERN,
   MAX_KERN_PAIRS,
   MAX_SPACE_WIDTH,
@@ -29,6 +31,13 @@ import {
   OFL_URL,
   type Project,
 } from "../core/types";
+import {
+  canHaveVariant,
+  isVariant,
+  typedCharacters,
+  variantBase,
+  variantCandidates,
+} from "../core/variants";
 import { download } from "./browser";
 import { Drawing } from "./Drawing";
 import { GlyphTile } from "./GlyphTile";
@@ -247,6 +256,7 @@ export function Workshop({
   onDrawingChange,
   onDrawNext,
   onDrawingDirtyChange,
+  onVariants,
 }: {
   project: Project;
   t: Dictionary;
@@ -262,6 +272,7 @@ export function Workshop({
   onDrawingChange: (draft: DrawingDraft | null, applied?: boolean) => boolean;
   onDrawNext: (character: string) => void;
   onDrawingDirtyChange: (dirty: boolean) => void;
+  onVariants: (change: { add: string[] } | { remove: string }) => void;
 }) {
   const editorLaunch = useRef<HTMLButtonElement>(null);
   const drawingOpener = useRef<HTMLButtonElement | null>(null);
@@ -273,7 +284,12 @@ export function Workshop({
     const glyph = project.glyphs[ch];
     return !!glyph?.contours.length && !glyph.reviewed;
   });
-  const readyCount = project.characters.length - missing.length;
+  const readyCount = project.characters.filter(
+    (ch) => project.glyphs[ch]?.contours.length,
+  ).length;
+  const typedCount = typedCharacters(project.characters).length;
+  const candidates = variantCandidates(project);
+  const variantRoom = MAX_GLYPHS - project.characters.length;
   const selectedIndex = project.characters.indexOf(selected);
   const nextBlank = [
     ...project.characters.slice(selectedIndex + 1),
@@ -377,6 +393,37 @@ export function Workshop({
           <Pen />
           {t.draw}
         </button>
+        <div className="variant-box">
+          <h3>{t.variantTitle}</h3>
+          <p>{t.variantHelp}</p>
+          {selected && canHaveVariant(project, selected) && variantRoom > 0 && (
+            <button
+              type="button"
+              onClick={() => onVariants({ add: [selected] })}
+            >
+              <Plus />
+              {t.addVariant}
+            </button>
+          )}
+          {isVariant(selected) && (
+            <button
+              type="button"
+              onClick={() => onVariants({ remove: variantBase(selected) })}
+            >
+              <Trash />
+              {t.removeVariant}
+            </button>
+          )}
+          {candidates.length > 0 && variantRoom > 0 && (
+            <button
+              type="button"
+              onClick={() => onVariants({ add: candidates })}
+            >
+              <Plus />
+              {t.addVariantsAll} ({Math.min(candidates.length, variantRoom)})
+            </button>
+          )}
+        </div>
       </aside>
       <div className="editor-column">
         <section className="editor panel">
@@ -615,7 +662,7 @@ export function Workshop({
               disabled={
                 exportBusy ||
                 (missing.length > 0 && !partial) ||
-                missing.length === project.characters.length
+                missing.length === typedCount
               }
               onClick={() => onExport("ttf", partial)}
             >
@@ -627,7 +674,7 @@ export function Workshop({
               disabled={
                 exportBusy ||
                 (missing.length > 0 && !partial) ||
-                missing.length === project.characters.length
+                missing.length === typedCount
               }
               onClick={() => onExport("woff2", partial)}
             >
@@ -723,7 +770,7 @@ function KerningPanel({
   t: Dictionary;
   editor: Editor;
 }) {
-  const characters = project.characters;
+  const characters = typedCharacters(project.characters);
   const pairs = project.kerning ?? [];
   const [left, setLeft] = useState(selected || characters[0]);
   const [right, setRight] = useState(characters[1] ?? characters[0]);

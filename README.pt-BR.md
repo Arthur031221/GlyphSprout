@@ -13,7 +13,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fo
 ![Oficina real: apagar e corrigir um glifo digitalizado, conferir a prévia e baixar o TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.29.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.30.0
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.

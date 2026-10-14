@@ -13,10 +13,10 @@ The bundled Paper Bloom sample exports a 3,448 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.29.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.30.0
 ```
 
-You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
+You need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
 
 | Start with | Make |
 | --- | --- |
@@ -25,7 +25,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 ## Make your first font
 
 1. Start a project and pick the characters you need, such as `Hello!`. One click adds a whole set: uppercase letters, digits, punctuation, accented letters, Greek, Cyrillic, hiragana, katakana or Hangul.
-2. Print the template at actual size on A4 or US Letter paper and write one character in each cell. Print from the browser, or choose **Download all pages (PDF)** to get one file you can print from any PDF viewer or take to a print shop.
+2. Print the template at actual size on A4 or US Letter paper and write one character in each cell. You can print from the browser, or choose **Download all pages (PDF)** for one file to print from any PDF viewer or take to a print shop.
 3. Add an evenly lit scan. Choose it, drop it onto the scan section, or tap **Take a photo** on a phone, then confirm the page ID. GlyphSprout finds the four registration crosses and snaps the corners to them. Check each corner and fix any that are off.
 4. Click **Convert scans** and wait for it to finish. Cells with no ink are listed at the end, so a skipped letter or a wrong page choice shows up right away.
 5. Review each glyph. You can adjust the source, threshold, stroke weight, outline smoothing, crop, size, offsets and spacing. Every number setting has a slider beside it. Type a value and press Enter, or move the slider, and the outline updates when you let go. Ctrl+Z or Cmd+Z undoes a change, and adding Shift redoes it. Dashed guides in the outline view mark the left edge and the advance width, so you can watch a glyph's spacing as you adjust it.
@@ -37,6 +37,8 @@ Zoom in to fix small details. Pen and eraser sizes use source pixels, so zooming
 
 Mark reviewed waits for pending ink and crop adjustments. If a scan cell has too many points or contours to export, conversion keeps its source and names the character. Other cells still convert. Adjust the speck filter, crop or source, then review the repaired glyph.
 
+To write a letter twice, choose **Add a second version of every letter** in the Workshop, or add one for the selected letter. The font then alternates between the two versions as you type, so repeated letters look written instead of stamped. Each second version is one more cell on the template and counts toward the 512 character limit.
+
 Once one glyph looks right, **Use this threshold, speck filter, weight and smoothing for all glyphs** traces every other glyph again with the same values. Review progress shows beside the glyph list. Each tile in the list draws your traced outline, so a tiny or misplaced letter stands out at a glance. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. A checkbox there lets lowercase letters you didn't add use the shape of their uppercase glyphs, so a capitals only alphabet also types in lowercase. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
 
 Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads use the applied values. Reloading loses unapplied setup changes.
@@ -45,9 +47,9 @@ Font name and character text in Characters stay as drafts while you move between
 
 Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a project can use up to 15 pages. Latin, Greek and Cyrillic glyphs use proportional spacing by default. Han, kana and Hangul use a fixed cell advance. The interface comes in nine languages, with light and dark themes and a narrow-screen layout.
 
-Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. Conversion evens out soft shadows and dim light across each cell, but glare and deep shadows still need a better photo. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
+Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. Conversion evens out soft shadows and dim light across each cell, but glare and deep shadows need a better photo. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
 
-Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. Kerning is set one pair at a time, up to 500 pairs, and exported as a plain `kern` table. There's no curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
+Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. Kerning is set one pair at a time, up to 500 pairs, and exported as a plain `kern` table. Second versions of a letter are exported with a single `calt` rule in the `GSUB` table that alternates the two. There's no curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
 
 ## Keep your work
 

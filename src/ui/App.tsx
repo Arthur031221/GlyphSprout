@@ -21,6 +21,12 @@ import { createSyntheticProject } from "../core/synthetic";
 import { appendCharacters, charactersToAdd } from "../core/text";
 import type { Project } from "../core/types";
 import {
+  addVariants,
+  removeVariant,
+  typedCharacters,
+  variantIsLast,
+} from "../core/variants";
+import {
   chooseProject,
   download,
   downloadProject,
@@ -108,6 +114,7 @@ export function App() {
   const locked =
     scans.busy || scans.reading || sampleBusy || recoveryBusy || exportBusy;
   const missing = project ? missingCharacters(project) : [];
+  const typedCount = project ? typedCharacters(project.characters).length : 0;
 
   const hasDrafts = setupDirty || drawingDirty || scans.drafts.length > 0;
   const hasUnsavedWork =
@@ -377,6 +384,35 @@ export function App() {
     }
   }
 
+  async function changeVariants(
+    change: { add: string[] } | { remove: string },
+  ) {
+    if (!(await editor.flush())) return;
+    const current = projectRef.current;
+    if (!current || !changeDrawing(null)) return;
+    if (
+      "remove" in change &&
+      !variantIsLast(current, change.remove) &&
+      !window.confirm(t.variantShift)
+    )
+      return;
+    const next =
+      "add" in change
+        ? addVariants(current, change.add)
+        : removeVariant(current, change.remove);
+    if (next === current) return;
+    editor.cancel();
+    commit(next);
+    if (next.id !== current.id) scans.discard();
+    if ("add" in change) {
+      setSelected(next.characters[current.characters.length]);
+      setNotice({ key: "variantAdded" });
+    } else {
+      setSelected(change.remove);
+      setNotice({ key: "variantRemoved" });
+    }
+  }
+
   function clear(character: string) {
     const current = projectRef.current;
     if (!current) return;
@@ -588,7 +624,7 @@ export function App() {
               <strong>{project?.name ?? "GlyphSprout"}</strong>
               <span>
                 {project
-                  ? `${project.characters.length - missing.length} / ${project.characters.length} ${t.charactersLabel}`
+                  ? `${typedCount - missing.length} / ${typedCount} ${t.charactersLabel}`
                   : ""}
               </span>
             </div>
@@ -856,6 +892,9 @@ export function App() {
                 onDrawingChange={changeDrawing}
                 onDrawNext={drawNext}
                 onDrawingDirtyChange={setDrawingDirty}
+                onVariants={(change) => {
+                  void changeVariants(change);
+                }}
               />
             </div>
           )}

@@ -1,13 +1,20 @@
 import type { TTF } from "fonteditor-core";
 import { createFont, woff2 } from "fonteditor-core";
+import { type Alternate, gsubTable, withTable } from "./gsub";
 import { hasCrossings } from "./smooth";
 import { isCjk, isSupported } from "./text";
 import { signedArea } from "./trace";
 import type { Glyph, KernPair, Project } from "./types";
 import { BASELINE, DEFAULT_SPACE_WIDTH, UNITS_PER_EM } from "./types";
+import {
+  isVariant,
+  typedCharacters,
+  variantBase,
+  variantKey,
+} from "./variants";
 
 export function missingCharacters(project: Project): string[] {
-  return project.characters.filter(
+  return typedCharacters(project.characters).filter(
     (ch) => !project.glyphs[ch]?.contours.length,
   );
 }
@@ -285,14 +292,23 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
         ...(borrowed.get(source) ?? []),
         borrower.codePointAt(0) ?? 0,
       ]);
-  const glyphs = project.characters
-    .filter((ch) => project.glyphs[ch]?.contours.length)
-    .map((ch) => {
-      const glyph = fontGlyph(project.glyphs[ch]);
-      const extra = borrowed.get(ch);
-      if (extra) glyph.unicode = [...(glyph.unicode ?? []), ...extra];
+  // A second version is only used when the first version of its letter exists.
+  const keys = project.characters.filter(
+    (ch) =>
+      project.glyphs[ch]?.contours.length &&
+      (!isVariant(ch) || project.glyphs[variantBase(ch)]?.contours.length),
+  );
+  const glyphs = keys.map((ch) => {
+    const glyph = fontGlyph(project.glyphs[ch]);
+    if (isVariant(ch)) {
+      glyph.name = `${glyph.name}.alt`;
+      glyph.unicode = [];
       return glyph;
-    });
+    }
+    const extra = borrowed.get(ch);
+    if (extra) glyph.unicode = [...(glyph.unicode ?? []), ...extra];
+    return glyph;
+  });
   const period = glyphs.find((g) => g.unicode?.includes(0x2e));
   if (period && glyphFallbacks(project).has(ELLIPSIS))
     glyphs.push(ellipsisGlyph(period));
@@ -314,15 +330,25 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     unicode: [32, ...SPACE_CODEPOINTS],
   };
   data.glyf = [notdef, space, ...glyphs];
+  const glyphIndex = new Map(
+    glyphs.flatMap((g, i) =>
+      (g.unicode ?? []).map((cp) => [String.fromCodePoint(cp), i + 2] as const),
+    ),
+  );
+  // A second version keeps the kerning of its first version.
+  for (const [i, key] of keys.entries())
+    if (isVariant(key)) glyphIndex.set(key, i + 2);
   const kern = kernTable(
-    project.kerning ?? [],
-    new Map(
-      glyphs.flatMap((g, i) =>
-        (g.unicode ?? []).map(
-          (cp) => [String.fromCodePoint(cp), i + 2] as const,
-        ),
+    (project.kerning ?? []).flatMap((pair) =>
+      [pair.left, variantKey(pair.left)].flatMap((left) =>
+        [pair.right, variantKey(pair.right)].map((right) => ({
+          left,
+          right,
+          value: pair.value,
+        })),
       ),
     ),
+    glyphIndex,
   );
   if (kern.length) (data as { kern?: number[] }).kern = kern;
   const now = Date.parse(project.updatedAt);
@@ -364,7 +390,7 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     ...(project.info?.licenseUrl && { urlOfLicence: project.info.licenseUrl }),
   });
   font.set(data);
-  return arrayBuffer(
+  const ttf = arrayBuffer(
     font.write({
       type: "ttf",
       hinting: false,
@@ -372,6 +398,16 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
       writeZeroContoursGlyfData: true,
     }),
   );
+  const alternates: Alternate[] = [];
+  for (const [i, key] of keys.entries()) {
+    const base = isVariant(key) ? keys.indexOf(variantBase(key)) : -1;
+    if (base >= 0) alternates.push({ base: base + 2, alt: i + 2 });
+  }
+  if (!alternates.length) return ttf;
+  const firstVersions = glyphs
+    .map((_, i) => i + 2)
+    .filter((_, i) => !isVariant(keys[i] ?? ""));
+  return withTable(ttf, "GSUB", gsubTable(alternates, firstVersions));
 }
 
 let woffPromise: Promise<unknown> | undefined;

@@ -278,5 +278,13 @@
   "matchTracing": "Appliquer ce seuil, ce filtre de taches, cette épaisseur et ce lissage à tous les glyphes",
   "tracingApplied": "Tracé copié. Glyphes modifiés :",
   "tracingSkipped": "Certains glyphes n'ont pas pu être tracés avec ces valeurs et sont restés inchangés :",
-  "spacingGuides": "Les lignes verticales en pointillés marquent le bord gauche et la chasse. L'espace entre le glyphe et chaque ligne est son espacement."
+  "spacingGuides": "Les lignes verticales en pointillés marquent le bord gauche et la chasse. L'espace entre le glyphe et chaque ligne est son espacement.",
+  "variantTitle": "Secondes versions",
+  "variantHelp": "Écrivez une lettre deux fois et la police alterne entre les deux pendant la frappe, pour que les lettres répétées aient l'air écrites à la main plutôt que tamponnées. Chaque seconde version ajoute une case au gabarit.",
+  "addVariant": "Ajouter une seconde version de cette lettre",
+  "addVariantsAll": "Ajouter une seconde version de chaque lettre",
+  "removeVariant": "Retirer cette seconde version",
+  "variantShift": "Retirer une case au milieu décale les suivantes, et les pages imprimées ne correspondent plus. Les pages numérisées sont dissociées et vos glyphes sont conservés. Continuer ?",
+  "variantAdded": "Secondes versions ajoutées. Imprimez de nouveau le gabarit pour les écrire, ou dessinez-les ici.",
+  "variantRemoved": "Seconde version retirée."
 }

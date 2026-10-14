@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.30.0
+
+You can now write a letter twice and the font alternates between the two versions as you type. Stamped looking repeats are the most obvious sign of a computer font: every `l` in `hello` is the same shape. The Workshop has a new Second versions box. **Add a second version of every letter** adds one more template cell for each Latin, Greek and Cyrillic letter, and a button next to the selected glyph adds one for a single letter. The new cells follow the typed characters on the template, and you can draw them, scan them and adjust them like any other glyph. The exported TTF and WOFF2 files carry a `calt` rule that switches a letter to its second version whenever the letter before it is a first version, so words start with a first version and alternate from there. Second versions count toward the 512 character limit, kerning set for a letter applies to its second version too, and a second version without ink is ignored. Removing one from the middle of the list asks first, because the cells after it move and the scan assignments are cleared. Your glyphs are kept.
+
+Unit tests cover the project rules, the backup round trip, removal and a checked `GSUB` table, including its checksums and both lookups. Browser tests add, draw, save and remove a second version, check in the browser that the exported font really alternates, and check the Traditional Chinese labels. The new text is translated in all nine interface languages.
+
 ## 1.29.0
 
 The interface now opens in your browser's language on the first visit. GlyphSprout has had nine interface languages for a long time, but everyone started in English and had to find the language menu. A browser set to Japanese, Korean, Spanish, French, German or Portuguese now opens in that language. Chinese is split by script or region, with Traditional for Hant, Taiwan, Hong Kong and Macau and Simplified otherwise. A browser language the app doesn't have still opens in English, and a language you choose in the menu always wins on later visits.

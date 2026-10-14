@@ -278,5 +278,13 @@
   "matchTracing": "Diesen Schwellenwert, Fleckenfilter, diese Strichstärke und Glättung für alle Glyphen verwenden",
   "tracingApplied": "Nachzeichnung kopiert. Geänderte Glyphen:",
   "tracingSkipped": "Einige Glyphen ließen sich mit diesen Werten nicht nachzeichnen und blieben unverändert:",
-  "spacingGuides": "Gestrichelte senkrechte Linien markieren den linken Rand und die Dickte. Der Abstand zwischen Glyphe und Linie ist ihr Zeichenabstand."
+  "spacingGuides": "Gestrichelte senkrechte Linien markieren den linken Rand und die Dickte. Der Abstand zwischen Glyphe und Linie ist ihr Zeichenabstand.",
+  "variantTitle": "Zweite Versionen",
+  "variantHelp": "Schreibe einen Buchstaben zweimal, und die Schrift wechselt beim Tippen zwischen beiden, damit wiederholte Buchstaben geschrieben statt gestempelt aussehen. Jede zweite Version ist ein weiteres Feld auf der Vorlage.",
+  "addVariant": "Zweite Version dieses Buchstabens hinzufügen",
+  "addVariantsAll": "Zweite Version für jeden Buchstaben hinzufügen",
+  "removeVariant": "Diese zweite Version entfernen",
+  "variantShift": "Wird ein Feld aus der Mitte entfernt, rücken die folgenden Felder nach, und die gedruckten Seiten passen nicht mehr. Die Scan-Zuordnungen werden entfernt, deine Glyphen bleiben erhalten. Fortfahren?",
+  "variantAdded": "Zweite Versionen hinzugefügt. Drucke die Vorlage erneut, um sie zu schreiben, oder zeichne sie hier.",
+  "variantRemoved": "Zweite Version entfernt."
 }

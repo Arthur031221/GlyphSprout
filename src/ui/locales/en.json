@@ -278,5 +278,13 @@
   "matchTracing": "Use this threshold, speck filter, weight and smoothing for all glyphs",
   "tracingApplied": "Tracing copied. Glyphs changed:",
   "tracingSkipped": "Some glyphs could not be traced with these values and were left as they were:",
-  "spacingGuides": "Dashed vertical lines mark the left edge and the advance width. The space between the glyph and each line is its spacing."
+  "spacingGuides": "Dashed vertical lines mark the left edge and the advance width. The space between the glyph and each line is its spacing.",
+  "variantTitle": "Second versions",
+  "variantHelp": "Write a letter twice and the font alternates between the two as you type, so repeated letters look written, not stamped. Each second version is one more cell on the template.",
+  "addVariant": "Add a second version of this letter",
+  "addVariantsAll": "Add a second version of every letter",
+  "removeVariant": "Remove this second version",
+  "variantShift": "Removing a cell from the middle moves the cells after it, so the printed pages no longer match. Scan assignments are removed and your glyphs are kept. Continue?",
+  "variantAdded": "Second versions added. Print the template again to write them, or draw them here.",
+  "variantRemoved": "Second version removed."
 }

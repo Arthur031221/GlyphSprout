@@ -278,5 +278,13 @@
   "matchTracing": "Usar este umbral, filtro de motas, grosor y suavizado en todos los glifos",
   "tracingApplied": "Trazado copiado. Glifos cambiados:",
   "tracingSkipped": "Algunos glifos no se pudieron trazar con estos valores y se dejaron como estaban:",
-  "spacingGuides": "Las líneas verticales discontinuas marcan el borde izquierdo y el ancho de avance. El espacio entre el glifo y cada línea es su espaciado."
+  "spacingGuides": "Las líneas verticales discontinuas marcan el borde izquierdo y el ancho de avance. El espacio entre el glifo y cada línea es su espaciado.",
+  "variantTitle": "Segundas versiones",
+  "variantHelp": "Escribe una letra dos veces y la fuente alterna entre las dos al teclear, de modo que las letras repetidas parezcan escritas a mano y no sellos. Cada segunda versión es una celda más en la plantilla.",
+  "addVariant": "Añadir una segunda versión de esta letra",
+  "addVariantsAll": "Añadir una segunda versión de cada letra",
+  "removeVariant": "Quitar esta segunda versión",
+  "variantShift": "Quitar una celda del medio desplaza las siguientes, y las páginas impresas dejan de coincidir. Se quitan las asignaciones de escaneo y se conservan tus glifos. ¿Continuar?",
+  "variantAdded": "Segundas versiones añadidas. Imprime la plantilla de nuevo para escribirlas o dibújalas aquí.",
+  "variantRemoved": "Segunda versión quitada."
 }

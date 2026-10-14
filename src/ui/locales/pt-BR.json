@@ -278,5 +278,13 @@
   "matchTracing": "Usar este limiar, filtro de manchas, espessura e suavização em todos os glifos",
   "tracingApplied": "Traçado copiado. Glifos alterados:",
   "tracingSkipped": "Alguns glifos não puderam ser traçados com esses valores e foram mantidos como estavam:",
-  "spacingGuides": "As linhas verticais tracejadas marcam a borda esquerda e a largura de avanço. O espaço entre o glifo e cada linha é o seu espaçamento."
+  "spacingGuides": "As linhas verticais tracejadas marcam a borda esquerda e a largura de avanço. O espaço entre o glifo e cada linha é o seu espaçamento.",
+  "variantTitle": "Segundas versões",
+  "variantHelp": "Escreva uma letra duas vezes e a fonte alterna entre as duas ao digitar, para que letras repetidas pareçam escritas à mão e não carimbadas. Cada segunda versão é mais uma célula no modelo.",
+  "addVariant": "Adicionar uma segunda versão desta letra",
+  "addVariantsAll": "Adicionar uma segunda versão de cada letra",
+  "removeVariant": "Remover esta segunda versão",
+  "variantShift": "Remover uma célula do meio desloca as seguintes, e as páginas impressas deixam de corresponder. As atribuições de digitalização são removidas e seus glifos são mantidos. Continuar?",
+  "variantAdded": "Segundas versões adicionadas. Imprima o modelo de novo para escrevê-las ou desenhe aqui.",
+  "variantRemoved": "Segunda versão removida."
 }

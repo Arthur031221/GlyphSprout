@@ -1,5 +1,5 @@
 import { validateCorners } from "./geometry";
-import { analyzeText } from "./text";
+import { analyzeText, isCjk } from "./text";
 import { signedArea } from "./trace";
 import type {
   FontInfo,
@@ -21,6 +21,7 @@ import {
   MAX_SPACE_WIDTH,
   MIN_SPACE_WIDTH,
 } from "./types";
+import { isVariant, typedCharacters, variantBase } from "./variants";
 
 export const MAX_PROJECT_BYTES = 96 * 1024 * 1024;
 export const MAX_IMAGE_BYTES = 16 * 1024 * 1024;
@@ -45,14 +46,24 @@ export function newProject(name: string, input: string): Project {
 }
 
 export function updateText(project: Project, input: string): Project {
-  const next = newProject(project.name, input);
-  if (JSON.stringify(next.characters) === JSON.stringify(project.characters))
-    return { ...project, text: next.text, updatedAt: next.updatedAt };
+  const typed = newProject(project.name, input);
+  const typedBefore = typedCharacters(project.characters);
+  if (JSON.stringify(typed.characters) === JSON.stringify(typedBefore))
+    return { ...project, text: typed.text, updatedAt: typed.updatedAt };
+  const next = {
+    ...typed,
+    characters: [
+      ...typed.characters,
+      ...project.characters.filter(
+        (ch) => isVariant(ch) && typed.characters.includes(variantBase(ch)),
+      ),
+    ],
+  };
   const { kerning: oldKerning, ...rest } = project;
   const kerning = (oldKerning ?? []).filter(
     (pair) =>
-      next.characters.includes(pair.left) &&
-      next.characters.includes(pair.right),
+      typed.characters.includes(pair.left) &&
+      typed.characters.includes(pair.right),
   );
   return {
     ...rest,
@@ -223,17 +234,30 @@ export function validateProject(value: unknown): Project {
     !analysis.characters.length
   )
     throw new Error("invalidProject");
+  if (!Array.isArray(p.characters)) throw new Error("invalidProject");
+  const cells = p.characters as unknown[];
+  const typedCells = cells.slice(0, analysis.characters.length);
+  const variantCells = cells.slice(analysis.characters.length);
   if (
-    !Array.isArray(p.characters) ||
-    JSON.stringify(p.characters) !== JSON.stringify(analysis.characters)
+    JSON.stringify(typedCells) !== JSON.stringify(analysis.characters) ||
+    cells.length > MAX_GLYPHS ||
+    new Set(variantCells).size !== variantCells.length ||
+    variantCells.some(
+      (key) =>
+        typeof key !== "string" ||
+        !isVariant(key) ||
+        isCjk(variantBase(key)) ||
+        !analysis.characters.includes(variantBase(key)),
+    )
   )
     throw new Error("invalidProject");
+  const allCells = cells as string[];
   const inputGlyphs = object(p.glyphs);
   if (Object.keys(inputGlyphs).length > MAX_GLYPHS)
     throw new Error("invalidProject");
   const glyphs: Record<string, Glyph> = {};
   for (const [ch, value] of Object.entries(inputGlyphs)) {
-    if (!analysis.characters.includes(ch)) throw new Error("invalidProject");
+    if (!allCells.includes(ch)) throw new Error("invalidProject");
     const g = object(value);
     if (
       g.character !== ch ||
@@ -287,7 +311,7 @@ export function validateProject(value: unknown): Project {
     const pageIndex = number(
       page.pageIndex,
       0,
-      Math.ceil(analysis.characters.length / 35) - 1,
+      Math.ceil(allCells.length / 35) - 1,
     );
     if (!Number.isInteger(pageIndex)) throw new Error("invalidProject");
     const corners = page.corners.map((p) =>
@@ -321,7 +345,7 @@ export function validateProject(value: unknown): Project {
     id: string(p.id, 100),
     name: string(p.name, 64),
     text,
-    characters: analysis.characters,
+    characters: allCells,
     glyphs,
     pages,
     ...(p.spaceWidth === undefined
