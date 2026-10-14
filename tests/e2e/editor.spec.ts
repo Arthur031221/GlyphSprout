@@ -203,7 +203,7 @@ for (const action of ["Undo", "Redo"] as const) {
   });
 }
 
-test("changing review state discards a canceled crop from the settings form", async ({
+test("changing review state preserves a pending crop in the settings form", async ({
   page,
 }) => {
   await ready(page);
@@ -211,13 +211,17 @@ test("changing review state discards a canceled crop from the settings form", as
   await holdDecode(page);
   await page.getByLabel("Crop edges Right").fill("0.5");
   await page.getByRole("button", { name: "Mark reviewed" }).click();
-  await expect(page.getByLabel("Crop edges Right")).toHaveValue("1");
+  await expect(page.getByLabel("Crop edges Right")).toHaveValue("0.5");
   await releaseDecode(page);
+  const reviewed = await backup(page);
+  expect(reviewed.glyphs.H.settings.crop.right).toBe(0.5);
+  expect(reviewed.glyphs.H.contours).not.toEqual(before.glyphs.H.contours);
+  expect(reviewed.glyphs.H.reviewed).toBe(true);
   await page.getByLabel("Size", { exact: true }).fill("1.2");
   await page.getByLabel("Size", { exact: true }).press("Tab");
   const after = await backup(page);
-  expect(after.glyphs.H.contours).toEqual(before.glyphs.H.contours);
-  expect(after.glyphs.H.settings.crop.right).toBe(1);
+  expect(after.glyphs.H.contours).toEqual(reviewed.glyphs.H.contours);
+  expect(after.glyphs.H.settings.crop.right).toBe(0.5);
   expect(after.glyphs.H.settings.scale).toBe(1.2);
   expect(after.glyphs.H.reviewed).toBe(false);
 });

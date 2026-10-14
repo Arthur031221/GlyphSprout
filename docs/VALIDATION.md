@@ -2,7 +2,7 @@
 
 ## What the headline measures
 
-The bundled Paper Bloom project has six letters: H, E, L, O, J and B. Its TTF is 3,284 bytes, or 3.3 kB using decimal units. This is one small sample, not a prediction for a 512 character font. Regenerate both formats from the committed project:
+The bundled Paper Bloom project has six letters: H, E, L, O, J and B. Its TTF is 3,360 bytes, or 3.4 kB using decimal units. This is one small sample, not a prediction for a 512 character font. Regenerate both formats from the committed project:
 
 ```sh
 npm ci
@@ -14,14 +14,14 @@ The script writes TTF and WOFF2 files to `artifacts/paper-bloom`. WOFF2 size can
 
 ## A real desktop application
 
-I opened the generated TTF in LibreOffice Writer 24.2.7.2 on Linux and exported a document containing `HELLO JOB` to PDF. Poppler's `pdffonts` reported an embedded TrueType font named PaperBloom. `pdftotext` preserved the exact text. The [resulting PDF](validation/paper-bloom.pdf) contains the embedded font and can be checked directly:
+For version 1.3.0, I opened the generated 3,284 byte TTF in LibreOffice Writer 24.2.7.2 on Linux and exported a document containing `HELLO JOB` to PDF. Poppler's `pdffonts` reported an embedded TrueType font named PaperBloom. `pdftotext` preserved the exact text. The [resulting PDF](validation/paper-bloom.pdf) contains the embedded font and can be checked directly:
 
 ```sh
 pdffonts docs/validation/paper-bloom.pdf
 pdftotext docs/validation/paper-bloom.pdf -
 ```
 
-This verifies that export path in that application. It is not a general desktop compatibility claim.
+Version 1.3.1 changes the internal font names to distinguish projects with similar or non Latin names. Its sample outlines and metrics are unchanged. The PDF above records the earlier export path in that application. It is not a general desktop compatibility claim.
 
 ## Independent font and source checks
 

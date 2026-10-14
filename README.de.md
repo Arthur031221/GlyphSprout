@@ -4,14 +4,14 @@
 
 Erstelle eine kleine Schrift für die Wörter und Namen deines Projekts. Drucke eine Vorlage, schreibe die gewünschten Zeichen hinein, prüfe die gescannten Konturen und exportiere eine Schrift zum Tippen.
 
-**Sechs handgeschriebene Buchstaben. Eine Schrift mit 3.3 kB.**
+**Sechs handgeschriebene Buchstaben. Eine Schrift mit 3.4 kB.**
 
-Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.284 Byte große TTF-Datei, geprüft mit Fontconfig und LibreOffice. Diese Messung bezieht sich auf sechs Buchstaben. [Messmethode und reproduzierbarer Export](docs/VALIDATION.md).
+Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei, geprüft mit Fontconfig und FreeType. Diese Messung bezieht sich auf sechs Buchstaben. [Messmethode und reproduzierbarer Export](docs/VALIDATION.md).
 
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -34,6 +34,8 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
 
 Vergrößere das Bild, um Details zu korrigieren. Stift und Radierer werden in Quellpixeln bemessen, daher bleibt die Strichbreite beim Zoomen gleich. Bewege das Bild mit Verschieben, den Scrollleisten oder Pfeiltasten. Beim Stoppen der Umwandlung bleiben Scans, Eckpunkte und Seitenbestätigungen für einen neuen Versuch erhalten. Mit **Vorgemerkte Scans verwerfen** entfernst du sie.
+
+Als geprüft markieren wartet, bis die Anpassungen an Tinte und Zuschnitt abgeschlossen sind. Hat eine Zelle zu viele Punkte oder Konturen für den Export, bleibt ihr Quellbild erhalten und das betroffene Zeichen wird angezeigt. Die anderen Zellen werden umgewandelt. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an und prüfe die korrigierte Glyphe.
 
 Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen den Bereichen als Entwürfe erhalten. Mit **Project ready** übernimmst du die Änderungen. Sicherungen und Schriftdateien verwenden bis dahin die übernommenen Werte. Nicht übernommene Änderungen gehen beim Neuladen verloren.
 
@@ -102,7 +104,7 @@ Lade WOFF2 herunter und binde die Datei mit `@font-face` ein. Die Schrift enthä
 
 Paper Bloom enthält sechs Buchstabenausschnitte aus dem gemeinfreien [NIST-SD19-Formular f1002_33](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png). Das vollständige Formular ist ausgeschlossen. Die [offizielle Datensatzseite](https://www.nist.gov/srd/nist-special-database-19), Ausschnittkoordinaten und die festgelegte Quell-Prüfsumme sind im [Prüfhandbuch](docs/VALIDATION.md) dokumentiert.
 
-Die exportierte Beispieldatei wurde in LibreOffice geöffnet und als PDF mit eingebetteter Schrift und erhaltenem Text gespeichert. Browser-Downloads beider Formate wurden mit FontTools geparst und mit FreeType gerendert. Die Referenzfälle decken Innenräume, abgesetzte Punkte, einen Unterlängenbuchstaben und Han-Striche in drei Rastergrößen ab. Methode, Ausschlüsse und Befehle stehen im Handbuch.
+Die Beispieldatei aus Version 1.3.0 wurde in LibreOffice geöffnet und als PDF mit eingebetteter Schrift und erhaltenem Text gespeichert. Version 1.3.1 ändert nur die internen Schriftnamen. Browser-Downloads beider Formate wurden mit FontTools geparst und mit FreeType gerendert. Die Referenzfälle decken Innenräume, abgesetzte Punkte, einen Unterlängenbuchstaben und Han-Striche in drei Rastergrößen ab. Methode, Ausschlüsse und Befehle stehen im Handbuch.
 
 ## Dokumentation und Entwicklung
 

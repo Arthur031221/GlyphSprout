@@ -4,14 +4,14 @@
 
 Créez une petite police pour les mots et les noms utilisés dans votre projet. Imprimez un modèle, écrivez chaque caractère, vérifiez les contours numérisés et exportez une police avec laquelle vous pourrez saisir du texte.
 
-**Six lettres manuscrites. Une police de 3.3 kB.**
+**Six lettres manuscrites. Une police de 3.4 kB.**
 
-L'exemple Paper Bloom fourni exporte un TTF de 3 284 octets, vérifié avec Fontconfig et LibreOffice. Cette mesure porte sur six lettres. [Méthode et export reproductible](docs/VALIDATION.md).
+L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Fontconfig et FreeType. Cette mesure porte sur six lettres. [Méthode et export reproductible](docs/VALIDATION.md).
 
 [Ouvrir l'atelier en ligne](https://Arthur031221.github.io/GlyphSprout/) | [Guide d'utilisation](docs/USAGE.md) | [![Licence MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -34,6 +34,8 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.
 
 Agrandissez l'image pour corriger les détails. La taille du stylo et de la gomme se mesure en pixels source, donc le zoom ne change pas la largeur du trait. Déplacez l'image avec l'outil Déplacer, les barres de défilement ou les flèches. Arrêter la conversion conserve les scans, les coins et les confirmations pour réessayer. Choisissez **Supprimer les scans en attente** pour les retirer.
+
+Marquer comme vérifié attend la fin des réglages d'encre et de recadrage. Si une case contient trop de points ou de contours pour être exportée, la conversion conserve son image et indique le caractère concerné. Les autres cases sont converties. Ajustez le filtre des taches, le recadrage ou l'image, puis vérifiez le glyphe corrigé.
 
 Le nom de la police et le texte des caractères dans « Characters » restent des brouillons lorsque vous changez de section. Choisissez **Project ready** pour les appliquer. Les sauvegardes et les polices téléchargées conservent jusque-là les valeurs appliquées. Les changements non appliqués sont perdus au rechargement.
 
@@ -102,7 +104,7 @@ Téléchargez le WOFF2 et chargez-le avec `@font-face`. La police ne contient qu
 
 Paper Bloom contient six découpes de lettres issues du domaine public, tirées du [formulaire f1002_33 de NIST SD19](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png). Le formulaire complet est exclu. La [page officielle du jeu de données](https://www.nist.gov/srd/nist-special-database-19), les coordonnées de découpe et la somme de contrôle figée de la source sont indiquées dans le [guide de validation](docs/VALIDATION.md).
 
-La police d'exemple exportée a été ouverte dans LibreOffice puis enregistrée en PDF avec la police intégrée et le texte conservé. Les téléchargements du navigateur dans les deux formats ont été analysés avec FontTools et rendus avec FreeType. Les cas de référence couvrent les contreformes, les points détachés, une descendante et des traits han à trois tailles de rasterisation. Consultez le guide pour la méthode, les exclusions et les commandes.
+La police d'exemple exportée avec la version 1.3.0 a été ouverte dans LibreOffice puis enregistrée en PDF avec la police intégrée et le texte conservé. La version 1.3.1 ne modifie que les noms internes de la police. Les téléchargements du navigateur dans les deux formats ont été analysés avec FontTools et rendus avec FreeType. Les cas de référence couvrent les contreformes, les points détachés, une descendante et des traits han à trois tailles de rasterisation. Consultez le guide pour la méthode, les exclusions et les commandes.
 
 ## Documentation et développement
 

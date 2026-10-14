@@ -1,6 +1,6 @@
 {
   "sample": "Paper Bloom",
-  "ttf_bytes": 3284,
+  "ttf_bytes": 3360,
   "measured_from": "Bundled project and actual browser download",
   "office": {
     "application": "LibreOffice 24.2.7.2",
@@ -11,12 +11,14 @@
     "pdf_embedded_font": "PaperBloom",
     "font_embedded": true,
     "text_preserved": true,
-    "method": "Generated TTF used by Writer to export a PDF. Poppler pdffonts confirms embedding and pdftotext checks exact text."
+    "method": "Generated TTF used by Writer to export a PDF. Poppler pdffonts confirms embedding and pdftotext checks exact text.",
+    "version": "1.3.0",
+    "ttf_bytes": 3284
   },
   "browser_export": {
     "source": "Actual browser downloads from the production workshop",
-    "ttf_bytes": 3284,
-    "woff2_bytes": 1100,
+    "ttf_bytes": 3360,
+    "woff2_bytes": 1132,
     "characters": 6,
     "raster_sizes": [
       20,

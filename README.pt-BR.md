@@ -4,14 +4,14 @@
 
 Crie uma fonte pequena para as palavras e os nomes usados no seu projeto. Imprima um modelo, escreva cada caractere, confira os contornos digitalizados e exporte uma fonte para usar ao digitar.
 
-**Seis letras manuscritas. Uma fonte de 3.3 kB.**
+**Seis letras manuscritas. Uma fonte de 3.4 kB.**
 
-A amostra Paper Bloom incluída exporta um TTF de 3.284 bytes, verificado com Fontconfig e LibreOffice. Essa medição corresponde a seis letras. [Método e exportação reproduzível](docs/VALIDATION.md).
+A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fontconfig e FreeType. Essa medição corresponde a seis letras. [Método e exportação reproduzível](docs/VALIDATION.md).
 
 [Abrir a oficina online](https://Arthur031221.github.io/GlyphSprout/) | [Guia do usuário](docs/USAGE.md) | [![Licença MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -34,6 +34,8 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 Editar origem carrega os pixels atuais e permite apagar, desenhar e desfazer traços locais. As configurações e a página atribuída são mantidas. Uma origem alterada precisa ser revisada. Desenhar um glifo começa com uma imagem vazia, substitui o glifo e redefine suas configurações. Desenhos sem tinta são rejeitados. Uma edição sem alterações não muda o histórico do projeto.
 
 Amplie para corrigir detalhes. Os tamanhos da caneta e da borracha usam pixels da origem, então o zoom mantém a largura do traço. Mova a imagem com Mover, as barras de rolagem ou as setas. Parar a conversão mantém as digitalizações, os cantos e as confirmações para tentar novamente. Use **Descartar digitalizações pendentes** para removê-las.
+
+Marcar como revisado espera o fim dos ajustes de tinta e recorte. Se uma célula tiver pontos ou contornos demais para exportar, a conversão mantém a imagem e indica o caractere afetado. As outras células são convertidas. Ajuste o filtro de manchas, o recorte ou a imagem e revise o glifo corrigido.
 
 O nome da fonte e o texto de caracteres em Characters continuam como rascunhos ao mudar de etapa. Selecione **Project ready** para aplicá-los. Até lá, backups e fontes baixadas mantêm os valores aplicados. Alterações não aplicadas são perdidas ao recarregar a página.
 
@@ -102,7 +104,7 @@ Baixe o WOFF2 e carregue-o com `@font-face`. A fonte contém apenas os caractere
 
 O Paper Bloom contém seis recortes de letras de domínio público, retirados do [formulário f1002_33 do NIST SD19](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png). O formulário completo não foi incluído. A [página oficial do conjunto de dados](https://www.nist.gov/srd/nist-special-database-19), as coordenadas dos recortes e o checksum fixado da fonte estão documentados no [guia de validação](docs/VALIDATION.md).
 
-A fonte de amostra exportada foi aberta no LibreOffice e salva como PDF com a fonte incorporada e o texto preservado. Os arquivos baixados pelo navegador nos dois formatos foram analisados com FontTools e renderizados com FreeType. Os casos de referência cobrem espaços internos, pontos destacados, uma descendente e traços han em três tamanhos de rasterização. Consulte o guia para o método, as exclusões e os comandos.
+A fonte de amostra exportada na versão 1.3.0 foi aberta no LibreOffice e salva como PDF com a fonte incorporada e o texto preservado. A versão 1.3.1 altera apenas os nomes internos da fonte. Os arquivos baixados pelo navegador nos dois formatos foram analisados com FontTools e renderizados com FreeType. Os casos de referência cobrem espaços internos, pontos destacados, uma descendente e traços han em três tamanhos de rasterização. Consulte o guia para o método, as exclusões e os comandos.
 
 ## Documentação e desenvolvimento
 

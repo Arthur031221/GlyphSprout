@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.3.1
+
+Marking a glyph reviewed waits for pending ink and crop adjustments and preserves undo history. Failed or canceled adjustments leave the review state unchanged.
+
+A scan cell with outlines that exceed export limits keeps its source for repair. Conversion lists the affected characters and retains the other glyphs. The warning is translated in all nine interface languages.
+
+Exported fonts have distinct internal names for separate projects and for family names that previously shared the same ASCII form. Updated the sample measurements, guides and demo recording.
+
 ## 1.3.0
 
 Stopping scan conversion keeps uploaded pages and their alignment ready to retry. Discarding staged scans is a separate action.

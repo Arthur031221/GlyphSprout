@@ -4,14 +4,14 @@
 
 为项目中实际使用的词语和名称制作小型字体。打印模板，写下字符，检查扫描后的轮廓，再导出可用于输入的字体。
 
-**六个手写字母。一款 3.3 kB 字体。**
+**六个手写字母。一款 3.4 kB 字体。**
 
-随附的 Paper Bloom 示例会导出 3,284 字节的 TTF，并经过 Fontconfig 和 LibreOffice 检查。这项测量仅涵盖六个字母。[测量方法和可复现的导出流程](docs/VALIDATION.md)。
+随附的 Paper Bloom 示例会导出 3,360 字节的 TTF，并经过 Fontconfig 和 FreeType 检查。这项测量仅涵盖六个字母。[测量方法和可复现的导出流程](docs/VALIDATION.md)。
 
 [打开在线工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 许可证](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。命令显示就绪信息后，打开 `http://127.0.0.1:4173`。
@@ -34,6 +34,8 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 编辑字源会载入当前像素，可用画笔和橡皮擦进行局部修改，也可撤销笔画。它会保留字形设置和页面分配。修改后的字源需要重新检查。绘制字形从空白图像开始，会替换字形并重置其设置。空白绘图会被拒绝。没有变化的字源编辑不会更改项目历史。
 
 放大可以修正细节。画笔和橡皮擦大小以原图像素为单位，缩放不会改变笔画宽度。可以使用平移工具、滚动条或方向键移动图像。停止扫描转换会保留扫描图像、角点位置和页面确认，方便重试。选择 **丢弃待处理扫描** 才会移除它们。
+
+标记已审阅会等待墨迹和裁剪调整完成。如果扫描字格的节点或轮廓过多而无法导出，转换会保留原图并列出受影响的字符，其他字格仍可正常转换。请调整杂点过滤、裁剪或原图，再审阅修复后的字形。
 
 在 Characters 中输入的字体名称和字符文字会作为草稿保留，切换页面后仍可继续编辑。选择 **Project ready** 后才会应用。在此之前，备份和字体下载仍使用已应用的值。未应用的设置更改会在重新加载页面后丢失。
 
@@ -102,7 +104,7 @@ fc-cache -f ~/.local/share/fonts
 
 Paper Bloom 包含取自公有领域 [NIST SD19 表单 f1002_33](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png) 的六个字母裁切图。完整表单未包含在内。[官方数据集页面](https://www.nist.gov/srd/nist-special-database-19)、裁切坐标和固定的来源校验和记载于[验证指南](docs/VALIDATION.md)。
 
-示例导出字体已在 LibreOffice 中打开，并保存为嵌入字体且保留文本的 PDF。两种格式的浏览器下载文件都用 FontTools 解析，并用 FreeType 渲染。参考测试涵盖封闭字腔、分离的小点、下伸笔画，以及三种栅格尺寸的汉字笔画。方法、排除项和命令请见指南。
+1.3.0 版导出的示例字体已在 LibreOffice 中打开，并保存为嵌入字体且保留文本的 PDF。1.3.1 版只更改内部字体名称。两种格式的浏览器下载文件都用 FontTools 解析，并用 FreeType 渲染。参考测试涵盖封闭字腔、分离的小点、下伸笔画，以及三种栅格尺寸的汉字笔画。方法、排除项和命令请见指南。
 
 ## 文档与开发
 

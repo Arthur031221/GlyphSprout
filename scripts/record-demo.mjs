@@ -111,6 +111,11 @@ try {
     .click();
   await expect(page.locator(".draft-notice")).toHaveCount(0);
   await page.getByText("Font preview ready", { exact: true }).waitFor();
+  await page.getByLabel("Ink threshold", { exact: true }).fill("140");
+  await page.getByRole("button", { name: "Mark reviewed" }).click();
+  await expect(
+    page.getByRole("button", { name: "Mark reviewed" }),
+  ).toHaveAttribute("aria-pressed", "true");
   await page.waitForTimeout(2600);
   await page.getByRole("button", { name: "Pages" }).click();
   await page

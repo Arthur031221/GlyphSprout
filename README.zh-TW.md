@@ -4,14 +4,14 @@
 
 為專案實際使用的詞語與名稱製作小型字型。列印範本、寫下字元、檢查掃描後的外框，再匯出可供輸入的字型。
 
-**六個手寫字母。一款 3.3 kB 字型。**
+**六個手寫字母。一款 3.4 kB 字型。**
 
-隨附的 Paper Bloom 範例會輸出 3,284 位元組的 TTF，並以 Fontconfig 和 LibreOffice 檢查。這項測量只涵蓋六個字母。[測量方法與可重現的匯出流程](docs/VALIDATION.md)。
+隨附的 Paper Bloom 範例會輸出 3,360 位元組的 TTF，並以 Fontconfig 和 FreeType 檢查。這項測量只涵蓋六個字母。[測量方法與可重現的匯出流程](docs/VALIDATION.md)。
 
 [開啟線上工作坊](https://Arthur031221.github.io/GlyphSprout/) | [使用指南](docs/USAGE.md) | [![MIT 授權條款](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。指令顯示就緒訊息後，請開啟 `http://127.0.0.1:4173`。
@@ -34,6 +34,8 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 編輯字源會載入目前的像素，可用筆刷與橡皮擦局部修改，也可復原筆畫。此功能會保留字形設定與頁面指派。修改後的字源需要重新檢查。繪製字形從空白影像開始，會取代字形並重設設定。空白繪圖會遭到拒絕。沒有變動的字源編輯不會改變專案記錄。
 
 放大可修正細節。筆刷與橡皮擦大小以來源像素為單位，縮放不會改變筆畫寬度。可使用平移工具、捲軸或方向鍵移動影像。停止掃描轉換會保留掃描影像、角點位置與頁面確認，方便重試。選擇 **捨棄待處理掃描** 才會移除它們。
+
+標記已審閱會等待墨跡與裁切調整完成。如果掃描字格的節點或輪廓過多而無法匯出，轉換會保留來源影像並列出受影響的字元，其他字格仍可正常轉換。請調整雜點過濾、裁切或來源影像，再審閱修復後的字形。
 
 在 Characters 輸入的字型名稱與字元文字會以草稿保留，切換頁面後仍可繼續編輯。選擇 **Project ready** 後才會套用。在此之前，備份與字型下載仍使用已套用的值。未套用的設定變更會在重新載入頁面後消失。
 
@@ -102,7 +104,7 @@ fc-cache -f ~/.local/share/fonts
 
 Paper Bloom 含有取自公有領域 [NIST SD19 表單 f1002_33](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png) 的六個字母裁切圖。未收錄完整表單。[官方資料集頁面](https://www.nist.gov/srd/nist-special-database-19)、裁切座標與固定的來源校驗碼都記載於[驗證指南](docs/VALIDATION.md)。
 
-範例匯出字型已在 LibreOffice 中開啟，並儲存為嵌入字型且保留文字的 PDF。兩種格式的瀏覽器下載檔都以 FontTools 解析，並以 FreeType 繪製。參考測試涵蓋封閉字腔、分離的小點、下伸筆畫，以及三種點陣尺寸的漢字筆畫。方法、排除項目與指令請見指南。
+1.3.0 版匯出的範例字型已在 LibreOffice 中開啟，並儲存為嵌入字型且保留文字的 PDF。1.3.1 版只更改內部字型名稱。兩種格式的瀏覽器下載檔都以 FontTools 解析，並以 FreeType 繪製。參考測試涵蓋封閉字腔、分離的小點、下伸筆畫，以及三種點陣尺寸的漢字筆畫。方法、排除項目與指令請見指南。
 
 ## 文件與開發
 

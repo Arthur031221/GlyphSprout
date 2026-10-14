@@ -209,5 +209,5 @@
   "fitCanvas": "Ajuster l'image",
   "drawingViewport": "Zone de dessin",
   "precisionHelp": "Agrandissez pour modifier les détails. Utilisez Déplacer, les barres de défilement ou les flèches lorsque le canevas a le focus. La taille est mesurée en pixels de l'image source.",
-  "scanRepair": "Conversion terminée. Ces cases nécessitent des contours plus simples. Ajustez le filtre des petits points, le recadrage ou l’image source :"
+  "scanRepair": "Conversion terminée. Ces cases nécessitent des contours plus simples. Ajustez le filtre des petits points, le recadrage ou l'image source :"
 }

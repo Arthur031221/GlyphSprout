@@ -4,14 +4,14 @@
 
 Crea una fuente pequeña para las palabras y los nombres que usa tu proyecto. Imprime una plantilla, escribe cada carácter, revisa los contornos escaneados y exporta una fuente que puedas usar al escribir.
 
-**Seis letras manuscritas. Una fuente de 3.3 kB.**
+**Seis letras manuscritas. Una fuente de 3.4 kB.**
 
-La muestra incluida de Paper Bloom exporta un TTF de 3.284 bytes, comprobado con Fontconfig y LibreOffice. Esta medición corresponde a seis letras. [Método y exportación reproducible](docs/VALIDATION.md).
+La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con Fontconfig y FreeType. Esta medición corresponde a seis letras. [Método y exportación reproducible](docs/VALIDATION.md).
 
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.1
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -34,6 +34,8 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.
 
 Amplía la imagen para corregir detalles. El tamaño del lápiz y del borrador se mide en píxeles de origen, así que el ancho del trazo se mantiene al cambiar el zoom. Usa Mover, las barras de desplazamiento o las flechas. Detener la conversión conserva los escaneos, las esquinas y las confirmaciones para reintentarlo. Usa **Descartar escaneos pendientes** para eliminarlos.
+
+Marcar como revisado espera a que terminen los ajustes de tinta y recorte. Si una celda tiene demasiados puntos o contornos para exportarla, la conversión conserva su imagen y muestra el carácter afectado. Las demás celdas se convierten. Ajusta el filtro de manchas, el recorte o la imagen y revisa el glifo corregido.
 
 El nombre de la fuente y el texto de caracteres en «Characters» se conservan como borradores al cambiar de sección. Pulsa **Project ready** para aplicarlos. Las copias de seguridad y las fuentes descargadas conservan los valores aplicados hasta entonces. Los cambios sin aplicar se pierden al recargar la página.
 
@@ -102,7 +104,7 @@ Descarga WOFF2 y cárgalo con `@font-face`. La fuente solo contiene los caracter
 
 Paper Bloom contiene seis recortes de letras de dominio público tomados del [formulario f1002_33 de NIST SD19](https://commons.wikimedia.org/wiki/File:NIST_SD-19_f1002_33.png). Se excluye el formulario completo. La [página oficial del conjunto de datos](https://www.nist.gov/srd/nist-special-database-19), las coordenadas de recorte y la suma de comprobación fijada de la fuente se documentan en la [guía de validación](docs/VALIDATION.md).
 
-La fuente de muestra exportada se abrió en LibreOffice y se guardó como PDF con la fuente incrustada y el texto preservado. Los archivos descargados en el navegador en ambos formatos se analizaron con FontTools y se renderizaron con FreeType. Los casos de referencia cubren huecos cerrados, puntos separados, un descendente y trazos han a tres tamaños de rasterización. Consulta la guía para conocer el método, las exclusiones y los comandos.
+La fuente de muestra exportada con la versión 1.3.0 se abrió en LibreOffice y se guardó como PDF con la fuente incrustada y el texto preservado. La versión 1.3.1 solo cambia los nombres internos de la fuente. Los archivos descargados en el navegador en ambos formatos se analizaron con FontTools y se renderizaron con FreeType. Los casos de referencia cubren huecos cerrados, puntos separados, un descendente y trazos han a tres tamaños de rasterización. Consulta la guía para conocer el método, las exclusiones y los comandos.
 
 ## Documentación y desarrollo
 
