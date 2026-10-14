@@ -1385,3 +1385,17 @@ progress {
     min-height: 40px;
   }
 }
+
+.size-control {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 12px 0;
+  font-size: 12px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.size-control input {
+  width: 100%;
+  accent-color: var(--accent);
+}

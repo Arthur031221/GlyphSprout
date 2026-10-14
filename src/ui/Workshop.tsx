@@ -1,6 +1,7 @@
 import {
   CheckCircle,
   Circle,
+  Copy,
   DownloadSimple,
   Pen,
   Trash,
@@ -174,6 +175,7 @@ export function Workshop({
   editor,
   onClear,
   onExport,
+  onCopyCss,
   exportBusy,
   drawing,
   drawingVersion,
@@ -187,6 +189,7 @@ export function Workshop({
   editor: Editor;
   onClear: (character: string) => void;
   onExport: (format: "ttf" | "woff2", partial: boolean) => void;
+  onCopyCss: () => void;
   exportBusy: boolean;
   drawing: DrawingDraft | null;
   drawingVersion: number;
@@ -546,6 +549,10 @@ export function Workshop({
             >
               <DownloadSimple />
               {t.downloadWoff}
+            </button>
+            <button type="button" disabled={exportBusy} onClick={onCopyCss}>
+              <Copy />
+              {t.copyWebCss}
             </button>
           </div>
         </section>

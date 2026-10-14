@@ -227,5 +227,9 @@
   "presetDigits": "Ziffern",
   "presetPunctuation": "Satzzeichen",
   "presetHiragana": "Hiragana",
-  "presetKatakana": "Katakana"
+  "presetKatakana": "Katakana",
+  "copyWebCss": "Web-Font-CSS kopieren",
+  "cssCopied": "Web-Font-CSS kopiert. Lege es neben die heruntergeladenen Schriftdateien.",
+  "cssCopyFailed": "Der Browser hat das Kopieren blockiert. Erlaube den Zugriff auf die Zwischenablage und versuche es erneut.",
+  "previewSize": "Vorschaugröße"
 }

@@ -227,5 +227,9 @@
   "presetDigits": "数字",
   "presetPunctuation": "句読点と記号",
   "presetHiragana": "ひらがな",
-  "presetKatakana": "カタカナ"
+  "presetKatakana": "カタカナ",
+  "copyWebCss": "Web フォント用 CSS をコピー",
+  "cssCopied": "Web フォント用 CSS をコピーしました。ダウンロードしたフォントファイルと同じ場所に置いてください。",
+  "cssCopyFailed": "ブラウザーがコピーを許可しませんでした。クリップボードの権限を許可してもう一度お試しください。",
+  "previewSize": "プレビューの大きさ"
 }

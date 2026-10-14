@@ -9,7 +9,12 @@ import {
   ShieldCheck,
 } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
-import { exportFont, fontFilename, missingCharacters } from "../core/font";
+import {
+  exportFont,
+  fontFilename,
+  missingCharacters,
+  webFontCss,
+} from "../core/font";
 import { newProject, parseProject, updateText } from "../core/project";
 import { createSyntheticProject } from "../core/synthetic";
 import type { Project } from "../core/types";
@@ -57,6 +62,7 @@ export function App() {
   const [setupDirty, setSetupDirty] = useState(false);
   const [setupVersion, setSetupVersion] = useState(0);
   const [specimen, setSpecimen] = useState("HELLO JOB");
+  const [specimenSize, setSpecimenSize] = useState<number | null>(null);
   const [notice, setNotice] = useState<Notice | null>(null);
   const [sampleBusy, setSampleBusy] = useState(false);
   const [exportBusy, setExportBusy] = useState(false);
@@ -313,6 +319,16 @@ export function App() {
     }
   }
 
+  async function copyCss() {
+    if (!project) return;
+    try {
+      await navigator.clipboard.writeText(webFontCss(project.name));
+      setNotice({ key: "cssCopied" });
+    } catch {
+      setNotice({ key: "cssCopyFailed", tone: "error" });
+    }
+  }
+
   async function exportSpecimen() {
     if (!project || !preview.family) return;
     const text = Array.from(specimen.normalize("NFC"))
@@ -438,6 +454,7 @@ export function App() {
               className="hero-copy"
               style={{
                 fontFamily: preview.family ? `"${preview.family}"` : "inherit",
+                ...(specimenSize ? { fontSize: `${specimenSize}px` } : {}),
               }}
               aria-live="polite"
             >
@@ -482,6 +499,17 @@ export function App() {
                 value={specimen}
                 maxLength={1000}
                 onChange={(e) => setSpecimen(e.target.value)}
+              />
+            </label>
+            <label className="size-control">
+              {t.previewSize}
+              <input
+                type="range"
+                min={24}
+                max={160}
+                step={4}
+                value={specimenSize ?? 80}
+                onChange={(e) => setSpecimenSize(Number(e.target.value))}
               />
             </label>
             <button
@@ -680,6 +708,9 @@ export function App() {
                 onClear={clear}
                 onExport={(format, partial) => {
                   void exportFile(format, partial);
+                }}
+                onCopyCss={() => {
+                  void copyCss();
                 }}
                 exportBusy={exportBusy || drawingDirty}
                 drawing={drawing}

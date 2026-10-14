@@ -197,3 +197,22 @@ export function fontFilename(name: string, extension: string): string {
       .slice(0, 64) || "My handwriting"
   }.${extension}`;
 }
+
+export function webFontCss(name: string): string {
+  const file = fontFilename(name, "woff2");
+  const family = file.slice(0, -".woff2".length);
+  const base = encodeURI(family);
+  return [
+    "@font-face {",
+    `  font-family: "${family}";`,
+    `  src: url("${base}.woff2") format("woff2"),`,
+    `    url("${base}.ttf") format("truetype");`,
+    "  font-display: swap;",
+    "}",
+    "",
+    "body {",
+    `  font-family: "${family}", sans-serif;`,
+    "}",
+    "",
+  ].join("\n");
+}

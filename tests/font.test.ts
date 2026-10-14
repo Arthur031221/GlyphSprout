@@ -1,6 +1,6 @@
 import { createFont } from "fonteditor-core";
-import { expect, it } from "vitest";
-import { buildTtf, fontGlyph } from "../src/core/font";
+import { describe, expect, it } from "vitest";
+import { buildTtf, fontGlyph, webFontCss } from "../src/core/font";
 import {
   blankGlyph,
   newProject,
@@ -109,4 +109,15 @@ it("keeps the word space through a project round trip and rejects bad values", (
       "invalidProject",
     );
   }
+});
+
+describe("web font css", () => {
+  it("references the downloaded file names and a safe family", () => {
+    const css = webFontCss('My "Hand" <writing>/1');
+    expect(css).toContain('font-family: "My Hand writing1";');
+    expect(css).toContain('url("My%20Hand%20writing1.woff2") format("woff2")');
+    expect(css).toContain('url("My%20Hand%20writing1.ttf") format("truetype")');
+    expect(css).toContain("font-display: swap;");
+    expect(css).not.toMatch(/[<>]/);
+  });
 });

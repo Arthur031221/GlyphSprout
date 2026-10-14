@@ -227,5 +227,9 @@
   "presetDigits": "数字",
   "presetPunctuation": "标点符号",
   "presetHiragana": "平假名",
-  "presetKatakana": "片假名"
+  "presetKatakana": "片假名",
+  "copyWebCss": "复制网页字体 CSS",
+  "cssCopied": "已复制网页字体 CSS。请把它放在下载的字体文件旁边。",
+  "cssCopyFailed": "浏览器阻止了复制。请允许剪贴板权限后再试一次。",
+  "previewSize": "预览大小"
 }
