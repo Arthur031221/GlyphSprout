@@ -32,3 +32,19 @@ test("character presets add missing characters as a setup draft", async ({
   ).toBeVisible();
   await expect(page.locator(".hero-foot")).toContainText("1 / 153 characters");
 });
+
+test("Greek, Cyrillic and Hangul presets are accepted as supported characters", async ({
+  page,
+}) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "Characters" }).click();
+  const text = page.getByLabel("Text to include");
+  await text.fill("한");
+  await page.getByRole("button", { name: "Greek" }).click();
+  await page.getByRole("button", { name: "Cyrillic" }).click();
+  await page.getByRole("button", { name: "Hangul letters" }).click();
+  await expect(text).toHaveValue(/ ΑΒΓ.*абвг.*ㄱㄲ/);
+  await expect(page.locator(".analysis")).toContainText("Distinct glyphs: 167");
+  await expect(page.locator(".analysis .bad")).toHaveCount(0);
+  await expect(page.getByRole("button", { name: "Greek" })).toBeDisabled();
+});

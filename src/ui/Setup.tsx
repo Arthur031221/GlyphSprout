@@ -16,8 +16,11 @@ const PRESET_LABELS = {
   punctuation: "presetPunctuation",
   accentedLower: "presetAccentedLower",
   accentedUpper: "presetAccentedUpper",
+  greek: "presetGreek",
+  cyrillic: "presetCyrillic",
   hiragana: "presetHiragana",
   katakana: "presetKatakana",
+  hangulLetters: "presetHangulLetters",
 } as const;
 
 export function Setup({

@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.16.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -24,7 +24,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 
 ## Make your first font
 
-1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets like uppercase letters, digits, punctuation, accented letters, hiragana or katakana with one click.
+1. Start a project and choose the characters you need, such as `Hello!`. Add whole sets like uppercase letters, digits, punctuation, accented letters, Greek, Cyrillic, hiragana, katakana or Hangul letters with one click.
 2. Print the template at actual size on A4 or US Letter paper and write one character in each cell.
 3. Add an evenly lit scan and confirm the page ID. GlyphSprout looks for the four registration crosses and snaps the corners to them. Check each corner and fix any that are off.
 4. Click **Convert scans** and wait for it to finish.
@@ -43,7 +43,7 @@ Font name and character text in Characters stay as drafts while you move between
 
 ## A small subset with clear limits
 
-Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a project can use up to 15 pages. Latin glyphs use proportional spacing by default. Han and kana use a fixed cell advance. The interface comes in nine languages, with light and dark themes and a narrow-screen layout.
+Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a project can use up to 15 pages. Latin, Greek and Cyrillic glyphs use proportional spacing by default. Han, kana and Hangul use a fixed cell advance. The interface comes in nine languages, with light and dark themes and a narrow-screen layout.
 
 Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. Conversion evens out soft shadows and dim light across each cell, but glare and deep shadows still need a better photo. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
 

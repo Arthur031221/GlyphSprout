@@ -272,3 +272,29 @@ describe("kerning pairs", () => {
     expect(updateText(project, "AC").kerning).toBeUndefined();
   });
 });
+
+describe("Greek, Cyrillic and Hangul export", () => {
+  it("maps each script to its code point with the right advance", () => {
+    const text = "ΩЖ한";
+    const project = newProject("Scripts", text);
+    for (const ch of text) {
+      const glyph = blankGlyph(ch, "");
+      glyph.contours = [
+        [
+          { x: 0.2, y: 0.2 },
+          { x: 0.5, y: 0.2 },
+          { x: 0.5, y: 0.7 },
+          { x: 0.2, y: 0.7 },
+        ],
+      ];
+      project.glyphs[ch] = glyph;
+    }
+    const font = createFont(buildTtf(project), { type: "ttf" }).get();
+    for (const ch of text)
+      expect(font.cmap[ch.codePointAt(0) as number]).toBeGreaterThan(0);
+    const advance = (ch: string) =>
+      font.glyf[font.cmap[ch.codePointAt(0) as number]].advanceWidth;
+    expect(advance("한")).toBe(1000);
+    expect(advance("Ω")).not.toBe(1000);
+  });
+});

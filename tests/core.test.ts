@@ -24,6 +24,7 @@ import {
   analyzeText,
   CHARACTER_SETS,
   type CharacterSetId,
+  isCjk,
   isSupported,
   missingFromSet,
 } from "../src/core/text";
@@ -285,6 +286,26 @@ describe("character set presets", () => {
     expect(CHARACTER_SETS.accentedUpper).toHaveLength(28);
     expect(CHARACTER_SETS.hiragana).toHaveLength(83);
     expect(CHARACTER_SETS.katakana).toHaveLength(86);
+    expect(CHARACTER_SETS.greek).toHaveLength(49);
+    expect(CHARACTER_SETS.cyrillic).toHaveLength(66);
+    expect(CHARACTER_SETS.hangulLetters).toHaveLength(51);
+  });
+
+  it("accepts Greek, Cyrillic and Hangul but still rejects combining marks", () => {
+    const analysis = analyzeText("Ωμέγα Привет, мир Ёё 한글 ㄱㅏ");
+    expect(analysis.unsupported).toEqual([]);
+    expect(analysis.characters).toContain("한");
+    expect(analysis.characters).toContain("Ё");
+    expect(isSupported("\u0483")).toBe(false);
+    expect(isSupported("\u03a2")).toBe(false);
+    expect(isSupported("\u1100")).toBe(false);
+  });
+
+  it("gives Hangul a fixed cell and Greek and Cyrillic proportional spacing", () => {
+    expect(isCjk("한")).toBe(true);
+    expect(isCjk("ㄱ")).toBe(true);
+    expect(isCjk("Ω")).toBe(false);
+    expect(isCjk("Ж")).toBe(false);
   });
 
   it("appends only the characters the text is missing", () => {

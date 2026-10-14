@@ -11,7 +11,7 @@ Press Ctrl+C to close the server. The command serves local static files. It does
 ## Project and scan limits
 
 - Up to 512 distinct supported BMP characters per project.
-- A small set of Latin, Han, and kana characters. Unsupported characters are reported during setup.
+- A small set of Latin, Greek, Cyrillic, Han, kana, and Hangul characters. Unsupported characters are reported during setup.
 - 35 cells per A4 or US Letter page, with up to 15 pages.
 - PNG or JPEG scan images up to 16 MiB each and 32 megapixels after decoding.
 - Projects up to 96 MiB.

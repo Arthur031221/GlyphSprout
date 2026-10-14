@@ -5,11 +5,15 @@ export function isSupported(character: string): boolean {
   return (
     ((cp >= 0x21 && cp <= 0x7e) ||
       (cp >= 0xa1 && cp <= 0x24f && cp !== 0xad) ||
+      (cp >= 0x370 && cp <= 0x3ff) ||
+      (cp >= 0x400 && cp <= 0x52f) ||
       (cp >= 0x3000 && cp <= 0x303f) ||
       (cp >= 0x3041 && cp <= 0x3096) ||
+      (cp >= 0x3131 && cp <= 0x318e) ||
       (cp >= 0x309b && cp <= 0x30ff) ||
       (cp >= 0x3400 && cp <= 0x4dbf) ||
       (cp >= 0x4e00 && cp <= 0x9fff) ||
+      (cp >= 0xac00 && cp <= 0xd7a3) ||
       (cp >= 0x2000 && cp <= 0x206f && !/\p{Cf}/u.test(character)) ||
       (cp >= 0x20a0 && cp <= 0x20cf) ||
       (cp >= 0xff01 && cp <= 0xff60) ||
@@ -20,7 +24,11 @@ export function isSupported(character: string): boolean {
 
 export function isCjk(character: string): boolean {
   const cp = character.codePointAt(0) ?? 0;
-  return (cp >= 0x3000 && cp <= 0x9fff) || cp >= 0xff01;
+  return (
+    (cp >= 0x3000 && cp <= 0x9fff) ||
+    (cp >= 0xac00 && cp <= 0xd7a3) ||
+    cp >= 0xff01
+  );
 }
 
 export interface TextAnalysis {
@@ -57,8 +65,14 @@ export const CHARACTER_SETS = {
   punctuation: [..."!?.,:;'\"()-&@/%"],
   accentedLower: [..."àáâãäåæçèéêëìíîïñòóôõöøùúûüýÿß"],
   accentedUpper: [..."ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÑÒÓÔÕÖØÙÚÛÜÝ"],
+  greek: [
+    ...range(0x391, 0x3a9).filter((ch) => ch !== "\u03a2"),
+    ...range(0x3b1, 0x3c9),
+  ],
+  cyrillic: [...range(0x410, 0x44f), "\u0401", "\u0451"],
   hiragana: range(0x3041, 0x3093),
   katakana: range(0x30a1, 0x30f6),
+  hangulLetters: range(0x3131, 0x3163),
 } as const;
 export type CharacterSetId = keyof typeof CHARACTER_SETS;
 

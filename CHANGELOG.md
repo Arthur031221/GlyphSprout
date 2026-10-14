@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.16.0
+
+The Characters stage now accepts Greek, Cyrillic and Korean Hangul. Before this, those letters were rejected as unsupported, so the Korean interface could not be used to make a Korean font and Greek or Russian text could not be set up at all. The quick-add row has three new buttons: **Greek** (49 letters), **Cyrillic** (the 66 letters of the Russian alphabet, including the letter io) and **Hangul letters** (the 51 basic jamo). Whole Hangul syllables can be typed or pasted directly. Adding every set at once still fits the 512 glyph limit.
+
+Greek and Cyrillic glyphs use proportional spacing like Latin letters, and Hangul uses a fixed cell like Han and kana. Combining marks and the unassigned code points inside these blocks are still rejected. Unit tests cover the accepted ranges, the spacing rule and a TTF export with a Greek, a Cyrillic and a Hangul glyph, and a browser test covers the buttons. The new labels are translated in all nine interface languages.
+
 ## 1.15.0
 
 Each glyph has a new **Stroke weight** setting from -3 to 3. It grows or shrinks the ink by whole source pixels before the outline is traced, so a font made with a thin pen can be made bolder and a heavy marker font can be lightened without redrawing. 0 keeps the traced width, and saved projects without the setting open at 0. The button that copies tracing values to every glyph now copies the weight too.

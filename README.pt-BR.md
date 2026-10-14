@@ -13,7 +13,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fo
 ![Oficina real: apagar e corrigir um glifo digitalizado, conferir a prévia e baixar o TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.16.0
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -24,7 +24,7 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 
 ## Crie sua primeira fonte
 
-1. Crie um projeto e escolha os caracteres necessários, como `Hello!`. Você pode adicionar conjuntos inteiros, como maiúsculas, dígitos, pontuação, letras acentuadas, hiragana ou katakana, com um clique.
+1. Crie um projeto e escolha os caracteres necessários, como `Hello!`. Você pode adicionar conjuntos inteiros, como maiúsculas, dígitos, pontuação, letras acentuadas, grego, cirílico, hiragana, katakana ou letras hangul, com um clique.
 2. Imprima o modelo no tamanho real em papel A4 ou US Letter e escreva um caractere em cada célula.
 3. Adicione uma digitalização com iluminação uniforme e confirme o ID da página. O GlyphSprout procura as quatro cruzes de registro e coloca os cantos sobre elas. Confira cada canto e ajuste os que estiverem fora do lugar.
 4. Clique em **Converter digitalizações** e aguarde a conversão terminar.
@@ -43,7 +43,7 @@ O nome da fonte e o texto de caracteres em Characters continuam como rascunhos a
 
 ## Um subconjunto pequeno, com limites claros
 
-Escolha até 512 caracteres BMP compatíveis. Cada modelo A4 tem 35 células e um projeto pode usar até 15 páginas. Por padrão, glifos latinos usam espaçamento proporcional. Han e kana usam avanço fixo por célula. A interface oferece nove idiomas, temas claro e escuro e uma organização para telas estreitas.
+Escolha até 512 caracteres BMP compatíveis. Cada modelo A4 tem 35 células e um projeto pode usar até 15 páginas. Por padrão, glifos latinos, gregos e cirílicos usam espaçamento proporcional. Han, kana e hangul usam avanço fixo por célula. A interface oferece nove idiomas, temas claro e escuro e uma organização para telas estreitas.
 
 As digitalizações precisam do modelo impresso, tinta escura, papel plano, iluminação uniforme e as quatro marcas de registro visíveis. A conversão compensa sombras suaves e luz fraca em cada célula, mas reflexos e sombras fortes exigem uma foto melhor. A atribuição e a confirmação das páginas são manuais. O GlyphSprout não lê escrita à mão nem detecta células automaticamente.
 

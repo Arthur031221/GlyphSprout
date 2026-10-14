@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.16.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -24,7 +24,7 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 
 ## Deine erste Schrift erstellen
 
-1. Erstelle ein Projekt und wähle die benötigten Zeichen, zum Beispiel `Hello!`. Ganze Sätze wie Großbuchstaben, Ziffern, Satzzeichen, Buchstaben mit Akzent, Hiragana oder Katakana lassen sich mit einem Klick hinzufügen.
+1. Erstelle ein Projekt und wähle die benötigten Zeichen, zum Beispiel `Hello!`. Ganze Sätze wie Großbuchstaben, Ziffern, Satzzeichen, Buchstaben mit Akzent, Griechisch, Kyrillisch, Hiragana, Katakana oder Hangul-Buchstaben lassen sich mit einem Klick hinzufügen.
 2. Drucke die Vorlage in Originalgröße auf A4- oder US-Letter-Papier und schreibe ein Zeichen in jedes Feld.
 3. Füge einen gleichmäßig beleuchteten Scan hinzu und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
@@ -43,7 +43,7 @@ Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen 
 
 ## Eine kleine Teilmenge mit klaren Grenzen
 
-Wähle bis zu 512 unterstützte BMP-Zeichen. Jede A4-Vorlage hat 35 Felder und ein Projekt kann bis zu 15 Seiten umfassen. Lateinische Glyphen verwenden standardmäßig proportionale Abstände. Han-Zeichen und Kana haben einen festen Zellenfortschritt. Die Oberfläche bietet neun Sprachen, helle und dunkle Themes sowie ein Layout für schmale Bildschirme.
+Wähle bis zu 512 unterstützte BMP-Zeichen. Jede A4-Vorlage hat 35 Felder und ein Projekt kann bis zu 15 Seiten umfassen. Lateinische, griechische und kyrillische Glyphen verwenden standardmäßig proportionale Abstände. Han-Zeichen, Kana und Hangul haben einen festen Zellenfortschritt. Die Oberfläche bietet neun Sprachen, helle und dunkle Themes sowie ein Layout für schmale Bildschirme.
 
 Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßiges Licht und alle vier sichtbaren Passermarken. Die Umwandlung gleicht weiche Schatten und schwaches Licht in jedem Feld aus, bei Blendung und tiefen Schatten brauchen Sie aber ein besseres Foto. Seitenzuordnung und Bestätigung erfolgen manuell. GlyphSprout liest keine Handschrift und erkennt keine Felder automatisch.
 

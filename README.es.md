@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.15.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.16.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -24,7 +24,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 
 ## Crea tu primera fuente
 
-1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`. Puedes añadir conjuntos completos, como mayúsculas, dígitos, puntuación, letras con acento, hiragana o katakana, con un clic.
+1. Crea un proyecto y elige los caracteres que necesitas, por ejemplo `Hello!`. Puedes añadir conjuntos completos, como mayúsculas, dígitos, puntuación, letras con acento, griego, cirílico, hiragana, katakana o letras hangul, con un clic.
 2. Imprime la plantilla a tamaño real en papel A4 o US Letter y escribe un carácter en cada celda.
 3. Añade un escaneo con luz uniforme y confirma el ID de página. GlyphSprout busca las cuatro cruces de registro y coloca las esquinas sobre ellas. Revisa cada esquina y corrige las que estén desviadas.
 4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
@@ -43,7 +43,7 @@ El nombre de la fuente y el texto de caracteres en «Characters» se conservan c
 
 ## Un subconjunto pequeño, con límites claros
 
-Elige hasta 512 caracteres BMP compatibles. Cada plantilla A4 tiene 35 celdas y cada proyecto admite hasta 15 páginas. Los glifos latinos usan espaciado proporcional de forma predeterminada. Han y kana usan un avance fijo de celda. La interfaz ofrece nueve idiomas, temas claros y oscuros, y una disposición para pantallas estrechas.
+Elige hasta 512 caracteres BMP compatibles. Cada plantilla A4 tiene 35 celdas y cada proyecto admite hasta 15 páginas. Los glifos latinos, griegos y cirílicos usan espaciado proporcional de forma predeterminada. Han, kana y hangul usan un avance fijo de celda. La interfaz ofrece nueve idiomas, temas claros y oscuros, y una disposición para pantallas estrechas.
 
 Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, luz uniforme y las cuatro marcas de registro visibles. La conversión compensa las sombras suaves y la luz tenue en cada celda, pero los reflejos y las sombras marcadas requieren una foto mejor. La asignación y confirmación de páginas son manuales. GlyphSprout no lee la escritura ni detecta las celdas automáticamente.
 
