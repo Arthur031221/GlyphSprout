@@ -849,6 +849,16 @@ fieldset {
   stroke-width: 1;
   stroke-dasharray: 6 4;
 }
+.outline-wrap .guide {
+  stroke: #5b8c78;
+  stroke-dasharray: 2 4;
+}
+.outline-wrap .guide-note {
+  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--muted);
+}
 .outline-wrap path {
   fill: #203247;
   fill-rule: evenodd;

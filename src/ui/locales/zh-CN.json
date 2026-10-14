@@ -264,5 +264,6 @@
   "previewZoom": "预览缩放",
   "matchTracing": "将此阈值、杂点过滤、笔画粗细和平滑设置应用到所有字形",
   "tracingApplied": "已复制描摹设置。变更的字形数：",
-  "tracingSkipped": "部分字形无法用这些数值描摹，已保持原样："
+  "tracingSkipped": "部分字形无法用这些数值描摹，已保持原样：",
+  "spacingGuides": "垂直虚线标示字形的左边界与字宽。字形与虚线之间的距离就是字距。"
 }

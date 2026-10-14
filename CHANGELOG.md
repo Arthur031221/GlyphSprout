@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.19.0
+
+The outline view in the glyph editor now draws two dashed vertical guides, one at the glyph's left edge and one at its advance width, with a short note under the outline that says so. Before this, only the baseline was drawn, so the space on each side of a letter was something you had to judge from the live preview. The right guide follows the advance width setting, the Latin side bearing and the automatic width, so the gap between the outline and each line is the spacing the exported font will use.
+
+A browser test checks that both guides are present, that the right guide moves when the advance width changes, and that the note is translated. The new note is translated in all nine interface languages, and the README step for reviewing glyphs mentions the guides in every language.
+
 ## 1.18.0
 
 Every number setting in the glyph editor now has a slider beside it: ink threshold, minimum speck area, outline smoothing, stroke weight, size, both offsets and Latin side bearing. Before this, you typed a number and had to leave the field before anything changed, so tuning meant guessing a value and waiting. A slider applies when you release it, and the arrow keys apply on each press, so the outline and the live preview follow your hand. Pressing Enter in a number field now applies it too. Each applied change is still one undoable step. Advance width keeps only its number field because 0 means automatic.

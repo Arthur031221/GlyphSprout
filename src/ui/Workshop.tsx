@@ -62,6 +62,22 @@ function Outline({ glyph, t }: { glyph: Glyph; t: Dictionary }) {
           y2={900}
           vectorEffect="non-scaling-stroke"
         />
+        {(
+          [
+            ["origin", 0],
+            ["advance", shape.advanceWidth],
+          ] as const
+        ).map(([name, x]) => (
+          <line
+            key={name}
+            className="guide"
+            x1={x}
+            y1={top}
+            x2={x}
+            y2={top + height}
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
         <path d={path} />
       </svg>
     );
@@ -450,7 +466,10 @@ export function Workshop({
                     </small>
                   </div>
                   {current.contours.length ? (
-                    <Outline glyph={current} t={t} />
+                    <>
+                      <Outline glyph={current} t={t} />
+                      <p className="guide-note">{t.spacingGuides}</p>
+                    </>
                   ) : (
                     <p className="bad">{t.missing}</p>
                   )}

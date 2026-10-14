@@ -264,5 +264,6 @@
   "previewZoom": "Zoom da pré-visualização",
   "matchTracing": "Usar este limiar, filtro de manchas, espessura e suavização em todos os glifos",
   "tracingApplied": "Traçado copiado. Glifos alterados:",
-  "tracingSkipped": "Alguns glifos não puderam ser traçados com esses valores e foram mantidos como estavam:"
+  "tracingSkipped": "Alguns glifos não puderam ser traçados com esses valores e foram mantidos como estavam:",
+  "spacingGuides": "As linhas verticais tracejadas marcam a borda esquerda e a largura de avanço. O espaço entre o glifo e cada linha é o seu espaçamento."
 }

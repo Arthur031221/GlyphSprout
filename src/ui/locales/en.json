@@ -264,5 +264,6 @@
   "previewZoom": "Preview zoom",
   "matchTracing": "Use this threshold, speck filter, weight and smoothing for all glyphs",
   "tracingApplied": "Tracing copied. Glyphs changed:",
-  "tracingSkipped": "Some glyphs could not be traced with these values and were left as they were:"
+  "tracingSkipped": "Some glyphs could not be traced with these values and were left as they were:",
+  "spacingGuides": "Dashed vertical lines mark the left edge and the advance width. The space between the glyph and each line is its spacing."
 }

@@ -264,5 +264,6 @@
   "previewZoom": "Vorschau-Zoom",
   "matchTracing": "Diesen Schwellenwert, Fleckenfilter, diese Strichstärke und Glättung für alle Glyphen verwenden",
   "tracingApplied": "Nachzeichnung kopiert. Geänderte Glyphen:",
-  "tracingSkipped": "Einige Glyphen ließen sich mit diesen Werten nicht nachzeichnen und blieben unverändert:"
+  "tracingSkipped": "Einige Glyphen ließen sich mit diesen Werten nicht nachzeichnen und blieben unverändert:",
+  "spacingGuides": "Gestrichelte senkrechte Linien markieren den linken Rand und die Dickte. Der Abstand zwischen Glyphe und Linie ist ihr Zeichenabstand."
 }

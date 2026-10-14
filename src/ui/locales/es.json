@@ -264,5 +264,6 @@
   "previewZoom": "Zoom de la vista previa",
   "matchTracing": "Usar este umbral, filtro de motas, grosor y suavizado en todos los glifos",
   "tracingApplied": "Trazado copiado. Glifos cambiados:",
-  "tracingSkipped": "Algunos glifos no se pudieron trazar con estos valores y se dejaron como estaban:"
+  "tracingSkipped": "Algunos glifos no se pudieron trazar con estos valores y se dejaron como estaban:",
+  "spacingGuides": "Las líneas verticales discontinuas marcan el borde izquierdo y el ancho de avance. El espacio entre el glifo y cada línea es su espaciado."
 }

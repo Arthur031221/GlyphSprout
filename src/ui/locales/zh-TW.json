@@ -264,5 +264,6 @@
   "previewZoom": "預覽縮放",
   "matchTracing": "將此閾值、雜點過濾、筆畫粗細與平滑設定套用到所有字形",
   "tracingApplied": "已複製描繪設定。變更的字形數：",
-  "tracingSkipped": "部分字形無法以這些數值描繪，已維持原狀："
+  "tracingSkipped": "部分字形無法以這些數值描繪，已維持原狀：",
+  "spacingGuides": "垂直虛線標示字形的左邊界與字寬。字形與虛線之間的距離就是字距。"
 }

@@ -264,5 +264,6 @@
   "previewZoom": "Zoom de l'aperçu",
   "matchTracing": "Appliquer ce seuil, ce filtre de taches, cette épaisseur et ce lissage à tous les glyphes",
   "tracingApplied": "Tracé copié. Glyphes modifiés :",
-  "tracingSkipped": "Certains glyphes n'ont pas pu être tracés avec ces valeurs et sont restés inchangés :"
+  "tracingSkipped": "Certains glyphes n'ont pas pu être tracés avec ces valeurs et sont restés inchangés :",
+  "spacingGuides": "Les lignes verticales en pointillés marquent le bord gauche et la chasse. L'espace entre le glyphe et chaque ligne est son espacement."
 }
