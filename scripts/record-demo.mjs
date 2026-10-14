@@ -62,9 +62,28 @@ try {
   );
   await page.mouse.up();
   await page.waitForTimeout(1400);
+  await expect(page.locator(".draft-notice")).toContainText(
+    "Drawing edits are not saved",
+  );
+  await page.getByRole("button", { name: "Pages" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Print pages" }),
+  ).toBeVisible();
+  await page.waitForTimeout(1400);
+  await page.getByRole("button", { name: "Characters" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Set up your font" }),
+  ).toBeVisible();
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Workshop" }).click();
+  await expect(page.locator(".draft-notice")).toContainText(
+    "Drawing edits are not saved",
+  );
+  await page.waitForTimeout(1400);
   await page
     .getByRole("button", { name: "Apply source edits", exact: true })
     .click();
+  await expect(page.locator(".draft-notice")).toHaveCount(0);
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.waitForTimeout(2600);
   const event = page.waitForEvent("download");
@@ -92,7 +111,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded source erasing and pen editing, the live preview, and a real TTF download.",
+    "Recorded source editing, draft preservation through Pages and Characters, Apply, and a TTF download.",
   );
 } finally {
   await browser?.close();

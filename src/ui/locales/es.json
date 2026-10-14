@@ -190,5 +190,9 @@
   "sourceLoading": "Cargando imagen de origen...",
   "sourceChanged": "Este glifo cambió mientras el editor de origen estaba abierto. Ábrelo de nuevo antes de aplicar los cambios.",
   "applySourceEdits": "Aplicar cambios al origen",
-  "cancelSourceEdit": "Cancelar edición del origen"
+  "cancelSourceEdit": "Cancelar edición del origen",
+  "discardDrawing": "¿Descartar los cambios de dibujo sin terminar? Aplícalos primero para conservar tu trabajo.",
+  "drawingUnsaved": "Los cambios del dibujo no se guardan ni se incluyen en las descargas. Aplícalos o cancélalos en el Taller antes de salir.",
+  "scansUnsaved": "La alineación del escaneo no se guarda ni se incluye en las descargas. Convierte o elimina los escaneos preparados antes de salir.",
+  "removeScan": "Quitar escaneo"
 }

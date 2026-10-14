@@ -190,5 +190,9 @@
   "sourceLoading": "Loading source image...",
   "sourceChanged": "This glyph changed while the source editor was open. Reopen it before applying edits.",
   "applySourceEdits": "Apply source edits",
-  "cancelSourceEdit": "Cancel source edit"
+  "cancelSourceEdit": "Cancel source edit",
+  "discardDrawing": "Discard the unfinished drawing edits? Apply them first to keep your work.",
+  "drawingUnsaved": "Drawing edits are not saved or included in downloads. Apply or cancel them in Workshop before leaving.",
+  "scansUnsaved": "Scan alignment is not saved or included in downloads. Convert or remove the staged scans before leaving.",
+  "removeScan": "Remove scan"
 }

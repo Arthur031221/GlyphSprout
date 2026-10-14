@@ -190,5 +190,9 @@
   "sourceLoading": "正在加载源图...",
   "sourceChanged": "源图编辑器打开期间此字形已更改。请重新打开后再应用修改。",
   "applySourceEdits": "应用源图修改",
-  "cancelSourceEdit": "取消源图编辑"
+  "cancelSourceEdit": "取消源图编辑",
+  "discardDrawing": "要放弃尚未完成的绘图修改吗？先应用修改即可保留工作。",
+  "drawingUnsaved": "绘图修改尚未保存，也不会包含在下载中。离开前请在工坊中应用或取消修改。",
+  "scansUnsaved": "扫描对齐尚未保存，也不会包含在下载中。离开前请转换或移除暂存的扫描件。",
+  "removeScan": "移除扫描件"
 }

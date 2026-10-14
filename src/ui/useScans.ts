@@ -26,6 +26,7 @@ export function useScans(
   commit: (project: Project) => void,
   notify: (notice: Notice) => void,
   replaceWarning: string,
+  beforeRun: (pages: DraftPage[]) => boolean,
 ) {
   const [drafts, setDrafts] = useState<DraftPage[]>([]);
   const [index, setIndex] = useState(0);
@@ -59,6 +60,19 @@ export function useScans(
         i === index
           ? { ...page, ...next, confirmed: next.confirmed ?? false }
           : page,
+      ),
+    );
+  }
+
+  function remove(id: string) {
+    if (busy || reading) return;
+    const removed = drafts.findIndex((page) => page.id === id);
+    if (removed < 0) return;
+    setDrafts((current) => current.filter((page) => page.id !== id));
+    setIndex((current) =>
+      Math.max(
+        0,
+        current > removed ? current - 1 : Math.min(current, drafts.length - 2),
       ),
     );
   }
@@ -139,6 +153,7 @@ export function useScans(
         !window.confirm(replaceWarning)
       )
         return;
+      if (!beforeRun(drafts)) return;
       const scanWorker = createScanWorker();
       worker.current = scanWorker;
       const jobId = crypto.randomUUID();
@@ -250,6 +265,7 @@ export function useScans(
     progress,
     add,
     change,
+    remove,
     corner,
     run,
     cancel,

@@ -190,5 +190,9 @@
   "sourceLoading": "Quellbild wird geladen...",
   "sourceChanged": "Dieses Zeichen wurde geändert, während der Quelleneditor geöffnet war. Öffne ihn erneut, bevor du Änderungen übernimmst.",
   "applySourceEdits": "Quellenänderungen übernehmen",
-  "cancelSourceEdit": "Quellenbearbeitung abbrechen"
+  "cancelSourceEdit": "Quellenbearbeitung abbrechen",
+  "discardDrawing": "Unfertige Zeichenänderungen verwerfen? Wende sie zuerst an, um deine Arbeit zu behalten.",
+  "drawingUnsaved": "Zeichenänderungen sind nicht gespeichert und nicht in Downloads enthalten. Wende sie in der Werkstatt an oder brich sie ab, bevor du sie verlässt.",
+  "scansUnsaved": "Die Scan-Ausrichtung ist nicht gespeichert und nicht in Downloads enthalten. Wandle die bereitgestellten Scans um oder entferne sie, bevor du die Seite verlässt.",
+  "removeScan": "Scan entfernen"
 }

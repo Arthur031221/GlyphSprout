@@ -1,4 +1,9 @@
-import { DownloadSimple, Printer, UploadSimple } from "@phosphor-icons/react";
+import {
+  DownloadSimple,
+  Printer,
+  Trash,
+  UploadSimple,
+} from "@phosphor-icons/react";
 import { type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   homography,
@@ -202,6 +207,8 @@ export function Pages({
   notify: (notice: Notice) => void;
 }) {
   const [size, setSize] = useState(384);
+  const queue = useRef<HTMLDivElement>(null);
+  const upload = useRef<HTMLInputElement>(null);
   const draft = scans.drafts[scans.index];
   const total = pageCount(project.characters);
   const sheets = useMemo(
@@ -280,6 +287,7 @@ export function Pages({
           <UploadSimple />
           {scans.reading ? t.loading : t.chooseImages}
           <input
+            ref={upload}
             type="file"
             accept="image/png,image/jpeg"
             multiple
@@ -292,17 +300,38 @@ export function Pages({
         </label>
         {!!scans.drafts.length && (
           <>
-            <div className="draft-queue">
+            <div ref={queue} className="draft-queue">
               {scans.drafts.map((page, i) => (
-                <button
-                  type="button"
-                  key={page.id}
-                  className={i === scans.index ? "selected" : ""}
-                  disabled={scans.busy}
-                  onClick={() => scans.setIndex(i)}
-                >
-                  {t.page} {i + 1}: {page.filename}
-                </button>
+                <div key={page.id} className="draft-item">
+                  <button
+                    type="button"
+                    className={i === scans.index ? "selected" : ""}
+                    aria-pressed={i === scans.index}
+                    disabled={scans.busy || scans.reading}
+                    onClick={() => scans.setIndex(i)}
+                  >
+                    {t.page} {i + 1}: {page.filename}
+                  </button>
+                  <button
+                    type="button"
+                    aria-label={`${t.removeScan}: ${page.filename}`}
+                    disabled={scans.busy || scans.reading}
+                    onClick={() => {
+                      const buttons =
+                        queue.current?.querySelectorAll<HTMLButtonElement>(
+                          ".draft-item > button:first-child",
+                        );
+                      const target =
+                        i === scans.index
+                          ? (buttons?.[i + 1] ?? buttons?.[i - 1])
+                          : buttons?.[scans.index];
+                      scans.remove(page.id);
+                      (target ?? upload.current)?.focus();
+                    }}
+                  >
+                    <Trash />
+                  </button>
+                </div>
               ))}
             </div>
             {draft && (

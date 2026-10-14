@@ -34,7 +34,7 @@ import { useFontPreview } from "./useFontPreview";
 import { type Notice, useGlyphEditor } from "./useGlyphEditor";
 import { useProject } from "./useProject";
 import { useScans } from "./useScans";
-import { Workshop } from "./Workshop";
+import { type DrawingDraft, Workshop } from "./Workshop";
 
 type Stage = "Characters" | "Pages" | "Workshop";
 
@@ -50,6 +50,9 @@ export function App() {
   );
   const [stage, setStage] = useState<Stage>("Workshop");
   const [selected, setSelected] = useState("");
+  const [drawing, setDrawing] = useState<DrawingDraft | null>(null);
+  const [drawingVersion, setDrawingVersion] = useState(0);
+  const [drawingDirty, setDrawingDirty] = useState(false);
   const [specimen, setSpecimen] = useState("HELLO JOB");
   const [notice, setNotice] = useState<Notice | null>(null);
   const [sampleBusy, setSampleBusy] = useState(false);
@@ -64,15 +67,53 @@ export function App() {
   const scans = useScans(
     projectRef,
     (next) => {
+      const replacesDrawing =
+        drawing &&
+        projectRef.current?.glyphs[selected] !== next.glyphs[selected];
       commit(next);
+      if (replacesDrawing) changeDrawing(null, true);
       editor.cancel();
     },
     setNotice,
     t.replaceWarning,
+    (pages) => {
+      const current = projectRef.current;
+      const affectsDrawing =
+        drawing &&
+        current &&
+        pages.some((page) =>
+          current.characters
+            .slice(page.pageIndex * 35, (page.pageIndex + 1) * 35)
+            .includes(selected),
+        );
+      return (
+        !affectsDrawing || !drawingDirty || window.confirm(t.discardDrawing)
+      );
+    },
   );
   const locked =
     scans.busy || scans.reading || sampleBusy || recoveryBusy || exportBusy;
   const missing = project ? missingCharacters(project) : [];
+
+  const hasDrafts = drawingDirty || scans.drafts.length > 0;
+  useEffect(() => {
+    if (!hasDrafts) return;
+    function warn(event: BeforeUnloadEvent) {
+      event.preventDefault();
+      event.returnValue = "";
+    }
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [hasDrafts]);
+
+  function changeDrawing(next: DrawingDraft | null, applied = false) {
+    if (!applied && drawingDirty && !window.confirm(t.discardDrawing))
+      return false;
+    setDrawingDirty(false);
+    setDrawing(next);
+    if (next) setDrawingVersion((value) => value + 1);
+    return true;
+  }
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -106,6 +147,7 @@ export function App() {
   }, [local.loading]);
 
   function replace(next: Project) {
+    changeDrawing(null, true);
     editor.cancel();
     scans.cancel();
     commit(next, "replace");
@@ -214,6 +256,7 @@ export function App() {
         : newProject(name, text);
       const charactersChanged = project && next.id !== project.id;
       if (charactersChanged && !window.confirm(t.charactersChanged)) return;
+      if (charactersChanged && !changeDrawing(null)) return;
       commit(next);
       if (charactersChanged) {
         editor.cancel();
@@ -230,6 +273,7 @@ export function App() {
   function clear(character: string) {
     const current = projectRef.current;
     if (!current) return;
+    if (!changeDrawing(null)) return;
     editor.cancel(character);
     const glyphs = { ...current.glyphs };
     delete glyphs[character];
@@ -259,11 +303,13 @@ export function App() {
 
   if (local.loading) return <main className="loading">{t.loading}</main>;
   const occurrences = new Map<string, number>();
-  const specimenLetters = Array.from(specimen).map((character) => {
-    const occurrence = (occurrences.get(character) ?? 0) + 1;
-    occurrences.set(character, occurrence);
-    return { character, key: `${character}-${occurrence}` };
-  });
+  const specimenLetters = Array.from(specimen.normalize("NFC")).map(
+    (character) => {
+      const occurrence = (occurrences.get(character) ?? 0) + 1;
+      occurrences.set(character, occurrence);
+      return { character, key: `${character}-${occurrence}` };
+    },
+  );
 
   return (
     <div className="app-shell">
@@ -501,6 +547,7 @@ export function App() {
               type="button"
               disabled={!local.canUndo || locked}
               onClick={() => {
+                if (!changeDrawing(null)) return;
                 editor.cancel();
                 local.undo();
               }}
@@ -513,6 +560,7 @@ export function App() {
               type="button"
               disabled={!local.canRedo || locked}
               onClick={() => {
+                if (!changeDrawing(null)) return;
                 editor.cancel();
                 local.redo();
               }}
@@ -571,22 +619,37 @@ export function App() {
             />
           ) : stage === "Pages" ? (
             <Pages project={project} t={t} scans={scans} notify={setNotice} />
-          ) : (
-            <Workshop
-              key={project.id}
-              project={project}
-              t={t}
-              selected={selected}
-              onSelect={setSelected}
-              editor={editor}
-              onClear={clear}
-              onExport={(format, partial) => {
-                void exportFile(format, partial);
-              }}
-              exportBusy={exportBusy}
-            />
+          ) : null}
+          {project && (
+            <div hidden={stage !== "Workshop"}>
+              <Workshop
+                key={project.id}
+                project={project}
+                t={t}
+                selected={selected}
+                onSelect={(character) => {
+                  if (character === selected || !changeDrawing(null)) return;
+                  setSelected(character);
+                }}
+                editor={editor}
+                onClear={clear}
+                onExport={(format, partial) => {
+                  void exportFile(format, partial);
+                }}
+                exportBusy={exportBusy || drawingDirty}
+                drawing={drawing}
+                drawingVersion={drawingVersion}
+                onDrawingChange={changeDrawing}
+                onDrawingDirtyChange={setDrawingDirty}
+              />
+            </div>
           )}
         </fieldset>
+        {hasDrafts && (
+          <p className="notice draft-notice" role="status">
+            {drawingDirty ? t.drawingUnsaved : t.scansUnsaved}
+          </p>
+        )}
         {scans.busy && (
           <div className="scan-job" role="status">
             <span>

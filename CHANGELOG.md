@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.2.0
+
+- Keep unfinished drawing pixels and drawing history mounted while moving between workshop stages.
+- Warn before discarding dirty drawing edits, and keep unapplied drawing and scan drafts out of project backups and font downloads.
+- Warn before closing or reloading while drawing edits or scan alignment remain staged.
+- Remove individual staged scans without discarding the other scans' registration and confirmation, then upload replacements as needed.
+- Normalize specimen preview text to NFC so decomposed accented characters render as their supported composed character.
+- Translate drawing and scan draft warnings and scan removal controls in all nine interface languages.
+- Refresh the demo to show a source edit surviving stage navigation before applying it and downloading a TTF.
+
 ## 1.1.0
 
 - Edit existing scan or drawing pixels with the pen, eraser and drawing undo while preserving glyph settings and template assignments.

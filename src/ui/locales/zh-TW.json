@@ -190,5 +190,9 @@
   "sourceLoading": "正在載入來源圖...",
   "sourceChanged": "來源圖編輯器開啟期間，此字形已變更。請重新開啟後再套用修改。",
   "applySourceEdits": "套用來源圖修改",
-  "cancelSourceEdit": "取消來源圖編輯"
+  "cancelSourceEdit": "取消來源圖編輯",
+  "discardDrawing": "要捨棄尚未完成的繪圖編輯嗎？先套用即可保留工作。",
+  "drawingUnsaved": "繪圖編輯尚未儲存，也不會包含在下載檔中。離開前請在工坊套用或取消編輯。",
+  "scansUnsaved": "掃描對齊尚未儲存，也不會包含在下載檔中。離開前請轉換或移除暫存的掃描影像。",
+  "removeScan": "移除掃描"
 }

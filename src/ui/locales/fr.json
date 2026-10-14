@@ -190,5 +190,9 @@
   "sourceLoading": "Chargement de l'image source...",
   "sourceChanged": "Ce glyphe a changé pendant que l'éditeur de source était ouvert. Rouvrez-le avant d'appliquer les modifications.",
   "applySourceEdits": "Appliquer les retouches",
-  "cancelSourceEdit": "Annuler la retouche de la source"
+  "cancelSourceEdit": "Annuler la retouche de la source",
+  "discardDrawing": "Abandonner les modifications de dessin inachevées ? Appliquez-les d'abord pour conserver votre travail.",
+  "drawingUnsaved": "Les modifications du dessin ne sont pas enregistrées ni incluses dans les téléchargements. Appliquez-les ou annulez-les dans l'Atelier avant de partir.",
+  "scansUnsaved": "L'alignement du scan n'est pas enregistré ni inclus dans les téléchargements. Convertissez ou supprimez les scans préparés avant de partir.",
+  "removeScan": "Supprimer le scan"
 }

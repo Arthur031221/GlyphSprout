@@ -190,5 +190,9 @@
   "sourceLoading": "원본 이미지를 불러오는 중...",
   "sourceChanged": "원본 편집기가 열린 동안 이 글리프가 변경되었습니다. 편집을 적용하기 전에 다시 여세요.",
   "applySourceEdits": "원본 편집 적용",
-  "cancelSourceEdit": "원본 편집 취소"
+  "cancelSourceEdit": "원본 편집 취소",
+  "discardDrawing": "완료되지 않은 그림 편집을 버릴까요? 작업을 보존하려면 먼저 적용하세요.",
+  "drawingUnsaved": "그림 편집 내용은 저장되지 않으며 다운로드에도 포함되지 않습니다. 이동하기 전에 작업실에서 적용하거나 취소하세요.",
+  "scansUnsaved": "스캔 정렬은 저장되지 않으며 다운로드에도 포함되지 않습니다. 이동하기 전에 대기 중인 스캔을 변환하거나 제거하세요.",
+  "removeScan": "스캔 제거"
 }
