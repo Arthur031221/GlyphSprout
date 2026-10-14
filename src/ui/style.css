@@ -9,7 +9,7 @@
   --paper: #fff;
   --paper-muted: #f8fafb;
   --ink: #203247;
-  --muted: #6d7c89;
+  --muted: #5d6b77;
   --line: #d9e1e5;
   --accent: #286c56;
   --accent-soft: #e6f1ec;
@@ -554,6 +554,10 @@ main {
   height: 1px;
   opacity: 0;
 }
+.file-picker:focus-within {
+  outline: 3px solid color-mix(in srgb, var(--accent), transparent 42%);
+  outline-offset: 3px;
+}
 .scan-workspace {
   display: grid;
   grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
@@ -584,17 +588,19 @@ main {
   stroke-width: 2;
 }
 .corner-handle {
-  position: absolute;
-  width: 29px;
-  height: 29px;
-  border: 2px solid white;
-  border-radius: 50%;
-  background: var(--accent);
-  color: white;
-  font-size: 11px;
-  font-weight: 700;
-  transform: translate(-50%, -50%);
+  pointer-events: all;
+  fill: var(--accent);
+  stroke: var(--paper);
+  stroke-width: 6;
+  cursor: grab;
   touch-action: none;
+}
+.corner-handle:active {
+  cursor: grabbing;
+}
+.corner-handle:focus-visible {
+  stroke: var(--ink);
+  stroke-width: 10;
 }
 .scan-controls {
   border: 1px solid var(--line);

@@ -61,8 +61,17 @@ export function App() {
   const t = dictionaries[locale];
   const preview = useFontPreview(project);
   const editor = useGlyphEditor(projectRef, commit, setNotice);
-  const scans = useScans(projectRef, commit, setNotice, t.replaceWarning);
-  const locked = scans.busy || scans.reading || sampleBusy || recoveryBusy;
+  const scans = useScans(
+    projectRef,
+    (next) => {
+      commit(next);
+      editor.cancel();
+    },
+    setNotice,
+    t.replaceWarning,
+  );
+  const locked =
+    scans.busy || scans.reading || sampleBusy || recoveryBusy || exportBusy;
   const missing = project ? missingCharacters(project) : [];
 
   useEffect(() => {
@@ -97,6 +106,7 @@ export function App() {
   }, [local.loading]);
 
   function replace(next: Project) {
+    editor.cancel();
     scans.cancel();
     commit(next, "replace");
     setSelected(next.characters[0]);
@@ -176,6 +186,7 @@ export function App() {
     recoveryAction.current = true;
     setRecoveryBusy(true);
     try {
+      editor.cancel();
       await local.resetSavedData();
       if (!projectRef.current) await sample("paper", false);
     } catch (error) {
@@ -194,14 +205,14 @@ export function App() {
         !window.confirm(t.charactersChanged)
       )
         return;
-      commit(
-        project
-          ? {
-              ...(text === project.text ? project : updateText(project, text)),
-              name: name.trim(),
-            }
-          : newProject(name, text),
-      );
+      const next = project
+        ? {
+            ...(text === project.text ? project : updateText(project, text)),
+            name: name.trim(),
+          }
+        : newProject(name, text);
+      commit(next);
+      if (project && text !== project.text) editor.cancel();
       scans.cancel();
       setStage("Pages");
       setNotice({ key: "projectReady" });
@@ -211,18 +222,24 @@ export function App() {
   }
 
   function clear(character: string) {
-    if (!project) return;
-    const glyphs = { ...project.glyphs };
+    const current = projectRef.current;
+    if (!current) return;
+    editor.cancel(character);
+    const glyphs = { ...current.glyphs };
     delete glyphs[character];
-    commit({ ...project, glyphs });
+    commit({ ...current, glyphs });
   }
 
   async function exportFile(format: "ttf" | "woff2", partial: boolean) {
     if (!project) return;
     setExportBusy(true);
     try {
-      const data = await exportFont(project, format, partial);
-      download(data, fontFilename(project.name, format), `font/${format}`);
+      if (!(await editor.flush())) return;
+      const current = projectRef.current;
+      if (!current || current.id !== project.id) return;
+      const data = await exportFont(current, format, partial);
+      if (projectRef.current !== current) return;
+      download(data, fontFilename(current.name, format), `font/${format}`);
       setNotice({ key: "fontReady" });
     } catch (error) {
       setNotice({
@@ -384,7 +401,9 @@ export function App() {
               />
             </label>
             <div className="preview-diagnostics" role="status">
-              {preview.busy ? (
+              {editor.busy ? (
+                t.applyingEdits
+              ) : preview.busy ? (
                 t.fontPreparing
               ) : preview.error ? (
                 <span className="bad">{t[preview.error]}</span>
@@ -475,7 +494,10 @@ export function App() {
             <button
               type="button"
               disabled={!local.canUndo || locked}
-              onClick={local.undo}
+              onClick={() => {
+                editor.cancel();
+                local.undo();
+              }}
               aria-label={t.undo}
             >
               <ArrowCounterClockwise />
@@ -484,7 +506,10 @@ export function App() {
             <button
               type="button"
               disabled={!local.canRedo || locked}
-              onClick={local.redo}
+              onClick={() => {
+                editor.cancel();
+                local.redo();
+              }}
               aria-label={t.redo}
             >
               <ArrowClockwise />

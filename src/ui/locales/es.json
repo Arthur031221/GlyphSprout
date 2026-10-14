@@ -91,7 +91,7 @@
   "invalidCorners": "Coloca las esquinas en este orden válido: arriba izquierda, arriba derecha, abajo derecha, abajo izquierda.",
   "wrongType": "Elige una imagen JPEG o PNG.",
   "tooLarge": "Cada imagen debe ocupar como máximo 16 MiB y decodificarse a menos de 32 megapíxeles.",
-  "drawHelp": "Dibuja dentro del cuadro. Se usará la presión si el lápiz es compatible.",
+  "drawHelp": "Dibuja dentro del cuadrado. Usar el dibujo reemplaza este glifo y restablece sus ajustes. La presión depende del lápiz compatible.",
   "downloadTemplate": "Descargar plantilla en blanco",
   "storagePersist": "Mantener este proyecto disponible sin conexión",
   "noGlyph": "Selecciona un carácter para editar su contorno.",
@@ -183,5 +183,6 @@
   "resetStorage": "Restablecer almacenamiento local",
   "resetStorageConfirm": "¿Eliminar las versiones e imágenes guardadas en este navegador? Descarga primero los datos si quieres conservarlos.",
   "secureContextRequired": "Abre GlyphSprout mediante HTTPS o una dirección local como localhost. Las direcciones de red con HTTP no permiten generar fuentes ni guardar proyectos.",
-  "openLiveWorkshop": "Abrir taller en línea"
+  "openLiveWorkshop": "Abrir taller en línea",
+  "applyingEdits": "Aplicando cambios al glifo..."
 }

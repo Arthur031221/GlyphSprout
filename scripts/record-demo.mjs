@@ -25,6 +25,37 @@ try {
   await page.waitForTimeout(2000);
   await page.locator(".glyph-tile").nth(5).click();
   await page.waitForTimeout(500);
+  await page.getByRole("button", { name: "Draw a glyph", exact: true }).click();
+  await page.waitForTimeout(700);
+  await page.getByRole("button", { name: "Use drawing", exact: true }).click();
+  await page
+    .getByRole("alert")
+    .filter({ hasText: "This glyph has no ink." })
+    .waitFor();
+  await page.waitForTimeout(1300);
+  const canvas = page.locator(".draw-canvas canvas");
+  const bounds = await canvas.boundingBox();
+  if (!bounds) throw new Error("Drawing canvas is not visible.");
+  await page.mouse.move(
+    bounds.x + bounds.width * 0.3,
+    bounds.y + bounds.height * 0.68,
+  );
+  await page.mouse.down();
+  await page.mouse.move(
+    bounds.x + bounds.width * 0.48,
+    bounds.y + bounds.height * 0.28,
+    { steps: 12 },
+  );
+  await page.mouse.move(
+    bounds.x + bounds.width * 0.68,
+    bounds.y + bounds.height * 0.68,
+    { steps: 12 },
+  );
+  await page.mouse.up();
+  await page.waitForTimeout(500);
+  await page.getByRole("button", { name: "Use drawing", exact: true }).click();
+  await page.getByText("Font preview ready", { exact: true }).waitFor();
+  await page.waitForTimeout(1400);
   const scale = page.getByLabel("Size", { exact: true });
   await scale.fill("1.12");
   await scale.press("Tab");

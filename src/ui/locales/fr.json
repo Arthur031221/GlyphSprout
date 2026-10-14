@@ -91,7 +91,7 @@
   "invalidCorners": "Placez les coins dans cet ordre valide : haut gauche, haut droit, bas droit, bas gauche.",
   "wrongType": "Choisissez une image JPEG ou PNG.",
   "tooLarge": "Chaque image doit faire au plus 16 MiB et être décodée en moins de 32 mégapixels.",
-  "drawHelp": "Dessinez dans le carré. La pression est prise en compte si le stylet le permet.",
+  "drawHelp": "Dessinez dans le carré. Utiliser le dessin remplace ce glyphe et réinitialise ses réglages. La pression suit le stylet si celui ci le permet.",
   "downloadTemplate": "Télécharger le modèle vierge",
   "storagePersist": "Garder ce projet disponible hors ligne",
   "noGlyph": "Sélectionnez un caractère pour modifier son contour.",
@@ -183,5 +183,6 @@
   "resetStorage": "Réinitialiser le stockage local",
   "resetStorageConfirm": "Supprimer les versions et images enregistrées dans ce navigateur ? Téléchargez les données avant de les supprimer si vous souhaitez les conserver.",
   "secureContextRequired": "Ouvrez GlyphSprout via HTTPS ou une adresse locale comme localhost. Les adresses réseau en HTTP ne permettent pas de générer des polices ni de sauvegarder des projets.",
-  "openLiveWorkshop": "Ouvrir l'atelier en ligne"
+  "openLiveWorkshop": "Ouvrir l'atelier en ligne",
+  "applyingEdits": "Application des modifications du glyphe..."
 }

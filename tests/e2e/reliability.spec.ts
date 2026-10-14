@@ -612,6 +612,19 @@ test("settings apply on blur, undo and redo; drawing undo is local to the canvas
   await page.mouse.move(box.x + 190, box.y + 60, { steps: 8 });
   await page.mouse.up();
   await page.getByRole("button", { name: "Undo" }).last().click();
+  expect(
+    await canvas.evaluate((element: HTMLCanvasElement) => {
+      const ctx = element.getContext("2d");
+      if (!ctx) throw new Error("missing canvas context");
+      return ctx
+        .getImageData(0, 0, element.width, element.height)
+        .data.some((value, index) => index % 4 === 0 && value < 128);
+    }),
+  ).toBe(false);
+  await page.mouse.move(box.x + 50, box.y + 180);
+  await page.mouse.down();
+  await page.mouse.move(box.x + 190, box.y + 60, { steps: 8 });
+  await page.mouse.up();
   await page.getByRole("button", { name: "Use drawing" }).click();
   await expect(page.locator(".glyph-source small")).toHaveText("Drawing");
 });
