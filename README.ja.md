@@ -11,7 +11,7 @@
 [オンライン作業場を開く](https://Arthur031221.github.io/GlyphSprout/) | [ユーザーガイド](docs/USAGE.md) | [![MIT ライセンス](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.2
 ```
 
 Node.js 22.12 以降と Git が必要です。起動完了のメッセージが表示されたら `http://127.0.0.1:4173` を開きます。

@@ -98,15 +98,19 @@ export function App() {
   const missing = project ? missingCharacters(project) : [];
 
   const hasDrafts = setupDirty || drawingDirty || scans.drafts.length > 0;
+  const hasUnsavedWork =
+    hasDrafts ||
+    editor.busy ||
+    (project !== null && local.saveState !== "saved");
   useEffect(() => {
-    if (!hasDrafts) return;
+    if (!hasUnsavedWork) return;
     function warn(event: BeforeUnloadEvent) {
       event.preventDefault();
       event.returnValue = "";
     }
     window.addEventListener("beforeunload", warn);
     return () => window.removeEventListener("beforeunload", warn);
-  }, [hasDrafts]);
+  }, [hasUnsavedWork]);
 
   function changeDrawing(next: DrawingDraft | null, applied = false) {
     if (!applied && drawingDirty && !window.confirm(t.discardDrawing))

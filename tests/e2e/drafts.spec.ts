@@ -16,6 +16,15 @@ async function ready(page: Page) {
   );
 }
 
+async function settleBeforeUnloadEffect(page: Page) {
+  await page.evaluate(
+    () =>
+      new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+      ),
+  );
+}
+
 async function useThreePageCharacterSet(page: Page) {
   await page.getByRole("button", { name: "Characters" }).click();
   const text = Array.from({ length: 94 }, (_, index) =>
@@ -251,6 +260,7 @@ test("unmodified and fully undone drawings do not trigger beforeunload; dirty dr
     .locator(".draw-tools")
     .getByRole("button", { name: "Undo" })
     .click();
+  await settleBeforeUnloadEffect(page);
   await page.reload();
   expect(seen).toEqual([]);
 
@@ -259,6 +269,7 @@ test("unmodified and fully undone drawings do not trigger beforeunload; dirty dr
   await page
     .getByRole("button", { name: "Cancel source edit", exact: true })
     .click();
+  await settleBeforeUnloadEffect(page);
   await page.reload();
   expect(seen).toEqual([]);
 
@@ -268,6 +279,10 @@ test("unmodified and fully undone drawings do not trigger beforeunload; dirty dr
     .getByRole("button", { name: "Apply source edits", exact: true })
     .click();
   await expect(page.locator(".draft-notice")).toHaveCount(0);
+  await expect(page.locator(".project-label [role=status]")).toHaveText(
+    "Saved",
+  );
+  await settleBeforeUnloadEffect(page);
   await page.reload();
   expect(seen).toEqual([]);
 
@@ -280,6 +295,7 @@ test("unmodified and fully undone drawings do not trigger beforeunload; dirty dr
     .getByRole("button", { name: "Cancel drawing", exact: true })
     .click();
   await expect(page.locator(".draft-notice")).toHaveCount(0);
+  await settleBeforeUnloadEffect(page);
   await page.reload();
   expect(seen).toEqual([]);
 
