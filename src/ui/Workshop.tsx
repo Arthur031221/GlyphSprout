@@ -549,6 +549,17 @@ export function Workshop({
               />
             </label>
             <small>{t.wordSpaceHelp}</small>
+            <label className="case-fallback">
+              <input
+                type="checkbox"
+                checked={!!project.upperForLower}
+                onChange={(event) => {
+                  void editor.upperForLower(event.target.checked);
+                }}
+              />
+              {t.upperForLower}
+            </label>
+            <small>{t.upperForLowerHelp}</small>
           </div>
           <button
             type="button"

@@ -77,6 +77,7 @@ export interface Project {
   pages: ScanPage[];
   spaceWidth?: number;
   kerning?: KernPair[];
+  upperForLower?: true;
   info?: FontInfo;
   createdAt: string;
   updatedAt: string;

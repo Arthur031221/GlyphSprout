@@ -231,6 +231,8 @@
   "spacingTitle": "Schriftabstände",
   "wordSpace": "Wortabstand",
   "wordSpaceHelp": "Breite des Leerzeichens in Schrifteinheiten, von 100 bis 1000.",
+  "upperForLower": "Kleinbuchstaben mit meinen Großbuchstaben-Glyphen schreiben",
+  "upperForLowerHelp": "Ein Kleinbuchstabe, den du nicht hinzugefügt hast, verwendet die Form seines Großbuchstabens, sodass eine Schrift nur aus Großbuchstaben auch Kleinbuchstaben tippen kann. Buchstaben, die du selbst hinzufügst, behalten ihre eigene Glyphe.",
   "matchBearing": "Diesen Seitenabstand für alle lateinischen Buchstaben verwenden",
   "spaceInvalid": "Der Wortabstand muss eine ganze Zahl von 100 bis 1000 sein.",
   "infoTitle": "Schriftinformationen",

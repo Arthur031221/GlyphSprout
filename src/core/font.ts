@@ -1,7 +1,7 @@
 import type { TTF } from "fonteditor-core";
 import { createFont, woff2 } from "fonteditor-core";
 import { hasCrossings } from "./smooth";
-import { isCjk } from "./text";
+import { isCjk, isSupported } from "./text";
 import { signedArea } from "./trace";
 import type { Glyph, KernPair, Project } from "./types";
 import { BASELINE, DEFAULT_SPACE_WIDTH, UNITS_PER_EM } from "./types";
@@ -10,6 +10,30 @@ export function missingCharacters(project: Project): string[] {
   return project.characters.filter(
     (ch) => !project.glyphs[ch]?.contours.length,
   );
+}
+
+/**
+ * Lowercase letters that borrow the glyph of their uppercase letter, keyed by
+ * the lowercase letter. Empty unless the project asks for it. A lowercase
+ * letter the project has itself keeps its own glyph.
+ */
+export function lowercaseFallbacks(project: Project): Map<string, string> {
+  const fallbacks = new Map<string, string>();
+  if (!project.upperForLower) return fallbacks;
+  const have = new Set(project.characters);
+  for (const upper of project.characters) {
+    if (!project.glyphs[upper]?.contours.length) continue;
+    const lower = upper.toLowerCase();
+    if (
+      lower === upper ||
+      Array.from(lower).length !== 1 ||
+      have.has(lower) ||
+      !isSupported(lower)
+    )
+      continue;
+    fallbacks.set(lower, upper);
+  }
+  return fallbacks;
 }
 
 export function fontGlyph(glyph: Glyph): TTF.Glyph {
@@ -187,9 +211,20 @@ function identitySuffix(projectId: string, name: string): string {
 export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
   const missing = missingCharacters(project);
   if (missing.length && !allowPartial) throw new Error("missingGlyphs");
+  const lowers = new Map<string, number[]>();
+  for (const [lower, upper] of lowercaseFallbacks(project))
+    lowers.set(upper, [
+      ...(lowers.get(upper) ?? []),
+      lower.codePointAt(0) ?? 0,
+    ]);
   const glyphs = project.characters
     .filter((ch) => project.glyphs[ch]?.contours.length)
-    .map((ch) => fontGlyph(project.glyphs[ch]));
+    .map((ch) => {
+      const glyph = fontGlyph(project.glyphs[ch]);
+      const extra = lowers.get(ch);
+      if (extra) glyph.unicode = [...(glyph.unicode ?? []), ...extra];
+      return glyph;
+    });
   if (!glyphs.length) throw new Error("emptyFont");
   const font = createFont();
   const data = font.get();
@@ -211,7 +246,11 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
   const kern = kernTable(
     project.kerning ?? [],
     new Map(
-      glyphs.map((g, i) => [String.fromCodePoint(g.unicode?.[0] ?? 0), i + 2]),
+      glyphs.flatMap((g, i) =>
+        (g.unicode ?? []).map(
+          (cp) => [String.fromCodePoint(cp), i + 2] as const,
+        ),
+      ),
     ),
   );
   if (kern.length) (data as { kern?: number[] }).kern = kern;

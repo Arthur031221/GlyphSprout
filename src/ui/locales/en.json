@@ -231,6 +231,8 @@
   "spacingTitle": "Font spacing",
   "wordSpace": "Word space",
   "wordSpaceHelp": "Width of the space character in font units, from 100 to 1000.",
+  "upperForLower": "Type lowercase letters with my uppercase glyphs",
+  "upperForLowerHelp": "A lowercase letter you didn't add uses the shape of its uppercase glyph, so a capitals only alphabet also types in lowercase. Letters you add yourself keep their own glyph.",
   "matchBearing": "Use this side bearing for all Latin letters",
   "spaceInvalid": "Word space must be a whole number from 100 to 1000.",
   "infoTitle": "Font information",

@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.25.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -37,7 +37,7 @@ Zoom in to fix small details. Pen and eraser sizes use source pixels, so zooming
 
 Mark reviewed waits for pending ink and crop adjustments. If a scan cell has too many points or contours to export, conversion keeps its source and names the character. Other cells still convert. Adjust the speck filter, crop or source, then review the repaired glyph.
 
-Once one glyph looks right, **Use this threshold, speck filter, weight and smoothing for all glyphs** traces every other glyph again with the same values. Review progress shows beside the glyph list. Each tile in the list draws your traced outline, so a tiny or misplaced letter stands out at a glance. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
+Once one glyph looks right, **Use this threshold, speck filter, weight and smoothing for all glyphs** traces every other glyph again with the same values. Review progress shows beside the glyph list. Each tile in the list draws your traced outline, so a tiny or misplaced letter stands out at a glance. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. A checkbox there lets lowercase letters you didn't add use the shape of their uppercase glyphs, so a capitals only alphabet also types in lowercase. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
 
 Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads use the applied values. Reloading loses unapplied setup changes.
 

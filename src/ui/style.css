@@ -1018,6 +1018,13 @@ fieldset {
   margin-top: 6px;
   color: var(--muted);
 }
+.spacing-panel .case-fallback {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  max-width: none;
+  margin-top: 14px;
+}
 .export-panel {
   margin-top: 14px;
   display: flex;

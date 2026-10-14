@@ -231,6 +231,8 @@
   "spacingTitle": "字体间距",
   "wordSpace": "词间空格",
   "wordSpaceHelp": "空格字符的宽度，以字体单位计，范围 100 到 1000。",
+  "upperForLower": "小写字母使用大写字形",
+  "upperForLowerHelp": "没有添加的小写字母会借用对应大写字母的字形，只写大写的字体也能输入小写。你自己添加的字母仍使用自己的字形。",
   "matchBearing": "将此侧边距应用到所有拉丁字母",
   "spaceInvalid": "词间空格必须是 100 到 1000 之间的整数。",
   "infoTitle": "字体信息",

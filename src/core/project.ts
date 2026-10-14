@@ -122,6 +122,11 @@ function date(value: unknown): string {
   return s;
 }
 
+function flag(value: unknown): true {
+  if (value !== true) throw new Error("invalidProject");
+  return true;
+}
+
 export function spaceWidth(value: unknown): number {
   const width = number(value, MIN_SPACE_WIDTH, MAX_SPACE_WIDTH);
   if (!Number.isInteger(width)) throw new Error("invalidProject");
@@ -326,6 +331,9 @@ export function validateProject(value: unknown): Project {
     !kernPairs(p.kerning, analysis.characters).length
       ? {}
       : { kerning: kernPairs(p.kerning, analysis.characters) }),
+    ...(p.upperForLower === undefined
+      ? {}
+      : { upperForLower: flag(p.upperForLower) }),
     ...(p.info === undefined || !Object.keys(fontInfo(p.info)).length
       ? {}
       : { info: fontInfo(p.info) }),

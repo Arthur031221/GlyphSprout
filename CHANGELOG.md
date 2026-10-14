@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.25.0
+
+The Font spacing panel has a new checkbox, **Type lowercase letters with my uppercase glyphs**. A capitals only handwriting font could not type lowercase text at all: every lowercase letter showed in red in the live preview and was missing from the exported font, so you had to print and write a second alphabet. With the box ticked, each lowercase letter that isn't in your character list is exported with the glyph of its uppercase letter. Latin, Greek and Cyrillic letters are covered. A lowercase letter you add yourself keeps its own glyph, and the live preview, the specimen image and the TTF and WOFF2 downloads all follow the setting. Kerning pairs set for two uppercase letters also apply to their lowercase forms.
+
+The option is saved in project backups and follows Undo and Redo. A backup with a value that isn't true is refused. Unit tests read the exported cmap for all three scripts, the kept lowercase glyph, empty glyphs and the backup round trip. A browser test checks the red letters and the add offer, the width of the lowercase text against the uppercase text, the backup and Undo, and the Traditional Chinese label. The label and help text are translated in all nine interface languages, and the README paragraph on the spacing panel and the usage guide describe it.
+
 ## 1.24.1
 
 The Workshop's glyph list now has its own heading, **Glyphs**. It reused the word for a character count, so the Traditional and Simplified Chinese interfaces showed a bare counting word where a title belongs. The new heading is translated in all nine interface languages.

@@ -231,6 +231,8 @@
   "spacingTitle": "字型間距",
   "wordSpace": "字間空白",
   "wordSpaceHelp": "空白字元的寬度，以字型單位計，範圍 100 到 1000。",
+  "upperForLower": "小寫字母使用大寫字形",
+  "upperForLowerHelp": "沒有加入的小寫字母會借用對應大寫字母的字形，只寫大寫的字體也能輸入小寫。你自己加入的字母仍使用自己的字形。",
   "matchBearing": "將此側邊距套用到所有拉丁字母",
   "spaceInvalid": "字間空白必須是 100 到 1000 之間的整數。",
   "infoTitle": "字型資訊",

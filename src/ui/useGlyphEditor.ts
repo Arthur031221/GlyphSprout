@@ -205,6 +205,16 @@ export function useGlyphEditor(
     }
   }
 
+  async function upperForLower(on: boolean) {
+    if (!(await flush())) return false;
+    const current = projectRef.current;
+    if (!current) return false;
+    if (on === !!current.upperForLower) return true;
+    const { upperForLower: _old, ...rest } = current;
+    commit(on ? { ...rest, upperForLower: true } : rest);
+    return true;
+  }
+
   async function kern(left: string, right: string, value: number) {
     if (!(await flush())) return false;
     const current = projectRef.current;
@@ -410,6 +420,7 @@ export function useGlyphEditor(
     mutate,
     settings,
     wordSpace,
+    upperForLower,
     kern,
     fontInfo,
     matchSideBearing,

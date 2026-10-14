@@ -231,6 +231,8 @@
   "spacingTitle": "Espaçamento da fonte",
   "wordSpace": "Espaço entre palavras",
   "wordSpaceHelp": "Largura do caractere de espaço em unidades da fonte, de 100 a 1000.",
+  "upperForLower": "Digitar minúsculas com meus glifos de maiúscula",
+  "upperForLowerHelp": "Uma minúscula que você não adicionou usa a forma da maiúscula correspondente, então um alfabeto só de maiúsculas também digita em minúsculas. As letras que você adiciona mantêm o próprio glifo.",
   "matchBearing": "Usar este espaçamento lateral em todas as letras latinas",
   "spaceInvalid": "O espaço entre palavras deve ser um número inteiro de 100 a 1000.",
   "infoTitle": "Informações da fonte",

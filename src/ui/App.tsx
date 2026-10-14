@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   exportFont,
   fontFilename,
+  lowercaseFallbacks,
   missingCharacters,
   webFontCss,
 } from "../core/font";
@@ -437,7 +438,10 @@ export function App() {
     },
   );
 
-  const addable = project ? charactersToAdd(specimen, project.characters) : [];
+  const fallbacks = project ? lowercaseFallbacks(project) : new Map();
+  const addable = project
+    ? charactersToAdd(specimen, [...project.characters, ...fallbacks.keys()])
+    : [];
 
   return (
     <div className="app-shell">
@@ -547,7 +551,9 @@ export function App() {
               {preview.family ? (
                 specimenLetters.map(({ character: ch, key }) => {
                   const absent =
-                    !/\s/u.test(ch) && !project?.glyphs[ch]?.contours.length;
+                    !/\s/u.test(ch) &&
+                    !project?.glyphs[ch]?.contours.length &&
+                    !fallbacks.has(ch);
                   return (
                     <span
                       key={key}

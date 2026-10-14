@@ -1,6 +1,11 @@
 import { createFont } from "fonteditor-core";
 import { describe, expect, it } from "vitest";
-import { buildTtf, fontGlyph, webFontCss } from "../src/core/font";
+import {
+  buildTtf,
+  fontGlyph,
+  lowercaseFallbacks,
+  webFontCss,
+} from "../src/core/font";
 import {
   blankGlyph,
   cleanFontInfo,
@@ -296,5 +301,71 @@ describe("Greek, Cyrillic and Hangul export", () => {
       font.glyf[font.cmap[ch.codePointAt(0) as number]].advanceWidth;
     expect(advance("한")).toBe(1000);
     expect(advance("Ω")).not.toBe(1000);
+  });
+});
+
+describe("uppercase glyphs for lowercase letters", () => {
+  function capsProject(text: string, on = true): Project {
+    const project = newProject("Caps", text);
+    for (const ch of project.characters) {
+      const glyph = blankGlyph(ch, "data:image/png;base64,iVBORw0KGgo=");
+      glyph.contours = [
+        [
+          { x: 0.2, y: 0.2 },
+          { x: 0.5, y: 0.2 },
+          { x: 0.5, y: 0.7 },
+          { x: 0.2, y: 0.7 },
+        ],
+      ];
+      project.glyphs[ch] = glyph;
+    }
+    return on ? { ...project, upperForLower: true } : project;
+  }
+  const cmap = (project: Project) =>
+    createFont(buildTtf(project), { type: "ttf" }).get().cmap;
+
+  it("does nothing until it is switched on", () => {
+    const project = capsProject("AB", false);
+    expect(lowercaseFallbacks(project).size).toBe(0);
+    expect(cmap(project)[0x61]).toBeUndefined();
+  });
+
+  it("maps each lowercase letter to the glyph of its uppercase letter", () => {
+    const table = cmap(capsProject("AБΩ1"));
+    expect(table[0x61]).toBe(table[0x41]);
+    expect(table[0x431]).toBe(table[0x411]);
+    expect(table[0x3c9]).toBe(table[0x3a9]);
+    expect(table[0x61]).toBeDefined();
+    expect(table[0x31]).toBeDefined();
+  });
+
+  it("keeps a lowercase letter the project has and skips glyphs that are empty", () => {
+    const project = capsProject("Aa");
+    project.glyphs.a.contours = [
+      [
+        { x: 0.1, y: 0.1 },
+        { x: 0.4, y: 0.1 },
+        { x: 0.4, y: 0.3 },
+      ],
+    ];
+    const table = cmap(project);
+    expect(table[0x61]).not.toBe(table[0x41]);
+    const empty = capsProject("B");
+    empty.glyphs.B.contours = [];
+    empty.glyphs.A = empty.glyphs.B;
+    expect(lowercaseFallbacks(empty).size).toBe(0);
+  });
+
+  it("survives a backup and rejects a value that is not true", () => {
+    const project = capsProject("AB");
+    expect(parseProject(serializeProject(project)).upperForLower).toBe(true);
+    expect(
+      parseProject(serializeProject(capsProject("AB", false))).upperForLower,
+    ).toBeUndefined();
+    const broken = JSON.parse(serializeProject(project));
+    broken.upperForLower = "yes";
+    expect(() => parseProject(JSON.stringify(broken))).toThrow(
+      "invalidProject",
+    );
   });
 });

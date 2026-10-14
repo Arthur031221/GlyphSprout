@@ -231,6 +231,8 @@
   "spacingTitle": "Espacement de la police",
   "wordSpace": "Espace entre les mots",
   "wordSpaceHelp": "Largeur du caractère espace en unités de police, de 100 à 1000.",
+  "upperForLower": "Saisir les minuscules avec mes glyphes majuscules",
+  "upperForLowerHelp": "Une minuscule que vous n'avez pas ajoutée reprend la forme de sa majuscule, si bien qu'un alphabet en capitales permet aussi de saisir en minuscules. Les lettres que vous ajoutez vous-même gardent leur propre glyphe.",
   "matchBearing": "Appliquer cette approche latérale à toutes les lettres latines",
   "spaceInvalid": "L'espace entre les mots doit être un entier de 100 à 1000.",
   "infoTitle": "Informations sur la police",

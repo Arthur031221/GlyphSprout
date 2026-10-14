@@ -161,6 +161,10 @@ try {
     page.getByRole("status").filter({ hasText: "Saved" }),
   ).toBeVisible();
   await page.waitForTimeout(1800);
+  await page
+    .getByLabel("Type lowercase letters with my uppercase glyphs")
+    .check();
+  await page.waitForTimeout(1600);
   const kern = page.locator(".kern-panel");
   await kern.scrollIntoViewIfNeeded();
   await kern.getByLabel("First letter").selectOption("H");

@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.24.1
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.25.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -37,7 +37,7 @@ Vergrößere das Bild, um Details zu korrigieren. Stift und Radierer werden in Q
 
 Als geprüft markieren wartet, bis die Anpassungen an Tinte und Zuschnitt abgeschlossen sind. Hat eine Zelle zu viele Punkte oder Konturen für den Export, bleibt ihr Quellbild erhalten und das betroffene Zeichen wird angezeigt. Die anderen Zellen werden umgewandelt. Passe den Fleckenfilter, den Zuschnitt oder das Quellbild an und prüfe die korrigierte Glyphe.
 
-Der Prüffortschritt steht neben der Zeichenliste. Jede Kachel in der Liste zeigt die nachgezeichnete Kontur, sodass ein winziges oder verschobenes Zeichen sofort auffällt. **Nächste Prüfung** springt zum nächsten ungeprüften Zeichen, und die Pfeiltasten wechseln zwischen den Zeichen. Im Bereich für Schriftabstände legst du den Wortabstand für die ganze Schrift fest und kannst den lateinischen Seitenabstand eines Zeichens auf alle lateinischen Buchstaben übertragen. **Beispieltext als Bild herunterladen** speichert den Vorschautext als PNG. **Web-Font-CSS kopieren** legt eine `@font-face`-Regel in die Zwischenablage, damit du die heruntergeladenen Dateien auf einer Website nutzen kannst, und **Vorschau-Zoom** ändert die Größe der Live-Vorschau. Das Feld **Schriftinformationen** schreibt Gestalter, Copyright-Vermerk und Lizenz in die exportierte Schrift und kann die SIL Open Font License mit einem Klick eintragen.
+Der Prüffortschritt steht neben der Zeichenliste. Jede Kachel in der Liste zeigt die nachgezeichnete Kontur, sodass ein winziges oder verschobenes Zeichen sofort auffällt. **Nächste Prüfung** springt zum nächsten ungeprüften Zeichen, und die Pfeiltasten wechseln zwischen den Zeichen. Im Bereich für Schriftabstände legst du den Wortabstand für die ganze Schrift fest und kannst den lateinischen Seitenabstand eines Zeichens auf alle lateinischen Buchstaben übertragen. Mit einem Kontrollkästchen dort verwenden nicht hinzugefügte Kleinbuchstaben die Form ihrer Großbuchstaben, sodass eine Schrift nur aus Großbuchstaben auch Kleinbuchstaben tippen kann. **Beispieltext als Bild herunterladen** speichert den Vorschautext als PNG. **Web-Font-CSS kopieren** legt eine `@font-face`-Regel in die Zwischenablage, damit du die heruntergeladenen Dateien auf einer Website nutzen kannst, und **Vorschau-Zoom** ändert die Größe der Live-Vorschau. Das Feld **Schriftinformationen** schreibt Gestalter, Copyright-Vermerk und Lizenz in die exportierte Schrift und kann die SIL Open Font License mit einem Klick eintragen.
 
 Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen den Bereichen als Entwürfe erhalten. Mit **Project ready** übernimmst du die Änderungen. Sicherungen und Schriftdateien verwenden bis dahin die übernommenen Werte. Nicht übernommene Änderungen gehen beim Neuladen verloren.
 
