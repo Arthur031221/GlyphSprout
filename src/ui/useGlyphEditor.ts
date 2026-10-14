@@ -20,6 +20,9 @@ export function useGlyphEditor(
   const requests = useRef(new Map<string, number>());
   const releasePending = useRef(new Map<string, () => void>());
   const pending = useRef(new Set<Promise<boolean | undefined>>());
+  const pendingByCharacter = useRef(
+    new Map<string, Promise<boolean | undefined>>(),
+  );
   const [busy, setBusy] = useState(false);
   const [cancellation, setCancellation] = useState(0);
 
@@ -38,10 +41,21 @@ export function useGlyphEditor(
     setCancellation((value) => value + 1);
   }
 
-  function mutate(character: string, change: (glyph: Glyph) => Glyph) {
+  async function mutate(character: string, change: (glyph: Glyph) => Glyph) {
+    const snapshot = projectRef.current;
+    if (!snapshot?.glyphs[character]) return;
+    const request = requests.current.get(character);
+    const task = pendingByCharacter.current.get(character);
+    if (task && (await task) !== true) return;
     const latest = projectRef.current;
     const glyph = latest?.glyphs[character];
-    if (!latest || !glyph) return;
+    if (
+      !latest ||
+      !glyph ||
+      latest.id !== snapshot.id ||
+      requests.current.get(character) !== request
+    )
+      return;
     cancel(character);
     try {
       commit({
@@ -77,9 +91,12 @@ export function useGlyphEditor(
       canceled,
     ]);
     pending.current.add(task);
+    pendingByCharacter.current.set(character, task);
     setBusy(true);
     void task.finally(() => {
       pending.current.delete(task);
+      if (pendingByCharacter.current.get(character) === task)
+        pendingByCharacter.current.delete(character);
       if (releasePending.current.get(character) === release)
         releasePending.current.delete(character);
       setBusy(pending.current.size > 0);

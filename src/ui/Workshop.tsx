@@ -277,7 +277,7 @@ export function Workshop({
                     aria-pressed={current.reviewed}
                     onClick={() => {
                       if (!onDrawingChange(null)) return;
-                      editor.mutate(selected, (glyph) => ({
+                      void editor.mutate(selected, (glyph) => ({
                         ...glyph,
                         reviewed: !glyph.reviewed,
                       }));
