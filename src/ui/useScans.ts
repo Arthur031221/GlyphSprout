@@ -8,6 +8,7 @@ import { errorKey } from "./i18n";
 import type { Notice } from "./useGlyphEditor";
 
 export interface DraftPage extends ScanPage {
+  templateId: string;
   filename: string;
   confirmed: boolean;
 }
@@ -35,6 +36,9 @@ export function useScans(
   const [progress, setProgress] = useState({ done: 0, total: 0 });
   const worker = useRef<Worker | null>(null);
   const readVersion = useRef(0);
+  const compatible = drafts.every(
+    (page) => page.templateId === projectRef.current?.id,
+  );
   useEffect(
     () => () => {
       worker.current?.terminate();
@@ -54,7 +58,7 @@ export function useScans(
   }
 
   function change(next: Partial<DraftPage>) {
-    if (busy || reading) return;
+    if (busy || reading || !compatible) return;
     setDrafts((current) =>
       current.map((page, i) =>
         i === index
@@ -90,6 +94,10 @@ export function useScans(
   async function add(files: File[]) {
     const snapshot = projectRef.current;
     if (!snapshot || busy || reading) return;
+    if (!compatible) {
+      notify({ key: "scanTemplateChanged", tone: "error" });
+      return;
+    }
     if (files.length + drafts.length > pageCount(snapshot.characters)) {
       notify({ key: "pageLimit", tone: "error" });
       return;
@@ -106,6 +114,7 @@ export function useScans(
         used.add(pageIndex);
         next.push({
           id: crypto.randomUUID(),
+          templateId: snapshot.id,
           pageIndex,
           filename: file.name,
           confirmed: false,
@@ -138,6 +147,8 @@ export function useScans(
     const snapshot = projectRef.current;
     if (!snapshot || busy || !drafts.length) return;
     try {
+      if (drafts.some((page) => page.templateId !== snapshot.id))
+        throw new Error("scanTemplateChanged");
       if (new Set(drafts.map((p) => p.pageIndex)).size !== drafts.length)
         throw new Error("duplicatePage");
       for (const page of drafts) {
@@ -235,7 +246,10 @@ export function useScans(
             glyphs,
             pages: [
               ...pages,
-              ...drafts.map(({ filename: _, confirmed: __, ...page }) => page),
+              ...drafts.map(
+                ({ filename: _, confirmed: __, templateId: ___, ...page }) =>
+                  page,
+              ),
             ],
           });
           setDrafts([]);
@@ -258,6 +272,7 @@ export function useScans(
   }
   return {
     drafts,
+    compatible,
     index,
     setIndex,
     busy,

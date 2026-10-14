@@ -53,6 +53,8 @@ export function App() {
   const [drawing, setDrawing] = useState<DrawingDraft | null>(null);
   const [drawingVersion, setDrawingVersion] = useState(0);
   const [drawingDirty, setDrawingDirty] = useState(false);
+  const [setupDirty, setSetupDirty] = useState(false);
+  const [setupVersion, setSetupVersion] = useState(0);
   const [specimen, setSpecimen] = useState("HELLO JOB");
   const [notice, setNotice] = useState<Notice | null>(null);
   const [sampleBusy, setSampleBusy] = useState(false);
@@ -95,7 +97,7 @@ export function App() {
     scans.busy || scans.reading || sampleBusy || recoveryBusy || exportBusy;
   const missing = project ? missingCharacters(project) : [];
 
-  const hasDrafts = drawingDirty || scans.drafts.length > 0;
+  const hasDrafts = setupDirty || drawingDirty || scans.drafts.length > 0;
   useEffect(() => {
     if (!hasDrafts) return;
     function warn(event: BeforeUnloadEvent) {
@@ -151,6 +153,8 @@ export function App() {
     editor.cancel();
     scans.cancel();
     commit(next, "replace");
+    setSetupVersion((value) => value + 1);
+    setSetupDirty(false);
     setSelected(next.characters[0]);
     setSpecimen(next.text);
     setStage("Workshop");
@@ -250,13 +254,14 @@ export function App() {
     try {
       const next = project
         ? {
-            ...(text === project.text ? project : updateText(project, text)),
+            ...updateText(project, text),
             name: name.trim(),
           }
         : newProject(name, text);
       const charactersChanged = project && next.id !== project.id;
-      if (charactersChanged && !window.confirm(t.charactersChanged)) return;
-      if (charactersChanged && !changeDrawing(null)) return;
+      if (charactersChanged && !window.confirm(t.charactersChanged))
+        return false;
+      if (charactersChanged && !changeDrawing(null)) return false;
       commit(next);
       if (charactersChanged) {
         editor.cancel();
@@ -265,8 +270,10 @@ export function App() {
       if (next.text !== project?.text) setSpecimen(next.text);
       setStage("Pages");
       setNotice({ key: "projectReady" });
+      return true;
     } catch (error) {
       setNotice({ key: errorKey(error), tone: "error" });
+      return false;
     }
   }
 
@@ -535,11 +542,13 @@ export function App() {
             <small className={local.saveError ? "bad" : ""} role="status">
               {local.saveError
                 ? t[local.saveError]
-                : local.saveState === "saving"
-                  ? t.saving
-                  : local.saveState === "saved"
-                    ? t.saved
-                    : t.savePending}
+                : setupDirty
+                  ? t.setupDraftStatus
+                  : local.saveState === "saving"
+                    ? t.saving
+                    : local.saveState === "saved"
+                      ? t.saved
+                      : t.savePending}
             </small>
           </div>
           <div className="toolbar-actions">
@@ -610,14 +619,16 @@ export function App() {
           </div>
         </div>
         <fieldset className="stage-content" disabled={locked}>
-          {!project || stage === "Characters" ? (
+          <div hidden={!!project && stage !== "Characters"}>
             <Setup
-              key={project?.id ?? "new"}
+              key={setupVersion}
               project={project}
               t={t}
               onApply={setup}
+              onDirtyChange={setSetupDirty}
             />
-          ) : stage === "Pages" ? (
+          </div>
+          {project && stage === "Pages" ? (
             <Pages project={project} t={t} scans={scans} notify={setNotice} />
           ) : null}
           {project && (
@@ -645,7 +656,12 @@ export function App() {
             </div>
           )}
         </fieldset>
-        {hasDrafts && (
+        {setupDirty && (
+          <p className="notice draft-notice setup-draft-notice" role="status">
+            {t.setupUnsaved}
+          </p>
+        )}
+        {(drawingDirty || scans.drafts.length > 0) && (
           <p className="notice draft-notice" role="status">
             {drawingDirty ? t.drawingUnsaved : t.scansUnsaved}
           </p>

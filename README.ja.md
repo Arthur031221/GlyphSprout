@@ -11,7 +11,7 @@
 [オンライン作業場を開く](https://Arthur031221.github.io/GlyphSprout/) | [ユーザーガイド](docs/USAGE.md) | [![MIT ライセンス](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
 ```
 
 Node.js 22.12 以降と Git が必要です。起動完了のメッセージが表示されたら `http://127.0.0.1:4173` を開きます。
@@ -32,6 +32,8 @@ Node.js 22.12 以降と Git が必要です。起動完了のメッセージが�
 6. プレビューに文章を入力し、TTF または WOFF2 をダウンロードします。
 
 「元画像を編集」では現在のピクセルを読み込み、消しゴムやペンで一部を直して、その操作を元に戻せます。設定とページ ID は維持されます。変更した字形は再確認が必要です。「字形を描く」は白紙から始まり、字形を置き換えて設定を初期化します。空の描画は適用されません。変更のない編集ではプロジェクト履歴は変わりません。
+
+「Characters」のフォント名と使用する文字は、画面を移動しても下書きとして残ります。**Project ready**を選ぶと反映されます。それまではバックアップとダウンロードに反映前の値が使われます。未反映の変更は再読み込みすると失われます。
 
 ## 小さなサブセットと明確な制限
 

@@ -11,7 +11,7 @@ The bundled Paper Bloom sample exports a 3,284 byte TTF checked with Fontconfig 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
 ```
 
 You'll need Node.js 22.12 or newer and Git. Once the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -32,6 +32,8 @@ You'll need Node.js 22.12 or newer and Git. Once the command prints its ready me
 6. Type your text in the live specimen and download TTF or WOFF2.
 
 Edit source keeps the current native pixels so you can erase, draw and undo local strokes. The glyph's settings and page assignment stay intact. Review any changed sources. Draw a glyph starts blank and replaces the glyph, resetting its settings. Empty drawings are rejected. If you leave the source unchanged, project history stays untouched.
+
+Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads keep the applied values. Reloading loses unapplied setup changes.
 
 ## A small subset with clear limits
 

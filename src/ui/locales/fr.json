@@ -194,5 +194,8 @@
   "discardDrawing": "Abandonner les modifications de dessin inachevées ? Appliquez-les d'abord pour conserver votre travail.",
   "drawingUnsaved": "Les modifications du dessin ne sont pas enregistrées ni incluses dans les téléchargements. Appliquez-les ou annulez-les dans l'Atelier avant de partir.",
   "scansUnsaved": "L'alignement du scan n'est pas enregistré ni inclus dans les téléchargements. Convertissez ou supprimez les scans préparés avant de partir.",
-  "removeScan": "Supprimer le scan"
+  "removeScan": "Supprimer le scan",
+  "setupDraftStatus": "Modifications de configuration non appliquées",
+  "setupUnsaved": "Les modifications du nom de la police et des caractères ne sont ni enregistrées ni incluses dans les téléchargements. Choisissez Projet prêt dans Caractères pour les appliquer.",
+  "scanTemplateChanged": "Ces scans appartiennent à un autre modèle de caractères. Rétablissez ce modèle avec Annuler ou Rétablir, ou supprimez les scans et importez les feuilles du modèle actuel."
 }

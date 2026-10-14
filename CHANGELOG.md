@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1
+
+- Bind staged scans to their original character template. Undo and redo cannot convert confirmed sheets against a different character order or page count. Restore the original template or remove the scans to continue.
+
+- Keep font name and character text drafts when moving between Characters, Pages, and Workshop. Show unapplied setup status and warn before leaving the page. Backups and font downloads use applied values until **Project ready** is submitted.
+- Follow project undo and redo in clean setup fields while preserving dirty drafts. Normalize the raw setup input after a successful submission, and reset drafts when replacing a project, including with the same sample.
+- Refresh the recording to show a setup draft surviving stage navigation before applying the font name and continuing with source editing and a TTF download.
+
 ## 1.2.0
 
 - Keep unfinished drawing pixels and drawing history mounted while moving between workshop stages.

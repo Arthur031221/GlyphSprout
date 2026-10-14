@@ -11,7 +11,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 284 octets, vérifié avec Font
 [Ouvrir l'atelier en ligne](https://Arthur031221.github.io/GlyphSprout/) | [Guide d'utilisation](docs/USAGE.md) | [![Licence MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -32,6 +32,8 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 6. Saisissez votre texte dans l'aperçu et téléchargez le TTF ou le WOFF2.
 
 Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.
+
+Le nom de la police et le texte des caractères dans « Characters » restent des brouillons lorsque vous changez de section. Choisissez **Project ready** pour les appliquer. Les sauvegardes et les polices téléchargées conservent jusque-là les valeurs appliquées. Les changements non appliqués sont perdus au rechargement.
 
 ## Un petit sous-ensemble avec des limites claires
 

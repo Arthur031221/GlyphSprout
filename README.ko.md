@@ -11,7 +11,7 @@
 [온라인 작업실 열기](https://Arthur031221.github.io/GlyphSprout/) | [사용자 안내서](docs/USAGE.md) | [![MIT 라이선스](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
 ```
 
 Node.js 22.12 이상과 Git이 필요합니다. 준비 완료 메시지가 나오면 `http://127.0.0.1:4173`을 여세요.
@@ -32,6 +32,8 @@ Node.js 22.12 이상과 Git이 필요합니다. 준비 완료 메시지가 나�
 6. 미리보기에 문장을 입력하고 TTF 또는 WOFF2를 다운로드합니다.
 
 원본 편집은 현재 픽셀을 불러와 펜과 지우개로 일부를 고치고 작업을 되돌릴 수 있습니다. 설정과 페이지 지정은 유지됩니다. 원본을 바꾼 글리프는 다시 검토해야 합니다. 글리프 그리기는 빈 이미지에서 시작해 글리프를 바꾸고 설정을 초기화합니다. 잉크가 없는 그림은 거부됩니다. 바뀌지 않은 원본 편집은 프로젝트 기록을 변경하지 않습니다.
+
+Characters의 글꼴 이름과 사용할 문자는 다른 단계로 이동해도 초안으로 남습니다. **Project ready**를 선택하면 적용됩니다. 그때까지 백업과 다운로드에는 적용된 값이 유지됩니다. 적용하지 않은 변경은 새로고침하면 사라집니다.
 
 ## 작은 부분집합과 명확한 한계
 

@@ -100,6 +100,7 @@ function Registration({
 }) {
   const active = useRef<number | null>(null);
   const svg = useRef<SVGSVGElement>(null);
+  const disabled = scans.busy || scans.reading || !scans.compatible;
   const names = [t.topLeft, t.topRight, t.bottomRight, t.bottomLeft];
   const polygons = useMemo(() => {
     try {
@@ -160,18 +161,21 @@ function Registration({
             r={Math.max(page.width / 55, 10)}
             className="corner-handle"
             role="slider"
-            tabIndex={0}
+            tabIndex={disabled ? -1 : 0}
+            aria-disabled={disabled}
             aria-label={names[i]}
             aria-valuemin={0}
             aria-valuemax={page.width}
             aria-valuenow={Math.round(p.x)}
             aria-valuetext={`${Math.round(p.x)}, ${Math.round(p.y)}`}
             onPointerDown={(e) => {
+              if (disabled) return;
               e.preventDefault();
               active.current = i;
               e.currentTarget.setPointerCapture(e.pointerId);
             }}
             onKeyDown={(e) => {
+              if (disabled) return;
               const delta = e.shiftKey ? 10 : 1;
               const directions: Record<string, Point> = {
                 ArrowLeft: { x: -delta, y: 0 },
@@ -300,6 +304,11 @@ export function Pages({
         </label>
         {!!scans.drafts.length && (
           <>
+            {!scans.compatible && (
+              <p className="notice bad scan-template-notice" role="alert">
+                {t.scanTemplateChanged}
+              </p>
+            )}
             <div ref={queue} className="draft-queue">
               {scans.drafts.map((page, i) => (
                 <div key={page.id} className="draft-item">
@@ -335,14 +344,16 @@ export function Pages({
               ))}
             </div>
             {draft && (
-              <fieldset disabled={scans.busy}>
+              <fieldset disabled={scans.busy || !scans.compatible}>
                 <div className="scan-workspace">
                   <div>
                     <Registration
                       page={draft}
                       count={
-                        pageCharacters(project.characters, draft.pageIndex)
-                          .length
+                        scans.compatible
+                          ? pageCharacters(project.characters, draft.pageIndex)
+                              .length
+                          : 0
                       }
                       scans={scans}
                       t={t}
@@ -358,7 +369,14 @@ export function Pages({
                           scans.change({ pageIndex: Number(e.target.value) })
                         }
                       >
-                        {Array.from({ length: total }, (_, i) => i).map((i) => (
+                        {Array.from(
+                          {
+                            length: scans.compatible
+                              ? total
+                              : draft.pageIndex + 1,
+                          },
+                          (_, i) => i,
+                        ).map((i) => (
                           <option key={i} value={i}>
                             {t.page} {i + 1}
                           </option>
@@ -367,7 +385,7 @@ export function Pages({
                     </label>
                     <label>
                       {t.pageId}
-                      <input readOnly value={project.id.slice(0, 8)} />
+                      <input readOnly value={draft.templateId.slice(0, 8)} />
                       <small>{t.scanHelp}</small>
                     </label>
                     {draft.corners.map((p, i) => (
@@ -438,7 +456,11 @@ export function Pages({
               <button
                 className="primary"
                 type="button"
-                disabled={scans.busy || !scans.drafts.every((p) => p.confirmed)}
+                disabled={
+                  scans.busy ||
+                  !scans.compatible ||
+                  !scans.drafts.every((p) => p.confirmed)
+                }
                 onClick={() => scans.run(size)}
               >
                 {t.processScans}
