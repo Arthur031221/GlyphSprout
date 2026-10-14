@@ -55,6 +55,10 @@ for (const ch of project.characters) {
     mask: Array.from(mask),
   };
 }
+project.kerning = [
+  { left: "O", right: "g", value: -60 },
+  { left: "i", right: "O", value: 25 },
+];
 const ttf = buildTtf(project);
 await writeFile(join(destination, "fixtures.ttf"), new Uint8Array(ttf));
 await woff2.init();
@@ -65,6 +69,7 @@ await writeFile(
   join(destination, "expected.json"),
   JSON.stringify({
     characters: project.characters,
+    kerning: project.kerning,
     size,
     expected,
     exporterGlyphCount: parsed.glyf.length,

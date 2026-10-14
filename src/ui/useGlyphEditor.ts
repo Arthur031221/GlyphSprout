@@ -3,6 +3,7 @@ import { fontGlyph } from "../core/font";
 import {
   blankGlyph,
   cleanFontInfo,
+  kernPairs,
   spaceWidth,
   validateSettings,
 } from "../core/project";
@@ -203,6 +204,31 @@ export function useGlyphEditor(
     }
   }
 
+  async function kern(left: string, right: string, value: number) {
+    if (!(await flush())) return false;
+    const current = projectRef.current;
+    if (!current) return false;
+    try {
+      const rest = (current.kerning ?? []).filter(
+        (pair) => pair.left !== left || pair.right !== right,
+      );
+      const pairs = kernPairs(
+        value === 0 ? rest : [...rest, { left, right, value }],
+        current.characters,
+      );
+      const same =
+        JSON.stringify(pairs) === JSON.stringify(current.kerning ?? []);
+      if (!same) {
+        const { kerning: _old, ...others } = current;
+        commit(pairs.length ? { ...others, kerning: pairs } : others);
+      }
+      return true;
+    } catch {
+      notice({ key: "kernInvalid", tone: "error" });
+      return false;
+    }
+  }
+
   async function fontInfo(value: FontInfo) {
     if (!(await flush())) return false;
     const current = projectRef.current;
@@ -306,6 +332,7 @@ export function useGlyphEditor(
     mutate,
     settings,
     wordSpace,
+    kern,
     fontInfo,
     matchSideBearing,
     drawing,

@@ -5,6 +5,7 @@ import type {
   FontInfo,
   Glyph,
   GlyphSettings,
+  KernPair,
   Point,
   Project,
   ScanPage,
@@ -14,6 +15,8 @@ import {
   FONT_INFO_LIMITS,
   MAX_CONTOURS_PER_GLYPH,
   MAX_GLYPHS,
+  MAX_KERN,
+  MAX_KERN_PAIRS,
   MAX_POINTS_PER_GLYPH,
   MAX_SPACE_WIDTH,
   MIN_SPACE_WIDTH,
@@ -45,8 +48,14 @@ export function updateText(project: Project, input: string): Project {
   const next = newProject(project.name, input);
   if (JSON.stringify(next.characters) === JSON.stringify(project.characters))
     return { ...project, text: next.text, updatedAt: next.updatedAt };
+  const { kerning: oldKerning, ...rest } = project;
+  const kerning = (oldKerning ?? []).filter(
+    (pair) =>
+      next.characters.includes(pair.left) &&
+      next.characters.includes(pair.right),
+  );
   return {
-    ...project,
+    ...rest,
     id: next.id,
     text: next.text,
     characters: next.characters,
@@ -59,6 +68,7 @@ export function updateText(project: Project, input: string): Project {
         }),
     ),
     pages: [],
+    ...(kerning.length ? { kerning } : {}),
     updatedAt: next.updatedAt,
   };
 }
@@ -116,6 +126,31 @@ export function spaceWidth(value: unknown): number {
   const width = number(value, MIN_SPACE_WIDTH, MAX_SPACE_WIDTH);
   if (!Number.isInteger(width)) throw new Error("invalidProject");
   return width;
+}
+
+export function kernPairs(
+  value: unknown,
+  characters: readonly string[],
+): KernPair[] {
+  if (!Array.isArray(value) || value.length > MAX_KERN_PAIRS)
+    throw new Error("invalidProject");
+  const seen = new Set<string>();
+  return value.map((entry) => {
+    const raw = object(entry);
+    const left = string(raw.left, 2);
+    const right = string(raw.right, 2);
+    const amount = number(raw.value, -MAX_KERN, MAX_KERN);
+    if (
+      !Number.isInteger(amount) ||
+      amount === 0 ||
+      !characters.includes(left) ||
+      !characters.includes(right) ||
+      seen.has(left + right)
+    )
+      throw new Error("invalidProject");
+    seen.add(left + right);
+    return { left, right, value: amount };
+  });
 }
 
 export function fontInfo(value: unknown): FontInfo {
@@ -285,6 +320,10 @@ export function validateProject(value: unknown): Project {
     ...(p.spaceWidth === undefined
       ? {}
       : { spaceWidth: spaceWidth(p.spaceWidth) }),
+    ...(p.kerning === undefined ||
+    !kernPairs(p.kerning, analysis.characters).length
+      ? {}
+      : { kerning: kernPairs(p.kerning, analysis.characters) }),
     ...(p.info === undefined || !Object.keys(fontInfo(p.info)).length
       ? {}
       : { info: fontInfo(p.info) }),

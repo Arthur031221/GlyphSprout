@@ -139,6 +139,14 @@ try {
     page.getByRole("status").filter({ hasText: "Saved" }),
   ).toBeVisible();
   await page.waitForTimeout(1800);
+  const kern = page.locator(".kern-panel");
+  await kern.scrollIntoViewIfNeeded();
+  await kern.getByLabel("First letter").selectOption("H");
+  await kern.getByLabel("Second letter").selectOption("E");
+  await kern.getByLabel("Adjustment").fill("-90");
+  await page.waitForTimeout(900);
+  await kern.getByRole("button", { name: "Set pair" }).click();
+  await page.waitForTimeout(2000);
   await page.getByRole("button", { name: "Pages" }).click();
   await page.waitForTimeout(900);
   await page.getByLabel("Paper size").selectOption("letter");
@@ -207,7 +215,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded character presets including accented letters, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded kerning, character presets including accented letters, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

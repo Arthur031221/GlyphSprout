@@ -16,6 +16,8 @@ import {
   type FontInfo,
   type Glyph,
   type GlyphSettings,
+  MAX_KERN,
+  MAX_KERN_PAIRS,
   MAX_SPACE_WIDTH,
   MIN_SPACE_WIDTH,
   OFL_LICENSE,
@@ -509,6 +511,12 @@ export function Workshop({
             {t.matchBearing}
           </button>
         </section>
+        <KerningPanel
+          project={project}
+          selected={selected}
+          t={t}
+          editor={editor}
+        />
         <FontInfoPanel project={project} t={t} editor={editor} />
         <section className="export-panel panel">
           <div>
@@ -630,6 +638,121 @@ function FontInfoPanel({
       >
         {t.infoUseOfl}
       </button>
+    </section>
+  );
+}
+
+function KerningPanel({
+  project,
+  selected,
+  t,
+  editor,
+}: {
+  project: Project;
+  selected: string;
+  t: Dictionary;
+  editor: Editor;
+}) {
+  const characters = project.characters;
+  const pairs = project.kerning ?? [];
+  const [left, setLeft] = useState(selected || characters[0]);
+  const [right, setRight] = useState(characters[1] ?? characters[0]);
+  const stored =
+    pairs.find((pair) => pair.left === left && pair.right === right)?.value ??
+    0;
+  const [amount, setAmount] = useState(String(stored));
+  useEffect(() => {
+    if (selected) setLeft(selected);
+  }, [selected]);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: refill the field when the pair changes
+  useEffect(() => setAmount(String(stored)), [stored, left, right]);
+  if (!characters.length) return null;
+  const full = pairs.length >= MAX_KERN_PAIRS && !stored;
+  return (
+    <section className="kern-panel panel">
+      <div>
+        <span className="eyebrow">{t.kernTitle}</span>
+        <p>{t.kernHelp}</p>
+      </div>
+      <form
+        className="kern-form"
+        noValidate
+        onSubmit={(event) => {
+          event.preventDefault();
+          void editor.kern(left, right, Number(amount)).then((applied) => {
+            if (!applied) setAmount(String(stored));
+          });
+        }}
+      >
+        <label>
+          {t.kernLeft}
+          <select value={left} onChange={(e) => setLeft(e.target.value)}>
+            {characters.map((ch) => (
+              <option key={ch} value={ch}>
+                {ch}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          {t.kernRight}
+          <select value={right} onChange={(e) => setRight(e.target.value)}>
+            {characters.map((ch) => (
+              <option key={ch} value={ch}>
+                {ch}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          {t.kernAmount}
+          <input
+            type="number"
+            min={-MAX_KERN}
+            max={MAX_KERN}
+            step={10}
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+          />
+        </label>
+        <button type="submit" disabled={full}>
+          {t.kernSet}
+        </button>
+      </form>
+      {full && <small className="bad">{t.kernFull}</small>}
+      {pairs.length ? (
+        <ul className="kern-list" aria-label={t.kernList}>
+          {pairs.map((pair) => (
+            <li key={pair.left + pair.right}>
+              <button
+                type="button"
+                className="kern-pair"
+                onClick={() => {
+                  setLeft(pair.left);
+                  setRight(pair.right);
+                }}
+              >
+                <span className="kern-chars">
+                  {pair.left}
+                  {pair.right}
+                </span>
+                <span>{pair.value > 0 ? `+${pair.value}` : pair.value}</span>
+              </button>
+              <button
+                type="button"
+                aria-label={`${t.kernRemove} ${pair.left}${pair.right}`}
+                onClick={() => {
+                  void editor.kern(pair.left, pair.right, 0);
+                }}
+              >
+                <Trash />
+              </button>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <small>{t.kernNone}</small>
+      )}
     </section>
   );
 }

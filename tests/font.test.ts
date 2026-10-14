@@ -7,6 +7,7 @@ import {
   newProject,
   parseProject,
   serializeProject,
+  updateText,
 } from "../src/core/project";
 import { OFL_LICENSE, OFL_URL, type Project } from "../src/core/types";
 
@@ -172,5 +173,102 @@ describe("font information", () => {
     expect(() => cleanFontInfo({ licenseUrl: "example.com" })).toThrow(
       "invalidProject",
     );
+  });
+});
+
+describe("kerning pairs", () => {
+  function kernedProject(): Project {
+    const project = newProject("Kerned", "AB");
+    const square = [
+      { x: 0.2, y: 0.2 },
+      { x: 0.5, y: 0.2 },
+      { x: 0.5, y: 0.7 },
+      { x: 0.2, y: 0.7 },
+    ];
+    for (const ch of ["A", "B"]) {
+      const glyph = blankGlyph(ch, "data:image/png;base64,iVBORw0KGgo=");
+      glyph.contours = [square];
+      project.glyphs[ch] = glyph;
+    }
+    return project;
+  }
+
+  // Reads the kern table straight from the file: every pair as [left, right, value].
+  function readKern(buffer: ArrayBuffer) {
+    const view = new DataView(buffer);
+    for (let i = 0; i < view.getUint16(4); i++) {
+      const entry = 12 + i * 16;
+      const tag = String.fromCharCode(...new Uint8Array(buffer, entry, 4));
+      if (tag !== "kern") continue;
+      const table = view.getUint32(entry + 8);
+      const pairs = view.getUint16(table + 10);
+      const rows: number[][] = [];
+      for (let p = 0; p < pairs; p++) {
+        const at = table + 18 + p * 6;
+        rows.push([
+          view.getUint16(at),
+          view.getUint16(at + 2),
+          view.getInt16(at + 4),
+        ]);
+      }
+      return rows;
+    }
+    return null;
+  }
+
+  it("writes a sorted kern table with signed values", () => {
+    const project = kernedProject();
+    project.kerning = [
+      { left: "B", right: "A", value: 40 },
+      { left: "A", right: "B", value: -80 },
+    ];
+    expect(readKern(buildTtf(project))).toEqual([
+      [2, 3, -80],
+      [3, 2, 40],
+    ]);
+  });
+
+  it("writes no kern table without pairs", () => {
+    expect(readKern(buildTtf(kernedProject()))).toBeNull();
+  });
+
+  it("skips pairs whose glyph is not part of a partial export", () => {
+    const project = kernedProject();
+    project.glyphs.B.contours = [];
+    project.kerning = [{ left: "A", right: "B", value: -50 }];
+    expect(readKern(buildTtf(project, true))).toBeNull();
+  });
+
+  it("keeps pairs in a backup and rejects invalid ones", () => {
+    const project = kernedProject();
+    project.kerning = [{ left: "A", right: "B", value: -80 }];
+    expect(parseProject(serializeProject(project)).kerning).toEqual(
+      project.kerning,
+    );
+    for (const bad of [
+      [{ left: "A", right: "B", value: 0 }],
+      [{ left: "A", right: "B", value: 301 }],
+      [{ left: "A", right: "B", value: 2.5 }],
+      [{ left: "A", right: "Z", value: 10 }],
+      [
+        { left: "A", right: "B", value: 10 },
+        { left: "A", right: "B", value: 20 },
+      ],
+      [{ left: "AB", right: "B", value: 10 }],
+      "AB",
+    ]) {
+      const broken = JSON.parse(serializeProject(project));
+      broken.kerning = bad;
+      expect(() => parseProject(JSON.stringify(broken))).toThrow(
+        "invalidProject",
+      );
+    }
+  });
+
+  it("drops pairs for characters that leave the project", () => {
+    const project = kernedProject();
+    project.kerning = [{ left: "A", right: "B", value: -80 }];
+    expect(updateText(project, "ABBA").kerning).toEqual(project.kerning);
+    expect(updateText(project, "AC").kerning).toBeUndefined();
   });
 });

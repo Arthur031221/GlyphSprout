@@ -40,11 +40,22 @@ for extension in ("ttf", "woff2"):
         == 40
     )
     assert font["glyf"][font.getBestCmap()[ord("g")]].yMin < 0
+    cmap = font.getBestCmap()
+    kern = font["kern"].kernTables[0].kernTable
+    assert kern == {
+        (cmap[ord(pair["left"])], cmap[ord(pair["right"])]): pair["value"]
+        for pair in fixtures["kerning"]
+    }
     font.flavor = None
     buffer = io.BytesIO()
     font.save(buffer)
     tables.append(buffer.getvalue())
     face = freetype.Face(io.BytesIO(buffer.getvalue()))
+    for pair in fixtures["kerning"]:
+        found = face.get_kerning(
+            pair["left"], pair["right"], freetype.FT_KERNING_UNSCALED
+        )
+        assert found.x == pair["value"], (extension, pair, found.x)
     for pixel_size in (100, 200, 1000):
         face.set_pixel_sizes(0, pixel_size)
         for ch in characters:

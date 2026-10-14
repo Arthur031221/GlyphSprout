@@ -3,7 +3,7 @@ import { createFont, woff2 } from "fonteditor-core";
 import { hasCrossings } from "./smooth";
 import { isCjk } from "./text";
 import { signedArea } from "./trace";
-import type { Glyph, Project } from "./types";
+import type { Glyph, KernPair, Project } from "./types";
 import { BASELINE, DEFAULT_SPACE_WIDTH, UNITS_PER_EM } from "./types";
 
 export function missingCharacters(project: Project): string[] {
@@ -94,6 +94,44 @@ export function fontGlyph(glyph: Glyph): TTF.Glyph {
   };
 }
 
+// Format 0 `kern` table with one horizontal subtable. Browsers, FreeType and
+// word processors apply it without any layout tables, so a font that has no
+// GPOS still kerns. Glyph indices follow the order set in buildTtf.
+export function kernTable(
+  pairs: readonly KernPair[],
+  glyphIndex: ReadonlyMap<string, number>,
+): number[] {
+  const rows = pairs
+    .flatMap((pair) => {
+      const left = glyphIndex.get(pair.left);
+      const right = glyphIndex.get(pair.right);
+      return left === undefined || right === undefined
+        ? []
+        : [{ left, right, value: pair.value }];
+    })
+    .sort((a, b) => a.left - b.left || a.right - b.right);
+  if (!rows.length) return [];
+  const bytes: number[] = [];
+  const u16 = (value: number) => bytes.push((value >> 8) & 255, value & 255);
+  const entrySelector = Math.floor(Math.log2(rows.length));
+  const searchRange = 6 * 2 ** entrySelector;
+  u16(0);
+  u16(1);
+  u16(0);
+  u16(14 + rows.length * 6);
+  u16(1);
+  u16(rows.length);
+  u16(searchRange);
+  u16(entrySelector);
+  u16(rows.length * 6 - searchRange);
+  for (const row of rows) {
+    u16(row.left);
+    u16(row.right);
+    u16(row.value & 0xffff);
+  }
+  return bytes;
+}
+
 function arrayBuffer(
   output: ArrayBuffer | ArrayLike<number> | string,
 ): ArrayBuffer {
@@ -136,6 +174,13 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     unicode: [32],
   };
   data.glyf = [notdef, space, ...glyphs];
+  const kern = kernTable(
+    project.kerning ?? [],
+    new Map(
+      glyphs.map((g, i) => [String.fromCodePoint(g.unicode?.[0] ?? 0), i + 2]),
+    ),
+  );
+  if (kern.length) (data as { kern?: number[] }).kern = kern;
   const now = Date.parse(project.updatedAt);
   data.head.unitsPerEm = UNITS_PER_EM;
   data.head.created = Date.parse(project.createdAt);
@@ -179,7 +224,7 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     font.write({
       type: "ttf",
       hinting: false,
-      kerning: false,
+      kerning: true,
       writeZeroContoursGlyfData: true,
     }),
   );

@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.10.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.11.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -37,7 +37,7 @@ Zoom in to fix small details. Pen and eraser sizes use source pixels, so zooming
 
 Mark reviewed waits for pending ink and crop adjustments. If a scan cell has too many points or contours to export, conversion keeps its source and names the character. Other cells still convert. Adjust the speck filter, crop or source, then review the repaired glyph.
 
-Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
+Review progress shows beside the glyph list. **Next to review** jumps to the next glyph you haven't checked, and the arrow keys move between glyphs. The spacing panel sets the word space for the whole font and can copy one glyph's Latin side bearing to every Latin letter. The **Kerning** panel pulls a pair such as A and V closer or pushes it apart, and the live specimen shows the change. **Download specimen image** saves your preview text as a PNG. **Copy web font CSS** puts an `@font-face` rule on your clipboard so you can use the downloaded files on a website. **Preview zoom** resizes the live specimen. The **Font information** panel records a designer, copyright notice and license in the exported font, and can fill in the SIL Open Font License with one click.
 
 Font name and character text in Characters stay as drafts while you move between stages. Choose **Project ready** to apply them. Until then, backups and font downloads use the applied values. Reloading loses unapplied setup changes.
 
@@ -47,7 +47,7 @@ Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a 
 
 Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
 
-Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. There's no kerning, curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
+Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. Kerning is set one pair at a time, up to 500 pairs, and exported as a plain `kern` table. There's no curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
 
 ## Keep your work
 

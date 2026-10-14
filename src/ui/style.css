@@ -1432,3 +1432,47 @@ progress {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 12px;
 }
+
+.kern-panel {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+.kern-panel p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+.kern-panel small {
+  color: var(--muted);
+}
+.kern-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+.kern-form label {
+  display: block;
+  min-width: 90px;
+}
+.kern-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.kern-list li {
+  display: flex;
+  gap: 4px;
+}
+.kern-pair {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+.kern-chars {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}

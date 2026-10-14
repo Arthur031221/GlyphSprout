@@ -60,6 +60,12 @@ export const OFL_LICENSE =
   "This Font Software is licensed under the SIL Open Font License, Version 1.1.";
 export const OFL_URL = "https://openfontlicense.org";
 
+export interface KernPair {
+  left: string;
+  right: string;
+  value: number;
+}
+
 export interface Project {
   schema: 1;
   id: string;
@@ -69,6 +75,7 @@ export interface Project {
   glyphs: Record<string, Glyph>;
   pages: ScanPage[];
   spaceWidth?: number;
+  kerning?: KernPair[];
   info?: FontInfo;
   createdAt: string;
   updatedAt: string;
@@ -80,6 +87,8 @@ export const MAX_POINTS_PER_GLYPH = 32760;
 export const DEFAULT_SPACE_WIDTH = 350;
 export const MIN_SPACE_WIDTH = 100;
 export const MAX_SPACE_WIDTH = 1000;
+export const MAX_KERN_PAIRS = 500;
+export const MAX_KERN = 300;
 export const BASELINE = 0.78;
 export const UNITS_PER_EM = 1000;
 export const DEFAULT_SETTINGS: GlyphSettings = {

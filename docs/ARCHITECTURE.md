@@ -8,7 +8,7 @@ GlyphSprout is a browser application served from a local Node.js process. The Vi
 2. The A4 or US Letter SVG template assigns up to 35 characters to each page and prints four registration marks.
 3. The user assigns a scan to a page and confirms its visible ID and four corners. A projective transform rectifies the page, then samples the registered cells.
 4. Per-cell thresholding and speck filtering create a binary ink mask. Contour tracing preserves holes and detached components. A glyph retains its source cell so settings can retrace it.
-5. Font metrics position each contour on a shared baseline. The font builder emits unhinted TTF. The WOFF2 path encodes the same generated font. The live preview loads the generated font itself.
+5. Font metrics position each contour on a shared baseline. The font builder emits unhinted TTF, with kerning pairs written as a format 0 `kern` table. The WOFF2 path encodes the same generated font. The live preview loads the generated font itself.
 
 The drawing canvas is an alternative source for a glyph. Scan and drawing inputs are independent per-character artwork. The project does not attempt OCR or automatic cell detection.
 

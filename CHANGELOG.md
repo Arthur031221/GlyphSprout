@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.0
+
+A new **Kerning** panel in the Workshop adjusts the space between two letters that sit next to each other, such as A and V. Choose the pair, enter a number from -300 to 300 thousandths of the text size, and the live specimen shows it at once. A negative number brings the letters closer and a positive number pushes them apart. Before this, every letter pair used the same spacing, which looks loose around shapes like A, V, T and L.
+
+Pairs are exported as a plain `kern` table in both the TTF and the WOFF2, and the validation run now checks them with FontTools and FreeType. They are saved in project backups, follow Undo and Redo, are limited to 500 per project, and are dropped when you remove one of their letters. The panel is translated in all nine interface languages.
+
 ## 1.10.0
 
 The Characters stage has two new quick-add buttons, **Accented lowercase** and **Accented uppercase**. They add the precomposed Latin letters that Spanish, French, German, Portuguese and many other languages need, such as e with an acute accent, n with a tilde, u with a diaeresis, c with a cedilla and the German sharp s, in one click. Before this you had to type or paste each accented letter yourself.
