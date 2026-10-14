@@ -21,6 +21,8 @@ The Characters stage has quick-add buttons for uppercase letters, lowercase lett
 
 ## Edit and review glyphs
 
+Each tracing, size, offset and spacing setting has a number field and a slider. Typing a value and pressing Enter or leaving the field applies it, and a slider applies when you release it, or after each arrow key press when you use the keyboard. Every applied change is one undoable step. Advance width has only a number field because 0 means automatic.
+
 The source editor opens the current native pixel image for the selected glyph. Use the pen and eraser to make local changes, and use drawing undo to step back through strokes. Applying a source edit keeps the glyph's threshold, smoothing, crop, size, offsets, spacing, and page ID. An empty source is rejected. A changed source becomes unreviewed so you can check its outline. Applying an unchanged source leaves project history untouched. If the glyph has changed or its settings are still being processed, the source editor rejects the edit and preserves that work. Cancel the source edit and reopen it once the pending settings finish.
 
 **Use this threshold, speck filter, weight and smoothing for all glyphs** copies the selected glyph's ink threshold, minimum speck area, stroke weight and outline smoothing to every other glyph and traces each one again from its source pixels, as one undoable step. Use it after you find values that suit your paper and lighting. Crop, size, offsets and spacing are left as they were, and the glyphs it changes become unreviewed. A glyph that can't be traced with the new values, for example because the outline would be too complex to export, is left unchanged and named in a message.

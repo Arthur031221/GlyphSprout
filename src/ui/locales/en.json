@@ -53,6 +53,7 @@
   "threshold": "Ink threshold",
   "minArea": "Minimum speck area",
   "smoothing": "Outline smoothing (0 to 3)",
+  "slider": "slider",
   "weight": "Stroke weight (-3 thinner to 3 bolder)",
   "removed": "specks removed",
   "scale": "Size",

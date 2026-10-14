@@ -53,6 +53,7 @@
   "threshold": "잉크 임계값",
   "minArea": "최소 얼룩 면적",
   "smoothing": "윤곽 부드럽게 (0~3)",
+  "slider": "슬라이더",
   "weight": "획 굵기(-3 가늘게 ~ 3 굵게)",
   "removed": "얼룩 제거됨",
   "scale": "크기",

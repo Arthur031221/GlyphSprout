@@ -124,13 +124,18 @@ try {
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.getByLabel("Ink threshold", { exact: true }).fill("140");
   await page.waitForTimeout(900);
-  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)", {
+    exact: true,
+  });
   await smoothing.fill("2");
   await smoothing.press("Tab");
   await page.getByText("Font preview ready", { exact: true }).waitFor();
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
-  await weight.fill("1");
-  await weight.press("Tab");
+  const weight = page.getByRole("slider", {
+    name: "Stroke weight (-3 thinner to 3 bolder), slider",
+    exact: true,
+  });
+  await weight.focus();
+  await weight.press("ArrowRight");
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   await page.waitForTimeout(1400);
   const matchTracing = page.getByRole("button", {

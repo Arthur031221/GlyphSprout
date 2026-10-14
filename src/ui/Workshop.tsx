@@ -124,20 +124,41 @@ function Settings({
       <p className="instructions">{t.settingsHelp}</p>
       <div className="settings-grid">
         {fields.map(([key, label, min, max, step]) => (
-          <label key={key}>
-            {label}
-            <input
-              type="number"
-              min={min}
-              max={max}
-              step={step}
-              value={draft[key]}
-              onChange={(e) =>
-                update({ ...draft, [key]: Number(e.target.value) })
-              }
-              onBlur={apply}
-            />
-          </label>
+          <div className="setting" key={key}>
+            <label>
+              {label}
+              <input
+                type="number"
+                min={min}
+                max={max}
+                step={step}
+                value={draft[key]}
+                onChange={(e) =>
+                  update({ ...draft, [key]: Number(e.target.value) })
+                }
+                onBlur={apply}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") apply();
+                }}
+              />
+            </label>
+            {key !== "advanceWidth" && (
+              <input
+                type="range"
+                aria-label={`${label}, ${t.slider}`}
+                min={min}
+                max={max}
+                step={step}
+                value={draft[key]}
+                onChange={(e) =>
+                  update({ ...draft, [key]: Number(e.target.value) })
+                }
+                onPointerUp={apply}
+                onKeyUp={apply}
+                onBlur={apply}
+              />
+            )}
+          </div>
         ))}
         <div className="crop-settings">
           {(["left", "top", "right", "bottom"] as const).map((key) => (

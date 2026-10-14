@@ -53,6 +53,7 @@
   "threshold": "Tintenschwelle",
   "minArea": "Mindestfläche für Störungen",
   "smoothing": "Konturglättung (0 bis 3)",
+  "slider": "Schieberegler",
   "weight": "Strichstärke (-3 dünner bis 3 kräftiger)",
   "removed": "Störungen entfernt",
   "scale": "Größe",

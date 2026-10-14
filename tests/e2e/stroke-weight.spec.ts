@@ -30,7 +30,9 @@ test("stroke weight makes a glyph bolder or thinner and zero restores it", async
   ).toBeVisible({ timeout: 10000 });
   const original = await backup(page);
   expect(original.glyphs.H.settings.weight).toBe(0);
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)", {
+    exact: true,
+  });
   await expect(weight).toHaveValue("0");
 
   await weight.fill("2");
@@ -71,7 +73,9 @@ test("an out of range stroke weight is rejected and keeps the glyph", async ({
   await expect(
     page.getByText("Font preview ready", { exact: true }),
   ).toBeVisible({ timeout: 10000 });
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)", {
+    exact: true,
+  });
   await weight.fill("4");
   await weight.press("Tab");
   await expect(page.getByRole("alert")).toBeVisible();

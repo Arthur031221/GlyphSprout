@@ -53,6 +53,7 @@
   "threshold": "Seuil d'encre",
   "minArea": "Surface minimale des taches",
   "smoothing": "Lissage du contour (0 à 3)",
+  "slider": "curseur",
   "weight": "Épaisseur du trait (-3 plus fin à 3 plus épais)",
   "removed": "taches supprimées",
   "scale": "Taille",

@@ -25,7 +25,9 @@ async function ready(page: Page) {
 
 // The bundled sample keeps pixel outlines; Reset settings returns to the default smoothing.
 async function useDefaultSmoothing(page: Page) {
-  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)", {
+    exact: true,
+  });
   await smoothing.fill("2");
   await smoothing.press("Tab");
   await expect(
@@ -758,7 +760,9 @@ test("a size that collapses a drawn outline retains its valid settings and expor
   await page.mouse.move(box.x + 230, box.y + 50, { steps: 100 });
   await page.mouse.up();
   await page.getByRole("button", { name: "Use drawing" }).click();
-  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)", {
+    exact: true,
+  });
   await smoothing.fill("0");
   await smoothing.press("Tab");
   await expect(page.locator(".project-label [role=status]")).toHaveText(

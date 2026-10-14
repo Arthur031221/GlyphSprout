@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.18.0
+
+Every number setting in the glyph editor now has a slider beside it: ink threshold, minimum speck area, outline smoothing, stroke weight, size, both offsets and Latin side bearing. Before this, you typed a number and had to leave the field before anything changed, so tuning meant guessing a value and waiting. A slider applies when you release it, and the arrow keys apply on each press, so the outline and the live preview follow your hand. Pressing Enter in a number field now applies it too. Each applied change is still one undoable step. Advance width keeps only its number field because 0 means automatic.
+
+A browser test drives a slider with the keyboard, checks that it stays in step with the number field and that Enter applies, and confirms the saved project values. Existing tests now match the number fields by their exact names. The new accessible name suffix is translated in all nine interface languages.
+
 ## 1.17.0
 
 The glyph list in the Workshop now shows each glyph's own traced outline instead of the typed character. Before this, every tile looked the same in the system font, so you had to open each glyph to find one that was tiny, cut off or in the wrong place. The outline is scaled to fit the tile and the character stays in the tile's corner. Glyphs that are missing, or whose outline can't be built, still show the typed character. The tiles keep their accessible names, so screen readers and the arrow keys work as before.

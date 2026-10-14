@@ -39,7 +39,9 @@ test("one glyph's tracing values apply to every glyph and undo together", async 
   await expect
     .poll(async () => (await backup(page)).glyphs.H.settings.smoothing)
     .toBe(0);
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)", {
+    exact: true,
+  });
   await weight.fill("1");
   await weight.press("Tab");
   await expect

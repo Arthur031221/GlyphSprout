@@ -53,6 +53,7 @@
   "threshold": "Limiar da tinta",
   "minArea": "Área mínima de manchas",
   "smoothing": "Suavização do contorno (0 a 3)",
+  "slider": "controle deslizante",
   "weight": "Espessura do traço (-3 mais fino a 3 mais grosso)",
   "removed": "manchas removidas",
   "scale": "Tamanho",

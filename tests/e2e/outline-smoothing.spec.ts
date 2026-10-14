@@ -19,7 +19,9 @@ test("smoothing rounds a glyph outline and zero restores the pixel outline", asy
   ).toBeVisible({ timeout: 10000 });
   const original = await backup(page);
   expect(original.glyphs.H.settings.smoothing).toBe(0);
-  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)", {
+    exact: true,
+  });
   await expect(smoothing).toHaveValue("0");
   await smoothing.fill("3");
   await smoothing.press("Tab");
@@ -46,7 +48,9 @@ test("an out of range smoothing value is rejected and keeps the glyph", async ({
   await expect(
     page.getByText("Font preview ready", { exact: true }),
   ).toBeVisible({ timeout: 10000 });
-  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)", {
+    exact: true,
+  });
   await smoothing.fill("4");
   await smoothing.press("Tab");
   await expect(page.getByRole("alert")).toBeVisible();

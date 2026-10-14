@@ -9,7 +9,7 @@ async function ready(page: Page) {
 }
 
 async function setSize(page: Page, size: string) {
-  const input = page.getByLabel("Size");
+  const input = page.getByLabel("Size", { exact: true });
   await input.fill(size);
   await input.blur();
 }
@@ -48,7 +48,7 @@ test("failed saves keep the edited project protected across reload", async ({
     "Local storage is unavailable. Download your project to keep a copy.",
   );
   expect(await reloadShowsBeforeUnload(page)).toBe(true);
-  await expect(page.getByLabel("Size")).toHaveValue("1");
+  await expect(page.getByLabel("Size", { exact: true })).toHaveValue("1");
 });
 
 test("pending digest saves warn until the save completes", async ({ page }) => {
@@ -83,7 +83,7 @@ test("pending digest saves warn until the save completes", async ({ page }) => {
     "Saved",
   );
   expect(await reloadShowsBeforeUnload(page)).toBe(false);
-  await expect(page.getByLabel("Size")).toHaveValue("1.2");
+  await expect(page.getByLabel("Size", { exact: true })).toHaveValue("1.2");
 });
 
 test("successful retry clears the failed-save unload warning", async ({
@@ -114,7 +114,7 @@ test("successful retry clears the failed-save unload warning", async ({
     "Saved",
   );
   expect(await reloadShowsBeforeUnload(page)).toBe(false);
-  await expect(page.getByLabel("Size")).toHaveValue("1.2");
+  await expect(page.getByLabel("Size", { exact: true })).toHaveValue("1.2");
 });
 
 test("completed saves do not warn on reload", async ({ page }) => {
@@ -124,7 +124,7 @@ test("completed saves do not warn on reload", async ({ page }) => {
     "Saved",
   );
   expect(await reloadShowsBeforeUnload(page)).toBe(false);
-  await expect(page.getByLabel("Size")).toHaveValue("1.2");
+  await expect(page.getByLabel("Size", { exact: true })).toHaveValue("1.2");
 });
 
 test("existing setup drafts continue to warn on reload", async ({ page }) => {

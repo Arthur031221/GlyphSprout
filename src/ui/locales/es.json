@@ -53,6 +53,7 @@
   "threshold": "Umbral de tinta",
   "minArea": "Área mínima de motas",
   "smoothing": "Suavizado del contorno (0 a 3)",
+  "slider": "control deslizante",
   "weight": "Grosor del trazo (-3 más fino a 3 más grueso)",
   "removed": "motas eliminadas",
   "scale": "Tamaño",

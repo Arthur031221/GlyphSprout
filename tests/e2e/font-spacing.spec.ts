@@ -31,7 +31,7 @@ test("word space and side bearing apply to the whole font and undo together", as
   await expect(page.getByRole("alert")).toContainText("Word space must be");
   await expect(space).toHaveValue("620");
 
-  const bearing = page.getByLabel("Latin side bearing");
+  const bearing = page.getByLabel("Latin side bearing", { exact: true });
   await bearing.fill("90");
   const match = page.getByRole("button", {
     name: "Use this side bearing for all Latin letters",

@@ -19,7 +19,9 @@ test("Ctrl+Z and Ctrl+Shift+Z undo and redo a glyph change", async ({
   await expect(
     page.getByText("Font preview ready", { exact: true }),
   ).toBeVisible({ timeout: 10000 });
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)", {
+    exact: true,
+  });
   await weight.fill("2");
   await weight.press("Tab");
   await expect
@@ -44,7 +46,9 @@ test("the shortcut leaves text fields to the browser", async ({ page }) => {
   await expect(
     page.getByText("Font preview ready", { exact: true }),
   ).toBeVisible({ timeout: 10000 });
-  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)");
+  const weight = page.getByLabel("Stroke weight (-3 thinner to 3 bolder)", {
+    exact: true,
+  });
   await weight.fill("2");
   await weight.press("Tab");
   await expect
