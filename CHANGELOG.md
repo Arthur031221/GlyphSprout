@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.20.0
+
+Scans can now be added in two more ways. On the Pages stage you can drop JPEG or PNG images onto the scan section, which is outlined while a file is over it, and dropped files that are not JPEG or PNG are refused with a message. On phones and tablets a **Take a photo** button opens the camera directly, so a printed sheet can be photographed without leaving the page. Before this, the only way in was the file chooser, which on a phone buries the camera behind extra taps. Mouse screens show a short drop hint in place of the camera button.
+
+Browser tests cover a real drop, the refusal of a non-image, the highlight, and the camera button on touch and mouse screens. The new labels are translated in all nine interface languages, and the README step for adding a scan mentions both in every language.
+
 ## 1.19.0
 
 The outline view in the glyph editor now draws two dashed vertical guides, one at the glyph's left edge and one at its advance width, with a short note under the outline that says so. Before this, only the baseline was drawn, so the space on each side of a letter was something you had to judge from the live preview. The right guide follows the advance width setting, the Latin side bearing and the automatic width, so the gap between the outline and each line is the spacing the exported font will use.

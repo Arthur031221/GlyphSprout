@@ -576,6 +576,28 @@ main {
   font-weight: 650;
   cursor: pointer;
 }
+.file-picker + .file-picker {
+  margin-left: 8px;
+}
+.camera-picker {
+  display: none;
+}
+.drop-hint {
+  margin: 8px 0 0;
+}
+@media (pointer: coarse) {
+  .camera-picker {
+    display: inline-flex;
+  }
+  .drop-hint {
+    display: none;
+  }
+}
+.scan-panel.dropping {
+  outline: 2px dashed var(--accent);
+  outline-offset: 6px;
+  background: var(--accent-soft);
+}
 .file-picker input {
   position: absolute;
   width: 1px;

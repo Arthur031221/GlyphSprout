@@ -1,10 +1,18 @@
 import {
+  Camera,
   DownloadSimple,
   Printer,
   Trash,
   UploadSimple,
 } from "@phosphor-icons/react";
-import { type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
+import {
+  type DragEvent,
+  type PointerEvent,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { homography, projectPoint, validateCorners } from "../core/geometry";
 import {
   cellRect,
@@ -24,6 +32,12 @@ import type { Notice } from "./useGlyphEditor";
 import type { DraftPage, useScans } from "./useScans";
 
 type Scans = ReturnType<typeof useScans>;
+
+const SCAN_TYPES = ["image/png", "image/jpeg"];
+
+function hasFiles(e: DragEvent) {
+  return Array.from(e.dataTransfer.types).includes("Files");
+}
 
 function Registration({
   page,
@@ -202,6 +216,7 @@ export function Pages({
   );
   const queue = useRef<HTMLDivElement>(null);
   const upload = useRef<HTMLInputElement>(null);
+  const [dropping, setDropping] = useState(false);
   const draft = scans.drafts[scans.index];
   const total = pageCount(project.characters);
   const sheets = useMemo(
@@ -298,7 +313,30 @@ export function Pages({
         ))}
       </div>
       <p className="instructions">{t.templateHelp}</p>
-      <section className="scan-panel">
+      {/* biome-ignore lint/a11y/noStaticElementInteractions: dropping files is a pointer shortcut, the file picker below is the keyboard path */}
+      <section
+        className={dropping ? "scan-panel dropping" : "scan-panel"}
+        onDragOver={(e) => {
+          if (!hasFiles(e) || scans.busy || scans.reading) return;
+          e.preventDefault();
+          setDropping(true);
+        }}
+        onDragLeave={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null))
+            setDropping(false);
+        }}
+        onDrop={(e) => {
+          if (!hasFiles(e)) return;
+          e.preventDefault();
+          setDropping(false);
+          if (scans.busy || scans.reading) return;
+          const images = Array.from(e.dataTransfer.files).filter((file) =>
+            SCAN_TYPES.includes(file.type),
+          );
+          if (images.length) void scans.add(images);
+          else notify({ key: "dropNotImages", tone: "error" });
+        }}
+      >
         <h3>{t.scan}</h3>
         <p>{t.scanHelp}</p>
         <label className="file-picker">
@@ -316,6 +354,21 @@ export function Pages({
             }}
           />
         </label>
+        <label className="file-picker camera-picker">
+          <Camera />
+          {t.takePhoto}
+          <input
+            type="file"
+            accept="image/*"
+            capture="environment"
+            disabled={scans.busy || scans.reading}
+            onChange={(e) => {
+              void scans.add(Array.from(e.currentTarget.files ?? []));
+              e.currentTarget.value = "";
+            }}
+          />
+        </label>
+        <p className="drop-hint">{t.dropImages}</p>
         {!!scans.drafts.length && (
           <>
             {!scans.compatible && (

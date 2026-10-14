@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.19.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.20.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -26,7 +26,7 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 
 1. Erstelle ein Projekt und wähle die benötigten Zeichen, zum Beispiel `Hello!`. Ganze Sätze wie Großbuchstaben, Ziffern, Satzzeichen, Buchstaben mit Akzent, Griechisch, Kyrillisch, Hiragana, Katakana oder Hangul-Buchstaben lassen sich mit einem Klick hinzufügen.
 2. Drucke die Vorlage in Originalgröße auf A4- oder US-Letter-Papier und schreibe ein Zeichen in jedes Feld.
-3. Füge einen gleichmäßig beleuchteten Scan hinzu und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
+3. Füge einen gleichmäßig beleuchteten Scan hinzu, indem du die Datei auswählst, auf den Scan-Bereich ziehst oder auf dem Handy **Foto aufnehmen** tippst, und bestätige die Seiten-ID. GlyphSprout sucht die vier Passerkreuze und setzt die Ecken darauf. Prüfe jede Ecke und korrigiere abweichende.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
 5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Strichstärke, Konturglättung, Ausschnitt, Größe, Versatz und Abstand an. Zu jeder Zahl gehört ein Schieberegler. Gib einen Wert ein und drücke Enter oder bewege den Regler, und die Kontur aktualisiert sich, sobald du loslässt. Mit Strg+Z oder Cmd+Z machst du eine Änderung rückgängig, mit zusätzlicher Umschalttaste stellst du sie wieder her. Gestrichelte Hilfslinien in der Konturansicht markieren den linken Rand und die Dickte, sodass du den Abstand jeder Glyphe beim Anpassen siehst.
 6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter. Sobald alle Glyphen fertig sind, speichert **Schrift herunterladen (TTF)** im Vorschaubereich die Schrift, ohne bis zur Werkstatt zu scrollen.
