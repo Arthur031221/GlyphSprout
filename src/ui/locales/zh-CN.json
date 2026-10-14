@@ -91,7 +91,7 @@
   "invalidCorners": "请将四角调整为有效的左上、右上、右下、左下顺序。",
   "wrongType": "请选择 JPEG 或 PNG 图像。",
   "tooLarge": "每张图像须小于 16 MiB，且解码后低于 3200 万像素。",
-  "drawHelp": "在方框内绘制。支持的笔具会使用压力感应。",
+  "drawHelp": "在方框内绘制。使用绘图会替换此字形并重置其设置。支持压力感应的手写笔可控制笔触。",
   "downloadTemplate": "下载空白模板",
   "storagePersist": "让此项目可供离线使用",
   "noGlyph": "选择字符以编辑轮廓。",
@@ -183,5 +183,6 @@
   "resetStorage": "重置本地存储",
   "resetStorageConfirm": "要移除此浏览器已保存的版本与图片吗？如需保留，请先下载已保存数据。",
   "secureContextRequired": "请通过 HTTPS 或 localhost 等本机地址打开 GlyphSprout。普通 HTTP 局域网地址无法生成字体或保存项目。",
-  "openLiveWorkshop": "打开在线工作坊"
+  "openLiveWorkshop": "打开在线工作坊",
+  "applyingEdits": "正在应用字形更改..."
 }

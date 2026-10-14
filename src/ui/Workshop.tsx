@@ -62,14 +62,24 @@ function Settings({
 }) {
   const [draft, setDraft] = useState(glyph.settings);
   const latest = useRef(glyph.settings);
+  const dirty = useRef(false);
   latest.current = glyph.settings;
-  function apply() {
-    void editor.settings(glyph.character, draft).then((applied) => {
-      if (applied === false) setDraft(latest.current);
+  function update(next: GlyphSettings) {
+    dirty.current = true;
+    setDraft(next);
+  }
+  function submit(values: GlyphSettings) {
+    dirty.current = false;
+    void editor.settings(glyph.character, values).then((applied) => {
+      if (applied === false)
+        setDraft((current) => (current === values ? latest.current : current));
     });
   }
+  function apply() {
+    submit(draft);
+  }
   useEffect(() => {
-    setDraft(glyph.settings);
+    if (!dirty.current) setDraft(glyph.settings);
   }, [glyph.settings]);
   const fields: [
     Exclude<keyof GlyphSettings, "crop">,
@@ -102,7 +112,7 @@ function Settings({
               step={step}
               value={draft[key]}
               onChange={(e) =>
-                setDraft({ ...draft, [key]: Number(e.target.value) })
+                update({ ...draft, [key]: Number(e.target.value) })
               }
               onBlur={apply}
             />
@@ -119,7 +129,7 @@ function Settings({
                 step={0.01}
                 value={draft.crop[key]}
                 onChange={(e) =>
-                  setDraft({
+                  update({
                     ...draft,
                     crop: { ...draft.crop, [key]: Number(e.target.value) },
                   })
@@ -134,7 +144,7 @@ function Settings({
           onClick={() => {
             const defaults = defaultSettings();
             setDraft(defaults);
-            void editor.settings(glyph.character, defaults);
+            submit(defaults);
           }}
         >
           {t.reset}
@@ -258,8 +268,7 @@ export function Workshop({
               t={t}
               onCancel={() => setDrawing(false)}
               onUse={(source, pixels) => {
-                editor.drawing(selected, source, pixels);
-                setDrawing(false);
+                if (editor.drawing(selected, source, pixels)) setDrawing(false);
               }}
             />
           ) : current ? (
@@ -319,7 +328,12 @@ export function Workshop({
                   )}
                 </div>
               </div>
-              <Settings key={selected} glyph={current} editor={editor} t={t} />
+              <Settings
+                key={`${selected}-${editor.cancellation}`}
+                glyph={current}
+                editor={editor}
+                t={t}
+              />
             </>
           ) : (
             <div className="empty-editor">

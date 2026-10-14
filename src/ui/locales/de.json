@@ -91,7 +91,7 @@
   "invalidCorners": "Ordne die Ecken in dieser Reihenfolge an: oben links, oben rechts, unten rechts, unten links.",
   "wrongType": "Wähle ein JPEG- oder PNG-Bild aus.",
   "tooLarge": "Jedes Bild darf höchstens 16 MiB groß sein und muss sich auf weniger als 32 Megapixel dekodieren lassen.",
-  "drawHelp": "Zeichne innerhalb des Quadrats. Wenn dein Stift es unterstützt, wird Druck verwendet.",
+  "drawHelp": "Zeichne innerhalb des Quadrats. Die Zeichnung ersetzt dieses Zeichen und setzt seine Einstellungen zurück. Unterstützte Stifte übertragen den Druck.",
   "downloadTemplate": "Leere Vorlage herunterladen",
   "storagePersist": "Dieses Projekt offline verfügbar halten",
   "noGlyph": "Wähle ein Zeichen, um seine Kontur zu bearbeiten.",
@@ -183,5 +183,6 @@
   "resetStorage": "Lokalen Speicher zurücksetzen",
   "resetStorageConfirm": "Gespeicherte Versionen und Bilder in diesem Browser löschen? Lade die Daten zuerst herunter, wenn du sie behalten möchtest.",
   "secureContextRequired": "Öffne GlyphSprout über HTTPS oder eine lokale Adresse wie localhost. Netzwerkadressen mit einfachem HTTP können keine Schriften erzeugen oder Projekte speichern.",
-  "openLiveWorkshop": "Onlinewerkstatt öffnen"
+  "openLiveWorkshop": "Onlinewerkstatt öffnen",
+  "applyingEdits": "Zeichenänderungen werden angewendet..."
 }

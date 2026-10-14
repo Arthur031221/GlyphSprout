@@ -36,7 +36,7 @@ Your first visit loads Paper Bloom with six real handwriting letters. You can ed
 5. Type Hello! in the specimen and download TTF or WOFF2.
 ```
 
-The workshop has source and outline views, threshold and speck filtering, cropping, scale, offsets and spacing controls. You can also draw or erase a glyph. The live specimen uses the generated font itself. Drawing undo and project undo are separate.
+The workshop has source and outline views, threshold and speck filtering, cropping, scale, offsets and spacing controls. You can draw or erase a glyph, too. Before saving, it rejects blank drawings and transformed outlines that collapse or exceed safe font bounds. Leaving settings unchanged keeps review state and edit history. Export waits for pending edits and uses the latest project snapshot. Corner handles work with mouse and touch. The live specimen uses the generated font itself. Drawing undo and project undo are separate.
 
 ## A small subset, with clear limits
 

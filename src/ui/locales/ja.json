@@ -91,7 +91,7 @@
   "invalidCorners": "左上、右上、右下、左下の順に四隅を調整してください。",
   "wrongType": "JPEG または PNG 画像を選んでください。",
   "tooLarge": "画像は16 MiB以下、デコード後32メガピクセル未満にしてください。",
-  "drawHelp": "枠内に描画します。対応するペンでは筆圧を使います。",
+  "drawHelp": "枠内に描いてください。描画を使用すると、この字形が置き換わり、設定がリセットされます。対応するペンでは筆圧が反映されます。",
   "downloadTemplate": "空のテンプレートをダウンロード",
   "storagePersist": "オフラインでもこのプロジェクトを使う",
   "noGlyph": "輪郭を編集する文字を選んでください。",
@@ -183,5 +183,6 @@
   "resetStorage": "ローカル保存をリセット",
   "resetStorageConfirm": "このブラウザーに保存した版と画像を削除しますか？残したい場合は、先に保存データをダウンロードしてください。",
   "secureContextRequired": "HTTPS または localhost などのループバックアドレスで GlyphSprout を開いてください。通常の HTTP ネットワークアドレスではフォントの生成やプロジェクトの保存ができません。",
-  "openLiveWorkshop": "オンラインの作業場を開く"
+  "openLiveWorkshop": "オンラインの作業場を開く",
+  "applyingEdits": "字形の変更を適用しています..."
 }

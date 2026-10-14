@@ -91,7 +91,7 @@
   "invalidCorners": "모서리를 왼쪽 위, 오른쪽 위, 오른쪽 아래, 왼쪽 아래 순서로 올바르게 배치하세요.",
   "wrongType": "JPEG 또는 PNG 이미지를 선택하세요.",
   "tooLarge": "각 이미지는 16 MiB 이하이고 디코딩 후 32메가픽셀 미만이어야 합니다.",
-  "drawHelp": "사각형 안에 그리세요. 지원되는 펜에서는 필압을 사용합니다.",
+  "drawHelp": "사각형 안에 그리세요. 그림을 사용하면 이 글리프가 교체되고 설정이 초기화됩니다. 지원하는 펜에서는 필압이 반영됩니다.",
   "downloadTemplate": "빈 템플릿 다운로드",
   "storagePersist": "이 프로젝트를 오프라인에서도 사용할 수 있도록 유지",
   "noGlyph": "윤곽선을 편집할 문자를 선택하세요.",
@@ -183,5 +183,6 @@
   "resetStorage": "로컬 저장소 초기화",
   "resetStorageConfirm": "이 브라우저에 저장된 버전과 이미지를 삭제할까요? 보관하려면 먼저 저장된 데이터를 다운로드하세요.",
   "secureContextRequired": "HTTPS 또는 localhost 같은 루프백 주소로 GlyphSprout를 열어 주세요. 일반 HTTP 네트워크 주소에서는 글꼴을 생성하거나 프로젝트를 저장할 수 없습니다.",
-  "openLiveWorkshop": "온라인 작업실 열기"
+  "openLiveWorkshop": "온라인 작업실 열기",
+  "applyingEdits": "글리프 변경 사항을 적용하는 중..."
 }

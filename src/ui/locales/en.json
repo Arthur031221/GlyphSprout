@@ -91,7 +91,7 @@
   "invalidCorners": "Move the corners into a valid top-left, top-right, bottom-right, bottom-left order.",
   "wrongType": "Choose a JPEG or PNG image.",
   "tooLarge": "Each image must be 16 MiB or smaller and decode below 32 megapixels.",
-  "drawHelp": "Draw inside the square. Pressure follows pen hardware when available.",
+  "drawHelp": "Draw inside the square. Using a drawing replaces this glyph and resets its settings. Pressure follows pen hardware when available.",
   "downloadTemplate": "Download blank template",
   "storagePersist": "Keep this project available for offline use",
   "noGlyph": "Select a character to edit its outline.",
@@ -183,5 +183,6 @@
   "resetStorage": "Reset local storage",
   "resetStorageConfirm": "Remove this browser's saved revisions and images? Download the stored data first if you want to keep it.",
   "secureContextRequired": "Open GlyphSprout with HTTPS or a loopback address such as localhost. Plain HTTP network addresses cannot generate fonts or save projects.",
-  "openLiveWorkshop": "Open live workshop"
+  "openLiveWorkshop": "Open live workshop",
+  "applyingEdits": "Applying glyph changes..."
 }
