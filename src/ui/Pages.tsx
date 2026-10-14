@@ -8,14 +8,17 @@ import { type PointerEvent, useEffect, useMemo, useRef, useState } from "react";
 import { homography, projectPoint, validateCorners } from "../core/geometry";
 import {
   cellRect,
+  PAPERS,
+  type Paper,
   pageCharacters,
   pageCount,
+  paperOrDefault,
   TEMPLATE,
   templateSvg,
 } from "../core/template";
 import type { Point, Project } from "../core/types";
 import { download, printSheets, svgUrl } from "./browser";
-import { type Dictionary, errorKey } from "./i18n";
+import { type Dictionary, errorKey, preference, remember } from "./i18n";
 import { RectifiedPreview } from "./RectifiedPreview";
 import type { Notice } from "./useGlyphEditor";
 import type { DraftPage, useScans } from "./useScans";
@@ -191,6 +194,12 @@ export function Pages({
   notify: (notice: Notice) => void;
 }) {
   const [size, setSize] = useState(384);
+  const [paper, setPaper] = useState<Paper>(() =>
+    paperOrDefault(
+      preference("glyphsprout.paper", ""),
+      navigator.language ?? "en",
+    ),
+  );
   const queue = useRef<HTMLDivElement>(null);
   const upload = useRef<HTMLInputElement>(null);
   const draft = scans.drafts[scans.index];
@@ -198,19 +207,26 @@ export function Pages({
   const sheets = useMemo(
     () =>
       Array.from({ length: total }, (_, page) =>
-        templateSvg(project.characters, project.name, project.id, page, {
-          page: t.page,
-          of: t.templateOf,
-          write: t.templateWrite,
-          registration: t.templateRegistration,
-          footer: t.templateFooter,
-        }),
+        templateSvg(
+          project.characters,
+          project.name,
+          project.id,
+          page,
+          {
+            page: t.page,
+            of: t.templateOf,
+            write: t.templateWrite,
+            registration: t.templateRegistration,
+            footer: t.templateFooter,
+          },
+          paper,
+        ),
       ),
-    [total, project.characters, project.name, project.id, t],
+    [total, project.characters, project.name, project.id, t, paper],
   );
   function print(svgs: string[]) {
     try {
-      printSheets(svgs, project.name);
+      printSheets(svgs, project.name, paper);
     } catch (error) {
       notify({ key: errorKey(error, "popupBlocked"), tone: "error" });
     }
@@ -223,10 +239,28 @@ export function Pages({
           <span className="eyebrow">{t.paperScans}</span>
           <h2>{t.pages}</h2>
         </div>
-        <button type="button" onClick={() => print(sheets)}>
-          <Printer />
-          {t.printAll}
-        </button>
+        <div className="paper-actions">
+          <label htmlFor="paper-size">{t.paperSize}</label>
+          <select
+            id="paper-size"
+            value={paper}
+            onChange={(e) => {
+              const next = e.target.value as Paper;
+              setPaper(next);
+              remember("glyphsprout.paper", next);
+            }}
+          >
+            {(Object.keys(PAPERS) as Paper[]).map((value) => (
+              <option key={value} value={value}>
+                {PAPERS[value].name}
+              </option>
+            ))}
+          </select>
+          <button type="button" onClick={() => print(sheets)}>
+            <Printer />
+            {t.printAll}
+          </button>
+        </div>
       </div>
       <div className="page-cards">
         {sheets.map((svg, index) => (

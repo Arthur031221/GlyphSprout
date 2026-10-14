@@ -24,6 +24,7 @@
   "storageUnavailable": "O armazenamento local está indisponível. Baixe o projeto para guardar uma cópia.",
   "storageQuota": "O armazenamento do navegador está cheio. Baixe o projeto para guardar uma cópia.",
   "pages": "Imprimir páginas",
+  "paperSize": "Tamanho do papel",
   "printAll": "Imprimir todas as páginas",
   "printPage": "Imprimir esta página",
   "templateHelp": "Imprima no tamanho real. Mantenha as quatro cruzes visíveis e use papel plano, tinta escura e iluminação uniforme.",

@@ -5,18 +5,20 @@ import { cellRect, TEMPLATE } from "../src/core/template";
 function page(
   width: number,
   height: number,
-  { angle = 0, dx = 0, dy = 0, scale = 1, noise = 0 } = {},
+  { angle = 0, dx = 0, dy = 0, scale = 1, noise = 0, fit = false } = {},
 ) {
+  // fit: the 1000 x 1414 layout sits centred at one scale, as on a Letter sheet.
+  const sx = fit ? Math.min(width / 1000, height / 1414) : width / 1000;
+  const sy = fit ? sx : height / 1414;
+  const ox = fit ? (width - 1000 * sx) / 2 : 0;
+  const oy = fit ? (height - 1414 * sy) / 2 : 0;
   const gray = new Uint8Array(width * height).fill(238);
   const to = (p: { x: number; y: number }) => {
     const u = (p.x - 500) * scale;
     const v = (p.y - 707) * scale;
     return {
-      x:
-        ((500 + u * Math.cos(angle) - v * Math.sin(angle)) / 1000) * width + dx,
-      y:
-        ((707 + u * Math.sin(angle) + v * Math.cos(angle)) / 1414) * height +
-        dy,
+      x: (500 + u * Math.cos(angle) - v * Math.sin(angle)) * sx + ox + dx,
+      y: (707 + u * Math.sin(angle) + v * Math.cos(angle)) * sy + oy + dy,
     };
   };
   let seed = 7;
@@ -26,8 +28,8 @@ function page(
   };
   const dark = (x: number, y: number) => {
     // Page space, so the drawing rotates and shifts with the sheet.
-    const w = (1000 / width) * (x - dx);
-    const h = (1414 / height) * (y - dy);
+    const w = (x - dx - ox) / sx;
+    const h = (y - dy - oy) / sy;
     const u = (w - 500) / scale;
     const v = (h - 707) / scale;
     const px = 500 + u * Math.cos(-angle) - v * Math.sin(-angle);
@@ -117,4 +119,14 @@ it("rejects a page with a missing cross", () => {
   for (let y = 1330; y < 1400; y++)
     for (let x = 20; x < 90; x++) gray[y * 1000 + x] = 238;
   expect(detectCorners(gray, 1000, 1414)).toBeNull();
+});
+
+it("finds the crosses on a US Letter sheet that is narrower than the page", () => {
+  const { gray, truth } = page(1275, 1650, { fit: true, noise: 30 });
+  expectNear(detectCorners(gray, 1275, 1650), truth, 3);
+});
+
+it("finds the crosses on a slightly rotated Letter scan", () => {
+  const { gray, truth } = page(1275, 1650, { fit: true, angle: 0.02, dx: 10 });
+  expectNear(detectCorners(gray, 1275, 1650), truth, 3);
 });

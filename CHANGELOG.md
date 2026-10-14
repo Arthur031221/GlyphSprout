@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.9.0
+
+The Pages stage has a **Paper size** choice of A4 or US Letter. Before this, the template was A4 only, so printing it at actual size on Letter paper cut off the bottom registration crosses. The Letter template is the same layout scaled to 94 percent and centered, so every cell and cross stays on the sheet, and the print window, the downloaded SVG and the footer line all follow the choice.
+
+The choice is remembered in this browser. Browsers set to a United States, Canadian, Mexican, Philippine, Chilean or Colombian region start on US Letter and all others on A4. A4 output is unchanged, and scans of either size are read the same way. Tests cover the Letter layout and corner detection on Letter scans. The label is translated in all nine interface languages. Updated the demo recording.
+
 ## 1.8.0
 
 A new **Font information** panel records a designer, a copyright notice, a license text and a license URL in the exported TTF and WOFF2 name table, so a font you share carries its own credit and terms. **Use the SIL Open Font License** fills the license text and URL in one click. Empty fields are left out, and projects without the information export exactly as before.

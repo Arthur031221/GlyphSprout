@@ -5,7 +5,7 @@ GlyphSprout is a browser application served from a local Node.js process. The Vi
 ## Workflow
 
 1. Character analysis keeps distinct supported BMP characters and caps a project at 512.
-2. The A4 SVG template assigns up to 35 characters to each page and prints four registration marks.
+2. The A4 or US Letter SVG template assigns up to 35 characters to each page and prints four registration marks.
 3. The user assigns a scan to a page and confirms its visible ID and four corners. A projective transform rectifies the page, then samples the registered cells.
 4. Per-cell thresholding and speck filtering create a binary ink mask. Contour tracing preserves holes and detached components. A glyph retains its source cell so settings can retrace it.
 5. Font metrics position each contour on a shared baseline. The font builder emits unhinted TTF. The WOFF2 path encodes the same generated font. The live preview loads the generated font itself.
@@ -20,7 +20,7 @@ If no stored revision can be validated, recovery reports failure and saves are r
 
 ## Main modules
 
-- `src/core/text.ts`, `template.ts`, and `geometry.ts`: character validation, A4 page layout, registration, and rectification.
+- `src/core/text.ts`, `template.ts`, and `geometry.ts`: character validation, page layout and paper sizes, registration, and rectification.
 - `src/core/trace.ts`: thresholding, speck removal, and contour tracing.
 - `src/core/smooth.ts`: corner cutting, point simplification and the crossing check that guards smoothed outlines.
 - `src/core/font.ts`: outline metrics and TTF/WOFF2 generation.

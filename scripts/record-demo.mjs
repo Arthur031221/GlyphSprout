@@ -138,6 +138,9 @@ try {
   ).toBeVisible();
   await page.waitForTimeout(1800);
   await page.getByRole("button", { name: "Pages" }).click();
+  await page.waitForTimeout(900);
+  await page.getByLabel("Paper size").selectOption("letter");
+  await page.waitForTimeout(1500);
   await page
     .locator('input[type="file"][accept="image/png,image/jpeg"]')
     .setInputFiles("tests/e2e/fixtures/paper.png");
@@ -202,7 +205,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded character presets, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded character presets, the paper size choice, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

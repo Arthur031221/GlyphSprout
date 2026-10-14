@@ -13,7 +13,7 @@
 ![实际工作坊：擦除并修正扫描字形、查看样张并下载 TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.8.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.9.0
 ```
 
 需要 Node.js 22.12 或更新版本，以及 Git。命令显示就绪信息后，打开 `http://127.0.0.1:4173`。
@@ -25,7 +25,7 @@ npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.8.0
 ## 制作你的第一款字体
 
 1. 新建项目，并选择需要的字符，例如 `Hello!`。也可以一键添加整组字符，例如大写字母、数字、标点符号、平假名或片假名。
-2. 按实际尺寸打印 A4 模板，每格写一个字符。
+2. 按实际尺寸打印模板（A4 或 US Letter 纸张），每格写一个字符。
 3. 添加光线均匀的扫描图并确认页面 ID。GlyphSprout 会查找四个定位十字并把角点放上去，请检查每个角，有偏差就调整。
 4. 点击**转换扫描**，等待转换完成。
 5. 检查每个字形。调整源图、阈值、轮廓平滑、裁切、大小、偏移和间距。

@@ -24,6 +24,7 @@
   "storageUnavailable": "Der lokale Speicher ist nicht verfügbar. Lade dein Projekt herunter, um eine Kopie zu behalten.",
   "storageQuota": "Der Browserspeicher ist voll. Lade dein Projekt herunter, um eine Kopie zu behalten.",
   "pages": "Seiten drucken",
+  "paperSize": "Papierformat",
   "printAll": "Alle Seiten drucken",
   "printPage": "Diese Seite drucken",
   "templateHelp": "In Originalgröße drucken. Alle vier Kreuze müssen sichtbar bleiben. Verwende glattes Papier, dunkle Tinte und gleichmäßiges Licht.",

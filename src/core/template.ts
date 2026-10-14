@@ -20,6 +20,29 @@ export const TEMPLATE = {
   ] as [Point, Point, Point, Point],
 };
 
+export type Paper = "a4" | "letter";
+
+/** Printed sheet sizes in millimetres. The 1000 x 1414 layout is fitted inside each. */
+export const PAPERS: Record<
+  Paper,
+  { width: number; height: number; name: string }
+> = {
+  a4: { width: 210, height: 297, name: "A4" },
+  letter: { width: 215.9, height: 279.4, name: "US Letter" },
+};
+
+const LETTER_REGIONS = new Set(["US", "CA", "MX", "PH", "CL", "CO"]);
+
+/** Letter paper where it is the usual office size, A4 everywhere else. */
+export function defaultPaper(language: string): Paper {
+  const region = language.split(/[-_]/)[1]?.toUpperCase();
+  return region && LETTER_REGIONS.has(region) ? "letter" : "a4";
+}
+
+export function paperOrDefault(value: string | null, language: string): Paper {
+  return value === "a4" || value === "letter" ? value : defaultPaper(language);
+}
+
 export function cellRect(slot: number) {
   if (!Number.isInteger(slot) || slot < 0 || slot >= TEMPLATE.perPage)
     throw new Error("invalidPage");
@@ -72,7 +95,17 @@ export function templateSvg(
       "Keep the four registration crosses visible. Flat paper, dark ink, even light.",
     footer: "Template v1 / 5 x 7 / A4 / Print at actual size",
   },
+  paper: Paper = "a4",
 ): string {
+  const sheet = PAPERS[paper];
+  // The layout keeps its 1000 x 1414 coordinates; Letter only adds side margins.
+  const viewWidth = Math.max(
+    TEMPLATE.width,
+    (sheet.width * TEMPLATE.height) / sheet.height,
+  );
+  const viewX = +((TEMPLATE.width - viewWidth) / 2).toFixed(2);
+  const box = `${viewX} 0 ${+viewWidth.toFixed(2)} ${TEMPLATE.height}`;
+  const footer = labels.footer.replace("A4", sheet.name);
   const chars = pageCharacters(characters, pageIndex);
   const cells = chars
     .map((ch, i) => {
@@ -87,5 +120,5 @@ export function templateSvg(
         `<path d="M${p.x - 12} ${p.y}h24 M${p.x} ${p.y - 12}v24" stroke="#203247" stroke-width="3"/><circle cx="${p.x}" cy="${p.y}" r="5" fill="white" stroke="#203247" stroke-width="2"/>`,
     )
     .join("");
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1414" width="210mm" height="297mm"><rect width="1000" height="1414" fill="white"/><g font-family="sans-serif"><text x="108" y="68" font-size="28" fill="#203247">${escapeXml(name)}</text><text x="108" y="93" font-size="13" fill="#607185">GlyphSprout / ${escapeXml(projectId.slice(0, 8))} / ${escapeXml(labels.page)} ${pageIndex + 1} ${escapeXml(labels.of)} ${pageCount(characters)}</text><text x="108" y="143" font-size="13" fill="#203247">${escapeXml(labels.write)}</text><text x="108" y="165" font-size="11" fill="#607185">${escapeXml(labels.registration)}</text>${cells}<text x="108" y="1375" font-size="11" fill="#607185">${escapeXml(labels.footer)}</text></g>${marks}</svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${box}" width="${sheet.width}mm" height="${sheet.height}mm"><rect x="${viewX}" width="${+viewWidth.toFixed(2)}" height="1414" fill="white"/><g font-family="sans-serif"><text x="108" y="68" font-size="28" fill="#203247">${escapeXml(name)}</text><text x="108" y="93" font-size="13" fill="#607185">GlyphSprout / ${escapeXml(projectId.slice(0, 8))} / ${escapeXml(labels.page)} ${pageIndex + 1} ${escapeXml(labels.of)} ${pageCount(characters)}</text><text x="108" y="143" font-size="13" fill="#203247">${escapeXml(labels.write)}</text><text x="108" y="165" font-size="11" fill="#607185">${escapeXml(labels.registration)}</text>${cells}<text x="108" y="1375" font-size="11" fill="#607185">${escapeXml(footer)}</text></g>${marks}</svg>`;
 }

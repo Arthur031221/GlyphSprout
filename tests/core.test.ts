@@ -13,7 +13,12 @@ import {
   updateText,
   validateSettings,
 } from "../src/core/project";
-import { cellRect, pageCount, templateSvg } from "../src/core/template";
+import {
+  cellRect,
+  pageCount,
+  paperOrDefault,
+  templateSvg,
+} from "../src/core/template";
 import {
   addCharacterSet,
   analyzeText,
@@ -299,4 +304,41 @@ describe("character set presets", () => {
     expect(analysis.unsupported).toEqual([]);
     expect(analysis.overflow).toBe(false);
   });
+});
+
+it("keeps A4 output unchanged and fits the same layout inside US Letter", () => {
+  const project = newProject("Sheet", "AB");
+  const a4 = templateSvg(project.characters, project.name, project.id, 0);
+  expect(a4).toContain('viewBox="0 0 1000 1414" width="210mm" height="297mm"');
+  expect(a4).toContain("/ A4 /");
+  const letter = templateSvg(
+    project.characters,
+    project.name,
+    project.id,
+    0,
+    undefined,
+    "letter",
+  );
+  expect(letter).toContain('width="215.9mm" height="279.4mm"');
+  expect(letter).toContain("/ US Letter /");
+  expect(letter).not.toContain("/ A4 /");
+  const [x, , width, height] = letter
+    .match(/viewBox="([-\d. ]+)"/)?.[1]
+    .split(" ")
+    .map(Number) ?? [0, 0, 0, 0];
+  // Same millimetres per layout unit on both axes, centred, nothing cropped.
+  expect(width / height).toBeCloseTo(215.9 / 279.4, 3);
+  expect(x).toBeCloseTo((1000 - width) / 2, 1);
+  expect(x + width).toBeGreaterThan(1000);
+  expect(letter.match(/d="M\d+ \d+h\d+/g)?.length).toBeGreaterThan(0);
+});
+
+it("chooses the paper from a saved value or the browser region", () => {
+  expect(paperOrDefault("a4", "en-US")).toBe("a4");
+  expect(paperOrDefault("letter", "de-DE")).toBe("letter");
+  expect(paperOrDefault("", "en-US")).toBe("letter");
+  expect(paperOrDefault(null, "fr-CA")).toBe("letter");
+  expect(paperOrDefault("bogus", "es_MX")).toBe("letter");
+  expect(paperOrDefault("", "en-GB")).toBe("a4");
+  expect(paperOrDefault("", "ja")).toBe("a4");
 });

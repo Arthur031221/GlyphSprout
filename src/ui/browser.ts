@@ -5,6 +5,7 @@ import {
   MAX_PROJECT_BYTES,
   serializeProject,
 } from "../core/project";
+import { PAPERS, type Paper } from "../core/template";
 import type { Project } from "../core/types";
 
 export function download(
@@ -176,15 +177,18 @@ export async function decodeCell(source: string) {
   return context.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-export function printSheets(sheets: string[], title: string) {
+export function printSheets(
+  sheets: string[],
+  title: string,
+  paper: Paper = "a4",
+) {
   // Requesting noopener here makes window.open return null, even when it opens.
   const popup = window.open("about:blank", "_blank", "width=900,height=1000");
   if (!popup) throw new Error("popupBlocked");
   popup.opener = null;
   popup.document.title = title;
   const style = popup.document.createElement("style");
-  style.textContent =
-    "@page{size:A4;margin:0}body{margin:0}img{width:210mm;height:297mm;display:block;break-after:page}img:last-child{break-after:auto}";
+  style.textContent = `@page{size:${PAPERS[paper].width}mm ${PAPERS[paper].height}mm;margin:0}body{margin:0}img{width:${PAPERS[paper].width}mm;height:${PAPERS[paper].height}mm;display:block;break-after:page}img:last-child{break-after:auto}`;
   popup.document.head.append(style);
   let loaded = 0;
   for (const svg of sheets) {

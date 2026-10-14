@@ -24,6 +24,7 @@
   "storageUnavailable": "Le stockage local est indisponible. Téléchargez votre projet pour en garder une copie.",
   "storageQuota": "Le stockage du navigateur est plein. Téléchargez votre projet pour en garder une copie.",
   "pages": "Imprimer les pages",
+  "paperSize": "Format du papier",
   "printAll": "Imprimer toutes les pages",
   "printPage": "Imprimer cette page",
   "templateHelp": "Imprimez à la taille réelle. Gardez les quatre croix visibles et utilisez du papier plat, de l'encre foncée et une lumière uniforme.",

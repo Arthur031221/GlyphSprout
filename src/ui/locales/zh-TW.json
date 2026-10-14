@@ -24,6 +24,7 @@
   "storageUnavailable": "無法使用本機儲存空間。請下載專案備份。",
   "storageQuota": "瀏覽器儲存空間已滿。請下載專案備份。",
   "pages": "列印頁面",
+  "paperSize": "紙張大小",
   "printAll": "列印所有頁面",
   "printPage": "列印此頁",
   "templateHelp": "請以實際尺寸列印。保留四個十字標記，使用平整紙張、深色墨水與均勻光線。",

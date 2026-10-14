@@ -24,6 +24,7 @@
   "storageUnavailable": "本地存储不可用。请下载项目备份。",
   "storageQuota": "浏览器存储空间已满。请下载项目备份。",
   "pages": "打印页面",
+  "paperSize": "纸张大小",
   "printAll": "打印所有页面",
   "printPage": "打印此页",
   "templateHelp": "请按实际尺寸打印。保留四个十字标记，使用平整纸张、深色墨水和均匀光线。",

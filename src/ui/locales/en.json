@@ -24,6 +24,7 @@
   "storageUnavailable": "Local storage is unavailable. Download your project to keep a copy.",
   "storageQuota": "Browser storage is full. Download your project to keep a copy.",
   "pages": "Print pages",
+  "paperSize": "Paper size",
   "printAll": "Print all pages",
   "printPage": "Print this page",
   "templateHelp": "Print at actual size. Keep all four crosses visible and use flat paper with dark ink and even light.",
