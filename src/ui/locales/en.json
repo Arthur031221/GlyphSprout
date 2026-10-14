@@ -50,6 +50,7 @@
   "clearGlyph": "Clear glyph",
   "threshold": "Ink threshold",
   "minArea": "Minimum speck area",
+  "smoothing": "Outline smoothing (0 to 3)",
   "removed": "specks removed",
   "scale": "Size",
   "offsetX": "Horizontal offset",

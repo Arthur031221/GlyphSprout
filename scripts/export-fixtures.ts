@@ -43,7 +43,7 @@ for (const ch of project.characters) {
     character: ch,
     source: "",
     contours: traceMask(mask, size, size),
-    settings: defaultSettings(),
+    settings: { ...defaultSettings(), smoothing: 0 },
     reviewed: true,
     origin: "sample",
   };

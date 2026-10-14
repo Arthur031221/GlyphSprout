@@ -11,7 +11,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 [Ouvrir l'atelier en ligne](https://Arthur031221.github.io/GlyphSprout/) | [Guide d'utilisation](docs/USAGE.md) | [![Licence MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -28,7 +28,7 @@ Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http:
 2. Imprimez le modèle A4 à taille réelle et écrivez un caractère dans chaque case.
 3. Ajoutez un scan éclairé uniformément, confirmez son identifiant de page et alignez les quatre coins.
 4. Cliquez sur **Convertir les scans** et attendez la fin de la conversion.
-5. Vérifiez chaque glyphe. Réglez la source, le seuil, le recadrage, la taille, les décalages et l'espacement.
+5. Vérifiez chaque glyphe. Réglez la source, le seuil, le lissage du contour, le recadrage, la taille, les décalages et l'espacement.
 6. Saisissez votre texte dans l'aperçu et téléchargez le TTF ou le WOFF2.
 
 Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.
@@ -47,7 +47,7 @@ Choisissez jusqu'à 512 caractères BMP pris en charge. Chaque modèle A4 compor
 
 Les scans nécessitent le modèle imprimé, de l'encre foncée, du papier plat, une lumière uniforme et les quatre repères visibles. L'affectation et la confirmation des pages sont manuelles. GlyphSprout ne lit pas l'écriture manuscrite et ne détecte pas les cases automatiquement.
 
-Les exports contiennent des contours simples sans hinting. Ils n'incluent ni crénage, ni simplification des courbes, ni façonnage de l'écriture liée, ni couverture complète des langues. L'exemple Han et kana utilise des traits synthétiques originaux, signalés comme tels.
+Les exports contiennent des contours simples sans hinting. Le lissage du contour transforme les marches de pixels des nouveaux tracés en segments diagonaux droits. Choisissez 0 pour conserver le contour exact en pixels. Ils n'incluent ni crénage, ni ajustement des courbes, ni façonnage de l'écriture liée, ni couverture complète des langues. L'exemple Han et kana utilise des traits synthétiques originaux, signalés comme tels.
 
 ## Conservez votre travail
 

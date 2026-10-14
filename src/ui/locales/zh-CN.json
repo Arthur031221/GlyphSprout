@@ -50,6 +50,7 @@
   "clearGlyph": "清除字形",
   "threshold": "墨迹阈值",
   "minArea": "最小斑点面积",
+  "smoothing": "轮廓平滑（0 到 3）",
   "removed": "个斑点已移除",
   "scale": "大小",
   "offsetX": "水平偏移",

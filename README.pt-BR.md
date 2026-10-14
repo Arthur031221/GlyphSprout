@@ -11,7 +11,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fo
 [Abrir a oficina online](https://Arthur031221.github.io/GlyphSprout/) | [Guia do usuário](docs/USAGE.md) | [![Licença MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -28,7 +28,7 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 2. Imprima o modelo A4 no tamanho real e escreva um caractere em cada célula.
 3. Adicione uma digitalização com iluminação uniforme, confirme o ID da página e alinhe os quatro cantos.
 4. Clique em **Converter digitalizações** e aguarde a conversão terminar.
-5. Confira cada glifo. Ajuste a origem, o limite, o corte, o tamanho, os deslocamentos e o espaçamento.
+5. Confira cada glifo. Ajuste a origem, o limite, a suavização do contorno, o corte, o tamanho, os deslocamentos e o espaçamento.
 6. Digite seu texto na prévia e baixe o TTF ou WOFF2.
 
 Editar origem carrega os pixels atuais e permite apagar, desenhar e desfazer traços locais. As configurações e a página atribuída são mantidas. Uma origem alterada precisa ser revisada. Desenhar um glifo começa com uma imagem vazia, substitui o glifo e redefine suas configurações. Desenhos sem tinta são rejeitados. Uma edição sem alterações não muda o histórico do projeto.
@@ -47,7 +47,7 @@ Escolha até 512 caracteres BMP compatíveis. Cada modelo A4 tem 35 células e u
 
 As digitalizações precisam do modelo impresso, tinta escura, papel plano, iluminação uniforme e as quatro marcas de registro visíveis. A atribuição e a confirmação das páginas são manuais. O GlyphSprout não lê escrita à mão nem detecta células automaticamente.
 
-Os arquivos exportados contêm contornos simples sem hinting. Não incluem kerning, simplificação de curvas, composição de escrita conectada nem cobertura completa de idiomas. A amostra de han e kana usa traços sintéticos originais e está identificada como tal.
+Os arquivos exportados contêm contornos simples sem hinting. A suavização do contorno transforma os degraus de pixel dos novos traçados em segmentos diagonais retos. Escolha 0 para manter o contorno exato em pixels. Não incluem kerning, ajuste de curvas, composição de escrita conectada nem cobertura completa de idiomas. A amostra de han e kana usa traços sintéticos originais e está identificada como tal.
 
 ## Guarde seu trabalho
 

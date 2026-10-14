@@ -6,7 +6,7 @@
 2. Print the generated A4 template at actual size. Write one character in each cell.
 3. Add a flat, evenly lit PNG or JPEG scan. Confirm its printed page ID and the four page corners.
 4. Click **Convert scans** and wait for conversion to finish.
-5. Review each traced glyph. Adjust its threshold, speck filter, crop, size, offsets, and spacing, or draw and erase directly on the source.
+5. Review each traced glyph. Adjust its threshold, speck filter, outline smoothing, crop, size, offsets, and spacing, or draw and erase directly on the source.
 6. Type a specimen in the live preview and download a TTF or WOFF2 font.
 
 Each A4 sheet has 35 cells. A project supports at most 512 supported BMP characters and 15 template pages. Drag a page corner with one finger or the left mouse button. A second finger leaves that drag and the other corners unchanged. You can also use the corner coordinates or arrow keys for fine adjustments. Confirming the visible page ID, page assignment, and interior alignment enables **Convert scans**. Click it to start conversion in a browser worker.
@@ -21,7 +21,9 @@ The Characters stage has quick-add buttons for uppercase letters, lowercase lett
 
 ## Edit and review glyphs
 
-The source editor opens the current native pixel image for the selected glyph. Use the pen and eraser to make local changes, and use drawing undo to step back through strokes. Applying a source edit keeps the glyph's threshold, crop, size, offsets, spacing, and page ID. An empty source is rejected. A changed source becomes unreviewed so you can check its outline. Applying an unchanged source leaves project history untouched. If the glyph has changed or its settings are still being processed, the source editor rejects the edit and preserves that work. Cancel the source edit and reopen it once the pending settings finish.
+The source editor opens the current native pixel image for the selected glyph. Use the pen and eraser to make local changes, and use drawing undo to step back through strokes. Applying a source edit keeps the glyph's threshold, smoothing, crop, size, offsets, spacing, and page ID. An empty source is rejected. A changed source becomes unreviewed so you can check its outline. Applying an unchanged source leaves project history untouched. If the glyph has changed or its settings are still being processed, the source editor rejects the edit and preserves that work. Cancel the source edit and reopen it once the pending settings finish.
+
+**Outline smoothing** runs from 0 to 3. New traces start at 2. Each level rounds the one pixel steps along curves and diagonals into straight segments and drops points that no longer change the shape. Level 1 follows the pixels most closely, level 3 gives the fewest points, and 0 keeps the exact pixel outline. Smoothing is a polyline, not a curve fit, and it can slightly thin a stroke that is only one or two pixels wide. If smoothing would make two outlines cross, GlyphSprout keeps that glyph's exact pixel outline instead. Projects saved before this setting existed, and the bundled Paper Bloom sample, stay at 0 until you change it. **Reset settings** returns a glyph to level 2.
 
 Zoom from 100 to 800 percent to correct details. Pen and eraser sizes are separate and measured in source pixels. Their widths stay stable when zoom changes. The canvas keeps the native image dimensions and aspect ratio. Choose **Pan** and drag to move a magnified image, use the scrollbars, or focus the drawing viewport and press arrow keys. **Fit image** returns to 100 percent. Zooming and panning do not change source pixels or drawing history.
 
@@ -69,4 +71,4 @@ Download the WOFF2 and TTF files, then choose **Copy web font CSS** in the Font 
 
 GlyphSprout creates ordinary unhinted TTF and WOFF2 files. Operating-system font installation steps vary by host and version. On many desktop systems, open the downloaded TTF in the system font viewer and choose its install action. Applications may need to restart before the font appears. WOFF2 is commonly loaded by a website with `@font-face`. Check the target application's font-format support. These steps are general guidance, not a compatibility guarantee.
 
-GlyphSprout does not provide kerning, curve simplification, hinting, OCR, a full language font, or connected-script shaping. Review the font in the application where you plan to use it.
+GlyphSprout does not provide kerning, curve fitting, hinting, OCR, a full language font, or connected-script shaping. Review the font in the application where you plan to use it.

@@ -1,8 +1,11 @@
+import { hasCrossings, smoothContour } from "./smooth";
 import type { Contour, Crop, Point } from "./types";
+import { MAX_POINTS_PER_GLYPH } from "./types";
 
 export interface TraceOptions {
   threshold: number;
   minArea: number;
+  smoothing?: number;
   crop?: Crop;
 }
 
@@ -88,6 +91,7 @@ export function traceMask(
   mask: Uint8Array,
   width: number,
   height: number,
+  smoothing = 0,
 ): Contour[] {
   if (
     mask.length !== width * height ||
@@ -120,7 +124,7 @@ export function traceMask(
       if (x === 0 || !mask[p - 1]) add(a + stride, a, 3);
     }
   }
-  const contours: Contour[] = [];
+  const loops: Point[][] = [];
   for (let first = 0; first < edges.length; first++) {
     if (edges[first].used) continue;
     let index = first;
@@ -152,9 +156,20 @@ export function traceMask(
     });
     if (reduced.length < 4 || signedArea(reduced) === 0)
       throw new Error("invalidContour");
-    contours.push(reduced.map((p) => ({ x: p.x / width, y: p.y / height })));
+    loops.push(reduced);
   }
-  return contours;
+  let shaped = loops;
+  if (smoothing > 0) {
+    const smoothed = loops.map((loop) => smoothContour(loop, smoothing));
+    // Smoothing can pinch thin strokes or push a counter across its outline.
+    // Keep the exact pixel outline for the whole glyph when that happens.
+    const points = smoothed.reduce((sum, loop) => sum + loop.length, 0);
+    if (points <= MAX_POINTS_PER_GLYPH && !hasCrossings(smoothed))
+      shaped = smoothed;
+  }
+  return shaped.map((loop) =>
+    loop.map((p) => ({ x: p.x / width, y: p.y / height })),
+  );
 }
 
 export function trace(
@@ -188,6 +203,6 @@ export function trace(
   return {
     ...stats,
     inkPixels: mask.reduce((a, b) => a + b, 0),
-    contours: traceMask(mask, width, height),
+    contours: traceMask(mask, width, height, options.smoothing ?? 0),
   };
 }

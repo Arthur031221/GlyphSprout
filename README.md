@@ -11,7 +11,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 [Open the live workshop](https://Arthur031221.github.io/GlyphSprout/) | [User guide](docs/USAGE.md) | [![MIT license](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -28,7 +28,7 @@ You'll need Node.js 22.12 or newer and Git. When the command prints its ready me
 2. Print its A4 template at actual size and write one character in each cell.
 3. Add an evenly lit scan, confirm the page ID and align its four corners.
 4. Click **Convert scans** and wait for conversion to finish.
-5. Review each glyph. Adjust the source, threshold, crop, size, offsets and spacing.
+5. Review each glyph. Adjust the source, threshold, outline smoothing, crop, size, offsets and spacing.
 6. Type your text in the live specimen and download TTF or WOFF2.
 
 Edit source keeps the current native pixels, so you can erase, draw and undo local strokes. The glyph's settings and page assignment stay as they were. Review any sources you changed. Draw a glyph starts blank and replaces the glyph, which resets its settings. Empty drawings are rejected. If you leave the source unchanged, project history isn't touched.
@@ -47,7 +47,7 @@ Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a 
 
 Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
 
-Exports contain simple unhinted outlines. There's no kerning, curve simplification, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
+Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. There's no kerning, curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
 
 ## Keep your work
 

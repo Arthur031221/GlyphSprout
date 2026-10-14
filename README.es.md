@@ -11,7 +11,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 [Abrir el taller en línea](https://Arthur031221.github.io/GlyphSprout/) | [Guía de uso](docs/USAGE.md) | [![Licencia MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -28,7 +28,7 @@ Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4
 2. Imprime la plantilla A4 a tamaño real y escribe un carácter en cada celda.
 3. Añade un escaneo con luz uniforme, confirma el ID de página y alinea las cuatro esquinas.
 4. Haz clic en **Convertir escaneos** y espera a que termine la conversión.
-5. Revisa cada glifo. Ajusta la imagen original, el umbral, el recorte, el tamaño, los desplazamientos y el espaciado.
+5. Revisa cada glifo. Ajusta la imagen original, el umbral, el suavizado del contorno, el recorte, el tamaño, los desplazamientos y el espaciado.
 6. Escribe tu texto en la vista previa y descarga TTF o WOFF2.
 
 Editar origen conserva los píxeles actuales y permite borrar, dibujar y deshacer trazos locales. Mantiene los ajustes y la página asignada. Si cambias el origen, debes revisar el glifo. Dibujar un glifo empieza con una imagen vacía, reemplaza el glifo y restablece sus ajustes. Se rechazan los dibujos vacíos. Una edición del origen sin cambios no modifica el historial del proyecto.
@@ -47,7 +47,7 @@ Elige hasta 512 caracteres BMP compatibles. Cada plantilla A4 tiene 35 celdas y 
 
 Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, luz uniforme y las cuatro marcas de registro visibles. La asignación y confirmación de páginas son manuales. GlyphSprout no lee la escritura ni detecta las celdas automáticamente.
 
-Las exportaciones contienen contornos sencillos sin hinting. No incluyen kerning, simplificación de curvas, composición de escritura conectada ni cobertura completa de idiomas. La muestra de han y kana usa trazos sintéticos originales y está identificada como tal.
+Las exportaciones contienen contornos sencillos sin hinting. El suavizado del contorno convierte los escalones de píxeles de los trazados nuevos en segmentos diagonales rectos. Elige 0 para conservar el contorno exacto de píxeles. No incluyen kerning, ajuste de curvas, composición de escritura conectada ni cobertura completa de idiomas. La muestra de han y kana usa trazos sintéticos originales y está identificada como tal.
 
 ## Conserva tu trabajo
 

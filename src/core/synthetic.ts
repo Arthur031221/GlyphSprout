@@ -106,7 +106,7 @@ export async function createSyntheticProject(): Promise<Project> {
   const glyphs: Record<string, Glyph> = {};
   for (const character of project.characters) {
     const raster = await rasterize(syntheticCellSvg(character));
-    const settings = defaultSettings();
+    const settings = { ...defaultSettings(), smoothing: 0 };
     const traced = trace(raster.gray, 384, 384, settings);
     glyphs[character] = {
       character,

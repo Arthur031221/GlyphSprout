@@ -50,6 +50,7 @@
   "clearGlyph": "グリフを消去",
   "threshold": "インクしきい値",
   "minArea": "最小ノイズ面積",
+  "smoothing": "輪郭のなめらかさ（0〜3）",
   "removed": "個のノイズを除去",
   "scale": "サイズ",
   "offsetX": "横方向の移動",

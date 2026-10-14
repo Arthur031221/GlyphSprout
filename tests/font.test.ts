@@ -11,6 +11,7 @@ import type { Project } from "../src/core/types";
 
 it("checks the actual rounding phase before losing a contour edge", () => {
   const glyph = blankGlyph("一", "");
+  glyph.settings.smoothing = 0;
   glyph.contours = [
     [
       { x: 0.2004, y: 0.2 },

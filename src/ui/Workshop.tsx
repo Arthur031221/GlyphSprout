@@ -103,6 +103,7 @@ function Settings({
   ][] = [
     ["threshold", t.threshold, 1, 235, 1],
     ["minArea", t.minArea, 1, 64, 1],
+    ["smoothing", t.smoothing, 0, 3, 1],
     ["scale", t.scale, 0.25, 2, 0.01],
     ["offsetX", t.offsetX, -500, 500, 1],
     ["offsetY", t.offsetY, -500, 500, 1],

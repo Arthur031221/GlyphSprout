@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+New traces no longer export as raw pixel staircases. **Outline smoothing** turns the one pixel steps along curves and diagonals into straight segments and drops the points that no longer matter, so large sizes look clean and glyphs carry fewer points. Each glyph has its own level from 0 to 3, new scans start at 2, and 0 keeps the exact pixel outline. If smoothing would make two outlines cross, the glyph keeps its pixel outline.
+
+Projects saved before this version and the bundled Paper Bloom sample stay at 0, so their fonts do not change. The setting is translated in all nine interface languages.
+
 ## 1.5.0
 
 The Characters stage can add whole character sets in one click: uppercase letters, lowercase letters, digits, punctuation, hiragana and katakana. Only the missing characters are appended, and the result stays a draft until **Project ready**.

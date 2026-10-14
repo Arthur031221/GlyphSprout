@@ -14,7 +14,7 @@ project.id = "nist-sd19";
 project.createdAt = project.updatedAt = "2026-10-14T00:00:00.000Z";
 for (const character of project.characters) {
   const { source, gray } = sources[character];
-  const settings = defaultSettings();
+  const settings = { ...defaultSettings(), smoothing: 0 };
   project.glyphs[character] = {
     character,
     source,

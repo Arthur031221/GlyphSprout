@@ -75,6 +75,11 @@ function number(value: unknown, min: number, max: number): number {
     throw new Error("invalidProject");
   return value;
 }
+function integer(value: unknown, min: number, max: number): number {
+  const result = number(value, min, max);
+  if (!Number.isInteger(result)) throw new Error("invalidProject");
+  return result;
+}
 function image(value: unknown): string {
   const data = string(value, MAX_IMAGE_BYTES * 1.4);
   if (!/^data:image\/(png|jpeg);base64,[A-Za-z0-9+/]+={0,2}$/.test(data))
@@ -122,6 +127,8 @@ export function validateSettings(value: unknown): GlyphSettings {
   return {
     threshold: number(s.threshold, 1, 235),
     minArea: number(s.minArea, 1, 64),
+    // Projects saved before smoothing existed keep their pixel outlines.
+    smoothing: s.smoothing === undefined ? 0 : integer(s.smoothing, 0, 3),
     scale: number(s.scale, 0.25, 2),
     offsetX: number(s.offsetX, -500, 500),
     offsetY: number(s.offsetY, -500, 500),

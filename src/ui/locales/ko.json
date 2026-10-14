@@ -50,6 +50,7 @@
   "clearGlyph": "글리프 지우기",
   "threshold": "잉크 임계값",
   "minArea": "최소 얼룩 면적",
+  "smoothing": "윤곽 부드럽게 (0~3)",
   "removed": "얼룩 제거됨",
   "scale": "크기",
   "offsetX": "가로 오프셋",

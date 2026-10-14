@@ -22,6 +22,7 @@ If no stored revision can be validated, recovery reports failure and saves are r
 
 - `src/core/text.ts`, `template.ts`, and `geometry.ts`: character validation, A4 page layout, registration, and rectification.
 - `src/core/trace.ts`: thresholding, speck removal, and contour tracing.
+- `src/core/smooth.ts`: corner cutting, point simplification and the crossing check that guards smoothed outlines.
 - `src/core/font.ts`: outline metrics and TTF/WOFF2 generation.
 - `src/core/project.ts` and `storage.ts`: project validation, import/export, assets, and recovery.
 - `src/worker/`: worker protocol and scan processing.

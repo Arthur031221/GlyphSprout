@@ -121,6 +121,7 @@ export function useGlyphEditor(
       const inkChanged =
         values.threshold !== glyph.settings.threshold ||
         values.minArea !== glyph.settings.minArea ||
+        values.smoothing !== glyph.settings.smoothing ||
         JSON.stringify(values.crop) !== JSON.stringify(glyph.settings.crop);
       let result: ReturnType<typeof trace> | undefined;
       if (inkChanged) {

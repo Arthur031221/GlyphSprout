@@ -1,5 +1,6 @@
 import type { TTF } from "fonteditor-core";
 import { createFont, woff2 } from "fonteditor-core";
+import { hasCrossings } from "./smooth";
 import { isCjk } from "./text";
 import { signedArea } from "./trace";
 import type { Glyph, Project } from "./types";
@@ -26,7 +27,8 @@ export function fontGlyph(glyph: Glyph): TTF.Glyph {
       ),
   };
   // A shared coordinate grid must stay distinct after TrueType integer rounding.
-  for (const axis of ["x", "y"] as const) {
+  // Smoothed outlines sit between pixels, so they get a crossing check below.
+  for (const axis of settings.smoothing ? [] : (["x", "y"] as const)) {
     const values = [
       ...new Set(glyph.contours.flatMap((c) => c.map((p) => p[axis]))),
     ].sort((a, b) => a - b);
@@ -41,11 +43,19 @@ export function fontGlyph(glyph: Glyph): TTF.Glyph {
       onCurve: true,
     })),
   );
+  if (settings.smoothing)
+    contours = contours.map((c) =>
+      c.filter((p, i) => {
+        const prev = c[(i + c.length - 1) % c.length];
+        return p.x !== prev.x || p.y !== prev.y;
+      }),
+    );
   if (
     contours.some(
       (c, i) =>
         c.length < 3 || signedArea(c) * signedArea(glyph.contours[i]) >= 0,
-    )
+    ) ||
+    (settings.smoothing && hasCrossings(contours))
   ) {
     throw new Error("collapsedContour");
   }

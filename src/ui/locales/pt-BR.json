@@ -50,6 +50,7 @@
   "clearGlyph": "Limpar glifo",
   "threshold": "Limiar da tinta",
   "minArea": "Área mínima de manchas",
+  "smoothing": "Suavização do contorno (0 a 3)",
   "removed": "manchas removidas",
   "scale": "Tamanho",
   "offsetX": "Deslocamento horizontal",

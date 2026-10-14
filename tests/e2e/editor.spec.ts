@@ -23,6 +23,19 @@ async function ready(page: Page) {
   );
 }
 
+// The bundled sample keeps pixel outlines; Reset settings returns to the default smoothing.
+async function useDefaultSmoothing(page: Page) {
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  await smoothing.fill("2");
+  await smoothing.press("Tab");
+  await expect(
+    page.getByText("Applying glyph changes...", { exact: true }),
+  ).toBeHidden();
+  await expect(page.locator(".project-label [role=status]")).toHaveText(
+    "Saved",
+  );
+}
+
 async function backup(page: Page): Promise<Project> {
   const event = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download project" }).click();
@@ -337,6 +350,13 @@ test("unchanged settings preserve reviewed glyphs and project history", async ({
   page,
 }) => {
   await ready(page);
+  await useDefaultSmoothing(page);
+  await page.getByRole("button", { name: "Mark reviewed" }).click();
+  await expect(page.locator(".project-label [role=status]")).toHaveText(
+    "Saved",
+  );
+  await page.reload();
+  await ready(page);
   const before = await backup(page);
   const inputs = page.locator(".settings-grid input");
   for (const input of await inputs.all()) {
@@ -594,6 +614,7 @@ test("export after Reset does not wait for canceled image decoding", async ({
   page,
 }) => {
   await ready(page);
+  await useDefaultSmoothing(page);
   const before = await backup(page);
   await holdDecode(page);
   await page.getByLabel("Crop edges Right").fill("0.5");
@@ -737,6 +758,12 @@ test("a size that collapses a drawn outline retains its valid settings and expor
   await page.mouse.move(box.x + 230, box.y + 50, { steps: 100 });
   await page.mouse.up();
   await page.getByRole("button", { name: "Use drawing" }).click();
+  const smoothing = page.getByLabel("Outline smoothing (0 to 3)");
+  await smoothing.fill("0");
+  await smoothing.press("Tab");
+  await expect(page.locator(".project-label [role=status]")).toHaveText(
+    "Saved",
+  );
   const before = await backup(page);
   const size = page.getByLabel("Size", { exact: true });
   await size.fill("0.38");
@@ -755,6 +782,7 @@ test("reset cancels a pending crop without changing the saved glyph", async ({
   page,
 }) => {
   await ready(page);
+  await useDefaultSmoothing(page);
   const before = await backup(page);
   await page.evaluate(() => {
     const decode = HTMLImageElement.prototype.decode;

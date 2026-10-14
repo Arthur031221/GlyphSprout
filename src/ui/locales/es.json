@@ -50,6 +50,7 @@
   "clearGlyph": "Borrar glifo",
   "threshold": "Umbral de tinta",
   "minArea": "Área mínima de motas",
+  "smoothing": "Suavizado del contorno (0 a 3)",
   "removed": "motas eliminadas",
   "scale": "Tamaño",
   "offsetX": "Desplazamiento horizontal",

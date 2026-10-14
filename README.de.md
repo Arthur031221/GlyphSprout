@@ -11,7 +11,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 [Online-Werkstatt öffnen](https://Arthur031221.github.io/GlyphSprout/) | [Benutzerhandbuch](docs/USAGE.md) | [![MIT-Lizenz](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.5.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.6.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -28,7 +28,7 @@ Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, so
 2. Drucke die A4-Vorlage in Originalgröße und schreibe ein Zeichen in jedes Feld.
 3. Füge einen gleichmäßig beleuchteten Scan hinzu, bestätige die Seiten-ID und richte die vier Ecken aus.
 4. Klicke auf **Scans umwandeln** und warte, bis die Umwandlung abgeschlossen ist.
-5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Ausschnitt, Größe, Versatz und Abstand an.
+5. Prüfe jedes Zeichen. Passe Quelle, Schwellenwert, Konturglättung, Ausschnitt, Größe, Versatz und Abstand an.
 6. Gib deinen Text in die Vorschau ein und lade TTF oder WOFF2 herunter.
 
 Mit der Aktion Quelle bearbeiten bleiben die aktuellen Pixel erhalten. Du kannst lokal radieren, zeichnen und rückgängig machen. Einstellungen und Seitenzuordnung bleiben erhalten. Eine geänderte Quelle muss geprüft werden. Die Aktion Glyph zeichnen beginnt mit einem leeren Bild, ersetzt das Glyph und setzt seine Einstellungen zurück. Leere Zeichnungen werden abgelehnt. Eine unveränderte Quellenbearbeitung lässt den Projektverlauf unverändert.
@@ -47,7 +47,7 @@ Wähle bis zu 512 unterstützte BMP-Zeichen. Jede A4-Vorlage hat 35 Felder und e
 
 Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßiges Licht und alle vier sichtbaren Passermarken. Seitenzuordnung und Bestätigung erfolgen manuell. GlyphSprout liest keine Handschrift und erkennt keine Felder automatisch.
 
-Die Exporte enthalten einfache Konturen ohne Hinting. Es gibt kein Kerning, keine Kurvenvereinfachung, keine Formung verbundener Schrift und keine vollständige Sprachabdeckung. Das Han- und Kana-Beispiel verwendet eigens erstellte synthetische Striche und ist entsprechend gekennzeichnet.
+Die Exporte enthalten einfache Konturen ohne Hinting. Die Konturglättung rundet die Pixelstufen neuer Nachzeichnungen zu geraden Diagonalen. Mit 0 bleibt die exakte Pixelkontur erhalten. Es gibt kein Kerning, keine Kurvenanpassung, keine Formung verbundener Schrift und keine vollständige Sprachabdeckung. Das Han- und Kana-Beispiel verwendet eigens erstellte synthetische Striche und ist entsprechend gekennzeichnet.
 
 ## Arbeit sichern
 

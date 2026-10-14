@@ -62,6 +62,7 @@ test("a noisy cell keeps its source for repair without rejecting the other glyph
   expect(converted.glyphs.A.source).toMatch(/^data:image\/png;base64,/);
   expect(converted.glyphs.A.pageId).toBe(converted.pages[0].id);
   expect(converted.glyphs.B.contours.length).toBeGreaterThan(0);
+  expect(converted.glyphs.B.settings.smoothing).toBe(2);
   expect(converted.glyphs.A).not.toHaveProperty("needsRepair");
   await page.getByRole("button", { name: "Workshop" }).click();
   await page.getByRole("button", { name: /^A / }).click();

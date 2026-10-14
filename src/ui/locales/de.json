@@ -50,6 +50,7 @@
   "clearGlyph": "Glyphe löschen",
   "threshold": "Tintenschwelle",
   "minArea": "Mindestfläche für Störungen",
+  "smoothing": "Konturglättung (0 bis 3)",
   "removed": "Störungen entfernt",
   "scale": "Größe",
   "offsetX": "Horizontaler Versatz",

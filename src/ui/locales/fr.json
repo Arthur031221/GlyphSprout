@@ -50,6 +50,7 @@
   "clearGlyph": "Effacer le glyphe",
   "threshold": "Seuil d'encre",
   "minArea": "Surface minimale des taches",
+  "smoothing": "Lissage du contour (0 à 3)",
   "removed": "taches supprimées",
   "scale": "Taille",
   "offsetX": "Décalage horizontal",
