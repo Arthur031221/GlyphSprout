@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+
+- Warn before closing or reloading while a save or glyph edit is pending, and when local saving has failed. Keep the warning until the project is saved.
+- Keep scan corner drags with the pointer that started them. Ignore other pointers and the right mouse button, and stop a drag when capture is lost.
+
 ## 1.2.1
 
 - Bind staged scans to their original character template. Undo and redo cannot convert confirmed sheets against a different character order or page count. Restore the original template or remove the scans to continue.

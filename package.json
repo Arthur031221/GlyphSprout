@@ -1,6 +1,6 @@
 {
   "name": "glyphsprout",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": true,
   "description": "A local handwriting font workshop for Latin, Han and kana subsets.",
   "type": "module",

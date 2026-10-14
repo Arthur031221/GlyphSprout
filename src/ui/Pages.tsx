@@ -98,7 +98,7 @@ function Registration({
   scans: Scans;
   t: Dictionary;
 }) {
-  const active = useRef<number | null>(null);
+  const active = useRef<{ pointerId: number; corner: number } | null>(null);
   const svg = useRef<SVGSVGElement>(null);
   const disabled = scans.busy || scans.reading || !scans.compatible;
   const names = [t.topLeft, t.topRight, t.bottomRight, t.bottomLeft];
@@ -125,15 +125,19 @@ function Registration({
   function move(event: PointerEvent<SVGSVGElement>) {
     const element = svg.current;
     const matrix = element?.getScreenCTM();
-    if (active.current === null || !element || !matrix) return;
+    if (active.current?.pointerId !== event.pointerId || !element || !matrix)
+      return;
     const point = element.createSVGPoint();
     point.x = event.clientX;
     point.y = event.clientY;
     const local = point.matrixTransform(matrix.inverse());
-    scans.corner(active.current, {
+    scans.corner(active.current.corner, {
       x: Math.max(0, Math.min(page.width, local.x)),
       y: Math.max(0, Math.min(page.height, local.y)),
     });
+  }
+  function finish(event: PointerEvent<SVGSVGElement>) {
+    if (active.current?.pointerId === event.pointerId) active.current = null;
   }
   return (
     <div className="scan-preview">
@@ -143,12 +147,9 @@ function Registration({
         viewBox={`0 0 ${page.width} ${page.height}`}
         aria-label={t.registrationPreview}
         onPointerMove={move}
-        onPointerUp={() => {
-          active.current = null;
-        }}
-        onPointerCancel={() => {
-          active.current = null;
-        }}
+        onPointerUp={finish}
+        onPointerCancel={finish}
+        onLostPointerCapture={finish}
       >
         {polygons.map((points) => (
           <polygon key={points} points={points} fill="none" />
@@ -169,9 +170,9 @@ function Registration({
             aria-valuenow={Math.round(p.x)}
             aria-valuetext={`${Math.round(p.x)}, ${Math.round(p.y)}`}
             onPointerDown={(e) => {
-              if (disabled) return;
+              if (disabled || active.current !== null || e.button !== 0) return;
               e.preventDefault();
-              active.current = i;
+              active.current = { pointerId: e.pointerId, corner: i };
               e.currentTarget.setPointerCapture(e.pointerId);
             }}
             onKeyDown={(e) => {

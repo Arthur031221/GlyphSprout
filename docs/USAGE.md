@@ -8,7 +8,7 @@
 4. Review each traced glyph. Adjust its threshold, speck filter, crop, size, offsets, and spacing, or draw and erase directly on the source.
 5. Type a specimen in the live preview and download a TTF or WOFF2 font.
 
-Each A4 sheet has 35 cells. A project supports at most 512 supported BMP characters and 15 template pages. Confirming the visible page ID, page assignment, and interior alignment enables **Convert scans**. Click it to start conversion in a browser worker.
+Each A4 sheet has 35 cells. A project supports at most 512 supported BMP characters and 15 template pages. Drag a page corner with one finger or the left mouse button. A second finger leaves that drag and the other corners unchanged. You can also use the corner coordinates or arrow keys for fine adjustments. Confirming the visible page ID, page assignment, and interior alignment enables **Convert scans**. Click it to start conversion in a browser worker.
 
 The font name and character text in Characters are drafts until you choose **Project ready**. They remain in the form while you move between Characters, Pages, and Workshop. A status and notice identify unapplied setup changes, and the workshop warns before the page is closed or reloaded. Backups and font downloads use the applied project values until setup is submitted. Fields you have not edited follow Undo and Redo. Any text you are still editing stays in place. A successful submission normalizes the raw input. Replacing a project resets the drafts, including when you load the same sample again. Unapplied setup changes are not saved or recovered after a page reload.
 
@@ -39,6 +39,8 @@ Changing the chosen characters or their order requires fresh printed sheets. Cha
 Download a `.glyphsprout.json` project file for a portable backup. A backup waits for pending settings to finish and includes their latest values. Projects are also saved locally in IndexedDB with a current and previous revision. If the newest revision cannot be read, the workshop can fall back to the previous one. If another tab saves first, the workshop warns about the conflict so you can download your copy or reload.
 
 On restore, the specimen uses the project's text. If both revisions are unreadable, automatic saving stops and the stored data stays intact. **Download stored data** saves a raw recovery archive, including original assets and revisions. This archive is for manual inspection or repair and cannot be opened as a project. Open a normal project backup to keep working, or use **Reset local storage** after keeping the archive. Resetting requires confirmation and removes this browser's saved revisions. Reset is disabled while the archive is being prepared. Wait for the browser to finish saving the file before resetting.
+
+The workshop warns before closing or reloading while a project save or glyph edit is pending, and when local saving has failed. Browser warnings are controlled by the browser and cannot protect work from a crash or forced close. Download a project backup if you need to keep changes before leaving.
 
 Browser storage is not a backup service and can be cleared. Keep project JSON outside the browser. Project data stays in this browser. The app does not upload it or use remote analytics.
 
