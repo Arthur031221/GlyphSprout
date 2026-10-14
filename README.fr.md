@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.13.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -45,7 +45,7 @@ Le nom de la police et le texte des caractères dans « Characters » restent de
 
 Choisissez jusqu'à 512 caractères BMP pris en charge. Chaque modèle A4 comporte 35 cases et un projet peut utiliser jusqu'à 15 pages. Les glyphes latins utilisent un espacement proportionnel par défaut. Han et kana utilisent un avancement fixe par case. L'interface propose neuf langues, des thèmes clair et sombre, et une mise en page pour les petits écrans.
 
-Les scans nécessitent le modèle imprimé, de l'encre foncée, du papier plat, une lumière uniforme et les quatre repères visibles. L'affectation et la confirmation des pages sont manuelles. GlyphSprout ne lit pas l'écriture manuscrite et ne détecte pas les cases automatiquement.
+Les scans nécessitent le modèle imprimé, de l'encre foncée, du papier plat, une lumière uniforme et les quatre repères visibles. La conversion atténue les ombres douces et la lumière faible dans chaque case, mais les reflets et les ombres marquées demandent une meilleure photo. L'affectation et la confirmation des pages sont manuelles. GlyphSprout ne lit pas l'écriture manuscrite et ne détecte pas les cases automatiquement.
 
 Les exports contiennent des contours simples sans hinting. Le lissage du contour transforme les marches de pixels des nouveaux tracés en segments diagonaux droits. Choisissez 0 pour conserver le contour exact en pixels. Le crénage se règle paire par paire, jusqu'à 500 paires, et s'exporte dans une table `kern` simple. Ils n'incluent ni ajustement des courbes, ni façonnage de l'écriture liée, ni couverture complète des langues. L'exemple Han et kana utilise des traits synthétiques originaux, signalés comme tels.
 

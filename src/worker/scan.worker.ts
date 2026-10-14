@@ -1,4 +1,5 @@
 import { base64 } from "../core/bytes";
+import { flattenLighting } from "../core/flatten";
 import { homography, sampleCell } from "../core/geometry";
 import { traceScannedCell } from "../core/scan";
 import { cellRect, TEMPLATE } from "../core/template";
@@ -30,12 +31,15 @@ self.onmessage = async (event: MessageEvent) => {
       for (let slot = 0; slot < 35; slot++) {
         const character = characters[page.pageIndex * 35 + slot];
         if (!character) break;
-        const pixels = sampleCell(
-          rgba,
-          canvas.width,
-          canvas.height,
-          map,
-          cellRect(slot),
+        const pixels = flattenLighting(
+          sampleCell(
+            rgba,
+            canvas.width,
+            canvas.height,
+            map,
+            cellRect(slot),
+            size,
+          ),
           size,
         );
         const cell = new OffscreenCanvas(size, size);

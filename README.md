@@ -13,7 +13,7 @@ The bundled Paper Bloom sample exports a 3,360 byte TTF checked with Fontconfig 
 ![Real workshop: erasing and correcting a scanned glyph, the live specimen and TTF download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.13.0
 ```
 
 You'll need Node.js 22.12 or newer and Git. When the command prints its ready message, open `http://127.0.0.1:4173`.
@@ -45,7 +45,7 @@ Font name and character text in Characters stay as drafts while you move between
 
 Choose up to 512 supported BMP characters. Each A4 template has 35 cells, and a project can use up to 15 pages. Latin glyphs use proportional spacing by default. Han and kana use a fixed cell advance. The interface comes in nine languages, with light and dark themes and a narrow-screen layout.
 
-Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
+Scans need the printed template, dark ink, flat paper, even lighting, and all four registration marks. Conversion evens out soft shadows and dim light across each cell, but glare and deep shadows still need a better photo. You assign and confirm pages by hand. GlyphSprout doesn't read handwriting or detect cells automatically.
 
 Exports contain simple unhinted outlines. Outline smoothing rounds the pixel steps of new traces into straight diagonal segments. Choose 0 to keep the exact pixel outline. Kerning is set one pair at a time, up to 500 pairs, and exported as a plain `kern` table. There's no curve fitting, connected-script shaping, or full language coverage. The Han and kana sample uses original synthetic strokes and is labeled that way.
 

@@ -13,7 +13,7 @@ Das enthaltene Paper-Bloom-Beispiel exportiert eine 3.360 Byte große TTF-Datei,
 ![Echte Werkstatt: ein gescanntes Zeichen radieren und korrigieren, die Vorschau und TTF-Download](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.13.0
 ```
 
 Du brauchst Node.js 22.12 oder neuer und Git. Öffne `http://127.0.0.1:4173`, sobald der Bereitschaftshinweis erscheint.
@@ -45,7 +45,7 @@ Schriftname und Zeichentext im Bereich Characters bleiben beim Wechsel zwischen 
 
 Wähle bis zu 512 unterstützte BMP-Zeichen. Jede A4-Vorlage hat 35 Felder und ein Projekt kann bis zu 15 Seiten umfassen. Lateinische Glyphen verwenden standardmäßig proportionale Abstände. Han-Zeichen und Kana haben einen festen Zellenfortschritt. Die Oberfläche bietet neun Sprachen, helle und dunkle Themes sowie ein Layout für schmale Bildschirme.
 
-Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßiges Licht und alle vier sichtbaren Passermarken. Seitenzuordnung und Bestätigung erfolgen manuell. GlyphSprout liest keine Handschrift und erkennt keine Felder automatisch.
+Scans benötigen die gedruckte Vorlage, dunkle Tinte, flaches Papier, gleichmäßiges Licht und alle vier sichtbaren Passermarken. Die Umwandlung gleicht weiche Schatten und schwaches Licht in jedem Feld aus, bei Blendung und tiefen Schatten brauchen Sie aber ein besseres Foto. Seitenzuordnung und Bestätigung erfolgen manuell. GlyphSprout liest keine Handschrift und erkennt keine Felder automatisch.
 
 Die Exporte enthalten einfache Konturen ohne Hinting. Die Konturglättung rundet die Pixelstufen neuer Nachzeichnungen zu geraden Diagonalen. Mit 0 bleibt die exakte Pixelkontur erhalten. Die Unterschneidung wird Paar für Paar festgelegt, bis zu 500 Paare, und als einfache `kern`-Tabelle exportiert. Es gibt keine Kurvenanpassung, keine Formung verbundener Schrift und keine vollständige Sprachabdeckung. Das Han- und Kana-Beispiel verwendet eigens erstellte synthetische Striche und ist entsprechend gekennzeichnet.
 

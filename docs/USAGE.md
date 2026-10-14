@@ -55,6 +55,8 @@ Changing project history, the character list, or review state clears canceled va
 
 Choose **Stop conversion** to interrupt processing while keeping uploaded scans, corner positions, page assignments and confirmations for a retry. The current project stays intact. **Discard staged scans** removes the queue. Completed conversion clears the queue after applying the result. Staged scans are still excluded from recovery and project downloads.
 
+Conversion evens out soft shadows, vignetting and a uniformly dim photo inside each cell before it traces the ink, so one threshold fits the whole cell. The stored source image is the evened version. Strong glare, deep shadows that hide the ink and photos taken at a steep angle still need a better picture.
+
 Changing the chosen characters or their order requires fresh printed sheets. Changes limited to whitespace, duplicate characters, or Unicode normalization preserve the template IDs and existing scans when the ordered characters remain the same. Renaming the font also preserves the IDs and scan assignments.
 
 ## Save and recover

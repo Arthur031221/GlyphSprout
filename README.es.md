@@ -13,7 +13,7 @@ La muestra incluida de Paper Bloom exporta un TTF de 3.360 bytes, comprobado con
 ![Taller real: borrar y corregir un glifo escaneado, vista previa y descarga TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.12.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.13.0
 ```
 
 Necesitas Node.js 22.12 o una versión posterior y Git. Abre `http://127.0.0.1:4173` cuando aparezca el mensaje de que está listo.
@@ -45,7 +45,7 @@ El nombre de la fuente y el texto de caracteres en «Characters» se conservan c
 
 Elige hasta 512 caracteres BMP compatibles. Cada plantilla A4 tiene 35 celdas y cada proyecto admite hasta 15 páginas. Los glifos latinos usan espaciado proporcional de forma predeterminada. Han y kana usan un avance fijo de celda. La interfaz ofrece nueve idiomas, temas claros y oscuros, y una disposición para pantallas estrechas.
 
-Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, luz uniforme y las cuatro marcas de registro visibles. La asignación y confirmación de páginas son manuales. GlyphSprout no lee la escritura ni detecta las celdas automáticamente.
+Los escaneos necesitan la plantilla impresa, tinta oscura, papel plano, luz uniforme y las cuatro marcas de registro visibles. La conversión compensa las sombras suaves y la luz tenue en cada celda, pero los reflejos y las sombras marcadas requieren una foto mejor. La asignación y confirmación de páginas son manuales. GlyphSprout no lee la escritura ni detecta las celdas automáticamente.
 
 Las exportaciones contienen contornos sencillos sin hinting. El suavizado del contorno convierte los escalones de píxeles de los trazados nuevos en segmentos diagonales rectos. Elige 0 para conservar el contorno exacto de píxeles. El interletraje se fija par a par, hasta 500 pares, y se exporta como una tabla `kern` sencilla. No incluyen ajuste de curvas, composición de escritura conectada ni cobertura completa de idiomas. La muestra de han y kana usa trazos sintéticos originales y está identificada como tal.
 

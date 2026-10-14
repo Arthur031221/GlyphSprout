@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.13.0
+
+Converting a scan now evens out the lighting in each cell before it traces the ink. Before this, one fixed ink threshold was applied to the photo as it came, so a soft shadow, a darker corner or a dim phone photo could turn paper into solid ink and ruin the glyph. The paper level is now estimated across each cell and divided out, so evenly lit pages convert as before and shaded ones trace the strokes you drew.
+
+The stored source image of a converted glyph is the evened version, so the threshold slider and Edit source behave the same as on a clean scan. Strong glare and deep shadows that hide the ink still need a better photo. Tests cover shaded, dim and solid-ink cells and a full conversion of a dim page in the browser.
+
 ## 1.12.0
 
 The Workshop has a new button, **Use this threshold, speck filter and smoothing for all glyphs**. Tune the ink threshold, minimum speck area and outline smoothing on one glyph, press it, and every other glyph is traced again from its source pixels with the same values. Before this, a page scanned under dim light meant editing the same setting glyph by glyph.
