@@ -22,8 +22,10 @@ import {
 import {
   addCharacterSet,
   analyzeText,
+  appendCharacters,
   CHARACTER_SETS,
   type CharacterSetId,
+  charactersToAdd,
   isCjk,
   isSupported,
   missingFromSet,
@@ -272,6 +274,32 @@ describe("text, templates and source projects", () => {
       ],
     });
     expect(desc.yMin).toBe(-170);
+  });
+});
+
+describe("characters from typed text", () => {
+  it("lists only supported characters the project lacks, once each", () => {
+    expect(charactersToAdd("hello JOB, hello!", ["H", "E", "L", "O"])).toEqual([
+      "h",
+      "e",
+      "l",
+      "o",
+      "J",
+      "B",
+      ",",
+      "!",
+    ]);
+    expect(charactersToAdd("a \u{1F600}\n a", ["a"])).toEqual([]);
+    expect(charactersToAdd("", ["a"])).toEqual([]);
+  });
+
+  it("appends after the existing text so current cells keep their order", () => {
+    const before = newProject("T", "Hello");
+    const add = charactersToAdd("Help", before.characters);
+    const after = updateText(before, appendCharacters(before.text, add));
+    expect(after.characters).toEqual([...before.characters, "p"]);
+    expect(appendCharacters("", ["a"])).toBe("a");
+    expect(appendCharacters("Hi ", [])).toBe("Hi ");
   });
 });
 

@@ -169,6 +169,8 @@
   "includedGlyphs": "포함된 글리프",
   "scanBusyWarning": "프로젝트를 편집하기 전에 스캔이 끝날 때까지 기다리거나 취소하세요.",
   "unsupportedPreview": "이 프로젝트에 없음",
+  "specimenMissingChars": "프로젝트에 아직 없는 글자",
+  "addSpecimenCharacters": "이 글자 추가",
   "missingPreview": "아직 잉크 없음",
   "reviewCount": "검토한 글리프",
   "projectBackup": "프로젝트 백업",

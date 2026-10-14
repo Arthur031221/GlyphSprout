@@ -169,6 +169,8 @@
   "includedGlyphs": "納入的字形",
   "scanBusyWarning": "編輯專案前，請等待掃描完成或取消掃描。",
   "unsupportedPreview": "不在此專案中",
+  "specimenMissingChars": "專案中還沒有的字",
+  "addSpecimenCharacters": "加入這些字",
   "missingPreview": "尚無墨跡",
   "reviewCount": "已檢視字形",
   "projectBackup": "專案備份",

@@ -17,6 +17,7 @@ import {
 } from "../core/font";
 import { newProject, parseProject, updateText } from "../core/project";
 import { createSyntheticProject } from "../core/synthetic";
+import { appendCharacters, charactersToAdd } from "../core/text";
 import type { Project } from "../core/types";
 import {
   chooseProject,
@@ -302,7 +303,7 @@ export function App() {
     }
   }
 
-  function setup(name: string, text: string) {
+  function setup(name: string, text: string, keepSpecimen = false) {
     try {
       const next = project
         ? {
@@ -319,7 +320,7 @@ export function App() {
         editor.cancel();
         scans.discard();
       }
-      if (next.text !== project?.text) setSpecimen(next.text);
+      if (!keepSpecimen && next.text !== project?.text) setSpecimen(next.text);
       setStage("Pages");
       setNotice({ key: "projectReady" });
       return true;
@@ -399,6 +400,8 @@ export function App() {
       return { character, key: `${character}-${occurrence}` };
     },
   );
+
+  const addable = project ? charactersToAdd(specimen, project.characters) : [];
 
   return (
     <div className="app-shell">
@@ -541,6 +544,26 @@ export function App() {
                 onChange={(e) => setSpecimen(e.target.value)}
               />
             </label>
+            {project && addable.length > 0 && (
+              <div className="specimen-missing">
+                <span>{t.specimenMissingChars}</span>
+                <strong>{addable.join(" ")}</strong>
+                <button
+                  type="button"
+                  disabled={setupDirty}
+                  title={setupDirty ? t.setupUnsaved : undefined}
+                  onClick={() =>
+                    setup(
+                      project.name,
+                      appendCharacters(project.text, addable),
+                      true,
+                    )
+                  }
+                >
+                  {t.addSpecimenCharacters}
+                </button>
+              </div>
+            )}
             <label className="zoom-control">
               {t.previewZoom}
               <input

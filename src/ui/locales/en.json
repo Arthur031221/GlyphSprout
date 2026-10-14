@@ -169,6 +169,8 @@
   "includedGlyphs": "Included glyphs",
   "scanBusyWarning": "Wait for the scan or cancel it before editing the project.",
   "unsupportedPreview": "Outside this project",
+  "specimenMissingChars": "Not in the project yet",
+  "addSpecimenCharacters": "Add these characters",
   "missingPreview": "No ink yet",
   "reviewCount": "Reviewed glyphs",
   "projectBackup": "Project backup",

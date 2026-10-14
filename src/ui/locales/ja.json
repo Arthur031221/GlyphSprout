@@ -169,6 +169,8 @@
   "includedGlyphs": "含まれる字形",
   "scanBusyWarning": "編集する前にスキャンの完了を待つか、キャンセルしてください。",
   "unsupportedPreview": "このプロジェクトにはありません",
+  "specimenMissingChars": "プロジェクトにまだない文字",
+  "addSpecimenCharacters": "これらの文字を追加",
   "missingPreview": "まだインクがありません",
   "reviewCount": "確認済みの字形",
   "projectBackup": "プロジェクトのバックアップ",

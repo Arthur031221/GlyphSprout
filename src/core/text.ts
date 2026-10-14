@@ -87,3 +87,18 @@ export function addCharacterSet(text: string, set: CharacterSetId): string {
   const base = text.trimEnd();
   return `${base}${base ? " " : ""}${missing.join("")}`;
 }
+
+/** Supported characters in typed text that the project doesn't have yet, in order of first use. */
+export function charactersToAdd(
+  typed: string,
+  existing: readonly string[],
+): string[] {
+  const have = new Set(existing);
+  return analyzeText(typed).characters.filter((ch) => !have.has(ch));
+}
+
+export function appendCharacters(text: string, add: readonly string[]): string {
+  if (!add.length) return text;
+  const base = text.trimEnd();
+  return `${base}${base ? " " : ""}${add.join("")}`;
+}

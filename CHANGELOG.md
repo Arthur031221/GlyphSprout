@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.21.0
+
+When the text typed into the live preview contains characters the project doesn't have, the preview now lists them under the text box and offers **Add these characters**. Before this, those letters showed in red and you had to go to Characters, work out what was missing and type it in. One click adds them after the existing characters, so the glyphs you already made keep their order and place, then opens Pages so you can print cells for the new characters. The same confirmation as in Characters appears first, because changing the characters clears scan page assignments. The text in the preview box is left as you typed it, and the button stays disabled while the Characters stage has an unapplied draft.
+
+Unit tests cover the list of missing characters and the order after adding. Browser tests cover the offer, the confirmation, declining it, and the translated labels. The two new labels are translated in all nine interface languages, and the README step for the live preview mentions the button in every language.
+
 ## 1.20.0
 
 Scans can now be added in two more ways. On the Pages stage you can drop JPEG or PNG images onto the scan section, which is outlined while a file is over it, and dropped files that are not JPEG or PNG are refused with a message. On phones and tablets a **Take a photo** button opens the camera directly, so a printed sheet can be photographed without leaving the page. Before this, the only way in was the file chooser, which on a phone buries the camera behind extra taps. Mouse screens show a short drop hint in place of the camera button.

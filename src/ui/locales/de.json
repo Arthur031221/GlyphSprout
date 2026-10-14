@@ -169,6 +169,8 @@
   "includedGlyphs": "Enthaltene Glyphen",
   "scanBusyWarning": "Warte vor der Bearbeitung, bis der Scan fertig ist, oder brich ihn ab.",
   "unsupportedPreview": "Nicht in diesem Projekt",
+  "specimenMissingChars": "Noch nicht im Projekt",
+  "addSpecimenCharacters": "Diese Zeichen hinzufügen",
   "missingPreview": "Noch keine Tinte",
   "reviewCount": "Geprüfte Glyphen",
   "projectBackup": "Projektsicherung",

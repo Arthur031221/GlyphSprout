@@ -169,6 +169,8 @@
   "includedGlyphs": "已纳入字形",
   "scanBusyWarning": "编辑项目前，请等待扫描完成或取消扫描。",
   "unsupportedPreview": "不在此项目中",
+  "specimenMissingChars": "项目中还没有的字",
+  "addSpecimenCharacters": "添加这些字",
   "missingPreview": "尚无墨迹",
   "reviewCount": "已检查字形",
   "projectBackup": "项目备份",

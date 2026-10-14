@@ -169,6 +169,8 @@
   "includedGlyphs": "Glyphes inclus",
   "scanBusyWarning": "Attendez la fin du scan ou annulez-le avant de modifier le projet.",
   "unsupportedPreview": "Hors de ce projet",
+  "specimenMissingChars": "Pas encore dans le projet",
+  "addSpecimenCharacters": "Ajouter ces caractères",
   "missingPreview": "Pas encore d'encre",
   "reviewCount": "Glyphes vérifiés",
   "projectBackup": "Sauvegarde du projet",

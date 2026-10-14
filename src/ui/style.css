@@ -305,6 +305,25 @@ main {
 .specimen-download {
   align-self: flex-start;
 }
+.specimen-missing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  font-size: 11px;
+  color: var(--muted);
+}
+.specimen-missing strong {
+  color: var(--ink);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  overflow-wrap: anywhere;
+}
+.specimen-missing button {
+  min-height: 32px;
+  padding: 0 10px;
+  font-size: 12px;
+}
 .hero-font-gate {
   font-size: 10px;
   color: var(--muted);

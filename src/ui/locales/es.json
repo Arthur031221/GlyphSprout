@@ -169,6 +169,8 @@
   "includedGlyphs": "Glifos incluidos",
   "scanBusyWarning": "Espera a que termine el escaneo o cancélalo antes de editar el proyecto.",
   "unsupportedPreview": "Fuera de este proyecto",
+  "specimenMissingChars": "Aún no están en el proyecto",
+  "addSpecimenCharacters": "Añadir estos caracteres",
   "missingPreview": "Aún sin tinta",
   "reviewCount": "Glifos revisados",
   "projectBackup": "Copia de seguridad del proyecto",
