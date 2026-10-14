@@ -92,6 +92,16 @@ function arrayBuffer(
   return Uint8Array.from(output).buffer;
 }
 
+function identitySuffix(projectId: string, name: string): string {
+  let hash = 0xcbf29ce484222325n;
+  for (const byte of new TextEncoder().encode(
+    JSON.stringify([projectId, name]),
+  )) {
+    hash = BigInt.asUintN(64, (hash ^ BigInt(byte)) * 0x100000001b3n);
+  }
+  return hash.toString(16).padStart(16, "0");
+}
+
 export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
   const missing = missingCharacters(project);
   if (missing.length && !allowPartial) throw new Error("missingGlyphs");
@@ -136,17 +146,18 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     sCapHeight: Math.round(UNITS_PER_EM * 0.7),
   });
   const name = project.name.trim().slice(0, 64) || "My handwriting";
-  const postScriptName =
+  const asciiName =
     name
       .normalize("NFKD")
       .replace(/[^A-Za-z0-9]/g, "")
-      .slice(0, 50) || "GlyphSproutFont";
+      .slice(0, 40) || "GlyphSproutFont";
+  const postScriptName = `${asciiName}-${identitySuffix(project.id, name)}`;
   Object.assign(data.name, {
     fontFamily: name,
     fontSubFamily: "Regular",
     fullName: name,
     postScriptName,
-    uniqueSubFamily: `${project.id}:${postScriptName}`,
+    uniqueSubFamily: `${project.id}:${name}:Regular`,
     version: "Version 1.000",
   });
   font.set(data);
