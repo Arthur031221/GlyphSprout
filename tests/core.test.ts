@@ -14,7 +14,14 @@ import {
   validateSettings,
 } from "../src/core/project";
 import { cellRect, pageCount, templateSvg } from "../src/core/template";
-import { analyzeText, isSupported } from "../src/core/text";
+import {
+  addCharacterSet,
+  analyzeText,
+  CHARACTER_SETS,
+  type CharacterSetId,
+  isSupported,
+  missingFromSet,
+} from "../src/core/text";
 import { grayscale, signedArea, trace, traceMask } from "../src/core/trace";
 import { defaultSettings } from "../src/core/types";
 
@@ -259,5 +266,37 @@ describe("text, templates and source projects", () => {
       ],
     });
     expect(desc.yMin).toBe(-170);
+  });
+});
+
+describe("character set presets", () => {
+  it("keeps every preset within the supported range", () => {
+    for (const set of Object.values(CHARACTER_SETS)) {
+      expect(set.length).toBeGreaterThan(0);
+      expect(set.every(isSupported)).toBe(true);
+    }
+    expect(CHARACTER_SETS.uppercase).toHaveLength(26);
+    expect(CHARACTER_SETS.hiragana).toHaveLength(83);
+    expect(CHARACTER_SETS.katakana).toHaveLength(86);
+  });
+
+  it("appends only the characters the text is missing", () => {
+    const text = addCharacterSet("Hello!", "digits");
+    expect(text).toBe("Hello! 0123456789");
+    expect(addCharacterSet(text, "digits")).toBe(text);
+    expect(addCharacterSet("", "digits")).toBe("0123456789");
+    expect(addCharacterSet("ABC", "uppercase")).toBe(
+      `ABC ${CHARACTER_SETS.uppercase.slice(3).join("")}`,
+    );
+    expect(missingFromSet(text, "digits")).toEqual([]);
+  });
+
+  it("stays inside the glyph limit when every preset is added", () => {
+    let text = "";
+    for (const id of Object.keys(CHARACTER_SETS) as CharacterSetId[])
+      text = addCharacterSet(text, id);
+    const analysis = analyzeText(text);
+    expect(analysis.unsupported).toEqual([]);
+    expect(analysis.overflow).toBe(false);
   });
 });

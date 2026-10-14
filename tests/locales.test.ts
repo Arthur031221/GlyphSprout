@@ -38,6 +38,8 @@ describe("locale resources", () => {
       "SVG",
       "NIST",
       "MiB",
+      "Hiragana",
+      "Katakana",
     ]);
     for (const [name, locale] of locales) {
       for (const [key, english] of Object.entries(en)) {

@@ -1,7 +1,22 @@
 import { useEffect, useState } from "react";
-import { analyzeText } from "../core/text";
+import {
+  addCharacterSet,
+  analyzeText,
+  CHARACTER_SETS,
+  type CharacterSetId,
+  missingFromSet,
+} from "../core/text";
 import type { Project } from "../core/types";
 import type { Dictionary } from "./i18n";
+
+const PRESET_LABELS = {
+  uppercase: "presetUppercase",
+  lowercase: "presetLowercase",
+  digits: "presetDigits",
+  punctuation: "presetPunctuation",
+  hiragana: "presetHiragana",
+  katakana: "presetKatakana",
+} as const;
 
 export function Setup({
   project,
@@ -73,6 +88,24 @@ export function Setup({
             }}
           />
         </label>
+        <fieldset className="presets">
+          <legend>{t.presetsLabel}</legend>
+          {(Object.keys(CHARACTER_SETS) as CharacterSetId[]).map((id) => (
+            <button
+              key={id}
+              type="button"
+              className="chip"
+              disabled={!missingFromSet(text, id).length}
+              onClick={() => {
+                const next = addCharacterSet(text, id);
+                setText(next);
+                setTextDirty(next !== committed.text);
+              }}
+            >
+              {t[PRESET_LABELS[id]]}
+            </button>
+          ))}
+        </fieldset>
         <div className="analysis" aria-live="polite">
           <span>
             {t.distinct}: {analysis.characters.length} / 512

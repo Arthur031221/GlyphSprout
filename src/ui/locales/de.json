@@ -220,5 +220,12 @@
   "spaceInvalid": "Der Wortabstand muss eine ganze Zahl von 100 bis 1000 sein.",
   "bearingApplied": "Seitenabstand kopiert. Geänderte Buchstaben:",
   "downloadSpecimen": "Beispieltext als Bild herunterladen",
-  "specimenEmpty": "Für kein Zeichen des Beispieltexts gibt es schon einen Glyphen."
+  "specimenEmpty": "Für kein Zeichen des Beispieltexts gibt es schon einen Glyphen.",
+  "presetsLabel": "Häufige Zeichen hinzufügen",
+  "presetUppercase": "Großbuchstaben",
+  "presetLowercase": "Kleinbuchstaben",
+  "presetDigits": "Ziffern",
+  "presetPunctuation": "Satzzeichen",
+  "presetHiragana": "Hiragana",
+  "presetKatakana": "Katakana"
 }

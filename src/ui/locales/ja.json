@@ -220,5 +220,12 @@
   "spaceInvalid": "単語間のスペースは 100 から 1000 までの整数で指定してください。",
   "bearingApplied": "サイドベアリングをコピーしました。変更した文字数：",
   "downloadSpecimen": "プレビュー画像をダウンロード",
-  "specimenEmpty": "プレビュー文字にはまだ字形のある文字がありません。"
+  "specimenEmpty": "プレビュー文字にはまだ字形のある文字がありません。",
+  "presetsLabel": "よく使う文字を追加",
+  "presetUppercase": "大文字",
+  "presetLowercase": "小文字",
+  "presetDigits": "数字",
+  "presetPunctuation": "句読点と記号",
+  "presetHiragana": "ひらがな",
+  "presetKatakana": "カタカナ"
 }

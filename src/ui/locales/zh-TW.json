@@ -220,5 +220,12 @@
   "spaceInvalid": "字間空白必須是 100 到 1000 之間的整數。",
   "bearingApplied": "已複製側邊距。變更的字母數：",
   "downloadSpecimen": "下載預覽圖片",
-  "specimenEmpty": "預覽文字中還沒有任何字元具備字形。"
+  "specimenEmpty": "預覽文字中還沒有任何字元具備字形。",
+  "presetsLabel": "加入常用字元",
+  "presetUppercase": "大寫字母",
+  "presetLowercase": "小寫字母",
+  "presetDigits": "數字",
+  "presetPunctuation": "標點符號",
+  "presetHiragana": "平假名",
+  "presetKatakana": "片假名"
 }

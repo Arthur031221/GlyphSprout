@@ -44,3 +44,30 @@ export function analyzeText(input: string): TextAnalysis {
 export function codepoint(character: string): string {
   return `U+${(character.codePointAt(0) ?? 0).toString(16).toUpperCase().padStart(4, "0")}`;
 }
+
+const range = (from: number, to: number) =>
+  Array.from({ length: to - from + 1 }, (_, i) =>
+    String.fromCodePoint(from + i),
+  );
+
+export const CHARACTER_SETS = {
+  uppercase: range(0x41, 0x5a),
+  lowercase: range(0x61, 0x7a),
+  digits: range(0x30, 0x39),
+  punctuation: [..."!?.,:;'\"()-&@/%"],
+  hiragana: range(0x3041, 0x3093),
+  katakana: range(0x30a1, 0x30f6),
+} as const;
+export type CharacterSetId = keyof typeof CHARACTER_SETS;
+
+export function missingFromSet(text: string, set: CharacterSetId): string[] {
+  const present = new Set(text.normalize("NFC"));
+  return CHARACTER_SETS[set].filter((ch) => !present.has(ch));
+}
+
+export function addCharacterSet(text: string, set: CharacterSetId): string {
+  const missing = missingFromSet(text, set);
+  if (!missing.length) return text;
+  const base = text.trimEnd();
+  return `${base}${base ? " " : ""}${missing.join("")}`;
+}
