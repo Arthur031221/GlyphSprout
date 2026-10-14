@@ -12,6 +12,7 @@
   --muted: #5d6b77;
   --line: #d9e1e5;
   --accent: #286c56;
+  --accent-ink: #fff;
   --accent-soft: #e6f1ec;
   --danger: #a3453a;
   --shadow: 0 8px 26px rgba(23, 42, 54, 0.045);
@@ -25,6 +26,7 @@
   --muted: #a8b8c3;
   --line: #394b5a;
   --accent: #9bd4bd;
+  --accent-ink: #14231e;
   --accent-soft: #29453d;
   --danger: #f19a8e;
   --shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
@@ -81,7 +83,8 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
-a:focus-visible {
+a:focus-visible,
+.drawing-area:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--accent), transparent 42%);
   outline-offset: 2px;
 }
@@ -223,7 +226,7 @@ main {
 .sample-button,
 .primary {
   background: var(--accent);
-  color: #fff;
+  color: var(--accent-ink);
   border: 1px solid var(--accent);
   border-radius: 7px;
   padding: 9px 13px;
@@ -236,9 +239,6 @@ main {
   background: var(--paper);
   color: var(--ink);
   border-color: var(--line);
-}
-:root[data-theme="dark"] .primary {
-  color: #14231e;
 }
 .specimen-hero {
   display: grid;
@@ -483,7 +483,7 @@ main {
 }
 .page-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(172px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
   gap: 12px;
   margin: 17px 0;
 }
@@ -494,7 +494,7 @@ main {
   border-radius: 8px;
   padding: 10px;
   display: grid;
-  grid-template-columns: 44px 1fr auto auto;
+  grid-template-columns: 44px minmax(0, 1fr) auto auto;
   align-items: center;
   gap: 8px;
 }
@@ -831,6 +831,9 @@ fieldset {
 .draw-tools {
   display: flex;
   gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
 }
 .draw-tools button {
   border: 1px solid var(--line);
@@ -1038,12 +1041,16 @@ fieldset {
     grid-template-columns: repeat(7, minmax(0, 1fr));
   }
   .page-cards {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
   .page-card {
-    grid-template-columns: 35px 1fr auto auto;
+    grid-template-columns: 35px minmax(0, 1fr);
     padding: 7px;
     gap: 4px;
+  }
+  .page-card button {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
   }
   .page-card img {
     width: 35px;
@@ -1111,6 +1118,7 @@ fieldset {
     --muted: #a8b8c3;
     --line: #394b5a;
     --accent: #9bd4bd;
+    --accent-ink: #14231e;
     --accent-soft: #29453d;
     --danger: #f19a8e;
     --shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
@@ -1213,6 +1221,7 @@ progress {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: auto;
 }
 .draw-baseline {
   position: absolute;

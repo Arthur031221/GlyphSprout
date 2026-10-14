@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0
+
+- Edit existing scan or drawing pixels with the pen, eraser and drawing undo while preserving glyph settings and template assignments.
+- Ignore secondary touches and restore keyboard focus when opening and closing the drawing editor.
+- Preserve newer glyph work when source edits conflict with a pending crop or changed glyph.
+- Wait for pending glyph edits before downloading a project backup.
+- Keep template IDs and scan assignments when whitespace, duplicate characters or Unicode normalization leave the ordered character list unchanged.
+- Restore the project text in the specimen after reopening saved work.
+- Keep template actions visible on narrow screens in all nine interface languages.
+- Use readable primary button colors in the System dark theme.
+- Refresh the workshop recording and document source editing and backup behavior.
+
 ## 1.0.1
 
 - Flush pending glyph edits before export and build the font from the latest project snapshot.

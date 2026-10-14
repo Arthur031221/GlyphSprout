@@ -54,7 +54,7 @@ The second command also rasterizes the committed SVG fixtures using Chromium. In
 
 ## Media
 
-The GIF records the real production workshop, a glyph scale change and a TTF download. With Chromium and ffmpeg installed, regenerate it using:
+The GIF records the real production workshop, an edit to a scanned source using the eraser and pen, the updated specimen, and a TTF download. With Chromium and ffmpeg installed, regenerate it using:
 
 ```sh
 npm run build

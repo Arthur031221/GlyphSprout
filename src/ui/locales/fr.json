@@ -184,5 +184,11 @@
   "resetStorageConfirm": "Supprimer les versions et images enregistrées dans ce navigateur ? Téléchargez les données avant de les supprimer si vous souhaitez les conserver.",
   "secureContextRequired": "Ouvrez GlyphSprout via HTTPS ou une adresse locale comme localhost. Les adresses réseau en HTTP ne permettent pas de générer des polices ni de sauvegarder des projets.",
   "openLiveWorkshop": "Ouvrir l'atelier en ligne",
-  "applyingEdits": "Application des modifications du glyphe..."
+  "applyingEdits": "Application des modifications du glyphe...",
+  "editSource": "Modifier la source",
+  "sourceEditHelp": "Retouchez l'image source. Les traits existants gardent leur taille initiale en pixels.",
+  "sourceLoading": "Chargement de l'image source...",
+  "sourceChanged": "Ce glyphe a changé pendant que l'éditeur de source était ouvert. Rouvrez-le avant d'appliquer les modifications.",
+  "applySourceEdits": "Appliquer les retouches",
+  "cancelSourceEdit": "Annuler la retouche de la source"
 }

@@ -2,7 +2,7 @@
 
 # GlyphSprout
 
-Transformez des modèles manuscrits en sous-ensembles de polices modifiables pour les caractères latins, han et kana.
+Créez une petite police pour les mots et les noms utilisés dans votre projet. Imprimez un modèle, écrivez chaque caractère, vérifiez les contours numérisés et exportez une police avec laquelle vous pourrez saisir du texte.
 
 **Six lettres manuscrites. Une police de 3.3 kB.**
 
@@ -11,40 +11,35 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 284 octets, vérifié avec Font
 [Ouvrir l'atelier en ligne](https://Arthur031221.github.io/GlyphSprout/) | [Guide d'utilisation](docs/USAGE.md) | [![Licence MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.1.0
 ```
 
-Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque la commande affiche le message indiquant que l'application est prête.
+Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
 
-| Avant | Après |
+| Point de départ | Résultat |
 | --- | --- |
-| Six découpes de lettres manuscrites | Une police utilisable pour écrire, avec des contours et un espacement modifiables |
+| Votre écriture sur une feuille imprimée | Une petite police avec pixels source, contours et espacement modifiables |
 
-![Atelier réel : aperçu manuscrit, réglage de l'échelle du glyphe et téléchargement TTF](assets/demo.gif)
-
-J'ai créé cet outil pour les caractères réellement utilisés par un petit projet.
+![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ## Créez votre première police
 
-Lors de la première visite, Paper Bloom s'ouvre avec six lettres manuscrites réelles. Vous pouvez modifier une lettre ou télécharger la police immédiatement. Pour créer la vôtre :
+1. Créez un projet et choisissez les caractères nécessaires, par exemple `Hello!`.
+2. Imprimez le modèle A4 à taille réelle et écrivez un caractère dans chaque case.
+3. Ajoutez un scan éclairé uniformément, confirmez son identifiant de page et alignez les quatre coins.
+4. Cliquez sur **Convertir les scans** et attendez la fin de la conversion.
+5. Vérifiez chaque glyphe. Réglez la source, le seuil, le recadrage, la taille, les décalages et l'espacement.
+6. Saisissez votre texte dans l'aperçu et téléchargez le TTF ou le WOFF2.
 
-```text
-1. Créez un projet nommé Weekend et choisissez le texte Hello!.
-2. Imprimez le modèle A4 à sa taille réelle et écrivez un caractère par case.
-3. Ajoutez un scan PNG ou JPEG à plat et attribuez-lui le numéro de page imprimé.
-4. Réglez les quatre coins, confirmez l'alignement, convertissez et examinez les glyphes.
-5. Saisissez Hello! dans l'échantillon et téléchargez le TTF ou le WOFF2.
-```
+Modifier la source conserve les pixels actuels et permet d'effacer, de dessiner et d'annuler des traits locaux. Les réglages et l'affectation de page sont conservés. Toute source modifiée doit être vérifiée. Dessiner un glyphe commence avec une image vierge, remplace le glyphe et réinitialise ses réglages. Les dessins vides sont refusés. Une modification de source sans changement ne modifie pas l'historique du projet.
 
-L'atelier propose une vue de la source et des contours, des réglages de seuil et de filtrage des poussières, ainsi que le recadrage, le multiplicateur d'échelle, les décalages et l'espacement. Les décalages et l'espacement utilisent les unités de la police. Vous pouvez aussi dessiner ou effacer un glyphe. L'échantillon en direct utilise la police générée. L'annulation du dessin et celle du projet sont indépendantes.
+## Un petit sous-ensemble avec des limites claires
 
-## Un petit sous-ensemble, avec des limites claires
+Choisissez jusqu'à 512 caractères BMP pris en charge. Chaque modèle A4 comporte 35 cases et un projet peut utiliser jusqu'à 15 pages. Les glyphes latins utilisent un espacement proportionnel par défaut. Han et kana utilisent un avancement fixe par case. L'interface propose neuf langues, des thèmes clair et sombre, et une mise en page pour les petits écrans.
 
-Choisissez jusqu'à 512 caractères BMP pris en charge, avec 35 cases par feuille A4 et un maximum de 15 feuilles. Par défaut, les glyphes latins ont un espacement proportionnel. Han et kana utilisent une avance de cellule fixe. L'interface propose neuf langues, des thèmes clair et sombre, ainsi qu'une mise en page adaptée aux écrans étroits.
+Les scans nécessitent le modèle imprimé, de l'encre foncée, du papier plat, une lumière uniforme et les quatre repères visibles. L'affectation et la confirmation des pages sont manuelles. GlyphSprout ne lit pas l'écriture manuscrite et ne détecte pas les cases automatiquement.
 
-Les scans nécessitent le modèle imprimé, de l'encre foncée, du papier plat, un éclairage uniforme et les quatre repères de position visibles. L'attribution et la confirmation des pages sont manuelles. L'outil ne lit pas le texte manuscrit et ne repère pas automatiquement les cases.
-
-Les exports contiennent des contours simples sans hinting. Ils ne comprennent ni crénage, ni lissage des courbes, ni façonnage des écritures liées, ni couverture complète d'une langue. L'exemple han et kana utilise des traits synthétiques originaux, indiqués comme tels.
+Les exports contiennent des contours simples sans hinting. Ils n'incluent ni crénage, ni simplification des courbes, ni façonnage de l'écriture liée, ni couverture complète des langues. L'exemple Han et kana utilise des traits synthétiques originaux, signalés comme tels.
 
 ## Conservez votre travail
 

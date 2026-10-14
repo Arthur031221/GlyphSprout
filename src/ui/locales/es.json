@@ -184,5 +184,11 @@
   "resetStorageConfirm": "¿Eliminar las versiones e imágenes guardadas en este navegador? Descarga primero los datos si quieres conservarlos.",
   "secureContextRequired": "Abre GlyphSprout mediante HTTPS o una dirección local como localhost. Las direcciones de red con HTTP no permiten generar fuentes ni guardar proyectos.",
   "openLiveWorkshop": "Abrir taller en línea",
-  "applyingEdits": "Aplicando cambios al glifo..."
+  "applyingEdits": "Aplicando cambios al glifo...",
+  "editSource": "Editar origen",
+  "sourceEditHelp": "Retoca la imagen de origen. Los trazos existentes conservan su tamaño original en píxeles.",
+  "sourceLoading": "Cargando imagen de origen...",
+  "sourceChanged": "Este glifo cambió mientras el editor de origen estaba abierto. Ábrelo de nuevo antes de aplicar los cambios.",
+  "applySourceEdits": "Aplicar cambios al origen",
+  "cancelSourceEdit": "Cancelar edición del origen"
 }

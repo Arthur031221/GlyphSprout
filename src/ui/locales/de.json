@@ -184,5 +184,11 @@
   "resetStorageConfirm": "Gespeicherte Versionen und Bilder in diesem Browser löschen? Lade die Daten zuerst herunter, wenn du sie behalten möchtest.",
   "secureContextRequired": "Öffne GlyphSprout über HTTPS oder eine lokale Adresse wie localhost. Netzwerkadressen mit einfachem HTTP können keine Schriften erzeugen oder Projekte speichern.",
   "openLiveWorkshop": "Onlinewerkstatt öffnen",
-  "applyingEdits": "Zeichenänderungen werden angewendet..."
+  "applyingEdits": "Zeichenänderungen werden angewendet...",
+  "editSource": "Quelle bearbeiten",
+  "sourceEditHelp": "Bearbeite das Quellbild. Vorhandene Striche behalten ihre ursprüngliche Pixelgröße.",
+  "sourceLoading": "Quellbild wird geladen...",
+  "sourceChanged": "Dieses Zeichen wurde geändert, während der Quelleneditor geöffnet war. Öffne ihn erneut, bevor du Änderungen übernimmst.",
+  "applySourceEdits": "Quellenänderungen übernehmen",
+  "cancelSourceEdit": "Quellenbearbeitung abbrechen"
 }
