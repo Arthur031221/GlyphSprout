@@ -42,6 +42,24 @@ export interface ScanPage {
   height: number;
 }
 
+export interface FontInfo {
+  designer?: string;
+  copyright?: string;
+  license?: string;
+  licenseUrl?: string;
+}
+
+export const FONT_INFO_LIMITS: Record<keyof FontInfo, number> = {
+  designer: 100,
+  copyright: 200,
+  license: 400,
+  licenseUrl: 200,
+};
+
+export const OFL_LICENSE =
+  "This Font Software is licensed under the SIL Open Font License, Version 1.1.";
+export const OFL_URL = "https://openfontlicense.org";
+
 export interface Project {
   schema: 1;
   id: string;
@@ -51,6 +69,7 @@ export interface Project {
   glyphs: Record<string, Glyph>;
   pages: ScanPage[];
   spaceWidth?: number;
+  info?: FontInfo;
   createdAt: string;
   updatedAt: string;
 }

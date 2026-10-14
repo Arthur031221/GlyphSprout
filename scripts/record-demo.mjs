@@ -165,6 +165,13 @@ try {
   await page.getByRole("button", { name: "Remove scan: paper.png" }).click();
   await page.getByRole("button", { name: "Workshop" }).click();
   await page.waitForTimeout(1800);
+  const designer = page.getByLabel("Designer", { exact: true });
+  await designer.fill("Ada Writer");
+  await designer.press("Enter");
+  await page
+    .getByRole("button", { name: "Use the SIL Open Font License" })
+    .click();
+  await page.waitForTimeout(1800);
   await page.getByRole("button", { name: "Copy web font CSS" }).click();
   await page.waitForTimeout(1800);
   const event = page.waitForEvent("download");
@@ -195,7 +202,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded character presets, source editing, scan alignment, web font CSS copy, the preview zoom and a TTF download.",
+    "Recorded character presets, source editing, scan alignment, font information, web font CSS copy, the preview zoom and a TTF download.",
   );
 } finally {
   await browser?.close();

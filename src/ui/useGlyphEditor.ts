@@ -1,10 +1,16 @@
 import { useRef, useState } from "react";
 import { fontGlyph } from "../core/font";
-import { blankGlyph, spaceWidth, validateSettings } from "../core/project";
+import {
+  blankGlyph,
+  cleanFontInfo,
+  spaceWidth,
+  validateSettings,
+} from "../core/project";
 import { isCjk } from "../core/text";
 import { grayscale, trace } from "../core/trace";
 import {
   DEFAULT_SPACE_WIDTH,
+  type FontInfo,
   type Glyph,
   type GlyphSettings,
   type Project,
@@ -197,6 +203,26 @@ export function useGlyphEditor(
     }
   }
 
+  async function fontInfo(value: FontInfo) {
+    if (!(await flush())) return false;
+    const current = projectRef.current;
+    if (!current) return false;
+    try {
+      const info = cleanFontInfo(value);
+      const same =
+        JSON.stringify(info) ===
+        JSON.stringify(cleanFontInfo(current.info ?? {}));
+      if (!same) {
+        const { info: _old, ...rest } = current;
+        commit(Object.keys(info).length ? { ...rest, info } : rest);
+      }
+      return true;
+    } catch {
+      notice({ key: "infoInvalid", tone: "error" });
+      return false;
+    }
+  }
+
   async function matchSideBearing(character: string) {
     if (!(await flush())) return;
     const current = projectRef.current;
@@ -280,6 +306,7 @@ export function useGlyphEditor(
     mutate,
     settings,
     wordSpace,
+    fontInfo,
     matchSideBearing,
     drawing,
     flush,

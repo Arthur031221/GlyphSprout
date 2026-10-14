@@ -3,11 +3,12 @@ import { describe, expect, it } from "vitest";
 import { buildTtf, fontGlyph, webFontCss } from "../src/core/font";
 import {
   blankGlyph,
+  cleanFontInfo,
   newProject,
   parseProject,
   serializeProject,
 } from "../src/core/project";
-import type { Project } from "../src/core/types";
+import { OFL_LICENSE, OFL_URL, type Project } from "../src/core/types";
 
 it("checks the actual rounding phase before losing a contour edge", () => {
   const glyph = blankGlyph("一", "");
@@ -120,5 +121,56 @@ describe("web font css", () => {
     expect(css).toContain('url("My%20Hand%20writing1.ttf") format("truetype")');
     expect(css).toContain("font-display: swap;");
     expect(css).not.toMatch(/[<>]/);
+  });
+});
+
+describe("font information", () => {
+  it("writes designer, copyright and license into the name table", () => {
+    const project = namedProject("Weekend");
+    project.info = {
+      designer: "Ada Writer",
+      copyright: "Copyright 2026 Ada Writer",
+      license: OFL_LICENSE,
+      licenseUrl: OFL_URL,
+    };
+    const name = names(project);
+    expect(name.designer).toBe("Ada Writer");
+    expect(name.copyright).toBe("Copyright 2026 Ada Writer");
+    expect(name.licence).toBe(OFL_LICENSE);
+    expect(name.urlOfLicence).toBe(OFL_URL);
+    expect(names(namedProject("Weekend")).designer).toBeUndefined();
+  });
+
+  it("keeps the information through a project round trip and rejects bad values", () => {
+    const project = namedProject("Weekend");
+    project.glyphs.A.source = "data:image/png;base64,iVBORw0KGgo=";
+    project.info = { designer: "Ada Writer", licenseUrl: OFL_URL };
+    expect(parseProject(serializeProject(project)).info).toEqual(project.info);
+    project.info = undefined;
+    expect(parseProject(serializeProject(project)).info).toBeUndefined();
+    for (const bad of [
+      { designer: 5 },
+      { designer: "x".repeat(101) },
+      { designer: " padded" },
+      { copyright: "two\nlines" },
+      { licenseUrl: "ftp://example.com" },
+      { licenseUrl: "not a url" },
+      "text",
+    ]) {
+      const broken = JSON.parse(serializeProject(project));
+      broken.info = bad;
+      expect(() => parseProject(JSON.stringify(broken))).toThrow(
+        "invalidProject",
+      );
+    }
+  });
+
+  it("cleans whitespace and drops empty fields", () => {
+    expect(
+      cleanFontInfo({ designer: "  Ada \n Writer ", copyright: "   " }),
+    ).toEqual({ designer: "Ada Writer" });
+    expect(() => cleanFontInfo({ licenseUrl: "example.com" })).toThrow(
+      "invalidProject",
+    );
   });
 });

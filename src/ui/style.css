@@ -1399,3 +1399,20 @@ progress {
   width: 100%;
   accent-color: var(--accent);
 }
+.info-panel {
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+}
+.info-panel p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+.info-panel button {
+  justify-self: start;
+}
+.info-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}

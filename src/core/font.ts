@@ -169,6 +169,10 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     postScriptName,
     uniqueSubFamily: `${project.id}:${name}:Regular`,
     version: "Version 1.000",
+    ...(project.info?.copyright && { copyright: project.info.copyright }),
+    ...(project.info?.designer && { designer: project.info.designer }),
+    ...(project.info?.license && { licence: project.info.license }),
+    ...(project.info?.licenseUrl && { urlOfLicence: project.info.licenseUrl }),
   });
   font.set(data);
   return arrayBuffer(

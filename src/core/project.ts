@@ -1,9 +1,17 @@
 import { validateCorners } from "./geometry";
 import { analyzeText } from "./text";
 import { signedArea } from "./trace";
-import type { Glyph, GlyphSettings, Point, Project, ScanPage } from "./types";
+import type {
+  FontInfo,
+  Glyph,
+  GlyphSettings,
+  Point,
+  Project,
+  ScanPage,
+} from "./types";
 import {
   defaultSettings,
+  FONT_INFO_LIMITS,
   MAX_CONTOURS_PER_GLYPH,
   MAX_GLYPHS,
   MAX_POINTS_PER_GLYPH,
@@ -108,6 +116,30 @@ export function spaceWidth(value: unknown): number {
   const width = number(value, MIN_SPACE_WIDTH, MAX_SPACE_WIDTH);
   if (!Number.isInteger(width)) throw new Error("invalidProject");
   return width;
+}
+
+export function fontInfo(value: unknown): FontInfo {
+  const raw = object(value);
+  const info: FontInfo = {};
+  for (const key of Object.keys(FONT_INFO_LIMITS) as (keyof FontInfo)[]) {
+    if (raw[key] === undefined) continue;
+    const text = string(raw[key], FONT_INFO_LIMITS[key]);
+    if (text !== text.trim() || /[\r\n\t]/.test(text))
+      throw new Error("invalidProject");
+    if (key === "licenseUrl" && text && !/^https?:\/\/\S+$/.test(text))
+      throw new Error("invalidProject");
+    if (text) info[key] = text;
+  }
+  return info;
+}
+
+export function cleanFontInfo(value: FontInfo): FontInfo {
+  const info: FontInfo = {};
+  for (const key of Object.keys(FONT_INFO_LIMITS) as (keyof FontInfo)[]) {
+    const text = (value[key] ?? "").replace(/\s+/g, " ").trim();
+    if (text) info[key] = text;
+  }
+  return fontInfo(info);
 }
 
 export function validateSettings(value: unknown): GlyphSettings {
@@ -253,6 +285,9 @@ export function validateProject(value: unknown): Project {
     ...(p.spaceWidth === undefined
       ? {}
       : { spaceWidth: spaceWidth(p.spaceWidth) }),
+    ...(p.info === undefined || !Object.keys(fontInfo(p.info)).length
+      ? {}
+      : { info: fontInfo(p.info) }),
     createdAt: date(p.createdAt),
     updatedAt: date(p.updatedAt),
   };

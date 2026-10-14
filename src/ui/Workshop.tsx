@@ -12,10 +12,14 @@ import { isCjk } from "../core/text";
 import {
   DEFAULT_SPACE_WIDTH,
   defaultSettings,
+  FONT_INFO_LIMITS,
+  type FontInfo,
   type Glyph,
   type GlyphSettings,
   MAX_SPACE_WIDTH,
   MIN_SPACE_WIDTH,
+  OFL_LICENSE,
+  OFL_URL,
   type Project,
 } from "../core/types";
 import { download } from "./browser";
@@ -505,6 +509,7 @@ export function Workshop({
             {t.matchBearing}
           </button>
         </section>
+        <FontInfoPanel project={project} t={t} editor={editor} />
         <section className="export-panel panel">
           <div>
             <span className="eyebrow">{t.fontFile}</span>
@@ -558,6 +563,73 @@ export function Workshop({
           </div>
         </section>
       </div>
+    </section>
+  );
+}
+
+function FontInfoPanel({
+  project,
+  t,
+  editor,
+}: {
+  project: Project;
+  t: Dictionary;
+  editor: ReturnType<typeof useGlyphEditor>;
+}) {
+  const stored: Required<FontInfo> = {
+    designer: project.info?.designer ?? "",
+    copyright: project.info?.copyright ?? "",
+    license: project.info?.license ?? "",
+    licenseUrl: project.info?.licenseUrl ?? "",
+  };
+  const [draft, setDraft] = useState(stored);
+  const key = JSON.stringify(stored);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset only when the saved info changes
+  useEffect(() => setDraft(stored), [key]);
+  function apply(value: FontInfo) {
+    void editor.fontInfo(value).then((applied) => {
+      if (!applied) setDraft(stored);
+    });
+  }
+  const fields = [
+    ["designer", t.infoDesigner],
+    ["copyright", t.infoCopyright],
+    ["license", t.infoLicense],
+    ["licenseUrl", t.infoLicenseUrl],
+  ] as const;
+  return (
+    <section className="info-panel panel">
+      <div>
+        <span className="eyebrow">{t.infoTitle}</span>
+        <p>{t.infoHelp}</p>
+      </div>
+      <div className="info-fields">
+        {fields.map(([name, label]) => (
+          <label key={name}>
+            {label}
+            <input
+              value={draft[name]}
+              maxLength={FONT_INFO_LIMITS[name]}
+              inputMode={name === "licenseUrl" ? "url" : undefined}
+              onChange={(e) => setDraft({ ...draft, [name]: e.target.value })}
+              onBlur={() => apply(draft)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") e.currentTarget.blur();
+              }}
+            />
+          </label>
+        ))}
+      </div>
+      <button
+        type="button"
+        onClick={() => {
+          const next = { ...draft, license: OFL_LICENSE, licenseUrl: OFL_URL };
+          setDraft(next);
+          apply(next);
+        }}
+      >
+        {t.infoUseOfl}
+      </button>
     </section>
   );
 }

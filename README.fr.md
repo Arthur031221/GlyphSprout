@@ -13,7 +13,7 @@ L'exemple Paper Bloom fourni exporte un TTF de 3 360 octets, vérifié avec Font
 ![Atelier réel : effacer et corriger un glyphe numérisé, aperçu et téléchargement TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.7.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.8.0
 ```
 
 Node.js 22.12 ou une version ultérieure et Git sont nécessaires. Ouvrez `http://127.0.0.1:4173` lorsque le message de disponibilité s'affiche.
@@ -37,7 +37,7 @@ Agrandissez l'image pour corriger les détails. La taille du stylo et de la gomm
 
 Marquer comme vérifié attend la fin des réglages d'encre et de recadrage. Si une case contient trop de points ou de contours pour être exportée, la conversion conserve son image et indique le caractère concerné. Les autres cases sont converties. Ajustez le filtre des taches, le recadrage ou l'image, puis vérifiez le glyphe corrigé.
 
-La progression de la vérification s'affiche à côté de la liste des glyphes. **Prochain à vérifier** passe au glyphe suivant non vérifié, et les touches fléchées permettent de passer d'un glyphe à l'autre. Le panneau d'espacement règle l'espace entre les mots pour toute la police et peut copier l'approche latérale latine d'un glyphe vers toutes les lettres latines. **Télécharger l'image d'exemple** enregistre le texte d'aperçu au format PNG. **Copier le CSS de police web** place une règle `@font-face` dans le presse-papiers pour utiliser les fichiers téléchargés sur un site web, et **Zoom de l'aperçu** redimensionne l'échantillon en direct.
+La progression de la vérification s'affiche à côté de la liste des glyphes. **Prochain à vérifier** passe au glyphe suivant non vérifié, et les touches fléchées permettent de passer d'un glyphe à l'autre. Le panneau d'espacement règle l'espace entre les mots pour toute la police et peut copier l'approche latérale latine d'un glyphe vers toutes les lettres latines. **Télécharger l'image d'exemple** enregistre le texte d'aperçu au format PNG. **Copier le CSS de police web** place une règle `@font-face` dans le presse-papiers pour utiliser les fichiers téléchargés sur un site web, et **Zoom de l'aperçu** redimensionne l'échantillon en direct. Le panneau **Informations sur la police** enregistre le créateur, la mention de copyright et la licence dans la police exportée, et peut remplir la SIL Open Font License en un clic.
 
 Le nom de la police et le texte des caractères dans « Characters » restent des brouillons lorsque vous changez de section. Choisissez **Project ready** pour les appliquer. Les sauvegardes et les polices téléchargées conservent jusque-là les valeurs appliquées. Les changements non appliqués sont perdus au rechargement.
 

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0
+
+A new **Font information** panel records a designer, a copyright notice, a license text and a license URL in the exported TTF and WOFF2 name table, so a font you share carries its own credit and terms. **Use the SIL Open Font License** fills the license text and URL in one click. Empty fields are left out, and projects without the information export exactly as before.
+
+The information is saved in project backups, follows Undo and Redo, and is checked when a backup is opened. The panel is translated in all nine interface languages.
+
 ## 1.7.0
 
 Adding a scan now finds the four registration crosses and places the page corners on them, so most pages need a check instead of four drags. The search tolerates pages that don't fill the image, small shifts and slight rotation. When a cross can't be found, the corners start where a page-filling scan would show them, as before, and the note is not shown. You still confirm every page.
