@@ -25,6 +25,21 @@ try {
   await page.getByText("Font preview ready", { exact: true }).waitFor();
   const trim = (Date.now() - started) / 1000 + 0.3;
   await page.waitForTimeout(1600);
+  await page.getByRole("button", { name: "Characters" }).click();
+  await expect(
+    page.getByRole("heading", { name: "Set up your font" }),
+  ).toBeVisible();
+  await page.getByRole("textbox", { name: "Font name" }).fill("Weekend");
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Workshop" }).click();
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Characters" }).click();
+  await expect(page.getByRole("textbox", { name: "Font name" })).toHaveValue(
+    "Weekend",
+  );
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Project ready" }).click();
+  await page.getByRole("button", { name: "Workshop" }).click();
   await page.locator(".glyph-tile").nth(5).click();
   await page.waitForTimeout(800);
   await page.getByRole("button", { name: "Edit source", exact: true }).click();
@@ -88,9 +103,7 @@ try {
   await page.waitForTimeout(2600);
   const event = page.waitForEvent("download");
   await page.getByRole("button", { name: "Download TTF", exact: true }).click();
-  await (await event).saveAs(
-    resolve(outputDir, "PaperBloom-source-edited.ttf"),
-  );
+  await (await event).saveAs(resolve(outputDir, "Weekend-source-edited.ttf"));
   await page.waitForTimeout(2200);
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "smooth" }));
   await page.waitForTimeout(3500);
@@ -111,7 +124,7 @@ try {
     "assets/demo.gif",
   ]);
   console.log(
-    "Recorded source editing, draft preservation through Pages and Characters, Apply, and a TTF download.",
+    "Recorded setup draft preservation through Workshop and Characters, font name application, source editing, and a TTF download.",
   );
 } finally {
   await browser?.close();

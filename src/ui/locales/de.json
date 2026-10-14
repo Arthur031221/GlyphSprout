@@ -194,5 +194,8 @@
   "discardDrawing": "Unfertige Zeichenänderungen verwerfen? Wende sie zuerst an, um deine Arbeit zu behalten.",
   "drawingUnsaved": "Zeichenänderungen sind nicht gespeichert und nicht in Downloads enthalten. Wende sie in der Werkstatt an oder brich sie ab, bevor du sie verlässt.",
   "scansUnsaved": "Die Scan-Ausrichtung ist nicht gespeichert und nicht in Downloads enthalten. Wandle die bereitgestellten Scans um oder entferne sie, bevor du die Seite verlässt.",
-  "removeScan": "Scan entfernen"
+  "removeScan": "Scan entfernen",
+  "setupDraftStatus": "Einrichtungsänderungen nicht angewendet",
+  "setupUnsaved": "Änderungen am Schriftnamen und an den Zeichen sind nicht gespeichert und nicht in Downloads enthalten. Wähle Projekt bereit unter Zeichen, um sie anzuwenden.",
+  "scanTemplateChanged": "Diese Scans gehören zu einer anderen Zeichenvorlage. Stelle sie mit Rückgängig oder Wiederholen wieder her, oder entferne die Scans und lade Blätter der aktuellen Vorlage hoch."
 }

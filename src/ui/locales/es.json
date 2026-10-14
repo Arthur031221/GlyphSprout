@@ -194,5 +194,8 @@
   "discardDrawing": "¿Descartar los cambios de dibujo sin terminar? Aplícalos primero para conservar tu trabajo.",
   "drawingUnsaved": "Los cambios del dibujo no se guardan ni se incluyen en las descargas. Aplícalos o cancélalos en el Taller antes de salir.",
   "scansUnsaved": "La alineación del escaneo no se guarda ni se incluye en las descargas. Convierte o elimina los escaneos preparados antes de salir.",
-  "removeScan": "Quitar escaneo"
+  "removeScan": "Quitar escaneo",
+  "setupDraftStatus": "Cambios de configuración sin aplicar",
+  "setupUnsaved": "Los cambios del nombre de la fuente y de los caracteres no se guardan ni se incluyen en las descargas. Selecciona Proyecto listo en Caracteres para aplicarlos.",
+  "scanTemplateChanged": "Estos escaneos pertenecen a otra plantilla de caracteres. Restáurala con Deshacer o Rehacer, o elimina los escaneos y sube hojas de la plantilla actual."
 }

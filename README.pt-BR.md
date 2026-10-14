@@ -11,7 +11,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.284 bytes, verificado com Fo
 [Abrir a oficina online](https://Arthur031221.github.io/GlyphSprout/) | [Guia do usuário](docs/USAGE.md) | [![Licença MIT](https://img.shields.io/badge/license-MIT-315d4e?style=flat-square)](LICENSE)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.2.1
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -32,6 +32,8 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 6. Digite seu texto na prévia e baixe o TTF ou WOFF2.
 
 Editar origem carrega os pixels atuais e permite apagar, desenhar e desfazer traços locais. As configurações e a página atribuída são mantidas. Uma origem alterada precisa ser revisada. Desenhar um glifo começa com uma imagem vazia, substitui o glifo e redefine suas configurações. Desenhos sem tinta são rejeitados. Uma edição sem alterações não muda o histórico do projeto.
+
+O nome da fonte e o texto de caracteres em Characters continuam como rascunhos ao mudar de etapa. Selecione **Project ready** para aplicá-los. Até lá, backups e fontes baixadas mantêm os valores aplicados. Alterações não aplicadas são perdidas ao recarregar a página.
 
 ## Um subconjunto pequeno, com limites claros
 

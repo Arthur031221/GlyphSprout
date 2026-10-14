@@ -194,5 +194,8 @@
   "discardDrawing": "Discard the unfinished drawing edits? Apply them first to keep your work.",
   "drawingUnsaved": "Drawing edits are not saved or included in downloads. Apply or cancel them in Workshop before leaving.",
   "scansUnsaved": "Scan alignment is not saved or included in downloads. Convert or remove the staged scans before leaving.",
-  "removeScan": "Remove scan"
+  "removeScan": "Remove scan",
+  "setupDraftStatus": "Unapplied setup changes",
+  "setupUnsaved": "Font name and character changes are not saved or included in downloads. Choose Project ready in Characters to apply them.",
+  "scanTemplateChanged": "These scans belong to a different character template. Restore it with Undo or Redo, or remove the scans and upload sheets for the current template."
 }

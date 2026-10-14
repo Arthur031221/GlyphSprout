@@ -194,5 +194,8 @@
   "discardDrawing": "Descartar as alterações de desenho inacabadas? Aplique-as primeiro para manter seu trabalho.",
   "drawingUnsaved": "As alterações do desenho não são salvas nem incluídas nos downloads. Aplique ou cancele no Workshop antes de sair.",
   "scansUnsaved": "O alinhamento do escaneamento não é salvo nem incluído nos downloads. Converta ou remova os escaneamentos preparados antes de sair.",
-  "removeScan": "Remover escaneamento"
+  "removeScan": "Remover escaneamento",
+  "setupDraftStatus": "Alterações de configuração não aplicadas",
+  "setupUnsaved": "As alterações do nome da fonte e dos caracteres não são salvas nem incluídas nos downloads. Selecione Projeto pronto em Caracteres para aplicá-las.",
+  "scanTemplateChanged": "Estas digitalizações pertencem a outro modelo de caracteres. Restaure-o com Desfazer ou Refazer, ou remova as digitalizações e envie folhas do modelo atual."
 }

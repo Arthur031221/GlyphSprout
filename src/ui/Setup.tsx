@@ -7,17 +7,27 @@ export function Setup({
   project,
   t,
   onApply,
+  onDirtyChange,
 }: {
   project: Project | null;
   t: Dictionary;
-  onApply: (name: string, text: string) => void;
+  onApply: (name: string, text: string) => boolean;
+  onDirtyChange: (dirty: boolean) => void;
 }) {
-  const [name, setName] = useState(project?.name ?? "My Handwriting");
-  const [text, setText] = useState(project?.text ?? "Hello world!");
+  const committed = {
+    name: project?.name ?? "My Handwriting",
+    text: project?.text ?? "Hello world!",
+  };
+  const [name, setName] = useState(committed.name);
+  const [text, setText] = useState(committed.text);
+  const [nameDirty, setNameDirty] = useState(false);
+  const [textDirty, setTextDirty] = useState(false);
   useEffect(() => {
-    setName(project?.name ?? "My Handwriting");
-    setText(project?.text ?? "Hello world!");
-  }, [project?.name, project?.text]);
+    if (!nameDirty) setName(project?.name ?? "My Handwriting");
+    if (!textDirty) setText(project?.text ?? "Hello world!");
+  }, [project?.name, project?.text, nameDirty, textDirty]);
+  const dirty = nameDirty || textDirty;
+  useEffect(() => onDirtyChange(dirty), [dirty, onDirtyChange]);
   const analysis = analyzeText(text);
   return (
     <section className="panel setup">
@@ -30,7 +40,12 @@ export function Setup({
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          onApply(name, text);
+          if (onApply(name, text)) {
+            setName(name.trim());
+            setText(analyzeText(text).text);
+            setNameDirty(false);
+            setTextDirty(false);
+          }
         }}
       >
         <label>
@@ -40,7 +55,10 @@ export function Setup({
             value={name}
             maxLength={64}
             required
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+              setNameDirty(e.target.value !== committed.name);
+            }}
           />
         </label>
         <label>
@@ -49,7 +67,10 @@ export function Setup({
             value={text}
             rows={4}
             maxLength={8192}
-            onChange={(e) => setText(e.target.value)}
+            onChange={(e) => {
+              setText(e.target.value);
+              setTextDirty(e.target.value !== committed.text);
+            }}
           />
         </label>
         <div className="analysis" aria-live="polite">
