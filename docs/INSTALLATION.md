@@ -4,7 +4,7 @@
 
 The local workshop requires Node.js 22.12 or newer and Git. Run:
 
-    npx --yes git+https://github.com/Arthur031221/GlyphSprout.git
+    npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.3.0
 
 This starts a server at `http://127.0.0.1:4173`. Keep the terminal open while using the workshop. Press Ctrl+C to stop it. The command uses the project's Git repository. GlyphSprout is not published to the npm registry.
 

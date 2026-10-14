@@ -136,7 +136,7 @@
   "blankCharacters": "Enter at least one supported character.",
   "projectFileTooLarge": "The project file must be smaller than 96 MiB.",
   "duplicatePage": "Assign each image to a different page. Convert a replacement in a separate batch.",
-  "scanCanceled": "Scan conversion was canceled. Your current glyphs are unchanged.",
+  "scanCanceled": "Scan conversion was canceled. Your scans and alignment are ready to retry.",
   "scanComplete": "Scans converted. Check each glyph before exporting.",
   "settingsInvalid": "Keep settings within their shown ranges and leave at least 5 percent of the crop.",
   "fontPreparing": "Building your font preview...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "Unapplied setup changes",
   "setupUnsaved": "Font name and character changes are not saved or included in downloads. Choose Project ready in Characters to apply them.",
   "scanTemplateChanged": "These scans belong to a different character template. Restore it with Undo or Redo, or remove the scans and upload sheets for the current template.",
-  "previewUpdating": "Updating corrected preview..."
+  "previewUpdating": "Updating corrected preview...",
+  "stopConversion": "Stop conversion",
+  "discardScans": "Discard staged scans",
+  "panCanvas": "Pan",
+  "penSize": "Pen size, source pixels",
+  "eraserSize": "Eraser size, source pixels",
+  "zoomIn": "Zoom in",
+  "zoomOut": "Zoom out",
+  "fitCanvas": "Fit image",
+  "drawingViewport": "Drawing viewport",
+  "precisionHelp": "Zoom for detail. Choose Pan, use the scrollbars or focus the canvas and press arrow keys to move. Brush sizes use source pixels."
 }

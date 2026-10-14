@@ -136,7 +136,7 @@
   "blankCharacters": "Saisissez au moins un caractère pris en charge.",
   "projectFileTooLarge": "Le fichier du projet doit faire moins de 96 Mio.",
   "duplicatePage": "Attribuez chaque image à une page différente. Convertissez les remplacements dans un autre lot.",
-  "scanCanceled": "La conversion du scan a été annulée. Vos glyphes actuels n'ont pas été modifiés.",
+  "scanCanceled": "La conversion a été annulée. Les scans et leur alignement sont conservés pour réessayer.",
   "scanComplete": "Scans convertis. Vérifiez chaque glyphe avant l'exportation.",
   "settingsInvalid": "Respectez les plages affichées et conservez au moins 5 % de la zone de recadrage.",
   "fontPreparing": "Préparation de l'aperçu de la police...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "Modifications de configuration non appliquées",
   "setupUnsaved": "Les modifications du nom de la police et des caractères ne sont ni enregistrées ni incluses dans les téléchargements. Choisissez Projet prêt dans Caractères pour les appliquer.",
   "scanTemplateChanged": "Ces scans appartiennent à un autre modèle de caractères. Rétablissez ce modèle avec Annuler ou Rétablir, ou supprimez les scans et importez les feuilles du modèle actuel.",
-  "previewUpdating": "Mise à jour de l'aperçu corrigé..."
+  "previewUpdating": "Mise à jour de l'aperçu corrigé...",
+  "stopConversion": "Arrêter la conversion",
+  "discardScans": "Supprimer les scans en attente",
+  "panCanvas": "Déplacer",
+  "penSize": "Taille du stylo, pixels de l'image",
+  "eraserSize": "Taille de la gomme, pixels de l'image",
+  "zoomIn": "Agrandir",
+  "zoomOut": "Réduire",
+  "fitCanvas": "Ajuster l'image",
+  "drawingViewport": "Zone de dessin",
+  "precisionHelp": "Agrandissez pour modifier les détails. Utilisez Déplacer, les barres de défilement ou les flèches lorsque le canevas a le focus. La taille est mesurée en pixels de l'image source."
 }

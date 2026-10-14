@@ -136,7 +136,7 @@
   "blankCharacters": "지원되는 문자를 하나 이상 입력하세요.",
   "projectFileTooLarge": "프로젝트 파일은 96 MiB보다 작아야 합니다.",
   "duplicatePage": "각 이미지를 서로 다른 페이지에 지정하세요. 대체 페이지는 별도 일괄 변환에서 처리하세요.",
-  "scanCanceled": "스캔 변환이 취소되었습니다. 현재 글리프는 변경되지 않았습니다.",
+  "scanCanceled": "스캔 변환을 취소했습니다. 이미지와 정렬 설정이 유지되어 다시 시도할 수 있습니다.",
   "scanComplete": "스캔을 변환했습니다. 내보내기 전에 각 글리프를 확인하세요.",
   "settingsInvalid": "설정을 표시된 범위 안에 두고 자르기 영역을 5% 이상 남기세요.",
   "fontPreparing": "글꼴 미리보기를 만드는 중...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "설정 변경 사항이 적용되지 않음",
   "setupUnsaved": "글꼴 이름과 문자 변경 사항은 저장되지 않았으며 다운로드에 포함되지 않습니다. 문자 단계에서 프로젝트 준비 완료를 선택하여 적용하세요.",
   "scanTemplateChanged": "이 스캔은 다른 문자 템플릿에 속합니다. 실행 취소 또는 다시 실행으로 원래 템플릿을 복원하거나, 스캔을 제거하고 현재 템플릿의 용지를 업로드하세요.",
-  "previewUpdating": "보정 미리보기를 업데이트하는 중..."
+  "previewUpdating": "보정 미리보기를 업데이트하는 중...",
+  "stopConversion": "변환 중지",
+  "discardScans": "대기 중인 스캔 버리기",
+  "panCanvas": "이동",
+  "penSize": "펜 크기, 원본 픽셀",
+  "eraserSize": "지우개 크기, 원본 픽셀",
+  "zoomIn": "확대",
+  "zoomOut": "축소",
+  "fitCanvas": "이미지 맞추기",
+  "drawingViewport": "그리기 영역",
+  "precisionHelp": "확대하여 세부를 편집하세요. 이동 도구나 스크롤 막대를 사용하거나 캔버스에 초점을 맞춘 후 화살표 키로 이동하세요. 브러시 크기는 원본 픽셀 단위입니다."
 }

@@ -95,7 +95,7 @@ test("scan images stay staged until page assignment is confirmed", async ({
       "I confirmed the visible page ID, page assignment and interior alignment",
     )
     .check();
-  await page.getByRole("button", { name: "Cancel" }).click();
+  await page.getByRole("button", { name: "Discard staged scans" }).click();
   await expect(page.getByText("sample.png · Page 1")).toHaveCount(0);
   await expect(page.locator(".project-label strong")).toHaveText("Paper Bloom");
 });

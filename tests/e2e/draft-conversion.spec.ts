@@ -220,7 +220,7 @@ for (const outcome of ["failed", "canceled", "invalid"] as const) {
     if (outcome === "canceled") {
       await page
         .locator(".scan-job")
-        .getByRole("button", { name: "Cancel", exact: true })
+        .getByRole("button", { name: "Stop conversion", exact: true })
         .click();
       await expect(
         page

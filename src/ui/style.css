@@ -1243,7 +1243,15 @@ progress {
 }
 .draw-canvas {
   position: relative;
+  flex-shrink: 0;
+}
+.drawing-viewport {
   width: min(100%, 384px);
+  aspect-ratio: 1;
+  overflow: auto;
+  border: 1px solid var(--line);
+  background: #fff;
+  overscroll-behavior: contain;
 }
 .draw-canvas canvas {
   display: block;
@@ -1251,6 +1259,42 @@ progress {
   height: auto;
   aspect-ratio: auto;
 }
+.drawing-viewport canvas {
+  border: 0;
+  cursor: crosshair;
+}
+.drawing-viewport.panning canvas {
+  cursor: grab;
+}
+.drawing-viewport.panning canvas:active {
+  cursor: grabbing;
+}
+.drawing-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: 100%;
+}
+.drawing-controls label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  font-size: 12px;
+}
+.drawing-controls input {
+  width: 64px;
+  padding: 5px;
+}
+.drawing-controls output {
+  min-width: 42px;
+  font-size: 12px;
+  align-self: center;
+  text-align: center;
+}
+
 .draw-baseline {
   position: absolute;
   inset-inline: 0;

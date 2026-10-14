@@ -136,7 +136,7 @@
   "blankCharacters": "Digite pelo menos um caractere compatível.",
   "projectFileTooLarge": "O arquivo do projeto deve ter menos de 96 MiB.",
   "duplicatePage": "Atribua cada imagem a uma página diferente. Converta substituições em outro lote.",
-  "scanCanceled": "A conversão da digitalização foi cancelada. Os glifos atuais não foram alterados.",
+  "scanCanceled": "A conversão foi cancelada. As digitalizações e o alinhamento foram mantidos para tentar novamente.",
   "scanComplete": "Digitalizações convertidas. Confira cada glifo antes de exportar.",
   "settingsInvalid": "Mantenha as configurações nos intervalos indicados e preserve pelo menos 5% do recorte.",
   "fontPreparing": "Preparando a prévia da fonte...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "Alterações de configuração não aplicadas",
   "setupUnsaved": "As alterações do nome da fonte e dos caracteres não são salvas nem incluídas nos downloads. Selecione Projeto pronto em Caracteres para aplicá-las.",
   "scanTemplateChanged": "Estas digitalizações pertencem a outro modelo de caracteres. Restaure-o com Desfazer ou Refazer, ou remova as digitalizações e envie folhas do modelo atual.",
-  "previewUpdating": "Atualizando a prévia corrigida..."
+  "previewUpdating": "Atualizando a prévia corrigida...",
+  "stopConversion": "Parar conversão",
+  "discardScans": "Descartar digitalizações pendentes",
+  "panCanvas": "Mover",
+  "penSize": "Tamanho da caneta, pixels da origem",
+  "eraserSize": "Tamanho da borracha, pixels da origem",
+  "zoomIn": "Ampliar",
+  "zoomOut": "Reduzir",
+  "fitCanvas": "Ajustar imagem",
+  "drawingViewport": "Área de desenho",
+  "precisionHelp": "Amplie para editar detalhes. Use Mover, as barras de rolagem ou foque a tela e pressione as setas. Os tamanhos são medidos em pixels da imagem de origem."
 }

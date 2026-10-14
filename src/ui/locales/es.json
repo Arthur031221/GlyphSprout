@@ -136,7 +136,7 @@
   "blankCharacters": "Introduce al menos un carácter compatible.",
   "projectFileTooLarge": "El archivo del proyecto debe ser menor de 96 MiB.",
   "duplicatePage": "Asigna cada imagen a una página distinta. Convierte los reemplazos en otro lote.",
-  "scanCanceled": "Se canceló la conversión del escaneo. Los glifos actuales no han cambiado.",
+  "scanCanceled": "Se canceló la conversión. Los escaneos y la alineación se conservan para volver a intentarlo.",
   "scanComplete": "Escaneos convertidos. Revisa cada glifo antes de exportar.",
   "settingsInvalid": "Mantén los ajustes dentro de los rangos indicados y conserva al menos un 5 % del recorte.",
   "fontPreparing": "Preparando la vista previa de la fuente...",
@@ -198,5 +198,15 @@
   "setupDraftStatus": "Cambios de configuración sin aplicar",
   "setupUnsaved": "Los cambios del nombre de la fuente y de los caracteres no se guardan ni se incluyen en las descargas. Selecciona Proyecto listo en Caracteres para aplicarlos.",
   "scanTemplateChanged": "Estos escaneos pertenecen a otra plantilla de caracteres. Restáurala con Deshacer o Rehacer, o elimina los escaneos y sube hojas de la plantilla actual.",
-  "previewUpdating": "Actualizando la vista previa corregida..."
+  "previewUpdating": "Actualizando la vista previa corregida...",
+  "stopConversion": "Detener conversión",
+  "discardScans": "Descartar escaneos pendientes",
+  "panCanvas": "Mover",
+  "penSize": "Tamaño del lápiz, píxeles de origen",
+  "eraserSize": "Tamaño del borrador, píxeles de origen",
+  "zoomIn": "Acercar",
+  "zoomOut": "Alejar",
+  "fitCanvas": "Ajustar imagen",
+  "drawingViewport": "Área de dibujo",
+  "precisionHelp": "Amplía para editar detalles. Usa Mover, las barras de desplazamiento o enfoca el lienzo y pulsa las flechas. El tamaño del pincel se mide en píxeles de origen."
 }

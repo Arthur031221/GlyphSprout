@@ -21,6 +21,8 @@ The corrected page preview updates as you adjust the four corners. Large scans a
 
 The source editor opens the current native pixel image for the selected glyph. Use the pen and eraser to make local changes, and use drawing undo to step back through strokes. Applying a source edit keeps the glyph's threshold, crop, size, offsets, spacing, and page ID. An empty source is rejected. A changed source becomes unreviewed so you can check its outline. Applying an unchanged source leaves project history untouched. If the glyph has changed or its settings are still being processed, the source editor rejects the edit and preserves that work. Cancel the source edit and reopen it once the pending settings finish.
 
+Zoom from 100 to 800 percent to correct details. Pen and eraser sizes are separate and measured in source pixels. Their widths stay stable when zoom changes. The canvas keeps the native image dimensions and aspect ratio. Choose **Pan** and drag to move a magnified image, use the scrollbars, or focus the drawing viewport and press arrow keys. **Fit image** returns to 100 percent. Zooming and panning do not change source pixels or drawing history.
+
 **Draw a glyph** starts with a blank image. Using a drawing replaces the glyph and resets its settings. Drawing undo and project undo are separate. Use **Mark reviewed** after checking the source and generated outline.
 
 An unfinished drawing stays in Workshop while you move between Workshop, Pages, and Characters. Its pixels and drawing undo history remain available when you return. The **Saved** badge refers to the committed project. Unapplied drawing edits are not included in project backups or font downloads, and font export stays disabled until you apply or cancel them. Leaving a dirty drawing for another glyph, a new drawing, review, clear, or project Undo/Redo asks whether to discard it. Choosing **Cancel drawing** or **Cancel source edit** discards it directly. Applying a source edit commits it without a discard prompt. Drawing undo keeps the latest 20 steps. Restoring the original pixels clears the draft warning.
@@ -34,6 +36,8 @@ The preview uses the generated font. An incomplete project is not exported by de
 Changing project history, the character list, or review state clears canceled values from the settings form. Resetting or rejecting settings, drawing, clearing a glyph, and project Undo or Redo cancel older unfinished crop work. That crop cannot replace a newer result or delay a font export. Successful scan conversion cancels earlier crop work. Export does not wait for a removed or replaced character's crop to finish.
 
 ## Templates and scans
+
+Choose **Stop conversion** to interrupt processing while keeping uploaded scans, corner positions, page assignments and confirmations for a retry. The current project stays intact. **Discard staged scans** removes the queue. Completed conversion clears the queue after applying the result. Staged scans are still excluded from recovery and project downloads.
 
 Changing the chosen characters or their order requires fresh printed sheets. Changes limited to whitespace, duplicate characters, or Unicode normalization preserve the template IDs and existing scans when the ordered characters remain the same. Renaming the font also preserves the IDs and scan assignments.
 

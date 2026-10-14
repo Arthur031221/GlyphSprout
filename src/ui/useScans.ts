@@ -47,12 +47,22 @@ export function useScans(
     [],
   );
 
-  function cancel() {
+  function stop() {
     worker.current?.terminate();
     worker.current = null;
     readVersion.current++;
     setBusy(false);
     setReading(false);
+    setProgress({ done: 0, total: 0 });
+  }
+
+  function cancel() {
+    stop();
+    notify({ key: "scanCanceled" });
+  }
+
+  function discard() {
+    stop();
     setDrafts([]);
     setIndex(0);
   }
@@ -187,6 +197,7 @@ export function useScans(
         setBusy(false);
       };
       scanWorker.onerror = () => {
+        if (worker.current !== scanWorker) return;
         finish();
         notify({ key: "scanFailed", tone: "error" });
       };
@@ -284,5 +295,6 @@ export function useScans(
     corner,
     run,
     cancel,
+    discard,
   };
 }

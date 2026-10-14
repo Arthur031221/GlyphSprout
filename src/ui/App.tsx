@@ -155,7 +155,7 @@ export function App() {
   function replace(next: Project) {
     changeDrawing(null, true);
     editor.cancel();
-    scans.cancel();
+    scans.discard();
     commit(next, "replace");
     setSetupVersion((value) => value + 1);
     setSetupDirty(false);
@@ -269,7 +269,7 @@ export function App() {
       commit(next);
       if (charactersChanged) {
         editor.cancel();
-        scans.cancel();
+        scans.discard();
       }
       if (next.text !== project?.text) setSpecimen(next.text);
       setStage("Pages");
@@ -679,14 +679,8 @@ export function App() {
               max={Math.max(1, scans.progress.total)}
               value={scans.progress.done}
             />
-            <button
-              type="button"
-              onClick={() => {
-                scans.cancel();
-                setNotice({ key: "scanCanceled" });
-              }}
-            >
-              {t.cancel}
+            <button type="button" onClick={scans.cancel}>
+              {t.stopConversion}
             </button>
           </div>
         )}

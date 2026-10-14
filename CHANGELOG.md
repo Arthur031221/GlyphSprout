@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+
+Stopping scan conversion keeps uploaded pages and their alignment ready to retry. Discarding staged scans is a separate action.
+
+Drawing and source editing support zoom, panning, keyboard scrolling and separate pen and eraser sizes in source pixels. Zoom preserves the native source dimensions. Updated all nine interface languages and the demo recording.
+
 ## 1.2.2
 
 - Warn before closing or reloading while a save or glyph edit is pending, and when local saving has failed. Keep the warning until the project is saved.
