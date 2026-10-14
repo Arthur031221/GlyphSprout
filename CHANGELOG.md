@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.28.0
+
+Dashes, the ellipsis and non-breaking spaces now type with the glyphs you already wrote. Text from a phone, a web page or a word processor is full of en and em dashes, the minus sign, the single ellipsis character and spaces that don't break lines. A font that only had a hyphen, periods and a word space showed the dashes and the ellipsis in red in the live preview and dropped all of them from the TTF and WOFF2 files, so the reader's system substituted another font in the middle of a sentence. The hyphen glyph now covers the hyphen variants, the figure dash, the en and em dashes, the horizontal bar and the minus sign. The ellipsis is built from three copies of your period outline and keeps the period's own spacing. Non-breaking, narrow non-breaking and the fixed width spaces from en space to hair space use the word space of the font. A dash or ellipsis you add to the project keeps its own glyph, and nothing changes when the hyphen or period glyph is missing. Nothing is saved in the project, so existing backups gain the behavior without a format change.
+
+Unit tests read the exported cmap for every dash and space code point and check the three period ellipsis contours and advance, and that an ellipsis the project has stays its own. A browser test checks that dashes, an ellipsis and a non-breaking space stop showing in red while a curly quote without an apostrophe glyph still does.
+
 ## 1.27.0
 
 Curly quotes and apostrophes now type with the glyphs of the straight ones. Phones and word processors turn a typed `'` or `"` into a curly mark, and a font that only had the straight marks showed every curly one in red in the live preview and left it out of the TTF and WOFF2 files. The font now maps the curly single quotes and the low and reversed single quote to your apostrophe glyph, and the curly double quotes and the low double quote to your double quote glyph. A curly mark you add to the project keeps its own glyph, and nothing changes when the straight glyph is missing. Kerning pairs set for a straight quote also apply to the curly ones. Nothing is saved in the project, so existing backups gain the behavior without a format change, and the **Add these characters** offer no longer lists curly marks that are already covered.

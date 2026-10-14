@@ -36,7 +36,7 @@ export function lowercaseFallbacks(project: Project): Map<string, string> {
   return fallbacks;
 }
 
-const QUOTE_SOURCES: Record<string, string> = {
+const PUNCTUATION_SOURCES: Record<string, string> = {
   "\u2018": "'",
   "\u2019": "'",
   "\u201a": "'",
@@ -44,26 +44,63 @@ const QUOTE_SOURCES: Record<string, string> = {
   "\u201c": '"',
   "\u201d": '"',
   "\u201e": '"',
+  "\u2010": "-",
+  "\u2011": "-",
+  "\u2012": "-",
+  "\u2013": "-",
+  "\u2014": "-",
+  "\u2015": "-",
+  "\u2212": "-",
 };
 
+const ELLIPSIS = "\u2026";
+
+// Word processors and the web type these as spaces that don't break lines.
+const SPACE_CODEPOINTS = [
+  0xa0, 0x2002, 0x2003, 0x2004, 0x2005, 0x2006, 0x2007, 0x2008, 0x2009, 0x200a,
+  0x202f,
+];
+
 /**
- * Curly quotes that borrow the glyph of the straight quote, keyed by the curly
- * quote. Phones and word processors type curly quotes and apostrophes, so a
- * font with only the straight marks would show them as missing. A curly quote
- * the project has itself keeps its own glyph.
+ * Curly quotes and dashes that borrow the glyph of a plain character, keyed by
+ * the typographic one. Phones and word processors type curly quotes, en and em
+ * dashes and an ellipsis, so a font with only the plain marks would show them
+ * as missing. A mark the project has itself keeps its own glyph. The ellipsis
+ * is built from three periods when the font is exported.
  */
-export function quoteFallbacks(project: Project): Map<string, string> {
+export function punctuationFallbacks(project: Project): Map<string, string> {
   const fallbacks = new Map<string, string>();
   const have = new Set(project.characters);
-  for (const [curly, straight] of Object.entries(QUOTE_SOURCES))
-    if (project.glyphs[straight]?.contours.length && !have.has(curly))
-      fallbacks.set(curly, straight);
+  const usable = (ch: string) => project.glyphs[ch]?.contours.length;
+  for (const [typographic, plain] of Object.entries(PUNCTUATION_SOURCES))
+    if (usable(plain) && !have.has(typographic))
+      fallbacks.set(typographic, plain);
+  if (usable(".") && !have.has(ELLIPSIS)) fallbacks.set(ELLIPSIS, ".");
   return fallbacks;
 }
 
 /** Every character the font types with another character's glyph, keyed by the borrowing character. */
 export function glyphFallbacks(project: Project): Map<string, string> {
-  return new Map([...lowercaseFallbacks(project), ...quoteFallbacks(project)]);
+  return new Map([
+    ...lowercaseFallbacks(project),
+    ...punctuationFallbacks(project),
+  ]);
+}
+
+/** Three copies of the period's outline in a row, for an ellipsis the project has no glyph for. */
+function ellipsisGlyph(period: TTF.Glyph): TTF.Glyph {
+  const step = period.advanceWidth;
+  const contours = [0, 1, 2].flatMap((i) =>
+    period.contours.map((c) => c.map((p) => ({ ...p, x: p.x + i * step }))),
+  );
+  return {
+    ...period,
+    contours,
+    xMax: period.xMax + 2 * step,
+    advanceWidth: 3 * step,
+    name: "ellipsis",
+    unicode: [0x2026],
+  };
 }
 
 export function fontGlyph(glyph: Glyph): TTF.Glyph {
@@ -243,10 +280,11 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
   if (missing.length && !allowPartial) throw new Error("missingGlyphs");
   const borrowed = new Map<string, number[]>();
   for (const [borrower, source] of glyphFallbacks(project))
-    borrowed.set(source, [
-      ...(borrowed.get(source) ?? []),
-      borrower.codePointAt(0) ?? 0,
-    ]);
+    if (borrower !== ELLIPSIS)
+      borrowed.set(source, [
+        ...(borrowed.get(source) ?? []),
+        borrower.codePointAt(0) ?? 0,
+      ]);
   const glyphs = project.characters
     .filter((ch) => project.glyphs[ch]?.contours.length)
     .map((ch) => {
@@ -255,6 +293,9 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
       if (extra) glyph.unicode = [...(glyph.unicode ?? []), ...extra];
       return glyph;
     });
+  const period = glyphs.find((g) => g.unicode?.includes(0x2e));
+  if (period && glyphFallbacks(project).has(ELLIPSIS))
+    glyphs.push(ellipsisGlyph(period));
   if (!glyphs.length) throw new Error("emptyFont");
   const font = createFont();
   const data = font.get();
@@ -270,7 +311,7 @@ export function buildTtf(project: Project, allowPartial = false): ArrayBuffer {
     advanceWidth: project.spaceWidth ?? DEFAULT_SPACE_WIDTH,
     leftSideBearing: 0,
     name: "space",
-    unicode: [32],
+    unicode: [32, ...SPACE_CODEPOINTS],
   };
   data.glyf = [notdef, space, ...glyphs];
   const kern = kernTable(

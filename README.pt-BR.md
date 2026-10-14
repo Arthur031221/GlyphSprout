@@ -13,7 +13,7 @@ A amostra Paper Bloom incluída exporta um TTF de 3.360 bytes, verificado com Fo
 ![Oficina real: apagar e corrigir um glifo digitalizado, conferir a prévia e baixar o TTF](assets/demo.gif)
 
 ```sh
-npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.27.0
+npx --yes git+https://github.com/Arthur031221/GlyphSprout.git#v1.28.0
 ```
 
 Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:4173` quando aparecer a mensagem de que está pronto.
@@ -29,7 +29,7 @@ Você precisa do Node.js 22.12 ou mais recente e do Git. Abra `http://127.0.0.1:
 3. Adicione uma digitalização com iluminação uniforme escolhendo o arquivo, soltando-o na seção de digitalização ou tocando em **Tirar uma foto** no celular, e confirme o ID da página. O GlyphSprout procura as quatro cruzes de registro e coloca os cantos sobre elas. Confira cada canto e ajuste os que estiverem fora do lugar.
 4. Clique em **Converter digitalizações** e aguarde a conversão terminar. As células sem tinta são listadas ao final, então uma letra esquecida ou uma página errada aparece na hora.
 5. Confira cada glifo. Ajuste a origem, o limite, a espessura do traço, a suavização do contorno, o corte, o tamanho, os deslocamentos e o espaçamento. Cada ajuste numérico tem um controle deslizante. Digite um valor e pressione Enter, ou mova o controle, e o contorno é atualizado quando você o solta. Pressione Ctrl+Z ou Cmd+Z para desfazer uma alteração e adicione Shift para refazê-la. As guias tracejadas na vista do contorno marcam a borda esquerda e a largura de avanço, para você ver o espaçamento de cada glifo enquanto ajusta.
-6. Digite seu texto na prévia e baixe o TTF ou WOFF2. Quando todos os glifos estão prontos, **Baixar fonte (TTF)** no painel de prévia salva a fonte sem rolar até a oficina. Os caracteres do texto que a fonte ainda não tem aparecem em vermelho, e **Adicionar estes caracteres** os inclui no projeto para você imprimir as casas deles. Mudar os caracteres apaga as atribuições de página dos scans, então atribua de novo. Aspas e apóstrofos curvos, como os digitados por telefones e processadores de texto, usam os glifos das suas `'` e `"` retas, então você não precisa escrevê-los duas vezes.
+6. Digite seu texto na prévia e baixe o TTF ou WOFF2. Quando todos os glifos estão prontos, **Baixar fonte (TTF)** no painel de prévia salva a fonte sem rolar até a oficina. Os caracteres do texto que a fonte ainda não tem aparecem em vermelho, e **Adicionar estes caracteres** os inclui no projeto para você imprimir as casas deles. Mudar os caracteres apaga as atribuições de página dos scans, então atribua de novo. Aspas e apóstrofos curvos, como os digitados por telefones e processadores de texto, usam os glifos das suas `'` e `"` retas, então você não precisa escrevê-los duas vezes. Os travessões e o sinal de menos usam o seu hífen, as reticências são formadas por três pontos e os espaços não separáveis usam o seu espaço entre palavras.
 
 Editar origem carrega os pixels atuais e permite apagar, desenhar e desfazer traços locais. As configurações e a página atribuída são mantidas. Uma origem alterada precisa ser revisada. Desenhar um glifo começa com uma imagem vazia, substitui o glifo e redefine suas configurações. Desenhos sem tinta são rejeitados. Enquanto você desenha, **Usar e desenhar o próximo** guarda o desenho e abre uma tela em branco para o próximo caractere que ainda não tem glifo, assim você pode criar uma fonte sem impressora. Uma edição sem alterações não muda o histórico do projeto.
 

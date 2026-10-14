@@ -4,7 +4,7 @@ import {
   buildTtf,
   fontGlyph,
   lowercaseFallbacks,
-  quoteFallbacks,
+  punctuationFallbacks,
   webFontCss,
 } from "../src/core/font";
 import {
@@ -371,7 +371,7 @@ describe("uppercase glyphs for lowercase letters", () => {
   });
 });
 
-describe("straight quotes for curly quotes", () => {
+describe("plain punctuation for typographic punctuation", () => {
   function quoteProject(text: string): Project {
     const project = newProject("Quotes", text);
     for (const ch of project.characters) {
@@ -400,7 +400,7 @@ describe("straight quotes for curly quotes", () => {
   });
 
   it("does nothing without a straight quote and keeps a curly quote the project has", () => {
-    expect(quoteFallbacks(quoteProject("AB")).size).toBe(0);
+    expect(punctuationFallbacks(quoteProject("AB")).size).toBe(0);
     const project = quoteProject("'\u2019");
     project.glyphs["\u2019"].contours = [
       [
@@ -414,9 +414,43 @@ describe("straight quotes for curly quotes", () => {
     expect(table[0x2018]).toBe(table[0x27]);
   });
 
+  it("types en and em dashes and the minus sign with the hyphen glyph", () => {
+    const table = cmap(quoteProject("A-"));
+    for (const dash of [0x2010, 0x2011, 0x2012, 0x2013, 0x2014, 0x2015, 0x2212])
+      expect(table[dash]).toBe(table[0x2d]);
+    expect(cmap(quoteProject("A"))[0x2014]).toBeUndefined();
+  });
+
+  it("types non-breaking and fixed width spaces with the space glyph", () => {
+    const table = cmap(quoteProject("A"));
+    for (const space of [0xa0, 0x2003, 0x2009, 0x202f])
+      expect(table[space]).toBe(table[0x20]);
+  });
+
+  it("builds an ellipsis from three periods and keeps one the project has", () => {
+    const project = quoteProject("A.");
+    const font = createFont(buildTtf(project), { type: "ttf" }).get();
+    const period = font.glyf[font.cmap[0x2e]];
+    const ellipsis = font.glyf[font.cmap[0x2026]];
+    expect(font.cmap[0x2026]).not.toBe(font.cmap[0x2e]);
+    expect(ellipsis.contours).toHaveLength(period.contours.length * 3);
+    expect(ellipsis.advanceWidth).toBe(period.advanceWidth * 3);
+    const own = quoteProject(".\u2026");
+    own.glyphs["\u2026"].contours = [
+      [
+        { x: 0.1, y: 0.1 },
+        { x: 0.4, y: 0.1 },
+        { x: 0.4, y: 0.3 },
+      ],
+    ];
+    expect(punctuationFallbacks(own).has("\u2026")).toBe(false);
+    const ownFont = createFont(buildTtf(own), { type: "ttf" }).get();
+    expect(ownFont.glyf[ownFont.cmap[0x2026]].contours).toHaveLength(1);
+  });
+
   it("skips a straight quote whose glyph is empty", () => {
     const project = quoteProject("A'");
     project.glyphs["'"].contours = [];
-    expect(quoteFallbacks(project).size).toBe(0);
+    expect(punctuationFallbacks(project).size).toBe(0);
   });
 });
