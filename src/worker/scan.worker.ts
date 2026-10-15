@@ -4,7 +4,6 @@ import { homography, sampleCell } from "../core/geometry";
 import { traceScannedCell } from "../core/scan";
 import { cellRect, TEMPLATE } from "../core/template";
 import { grayscale } from "../core/trace";
-import { defaultSettings } from "../core/types";
 
 self.onmessage = async (event: MessageEvent) => {
   const { jobId, projectId, pages, characters, size } = event.data;
@@ -50,7 +49,6 @@ self.onmessage = async (event: MessageEvent) => {
           0,
           0,
         );
-        const settings = defaultSettings();
         const result = traceScannedCell(
           character,
           grayscale(pixels),
@@ -63,7 +61,7 @@ self.onmessage = async (event: MessageEvent) => {
           character,
           contours: result.contours,
           source,
-          settings,
+          settings: result.settings,
           removedPixels: result.removedPixels,
           needsRepair: result.needsRepair,
           pageId: page.id,

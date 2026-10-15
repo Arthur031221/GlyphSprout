@@ -1,4 +1,5 @@
 import { fontGlyph } from "./font";
+import { inkThreshold } from "./ink";
 import { trace } from "./trace";
 import {
   defaultSettings,
@@ -13,8 +14,14 @@ export function traceScannedCell(
   height: number,
 ) {
   const settings = defaultSettings();
+  settings.threshold = inkThreshold(gray);
   const result = trace(gray, width, height, settings);
-  const repair = () => ({ ...result, contours: [], needsRepair: true });
+  const repair = () => ({
+    ...result,
+    contours: [],
+    needsRepair: true,
+    settings,
+  });
   if (
     result.contours.length > MAX_CONTOURS_PER_GLYPH ||
     result.contours.reduce((count, contour) => count + contour.length, 0) >
@@ -39,7 +46,7 @@ export function traceScannedCell(
       return repair();
     throw error;
   }
-  return { ...result, needsRepair: false };
+  return { ...result, needsRepair: false, settings };
 }
 
 const LISTED_CELLS = 24;

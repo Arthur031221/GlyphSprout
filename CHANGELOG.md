@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.31.0
+
+Pencil and pale pen ink now convert. The ink threshold used to be a fixed 165, so strokes that read lighter than that after the lighting was evened out, such as a soft pencil or a light gel pen, came back as an empty cell and were listed as a skipped letter. Conversion now sets each glyph's threshold from the strokes, halfway between the ink and the paper and never above 215, so the printed guide lines stay out. Dark ink keeps 165 and converts as before.
+
+Unit tests cover dark, pencil and pale ink, the printed guide lines, paper grain and an empty cell. A browser test converts a scan drawn in light pencil and checks the outline width and the stored threshold.
+
 ## 1.30.0
 
 You can now write a letter twice and the font alternates between the two versions as you type. Stamped looking repeats are the most obvious sign of a computer font: every `l` in `hello` is the same shape. The Workshop has a new Second versions box. **Add a second version of every letter** adds one more template cell for each Latin, Greek and Cyrillic letter, and a button next to the selected glyph adds one for a single letter. The new cells follow the typed characters on the template, and you can draw them, scan them and adjust them like any other glyph. The exported TTF and WOFF2 files carry a `calt` rule that switches a letter to its second version whenever the letter before it is a first version, so words start with a first version and alternate from there. Second versions count toward the 512 character limit, kerning set for a letter applies to its second version too, and a second version without ink is ignored. Removing one from the middle of the list asks first, because the cells after it move and the scan assignments are cleared. Your glyphs are kept.
